@@ -1,0 +1,156 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0012_shopping_mall",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated mall frames should remain cinematic-realistic, technically clean, and free of artifacts while preserving readable escalators, skylight, signs, kiosk, tile grid, and balcony details.",
+      "parameters": {
+        "scene_style": "cinematic_realistic shopping mall",
+        "check_for": [
+          "blur or smearing beyond plausible motion blur",
+          "warped architecture",
+          "unreadable or unstable signage",
+          "broken reflections on polished tile and glass",
+          "subject or background rendering artifacts"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout requires a two-step navigation transition: a left turn followed by forward movement, so motion should be present, smooth, and temporally coherent.",
+      "parameters": {
+        "expected_motion_sequence": [
+          "leftward camera/view rotation or counterclockwise orbit around the subject",
+          "forward movement along the newly oriented route"
+        ],
+        "check_for": [
+          "stutter",
+          "teleporting",
+          "abrupt scene cuts",
+          "inconsistent motion direction between chunks"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable mall landmarks and the third-person subject should keep consistent identity and appearance through the turn and forward movement unless naturally changing viewpoint makes them leave frame.",
+      "parameters": {
+        "protected_anchors": [
+          "polished tile grid and grout-line perspective",
+          "central escalator pair",
+          "glass skylight atrium roof",
+          "second-floor balcony railing",
+          "overhead wayfinding sign cluster",
+          "circular information kiosk"
+        ],
+        "check_for": [
+          "landmark destruction or rearrangement",
+          "subject identity drift",
+          "storefront or railing instability",
+          "new main characters or events replacing the navigation outcome"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera, subject, pedestrians, escalators, tile perspective, and mall geometry should behave plausibly during navigation, without impossible geometry or causally incoherent motion.",
+      "parameters": {
+        "check_for": [
+          "physically impossible camera jumps",
+          "inconsistent perspective on tile grid and railings",
+          "objects sliding or stretching",
+          "pedestrians or escalator handrails moving implausibly",
+          "subject-camera distance changes inconsistent with third-person follow framing"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory transition is explicitly a navigation action sequence: turn left before the escalators toward the food court corridor, then move forward while maintaining route continuity and third-person framing.",
+      "parameters": {
+        "control_sequence": [
+          {
+            "chunk_id": "c01",
+            "token": "left",
+            "expected_effect": "camera/view turns left; in third person this may appear as a counterclockwise orbit around the still subject"
+          },
+          {
+            "chunk_id": "c02",
+            "token": "W",
+            "expected_effect": "subject moves forward along the newly oriented route; camera follows while maintaining distance and framing"
+          }
+        ],
+        "expected_outcome": [
+          "view turns toward escalator base and moving handrails",
+          "visible route geometry changes consistently with the left turn",
+          "forward motion follows the turned direction rather than continuing straight in the original view",
+          "non-target landmarks remain present unless naturally moved out of view"
+        ],
+        "negative_constraints": [
+          "do not jump to an unrelated mall location",
+          "do not introduce new characters or events as the main outcome",
+          "do not destroy or rearrange stable landmarks"
+        ],
+        "protected_anchors": [
+          "polished tile grid and grout-line perspective",
+          "central escalator pair",
+          "glass skylight atrium roof",
+          "second-floor balcony railing",
+          "overhead wayfinding sign cluster",
+          "circular information kiosk"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint transition, not an intentional semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of camera, subject, and mall geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short two-chunk navigation rollout, not a long-horizon drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include leaving and returning to a previously viewed location."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not require an offscreen process to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0011_kitchen",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated kitchen/robot frames must remain technically clean, with the glass bowl, spoon, grippers, counter, appliances, and background objects clearly rendered without artifacts.",
+      "parameters": {
+        "check_for": [
+          "clean object boundaries for robot hands, wooden spoon, glass bowl, counter, sink, stove, kettle, towel, refrigerator, window, clock, and cabinets",
+          "no severe blur, warping, duplication, melting, or texture corruption",
+          "transparent glass bowl remains visually legible"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested result requires a visible manipulation rollout where the right gripper lifts the spoon and holds it above the bowl, so motion should be present and temporally smooth.",
+      "parameters": {
+        "expected_motion": "right gripper approaches or controls the wooden spoon, raises it from the counter, and stabilizes it hovering above or just over the glass mixing bowl",
+        "stationary_elements": [
+          "left gripper remains low near the bottom edge",
+          "camera viewpoint remains fixed",
+          "background kitchen objects remain still"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Protected anchors and object identities must remain consistent while only the spoon/right-gripper relationship changes.",
+      "parameters": {
+        "protected_anchors": [
+          "clear glass mixing bowl on foreground counter",
+          "folded blue dish towel on left counter",
+          "stainless kettle on back-left stove burner",
+          "potted basil plant on closed window sill",
+          "tall refrigerator with two square magnets at far left/right background",
+          "white tile backsplash behind stove",
+          "sink, stove, mug, table, window, clock, cabinets"
+        ],
+        "watch_for": [
+          "towel color or position changing",
+          "background clock, cabinets, window, basil plant, or refrigerator moving or being replaced",
+          "spoon changing material, shape, or scale",
+          "robot hands changing design or side identity"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The lift should look causally plausible: the spoon should be supported by the right gripper rather than floating independently, intersecting objects, or teleporting.",
+      "parameters": {
+        "physical_checks": [
+          "right gripper visibly contacts or encloses the spoon during lift and hover",
+          "spoon is raised off the counter without impossible penetration through the counter, bowl, or gripper",
+          "spoon remains stable above or just over the bowl once lifted",
+          "left gripper stays low and does not participate"
+        ],
+        "forbidden_effects": [
+          "water",
+          "steam",
+          "smoke",
+          "flame",
+          "spills",
+          "faucet activation"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "This is an intentional semantic object-state transition: the wooden spoon must move from resting on the light-gray counter to being held by the robot's right gripper above the clear glass mixing bowl, while protected kitchen anchors remain unchanged.",
+      "parameters": {
+        "target_change": {
+          "object": "wooden spoon",
+          "initial_state": "lying on the light-gray counter near the right robotic gripper",
+          "final_state": "visibly raised off the counter and held by the right robotic gripper hovering above or just over the clear glass mixing bowl"
+        },
+        "agent_constraints": [
+          "right gripper performs the lift and holds the spoon",
+          "left gripper remains low at the bottom edge of the frame"
+        ],
+        "view_constraints": [
+          "first-person robot viewpoint remains unchanged",
+          "camera perspective does not change"
+        ],
+        "protected_anchors": [
+          "clear glass mixing bowl",
+          "folded blue dish towel",
+          "stainless kettle",
+          "potted basil plant",
+          "refrigerator with two square magnets",
+          "white tile backsplash",
+          "sink",
+          "stove",
+          "mug",
+          "table",
+          "window",
+          "clock",
+          "cabinets"
+        ],
+        "negative_constraints": [
+          "no person or animal added",
+          "no water, steam, smoke, flame, or spills",
+          "no faucet activation",
+          "no towel color or position change",
+          "no moving or replacing background clock, cabinets, window, basil plant, or refrigerator"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly forbids camera or first-person viewpoint changes; it does not require active navigation or a camera trajectory."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The primary target is a directly specified intentional object-state change, not an observed causal response to an external physical intervention or force."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome, such as collision dynamics, fluid behavior, or force response, is the evaluation target beyond general plausibility."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a single intentional transition, not a long-horizon rollout with many turns where progressive degradation resistance is the explicit target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The scenario does not involve leaving and returning to a previous view after a non-static loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

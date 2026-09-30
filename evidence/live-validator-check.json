@@ -1,0 +1,17 @@
+{
+  "status_code": 200,
+  "body": {
+    "judgment": {
+      "valid": true,
+      "reason": "The red book is visible and accessible on the counter. Opening it is a physically feasible action. The outcome (book open) is visually judgeable. The other specified objects (blue mug, herb plant, counter) are visible and will remain unchanged as instructed.",
+      "checks": {
+        "target_visible": true,
+        "action_feasible": true,
+        "specific_outcome": true,
+        "judgeable": true
+      },
+      "suggested_action": "Open the red book by lifting its cover."
+    },
+    "receipt": "evidence/interactive/ead94dca-6472-4c16-899e-62a1c5072522.json"
+  }
+}

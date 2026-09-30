@@ -1,0 +1,98 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0039_quarry",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames should remain technically clean and aesthetically coherent in the anime quarry setting, preserving readable depth layers, terrain, machinery, rocks, ridge, and humanoid robot without artifacts, blur, UI, text, or collage effects.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout contains two navigation chunks, so motion should be present, continuous, and smooth as the viewpoint advances and then moves forward-right along the quarry path.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same coherent quarry world must persist across the transition, including anime rendering style, cliff faces, dirt road, robot, rock piles, rusted machinery, barrels, ledges, and lighting.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through the quarry should respect plausible camera height, ground contact, terrain elevation changes, occlusion by ledges and structures, and stable spatial relationships among rocks, machinery, ridge, and path.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary target is exploratory navigation: the camera should move forward on W, then forward-right on W+D, following the visible traversable dirt route around the ridge while revealing connected parts of the same quarry.",
+      "parameters": {
+        "expected_actions": [
+          "W",
+          "W+D"
+        ],
+        "environment": "outdoor industrial quarry",
+        "trajectory_expectation": "advance from the initial corner viewpoint along the dirt path, then curve or strafe forward-right along the ridge without teleporting or switching scenes",
+        "key_anchors": [
+          "humanoid robot near the foreground",
+          "curving dirt quarry path",
+          "visible elevation change and ledge",
+          "quarry cliff walls",
+          "rock piles",
+          "rusted quarry machinery",
+          "barrels or small industrial objects",
+          "partial occlusion from structural rock/ledge elements"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state edit; it requests camera navigation through the existing quarry."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal dynamics need to be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is targeted beyond general navigation plausibility, which is covered by physical_plausibility_inspector."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only two navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not require returning to a previously seen viewpoint after a loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving during the navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

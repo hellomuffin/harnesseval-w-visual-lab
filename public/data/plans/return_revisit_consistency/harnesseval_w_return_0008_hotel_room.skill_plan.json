@@ -1,0 +1,118 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0008_hotel_room",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames should remain technically clean in a realistic first-person hotel-room/corridor scene, with coherent geometry, materials, lighting, and no UI, text, borders, or watermark artifacts.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout requires active forward movement, right strafe, turn, inverse turn, and return steps, so motion should be present, smooth, and free of temporal jitter or frame popping.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The hotel corridor, open metal gates, wall finishes, lamps, side furniture, irregular floor-material boundary, and distant silhouettes should keep stable identity and appearance throughout the loop.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement through the corridor and between the open metal gates should preserve plausible scale, depth, occlusion, support relationships, and first-person navigation without impossible geometry changes.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly specifies an active first-person navigation trajectory: move forward twice, shift right, turn right, then undo the turn and strafe/step back.",
+      "parameters": {
+        "expected_sequence": [
+          "forward",
+          "forward",
+          "strafe_right",
+          "turn_right",
+          "turn_left",
+          "strafe_left",
+          "backward",
+          "backward"
+        ],
+        "closed_loop": true
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return_revisit_consistency: after a non-static loop, the final view should return to the starting view between the open metal gates with stable scene anchors.",
+      "parameters": {
+        "reference_chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04"
+        ],
+        "return_chunks": [
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "key_anchors": [
+          "open metal gate frames",
+          "hotel corridor layout",
+          "irregular boundary between floor materials",
+          "wall lamps",
+          "side furniture and beds",
+          "distant silhouettes",
+          "different nearby material finishes"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for a semantic or object-state transition; it asks for navigation away and return to the same view."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; only camera navigation is specified."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of first-person movement and stable geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short eight-chunk closed loop, not a long-horizon many-turn drift-resistance probe."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify an offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

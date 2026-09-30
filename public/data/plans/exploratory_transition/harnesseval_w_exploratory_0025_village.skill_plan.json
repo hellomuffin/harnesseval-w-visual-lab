@@ -1,0 +1,171 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0025_village",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve a clean anime-style rural village scene with readable motorcycle, dirt track, paved road, barn, dead tree, roadside posts, rusted fence, fields, and distant hill without artifacts, blur, UI, text, borders, or watermarks.",
+      "parameters": {
+        "check_scene_elements": [
+          "foreground motorcycle cockpit/body",
+          "dirt approach track",
+          "paved traffic lane",
+          "barn on left",
+          "dead tree",
+          "rusted fence on right",
+          "roadside posts",
+          "fields and hill"
+        ],
+        "style": "detailed anime",
+        "failure_modes": [
+          "warped geometry",
+          "melted vehicle parts",
+          "unreadable road markings",
+          "generic or decorative restaging",
+          "text or watermark"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains three navigation chunks, so generated frames should show present, smooth forward travel and a final rightward turn without temporal jitter, sudden jumps, or frozen-view behavior.",
+      "parameters": {
+        "expected_motion": [
+          "forward movement during c01",
+          "continued forward movement during c02",
+          "forward movement with rightward heading change during c03"
+        ],
+        "failure_modes": [
+          "no apparent motion",
+          "teleportation",
+          "stutter",
+          "abrupt camera snap",
+          "inconsistent motion speed"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same world instance must remain recognizable during navigation, with stable landmarks and ordinary rural variation rather than semantic drift or replacement of the village road layout.",
+      "parameters": {
+        "anchors_to_track": [
+          "motorcycle foreground identity",
+          "barn left of route",
+          "dead tree near barn",
+          "rusted fence to the right",
+          "roadside posts with uneven spacing",
+          "paved lane and dirt track relationship",
+          "distant hill and agricultural fields"
+        ],
+        "failure_modes": [
+          "landmarks disappear without occlusion or viewpoint reason",
+          "motorcycle changes type",
+          "road becomes unrelated scene",
+          "anime style shifts",
+          "layout recenters into a stock composition"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The motorcycle navigation should obey plausible ground contact, scale, occlusion, and perspective while moving from dirt toward the road and turning right.",
+      "parameters": {
+        "plausibility_checks": [
+          "motorcycle remains supported by the road or dirt surface",
+          "camera height and third-person motorcycle viewpoint stay plausible",
+          "near objects expand and pass consistently under forward motion",
+          "roadside posts and fence obey perspective and occlusion",
+          "right turn changes heading without impossible sliding or scene rotation"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This is an exploratory_transition case driven by navigation controls W, W, then W+right; evaluation must verify that the viewpoint advances along the route and turns right relative to the initial motorcycle-facing-road perspective.",
+      "parameters": {
+        "control_sequence": [
+          {
+            "chunk_id": "c01",
+            "expected": "advance forward from the motorcycle's starting position along the dirt track toward the paved road"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "continue forward, reducing distance to or crossing onto the paved traffic lane while preserving near-to-far route perspective"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "continue movement while yawing or steering right, shifting the visible route and landmarks accordingly"
+          }
+        ],
+        "reference_points": [
+          "foreground motorcycle",
+          "dirt track",
+          "paved road",
+          "barn left",
+          "dead tree left-center",
+          "rusted fence right",
+          "roadside posts",
+          "distant hill"
+        ],
+        "trajectory_failure_modes": [
+          "camera remains fixed",
+          "movement goes backward or sideways instead of forward",
+          "right input ignored",
+          "right turn happens before c03",
+          "viewpoint teleports to an unrelated position",
+          "world rotates as a flat image instead of coherent 3D navigation"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation through the village scene, not an explicitly specified semantic or object-state change with protected anchors."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated; the motorcycle movement is controlled navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law check beyond general plausibility of navigation and perspective."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short action chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require revisiting a previous view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

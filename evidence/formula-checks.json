@@ -1,0 +1,24 @@
+{
+  "seed": 330,
+  "checks": [
+    {
+      "skill": "intentional",
+      "vectors": 1000,
+      "mismatches": 0,
+      "examples": []
+    },
+    {
+      "skill": "physical",
+      "vectors": 1000,
+      "mismatches": 0,
+      "examples": []
+    },
+    {
+      "skill": "offscreen",
+      "vectors": 1000,
+      "mismatches": 0,
+      "examples": []
+    }
+  ],
+  "scope": "Complete 8-question inputs; does not validate the VLM judgments or missing-input behavior."
+}

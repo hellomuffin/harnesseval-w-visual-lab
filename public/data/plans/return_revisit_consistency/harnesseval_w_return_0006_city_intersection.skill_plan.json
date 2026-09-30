@@ -1,0 +1,130 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0006_city_intersection",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess technical image quality across the realistic third-person city-intersection rollout, including artifacts, blur, lighting, and object legibility.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The output should show navigation through W/W/S/S/D/D/A/A/left/left/right/right chunks with present, smooth temporal motion rather than static or jumpy frames.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Urban anchors and the third-person human subject should retain stable appearance during the loop, without identity, texture, lighting, or layout changes.",
+      "parameters": {
+        "anchors": [
+          "red-brick station with arched entrance and clocktower",
+          "suspended traffic-light gantry over the four-way intersection",
+          "zebra crossing and center refuge island with bollards",
+          "glass corner cafe with green awning",
+          "blue bus shelter and newsstand kiosk"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through a city intersection should preserve plausible pedestrian/camera movement, street geometry, occlusion, scale, and contact with the curb and road surfaces.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active navigation along a closed path using forward/back, strafe, and view-turn tokens, moving away from the initial curb and undoing the movement.",
+      "parameters": {
+        "expected_chunks": [
+          "W",
+          "W",
+          "S",
+          "S",
+          "D",
+          "D",
+          "A",
+          "A",
+          "left",
+          "left",
+          "right",
+          "right"
+        ],
+        "closure_type": "inverse_balanced_navigation_tokens"
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "The persistence targets explicitly include drift, and the multi-chunk closed navigation loop should preserve visual, geometric, and semantic stability of the city anchors over time.",
+      "parameters": {
+        "stable_anchors": [
+          "red-brick station with arched entrance and clocktower",
+          "suspended traffic-light gantry over the four-way intersection",
+          "zebra crossing and center refuge island with bollards",
+          "glass corner cafe with green awning",
+          "blue bus shelter and newsstand kiosk"
+        ]
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return/revisit consistency: after a non-static inverse-balanced loop, chunk c12 should return to a recognizably similar viewpoint to the early reference view without resetting the scene.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c12",
+        "expected_return": "recognizably similar viewpoint near the initial curb area",
+        "stable_anchors": [
+          "red-brick station with arched entrance and clocktower",
+          "suspended traffic-light gantry over the four-way intersection",
+          "zebra crossing and center refuge island with bollards",
+          "glass corner cafe with green awning",
+          "blue bus shelter and newsstand kiosk"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for an intentional semantic or object-state transition; it asks for navigation persistence and loop closure."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of pedestrian/camera navigation."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The persistence target explicitly marks offscreen evolution as false, and no offscreen process is specified."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

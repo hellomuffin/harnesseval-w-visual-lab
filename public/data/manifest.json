@@ -1,0 +1,6233 @@
+{
+  "schema_version": "harnesseval.case_manifest",
+  "dataset_id": "harnesseval_w_public_100",
+  "taxonomy_schema": "harnesseval_taxonomy_v2",
+  "summary": {
+    "case_count": 100,
+    "probe_family_counts": {
+      "drift_resistance": 9,
+      "exploratory_transition": 43,
+      "intentional_transition": 21,
+      "offscreen_evolution": 5,
+      "physical_transition": 10,
+      "return_revisit_consistency": 12
+    }
+  },
+  "cases": [
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0001_old_town_lane.jpg"
+        },
+        "source_tags": {
+          "scene": "old_town_lane",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0001_old_town_lane_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0002_winter_village",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0002_winter_village.jpg"
+        },
+        "source_tags": {
+          "scene": "winter_village",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0002_winter_village_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "up"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "down"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0003_desert_ruins",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0003_desert_ruins.jpg"
+        },
+        "source_tags": {
+          "scene": "desert_ruins",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0003_desert_ruins_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c10",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0004_old_town_lane",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0004_old_town_lane.jpg"
+        },
+        "source_tags": {
+          "scene": "old_town_lane",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0004_old_town_lane_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "up"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "down"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0005_hotel_lobby",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0005_hotel_lobby.jpg"
+        },
+        "source_tags": {
+          "scene": "hotel_lobby",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0005_hotel_lobby_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0006_airport_terminal",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0006_airport_terminal.jpg"
+        },
+        "source_tags": {
+          "scene": "airport_terminal",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0006_airport_terminal_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "up"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "down"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c10",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0007_hallway",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0007_hallway.jpg"
+        },
+        "source_tags": {
+          "scene": "hallway",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0007_hallway_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move continuously down the open hallway from the foreground wood floor toward the distant raised stair area and far silhouette, using small steering adjustments to stay centered and avoid the right door, side table, coat stand, scattered books, and stair edges while preserving the hallway layout.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c10",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0008_alley",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0008_alley.jpg"
+        },
+        "source_tags": {
+          "scene": "alley",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0008_alley_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move steadily forward along the alley traffic lane, starting just to the right of the rusted cabinet, then continue past the lamppost, cracked pavement, graffiti wall, bicycles, and brick fire escapes while making small steering corrections to stay centered and avoid the curbs.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c10",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_drift_0009_rainforest",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "drift_resistance"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_drift_0009_rainforest.jpg"
+        },
+        "source_tags": {
+          "scene": "rainforest",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "long_navigation_sequence",
+          "action_id": "harnesseval_w_drift_0009_rainforest_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Proceed steadily forward along the worn wooden bridge through the rainforest, keeping the mossy left railing and right-side posts in view while making small steering corrections to stay centered on the planks and continue toward the far tree-lined path.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c10",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0001_urban_crosswalk.jpg"
+        },
+        "source_tags": {
+          "scene": "urban_crosswalk",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0001_urban_crosswalk_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0002_mountain_trail",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0002_mountain_trail.jpg"
+        },
+        "source_tags": {
+          "scene": "mountain_trail",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0002_mountain_trail_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0003_campus_walkway",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0003_campus_walkway.jpg"
+        },
+        "source_tags": {
+          "scene": "campus_walkway",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0003_campus_walkway_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0004_canyon_overlook",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0004_canyon_overlook.jpg"
+        },
+        "source_tags": {
+          "scene": "canyon_overlook",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0004_canyon_overlook_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0005_urban_crosswalk",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0005_urban_crosswalk.jpg"
+        },
+        "source_tags": {
+          "scene": "urban_crosswalk",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0005_urban_crosswalk_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0006_museum_gallery",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0006_museum_gallery.jpg"
+        },
+        "source_tags": {
+          "scene": "museum_gallery",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0006_museum_gallery_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0007_forest_bridge",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0007_forest_bridge.jpg"
+        },
+        "source_tags": {
+          "scene": "forest_bridge",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0007_forest_bridge_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0008_campus_walkway",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0008_campus_walkway.jpg"
+        },
+        "source_tags": {
+          "scene": "campus_walkway",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0008_campus_walkway_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0009_mountain_trail",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0009_mountain_trail.jpg"
+        },
+        "source_tags": {
+          "scene": "mountain_trail",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation",
+          "action_id": "harnesseval_w_exploratory_0009_mountain_trail_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0010_museum_hall",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0010_museum_hall.jpg"
+        },
+        "source_tags": {
+          "scene": "museum_hall",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation",
+          "action_id": "harnesseval_w_exploratory_0010_museum_hall_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0011_medieval_courtyard",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0011_medieval_courtyard.jpg"
+        },
+        "source_tags": {
+          "scene": "medieval_courtyard",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation",
+          "action_id": "harnesseval_w_exploratory_0011_medieval_courtyard_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0012_shopping_mall",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0012_shopping_mall.jpg"
+        },
+        "source_tags": {
+          "scene": "shopping_mall",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation",
+          "action_id": "harnesseval_w_exploratory_0012_shopping_mall_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0013_tunnel",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0013_tunnel.jpg"
+        },
+        "source_tags": {
+          "scene": "tunnel",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0013_tunnel_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0014_temple",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0014_temple.jpg"
+        },
+        "source_tags": {
+          "scene": "temple",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0014_temple_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0015_mine",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0015_mine.jpg"
+        },
+        "source_tags": {
+          "scene": "mine",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0015_mine_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0016_factory_yard",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0016_factory_yard.jpg"
+        },
+        "source_tags": {
+          "scene": "factory_yard",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0016_factory_yard_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0017_hospital_ward",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0017_hospital_ward.jpg"
+        },
+        "source_tags": {
+          "scene": "hospital_ward",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0017_hospital_ward_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0018_farmyard",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0018_farmyard.jpg"
+        },
+        "source_tags": {
+          "scene": "farmyard",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0018_farmyard_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0019_archaeological_site",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0019_archaeological_site.jpg"
+        },
+        "source_tags": {
+          "scene": "archaeological_site",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0019_archaeological_site_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0020_temple_courtyard",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0020_temple_courtyard.jpg"
+        },
+        "source_tags": {
+          "scene": "temple_courtyard",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0020_temple_courtyard_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0021_art_gallery",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0021_art_gallery.jpg"
+        },
+        "source_tags": {
+          "scene": "art_gallery",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0021_art_gallery_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0022_indoor_pool",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0022_indoor_pool.jpg"
+        },
+        "source_tags": {
+          "scene": "indoor_pool",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0022_indoor_pool_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0023_parking_garage",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0023_parking_garage.jpg"
+        },
+        "source_tags": {
+          "scene": "parking_garage",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0023_parking_garage_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0024_atrium",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0024_atrium.jpg"
+        },
+        "source_tags": {
+          "scene": "atrium",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0024_atrium_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0025_village",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0025_village.jpg"
+        },
+        "source_tags": {
+          "scene": "village",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0025_village_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0026_warehouse",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0026_warehouse.jpg"
+        },
+        "source_tags": {
+          "scene": "warehouse",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0026_warehouse_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0027_forest",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0027_forest.jpg"
+        },
+        "source_tags": {
+          "scene": "forest",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0027_forest_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0028_cave",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0028_cave.jpg"
+        },
+        "source_tags": {
+          "scene": "cave",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0028_cave_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0029_rocky_coast",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0029_rocky_coast.jpg"
+        },
+        "source_tags": {
+          "scene": "rocky_coast",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0029_rocky_coast_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0030_rainforest",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0030_rainforest.jpg"
+        },
+        "source_tags": {
+          "scene": "rainforest",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0030_rainforest_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0031_frozen_lake",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0031_frozen_lake.jpg"
+        },
+        "source_tags": {
+          "scene": "frozen_lake",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0031_frozen_lake_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0032_living_room",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0032_living_room.jpg"
+        },
+        "source_tags": {
+          "scene": "living_room",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0032_living_room_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0033_game_room",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0033_game_room.jpg"
+        },
+        "source_tags": {
+          "scene": "game_room",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0033_game_room_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0034_desert",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0034_desert.jpg"
+        },
+        "source_tags": {
+          "scene": "desert",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0034_desert_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0035_bridge_deck",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0035_bridge_deck.jpg"
+        },
+        "source_tags": {
+          "scene": "bridge_deck",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0035_bridge_deck_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0036_orchard",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0036_orchard.jpg"
+        },
+        "source_tags": {
+          "scene": "orchard",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0036_orchard_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0037_wetland",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0037_wetland.jpg"
+        },
+        "source_tags": {
+          "scene": "wetland",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0037_wetland_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0038_tundra",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0038_tundra.jpg"
+        },
+        "source_tags": {
+          "scene": "tundra",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0038_tundra_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0039_quarry",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0039_quarry.jpg"
+        },
+        "source_tags": {
+          "scene": "quarry",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0039_quarry_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0040_pier",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0040_pier.jpg"
+        },
+        "source_tags": {
+          "scene": "pier",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0040_pier_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0041_clinic",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0041_clinic.jpg"
+        },
+        "source_tags": {
+          "scene": "clinic",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0041_clinic_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0042_lakeside",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0042_lakeside.jpg"
+        },
+        "source_tags": {
+          "scene": "lakeside",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0042_lakeside_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0043_forest",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "exploratory_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_exploratory_0043_forest.jpg"
+        },
+        "source_tags": {
+          "scene": "forest",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "navigation_control",
+          "action_id": "harnesseval_w_exploratory_0043_forest_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.jpg"
+        },
+        "source_tags": {
+          "scene": "living_room_table",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "tip the white ceramic mug onto its side and create a small local spill",
+          "The ceramic mug remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "sofa",
+          "coffee table",
+          "rug",
+          "floor lamp"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug_action",
+          "text": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0002_desk_workspace_desk_lamp",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0002_desk_workspace_desk_lamp.jpg"
+        },
+        "source_tags": {
+          "scene": "desk_workspace",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "turn the brass desk lamp on so it creates a warm pool of light",
+          "The desk lamp remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "laptop",
+          "notebook",
+          "pen cup",
+          "window blinds"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0002_desk_workspace_desk_lamp_action",
+          "text": "turn the brass desk lamp on so it creates a warm pool of light. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0003_kitchen_counter_wooden_spoon",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0003_kitchen_counter_wooden_spoon.jpg"
+        },
+        "source_tags": {
+          "scene": "kitchen_counter",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "move the wooden spoon from the counter into the clear glass bowl",
+          "The wooden spoon remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "sink",
+          "stove",
+          "towel",
+          "cutting board"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0003_kitchen_counter_wooden_spoon_action",
+          "text": "move the wooden spoon from the counter into the clear glass bowl. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0004_parking_lot_red_hatchback",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0004_parking_lot_red_hatchback.jpg"
+        },
+        "source_tags": {
+          "scene": "parking_lot",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "open the rear hatch while the car remains parked in the same bay",
+          "The red hatchback remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "painted parking lines",
+          "lamp post",
+          "curb",
+          "background cars"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0004_parking_lot_red_hatchback_action",
+          "text": "open the rear hatch while the car remains parked in the same bay. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0005_reading_room_closed_book",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0005_reading_room_closed_book.jpg"
+        },
+        "source_tags": {
+          "scene": "reading_room",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "open the brown book so pale pages are visible",
+          "The closed book remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "reading table",
+          "green lamp",
+          "bookshelves",
+          "chair"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0005_reading_room_closed_book_action",
+          "text": "open the brown book so pale pages are visible. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0006_street_corner_traffic_cone",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0006_street_corner_traffic_cone.jpg"
+        },
+        "source_tags": {
+          "scene": "street_corner",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "knock over exactly one orange cone near the curb",
+          "The traffic cone remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "other cone",
+          "crosswalk",
+          "shopfront",
+          "street sign"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0006_street_corner_traffic_cone_action",
+          "text": "knock over exactly one orange cone near the curb. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0007_robot_lab_robot_gripper",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0007_robot_lab_robot_gripper.jpg"
+        },
+        "source_tags": {
+          "scene": "robot_lab",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "have the right gripper lift the cube above the tray",
+          "The robot gripper remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "left gripper",
+          "tray",
+          "calibration board",
+          "workbench"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0007_robot_lab_robot_gripper_action",
+          "text": "have the right gripper lift the cube above the tray. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0008_classroom_whiteboard_marker",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0008_classroom_whiteboard_marker.jpg"
+        },
+        "source_tags": {
+          "scene": "classroom",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "move the red marker from the tray to the desk",
+          "The whiteboard marker remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "whiteboard",
+          "desk rows",
+          "clock",
+          "poster"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0008_classroom_whiteboard_marker_action",
+          "text": "move the red marker from the tray to the desk. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0009_robot_lab_robot_gripper",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0009_robot_lab_robot_gripper.jpg"
+        },
+        "source_tags": {
+          "scene": "robot_lab",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "have the right gripper lift the cube above the tray",
+          "The robot gripper remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "left gripper",
+          "tray",
+          "calibration board",
+          "workbench"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0009_robot_lab_robot_gripper_action",
+          "text": "have the right gripper lift the cube above the tray. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0010_temple_altar_altar_cloth",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0010_temple_altar_altar_cloth.jpg"
+        },
+        "source_tags": {
+          "scene": "temple_altar",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "change the altar cloth from white to deep blue with a thin gold border",
+          "The altar cloth remains identifiable as the same entity.",
+          "Protected anchors remain unchanged."
+        ],
+        "protected_anchors": [
+          "candles",
+          "vase",
+          "wood altar",
+          "stone wall"
+        ],
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0010_temple_altar_altar_cloth_action",
+          "text": "change the altar cloth from white to deep blue with a thin gold border. Keep the camera fixed and keep all unrelated scene anchors unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0011_kitchen",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0011_kitchen.jpg"
+        },
+        "source_tags": {
+          "scene": "kitchen",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The wooden spoon is visibly raised off the counter.",
+          "The right robotic gripper is holding the spoon above or just over the glass mixing bowl.",
+          "The bowl, towel, sink, stove, kettle, mug, table, window, clock, and refrigerator remain in their original positions."
+        ],
+        "protected_anchors": [
+          "Clear glass mixing bowl on the foreground counter",
+          "Folded blue dish towel on the left side of the counter",
+          "Stainless kettle on the back-left stove burner",
+          "Potted basil plant on the closed window sill",
+          "Tall refrigerator with two square magnets at the far left",
+          "White tile backsplash behind the stove"
+        ],
+        "negative_constraints": [
+          "Do not change the camera perspective or robot first-person viewpoint.",
+          "Do not change the towel color or move the towel.",
+          "Do not turn on the faucet or create water, steam, smoke, flame, or spills.",
+          "Do not add a person or animal to the kitchen.",
+          "Do not move or replace the background clock, cabinets, window, basil plant, or refrigerator."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0011_kitchen_action",
+          "text": "Make the robot's right gripper lift the wooden spoon from the light-gray counter and hold it hovering above the clear glass mixing bowl, while the left gripper remains low at the bottom edge of the frame."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0012_meadow",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0012_meadow.jpg"
+        },
+        "source_tags": {
+          "scene": "meadow",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0012_meadow_action",
+          "text": "Swing the open wooden gate on the left stone pillar closed across the cracked stone entrance, while keeping the stone pillars, meadow slope, rocks, and distant trees unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0013_veranda",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0013_veranda.jpg"
+        },
+        "source_tags": {
+          "scene": "veranda",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0013_veranda_action",
+          "text": "Close the left open door leaf of the central doorway while keeping the soldiers, veranda, railing, red overhead beam, and courtyard unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0014_sidewalk",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0014_sidewalk.jpg"
+        },
+        "source_tags": {
+          "scene": "sidewalk",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0014_sidewalk_action",
+          "text": "Open the weathered blue metal door on the brick building while keeping the bicycle, fence, sidewalk, church spire, and glass building unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0015_underpass",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0015_underpass.jpg"
+        },
+        "source_tags": {
+          "scene": "underpass",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0015_underpass_action",
+          "text": "Make the lone person in the foreground raise their right arm straight upward while staying in the same spot."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0016_dock",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0016_dock.jpg"
+        },
+        "source_tags": {
+          "scene": "dock",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0016_dock_action",
+          "text": "Move the scratched gray suitcase from the left foreground onto the center of the wooden dock planks, keeping it upright and closed."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0017_bank",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0017_bank.jpg"
+        },
+        "source_tags": {
+          "scene": "bank",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0017_bank_action",
+          "text": "Close the partially open glass door at the bank entrance while keeping the wooden chair, potted plant, and counter unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0018_cafe",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0018_cafe.jpg"
+        },
+        "source_tags": {
+          "scene": "cafe",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0018_cafe_action",
+          "text": "Tip the large speckled ceramic mug in the foreground onto its side on the tabletop while keeping the door, counter, floor, and metal dispenser unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0019_campus",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0019_campus.jpg"
+        },
+        "source_tags": {
+          "scene": "campus",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0019_campus_action",
+          "text": "Open the closed front passenger door on the white bus at the left edge of the scene, while keeping the archway, brick building, pavement, and bus position unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0020_coworking_space",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0020_coworking_space.jpg"
+        },
+        "source_tags": {
+          "scene": "coworking_space",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0020_coworking_space_action",
+          "text": "Close the large scuffed foreground drawer with the silver handle completely."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0021_monument_grounds",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_intentional_0021_monument_grounds.jpg"
+        },
+        "source_tags": {
+          "scene": "monument_grounds",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "harnesseval_w_intentional_0021_monument_grounds_action",
+          "text": "Tip the weathered blue wooden chair in the foreground onto its right side while leaving the stone path, column, distant monument, and scattered stones unchanged."
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0001_train_platform",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "offscreen_evolution"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_offscreen_0001_train_platform.jpg"
+        },
+        "source_tags": {
+          "scene": "train_platform",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "offscreen_evolution_spec": {
+          "target_process": "steam plume from locomotive",
+          "expected_evolution": [
+            "The steam plume from locomotive continues changing during the offscreen interval.",
+            "When it returns, the steam plume from locomotive is not an exact frozen copy, but remains the same process in the same world."
+          ],
+          "failure_modes": [
+            "target never leaves view",
+            "target never returns",
+            "frozen copy",
+            "world reset",
+            "identity swap"
+          ]
+        },
+        "stable_anchors": [
+          "platform clock",
+          "rail tracks",
+          "signal post",
+          "station canopy",
+          "steam plume from locomotive"
+        ],
+        "visibility_plan": {
+          "pre_visible": [
+            "c01"
+          ],
+          "offscreen": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible": [
+            "c07",
+            "c08"
+          ]
+        },
+        "offscreen_window": {
+          "leave_chunk": "c02",
+          "return_chunk": "c07"
+        },
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "offscreen_evolution_sequence",
+          "action_id": "harnesseval_w_offscreen_0001_train_platform_action",
+          "text": "Use a look-away-and-return sequence. The steam plume from locomotive should continue evolving while offscreen.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "action": {
+                "text": "Turn away from the steam plume from locomotive while it is still visible."
+              }
+            },
+            {
+              "chunk_id": "c02",
+              "action": {
+                "text": "Continue turning so the steam plume from locomotive leaves the camera view."
+              }
+            },
+            {
+              "chunk_id": "c03",
+              "action": {
+                "text": "Move forward while looking away; the steam plume from locomotive remains offscreen and should continue evolving."
+              }
+            },
+            {
+              "chunk_id": "c04",
+              "action": {
+                "text": "Pause briefly with the steam plume from locomotive still offscreen."
+              }
+            },
+            {
+              "chunk_id": "c05",
+              "action": {
+                "text": "Move back toward the original area while not facing the steam plume from locomotive."
+              }
+            },
+            {
+              "chunk_id": "c06",
+              "action": {
+                "text": "Turn back toward the same steam plume from locomotive."
+              }
+            },
+            {
+              "chunk_id": "c07",
+              "action": {
+                "text": "Return the steam plume from locomotive to view; it should have evolved rather than frozen or reset."
+              }
+            },
+            {
+              "chunk_id": "c08",
+              "action": {
+                "text": "Settle into a final view compatible with the original world."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0003_campfire_site",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "offscreen_evolution"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_offscreen_0003_campfire_site.jpg"
+        },
+        "source_tags": {
+          "scene": "campfire_site",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "offscreen_evolution_spec": {
+          "target_process": "campfire flame and smoke",
+          "expected_evolution": [
+            "The campfire flame and smoke continues changing during the offscreen interval.",
+            "When it returns, the campfire flame and smoke is not an exact frozen copy, but remains the same process in the same world."
+          ],
+          "failure_modes": [
+            "target never leaves view",
+            "target never returns",
+            "frozen copy",
+            "world reset",
+            "identity swap"
+          ]
+        },
+        "stable_anchors": [
+          "fire ring",
+          "logs",
+          "tent",
+          "cooler",
+          "campfire flame and smoke"
+        ],
+        "visibility_plan": {
+          "pre_visible": [
+            "c01"
+          ],
+          "offscreen": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible": [
+            "c07",
+            "c08"
+          ]
+        },
+        "offscreen_window": {
+          "leave_chunk": "c02",
+          "return_chunk": "c07"
+        },
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "offscreen_evolution_sequence",
+          "action_id": "harnesseval_w_offscreen_0003_campfire_site_action",
+          "text": "Use a look-away-and-return sequence. The campfire flame and smoke should continue evolving while offscreen.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "action": {
+                "text": "Turn away from the campfire flame and smoke while it is still visible."
+              }
+            },
+            {
+              "chunk_id": "c02",
+              "action": {
+                "text": "Continue turning so the campfire flame and smoke leaves the camera view."
+              }
+            },
+            {
+              "chunk_id": "c03",
+              "action": {
+                "text": "Move forward while looking away; the campfire flame and smoke remains offscreen and should continue evolving."
+              }
+            },
+            {
+              "chunk_id": "c04",
+              "action": {
+                "text": "Pause briefly with the campfire flame and smoke still offscreen."
+              }
+            },
+            {
+              "chunk_id": "c05",
+              "action": {
+                "text": "Move back toward the original area while not facing the campfire flame and smoke."
+              }
+            },
+            {
+              "chunk_id": "c06",
+              "action": {
+                "text": "Turn back toward the same campfire flame and smoke."
+              }
+            },
+            {
+              "chunk_id": "c07",
+              "action": {
+                "text": "Return the campfire flame and smoke to view; it should have evolved rather than frozen or reset."
+              }
+            },
+            {
+              "chunk_id": "c08",
+              "action": {
+                "text": "Settle into a final view compatible with the original world."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0004_mall_concourse",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "offscreen_evolution"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_offscreen_0004_mall_concourse.jpg"
+        },
+        "source_tags": {
+          "scene": "mall_concourse",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "offscreen_evolution_spec": {
+          "target_process": "walking crowd positions",
+          "expected_evolution": [
+            "The walking crowd positions continues changing during the offscreen interval.",
+            "When it returns, the walking crowd positions is not an exact frozen copy, but remains the same process in the same world."
+          ],
+          "failure_modes": [
+            "target never leaves view",
+            "target never returns",
+            "frozen copy",
+            "world reset",
+            "identity swap"
+          ]
+        },
+        "stable_anchors": [
+          "escalator",
+          "skylight",
+          "information kiosk",
+          "storefronts",
+          "walking crowd positions"
+        ],
+        "visibility_plan": {
+          "pre_visible": [
+            "c01"
+          ],
+          "offscreen": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible": [
+            "c07",
+            "c08"
+          ]
+        },
+        "offscreen_window": {
+          "leave_chunk": "c02",
+          "return_chunk": "c07"
+        },
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "offscreen_evolution_sequence",
+          "action_id": "harnesseval_w_offscreen_0004_mall_concourse_action",
+          "text": "Use a look-away-and-return sequence. The walking crowd positions should continue evolving while offscreen.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "action": {
+                "text": "Turn away from the walking crowd positions while it is still visible."
+              }
+            },
+            {
+              "chunk_id": "c02",
+              "action": {
+                "text": "Continue turning so the walking crowd positions leaves the camera view."
+              }
+            },
+            {
+              "chunk_id": "c03",
+              "action": {
+                "text": "Move forward while looking away; the walking crowd positions remains offscreen and should continue evolving."
+              }
+            },
+            {
+              "chunk_id": "c04",
+              "action": {
+                "text": "Pause briefly with the walking crowd positions still offscreen."
+              }
+            },
+            {
+              "chunk_id": "c05",
+              "action": {
+                "text": "Move back toward the original area while not facing the walking crowd positions."
+              }
+            },
+            {
+              "chunk_id": "c06",
+              "action": {
+                "text": "Turn back toward the same walking crowd positions."
+              }
+            },
+            {
+              "chunk_id": "c07",
+              "action": {
+                "text": "Return the walking crowd positions to view; it should have evolved rather than frozen or reset."
+              }
+            },
+            {
+              "chunk_id": "c08",
+              "action": {
+                "text": "Settle into a final view compatible with the original world."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0005_plaza",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "offscreen_evolution"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_offscreen_0005_plaza.jpg"
+        },
+        "source_tags": {
+          "scene": "plaza",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "offscreen_evolution_spec": {
+          "target_process": "circular ripples in the foreground pool",
+          "expected_evolution": [
+            "The pool ripples continue spreading and weakening while offscreen.",
+            "On return, the same pool shows wider, softer rings instead of a reset."
+          ],
+          "failure_modes": [
+            "frozen process",
+            "state reset",
+            "world inconsistency"
+          ]
+        },
+        "stable_anchors": [
+          "broken stone wall",
+          "grass strip and rocks",
+          "metal planters",
+          "concrete buildings",
+          "distant glass tower"
+        ],
+        "visibility_plan": {
+          "pre_visible": [
+            "c01"
+          ],
+          "offscreen": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible": [
+            "c07",
+            "c08"
+          ]
+        },
+        "offscreen_window": {
+          "leave_chunk": "c02",
+          "return_chunk": "c07"
+        },
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "offscreen_evolution_sequence",
+          "action_id": "harnesseval_w_offscreen_0005_plaza_action",
+          "text": "Look away from the rippling foreground pool, let the same water disturbance continue offscreen, then return to the pool in the same plaza with the ripples visibly evolved while all static landmarks remain consistent.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "action": {
+                "text": "Begin with the circular ripples visible on the foreground pool, with the low broken stone wall, narrow grass strip with scattered rocks, rows of metal planters, tall concrete buildings, and distant glass tower all in their original positions."
+              }
+            },
+            {
+              "chunk_id": "c02",
+              "action": {
+                "text": "Turn the camera smoothly to the right until the rippling pool and its near water surface are fully offscreen, keeping the right-side walkway and concrete building face in view."
+              }
+            },
+            {
+              "chunk_id": "c03",
+              "action": {
+                "text": "Hold the view away from the pool while the same circular water ripples continue spreading and weakening outside the frame."
+              }
+            },
+            {
+              "chunk_id": "c04",
+              "action": {
+                "text": "Keep looking along the right plaza edge for another moment, with metal planters and the concrete facade steady, while the offscreen pool surface continues evolving from the earlier disturbance."
+              }
+            },
+            {
+              "chunk_id": "c05",
+              "action": {
+                "text": "Turn the camera back left toward the original central view, bringing the grass strip, scattered rocks, and distant glass tower back into alignment before the pool reappears."
+              }
+            },
+            {
+              "chunk_id": "c06",
+              "action": {
+                "text": "Continue turning left until the foreground pool returns into view below the broken stone wall."
+              }
+            },
+            {
+              "chunk_id": "c07",
+              "action": {
+                "text": "Show the same pool surface again with the original ripple pattern evolved into wider, softer rings rather than resetting to the initial tight circles."
+              }
+            },
+            {
+              "chunk_id": "c08",
+              "action": {
+                "text": "End facing the original plaza composition, preserving the low stone wall, grass strip with rocks, uneven rows of planters, flanking concrete buildings, and distant glass tower while the pool shows the later ripple state."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0006_train_station_hall",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "offscreen_evolution"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_offscreen_0006_train_station_hall.jpg"
+        },
+        "source_tags": {
+          "scene": "train_station_hall",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "offscreen_evolution_spec": {
+          "target_process": "passenger crowd in the central concourse",
+          "expected_evolution": [
+            "Passenger traffic continues moving while the concourse is offscreen.",
+            "On return, the same crowd area is naturally redistributed."
+          ],
+          "failure_modes": [
+            "frozen crowd",
+            "crowd reset",
+            "station inconsistency"
+          ]
+        },
+        "stable_anchors": [
+          "arched roof",
+          "large clock",
+          "platform trains",
+          "benches and planters",
+          "shopfronts"
+        ],
+        "visibility_plan": {
+          "pre_visible": [
+            "c01"
+          ],
+          "offscreen": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible": [
+            "c07",
+            "c08"
+          ]
+        },
+        "offscreen_window": {
+          "leave_chunk": "c03",
+          "return_chunk": "c07"
+        },
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "offscreen_evolution_sequence",
+          "action_id": "harnesseval_w_offscreen_0006_train_station_hall_action",
+          "text": "Look away from the moving passenger crowd in the central train station concourse, let that crowd continue evolving offscreen, then return to the same concourse with the crowd visibly changed while preserving the station architecture and landmarks.",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "action": {
+                "text": "Begin with the central concourse passenger traffic visible between the platform trains on the left and the glass-fronted shops on the right, under the arched roof and large clock."
+              }
+            },
+            {
+              "chunk_id": "c02",
+              "action": {
+                "text": "Turn the camera steadily toward the right-side shopfronts and balcony arches until the central moving crowd is mostly out of frame."
+              }
+            },
+            {
+              "chunk_id": "c03",
+              "action": {
+                "text": "Continue turning or shifting right until the original central concourse crowd is fully offscreen, leaving only the right wall, shop windows, balcony, and station architecture visible."
+              }
+            },
+            {
+              "chunk_id": "c04",
+              "action": {
+                "text": "Hold this offscreen view while the same passenger flow continues outside the frame, with people still walking, separating, and joining the concourse traffic beyond view."
+              }
+            },
+            {
+              "chunk_id": "c05",
+              "action": {
+                "text": "Keep the central crowd offscreen a little longer while the offscreen passenger positions evolve naturally, without changing the clock, arched roof, platform trains, benches, planters, or shopfront layout."
+              }
+            },
+            {
+              "chunk_id": "c06",
+              "action": {
+                "text": "Turn the camera back left toward the original central concourse, bringing the platform trains, benches, planters, and large clock back into the same spatial relationship."
+              }
+            },
+            {
+              "chunk_id": "c07",
+              "action": {
+                "text": "Bring the same central passenger traffic area back into view, now with the crowd redistributed, some travelers farther along the concourse and small groups shifted relative to the benches and blue kiosks."
+              }
+            },
+            {
+              "chunk_id": "c08",
+              "action": {
+                "text": "Settle on a final view compatible with the initial station hall, preserving the arched roof, clock, left-side trains, right-side shops, benches, planters, and platform edges while showing the evolved crowd state."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0001_wind_flag_deformation_v02.png"
+        },
+        "source_tags": {
+          "scene": "wind_flag_deformation"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "apply_physical_control",
+          "text": "Continue the calibrated fan airflow at 5.0 m/s.",
+          "parameters": {
+            "wind_speed_m_per_s": 5
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0002_water_dye_advection_v02",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0002_water_dye_advection_v02.png"
+        },
+        "source_tags": {
+          "scene": "water_dye_advection"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The dye front should advect farther over the same observation interval at higher flow speed."
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "text": "Release a dye marker into water flowing at a mean speed of 0.5 m/s.",
+          "parameters": {
+            "mean_water_speed_m_per_s": 0.5
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0003_incline_roll_school_lab_v02",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0003_incline_roll_school_lab_v02.png"
+        },
+        "source_tags": {
+          "scene": "incline_roll",
+          "perspective": "fixed_measurement_camera"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The ball remains supported by the ramp and rolls downhill; a steeper ramp should produce more progress in the fixed time window."
+        ],
+        "protected_anchors": [
+          "fixed_floor",
+          "fixed_instrumented_ramp",
+          "fixed_ramp_catcher",
+          "fixed_metric_ruler"
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0003_incline_roll_school_lab_v02_action",
+          "text": "Release the red ball from rest on the instrumented ramp set to 20.0 degrees.",
+          "parameters": {
+            "incline_angle_degrees": 20
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0004_restitution_bounce_quality_lab_v02",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0004_restitution_bounce_quality_lab_v02.png"
+        },
+        "source_tags": {
+          "scene": "restitution_bounce",
+          "perspective": "fixed_measurement_camera"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The ball falls, contacts the floor, and rebounds without teleporting; rebound height should increase with restitution."
+        ],
+        "protected_anchors": [
+          "fixed_floor",
+          "fixed_rebound_gauge",
+          "fixed_metric_ruler"
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0004_restitution_bounce_quality_lab_v02_action",
+          "text": "Release the yellow ball onto the calibrated floor with coefficient of restitution 0.48.",
+          "parameters": {
+            "coefficient_of_restitution": 0.48
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0005_friction_slide_school_tribometer_v02",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0005_friction_slide_school_tribometer_v02.png"
+        },
+        "source_tags": {
+          "scene": "friction_slide",
+          "perspective": "fixed_measurement_camera"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The parcel moves along the ruler and loses speed through contact friction; higher friction should shorten its travel."
+        ],
+        "protected_anchors": [
+          "fixed_floor",
+          "fixed_metric_ruler",
+          "fixed_foam_stop"
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0005_friction_slide_school_tribometer_v02_action",
+          "text": "A motorized black pusher gives the blue parcel one identical forward shove; let it slide on the marked surface with friction 0.38.",
+          "parameters": {
+            "surface_friction": 0.38
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0006_support_margin_countertop_v02",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0006_support_margin_countertop_v02.png"
+        },
+        "source_tags": {
+          "scene": "support_margin",
+          "perspective": "fixed_measurement_camera"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The crate should topple when its center of mass lies outside the permanent support and remain supported for a sufficiently positive margin."
+        ],
+        "protected_anchors": [
+          "fixed_floor",
+          "fixed_permanent_support",
+          "fixed_metric_ruler"
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0006_support_margin_countertop_v02_action",
+          "text": "Remove the yellow temporary brace while the red crate has a signed support margin of 0.02 m.",
+          "parameters": {
+            "support_margin_m": 0.02
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0007_pendulum_release",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0007_pendulum_release.jpg"
+        },
+        "source_tags": {
+          "scene": "pendulum_setup",
+          "perspective": "measurement_camera"
+        }
+      },
+      "non_model_facing": {
+        "expected_outcome": [
+          "The target system responds according to the medium pendulum_release condition.",
+          "Cause precedes effect and the response remains in the visible apparatus.",
+          "Apparatus, scale cues, and camera remain fixed."
+        ],
+        "protected_anchors": [
+          "pivot",
+          "string",
+          "protractor",
+          "rest marker"
+        ]
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0007_pendulum_release_action",
+          "text": "Set the pendulum_release condition to medium level 3. Release the pendulum bob from the marked angle with no push. Keep the measurement camera and all apparatus anchors fixed.",
+          "parameters": {
+            "condition_level": "medium",
+            "template_parameter_index": 3
+          }
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0008_community_center",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0008_community_center.jpg"
+        },
+        "source_tags": {
+          "scene": "community_center",
+          "perspective": "third_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0008_community_center_action",
+          "text": "Close the visible robotic gripper fingers from their open position while keeping the arm base and camera fixed.",
+          "parameters": {}
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0009_arcade",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0009_arcade.jpg"
+        },
+        "source_tags": {
+          "scene": "arcade",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0009_arcade_action",
+          "text": "Push the open wooden drawer straight inward until it slides closed into the cabinet.",
+          "parameters": {}
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_physical_0010_robotics_lab",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "physical_transition"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_physical_0010_robotics_lab.jpg"
+        },
+        "source_tags": {
+          "scene": "robotics_lab",
+          "perspective": "first_person"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "physical_parameter_condition",
+          "action_id": "harnesseval_w_physical_0010_robotics_lab_action",
+          "text": "Push the leftmost visible upright block in the foreground domino chain forward so it tips into the next block.",
+          "parameters": {}
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0002_garden_loop",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0002_garden_loop.jpg"
+        },
+        "source_tags": {
+          "scene": "garden_loop",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0002_garden_loop_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens"
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W+left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S+D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0003_living_room_loop",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0003_living_room_loop.jpg"
+        },
+        "source_tags": {
+          "scene": "living_room_loop",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0003_living_room_loop_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens"
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0004_school_hall_loop",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0004_school_hall_loop.jpg"
+        },
+        "source_tags": {
+          "scene": "school_hall_loop",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0004_school_hall_loop_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens"
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0005_museum_loop",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0005_museum_loop.jpg"
+        },
+        "source_tags": {
+          "scene": "museum_loop",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0005_museum_loop_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens"
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "up"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "down"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0006_city_intersection",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0006_city_intersection.jpg"
+        },
+        "source_tags": {
+          "scene": "city_intersection",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c12"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "return_revisit_consistency",
+          "action_id": "harnesseval_w_return_0006_city_intersection_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Follow an inverse-balanced closed navigation loop through the city intersection. Move away from the initial curb area and then undo the movement and view changes, returning to a recognizably similar viewpoint without resetting the scene.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens"
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c09",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c10",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c11",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c12",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0007_indoor_garden",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0007_indoor_garden.jpg"
+        },
+        "source_tags": {
+          "scene": "indoor_garden",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0007_indoor_garden_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move forward along the indoor garden bridge, shift slightly right and turn right to change the view, then undo the turn, strafe back left, and step backward to return to the initial bridge-facing viewpoint.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0008_hotel_room",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0008_hotel_room.jpg"
+        },
+        "source_tags": {
+          "scene": "hotel_room",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0008_hotel_room_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move forward into the corridor, shift slightly toward the right side while turning right, then undo the turn and strafe/step back to return to the starting view between the open metal gates.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0009_atrium",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0009_atrium.jpg"
+        },
+        "source_tags": {
+          "scene": "atrium",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0009_atrium_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move forward from the foreground group across the open atrium floor toward the central staircase and red bollards, shift slightly right, turn right for a changed view, then reverse the same controls to return to a compatible view of the original group, floor boundary, columns, and staircase.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0010_glacier",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0010_glacier.jpg"
+        },
+        "source_tags": {
+          "scene": "glacier",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0010_glacier_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Turn left to look along the rocky riverbank, move a short distance parallel to the flowing water, then reverse the same movement and turn back to the original glacier-facing viewpoint with the river, winding trail, blue ice, and mountains aligned as before.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0011_wetland",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0011_wetland.jpg"
+        },
+        "source_tags": {
+          "scene": "wetland",
+          "perspective": "third_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0011_wetland_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move forward along the uneven wooden bridge toward the wetland structures, make a small rightward viewpoint change, then reverse the same movement to return to the initial view framed by the stone edges and bridge entrance.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0012_sand_dunes",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0012_sand_dunes.jpg"
+        },
+        "source_tags": {
+          "scene": "sand_dunes",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0012_sand_dunes_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move forward across the open sand toward the tall central spire, strafe right toward the cactus-and-rock side, turn right, move forward briefly, then exactly reverse those moves to return to a compatible view of the original sand-dune scene.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "harnesseval_w_return_0013_exhibition_hall",
+      "taxonomy": {
+        "primary_axis": "world_persistence",
+        "probe_family": "return_revisit_consistency"
+      },
+      "world": {
+        "initial_observation": {
+          "type": "image",
+          "path": "data/initial_observations/harnesseval_w_return_0013_exhibition_hall.jpg"
+        },
+        "source_tags": {
+          "scene": "exhibition_hall",
+          "perspective": "first_person"
+        }
+      },
+      "non_model_facing": {
+        "return_window": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "closed_loop_navigation",
+          "action_id": "harnesseval_w_return_0013_exhibition_hall_action",
+          "control_scheme": "harnesseval_navigation_v1",
+          "text": "Move forward through the doorway along the wood-floored exhibition aisle, shift slightly toward the bench with the red accent on the right, turn left briefly, then exactly reverse the turn, sidestep, and forward movement to return to the original doorway view.",
+          "closed_loop": {
+            "intended": true,
+            "closure_type": "inverse_balanced_navigation_tokens",
+            "reference_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04"
+            ],
+            "return_chunks": [
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ]
+          },
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c02",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "W"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c03",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "D"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c04",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "left"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c05",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "right"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c06",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "A"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c07",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            },
+            {
+              "chunk_id": "c08",
+              "actions": [
+                {
+                  "type": "navigation",
+                  "action": "S"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

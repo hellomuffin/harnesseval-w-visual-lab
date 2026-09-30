@@ -1,0 +1,127 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0007_robot_lab_robot_gripper",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated robot-lab frames must remain technically clean, realistic, artifact-free, and judgeable, with the cube, tray, grippers, calibration board, and workbench clearly visible.",
+      "parameters": {
+        "check_for": [
+          "severe artifacts",
+          "watermarks or text artifacts",
+          "broken robot geometry",
+          "blur that prevents judging the lift",
+          "ambiguous cube or gripper visibility"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested result requires visible temporal motion of the right gripper lifting the cube above the tray, so the rollout should show smooth, coherent movement rather than a sudden discontinuous edit.",
+      "parameters": {
+        "expected_motion": "right gripper approaches or holds the cube and lifts it upward above the tray",
+        "motion_subjects": [
+          "right gripper",
+          "cube"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The robot gripper must remain identifiable as the same entity, and protected anchors such as the left gripper, tray, calibration board, and workbench should retain stable visual identity across frames.",
+      "parameters": {
+        "tracked_entities": [
+          "right robot gripper",
+          "cube",
+          "left gripper",
+          "tray",
+          "calibration board",
+          "workbench"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The lift should look mechanically plausible: the gripper should contact or grasp the cube, the cube should move with the gripper, and it should not float, teleport, deform, or pass through the tray or gripper.",
+      "parameters": {
+        "physical_expectations": [
+          "gripper-cube contact or grasp before lift",
+          "cube remains rigid",
+          "cube rises above tray with plausible support",
+          "no object interpenetration",
+          "no unrelated object motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "This is an intentional transition: the specified semantic state change is that the right gripper lifts the cube above the tray while protected anchors remain unchanged and the camera stays fixed.",
+      "parameters": {
+        "target_entity": "right robot gripper",
+        "target_object": "cube",
+        "required_final_state": "cube is lifted above the tray by the right gripper",
+        "protected_anchors": [
+          "left gripper",
+          "tray",
+          "calibration board",
+          "workbench"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly requires a fixed camera, not an active camera or navigation trajectory; viewpoint stability can be checked as part of the intentional-change constraints."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The primary target is a directly specified intentional object-state change, not the causal response to an external physical intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law calculation is required beyond general plausibility of a gripper lifting a cube."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon drift-resistance rollout with many turns or chunks."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a previous view after a loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

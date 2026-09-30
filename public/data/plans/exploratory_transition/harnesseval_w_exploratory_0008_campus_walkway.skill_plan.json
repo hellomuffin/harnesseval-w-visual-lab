@@ -1,0 +1,99 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0008_campus_walkway",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated campus walkway frames must remain technically clean, without severe artifacts, watermarks, split-screen effects, broken geometry, or ambiguity that would prevent judging navigation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is a three-chunk navigation sequence, so motion should be present, smooth, and temporally coherent across forward, forward-left, and right inputs.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable anchors such as the brick hall, lamp posts, bicycle rack, and tree row should preserve identity, layout, and visual continuity as the viewpoint changes.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera should move through the walkway in a plausible third-person navigation trajectory without impossible jumps, warped scale, object collisions, or incoherent parallax.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory transition explicitly requires active navigation: move forward, then forward while turning left, then turn right, along a visible campus path with near-mid-far anchors.",
+      "parameters": {
+        "action_sequence": [
+          "W",
+          "W+left",
+          "right"
+        ],
+        "expected_behavior": "forward progress along the walkway, a leftward heading adjustment during continued forward motion, followed by a rightward heading adjustment",
+        "stable_anchors": [
+          "brick hall",
+          "lamp posts",
+          "bicycle rack",
+          "tree row"
+        ],
+        "navigation_affordances": [
+          "visible path",
+          "stable near-mid-far anchors",
+          "judgeable camera motion"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case is about navigation/viewpoint transition, not an explicitly requested semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general plausibility of camera movement and scene stability."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not require returning to a previously seen viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify any offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

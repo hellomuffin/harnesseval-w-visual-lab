@@ -1,0 +1,133 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0002_desk_workspace_desk_lamp",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain technically clean and realistic in the desk workspace, with no artifacts, watermarks, broken geometry, or ambiguous rendering that would obscure the lamp-on change.",
+      "parameters": {
+        "check_for": [
+          "clean realistic frames",
+          "no severe blur or artifacts",
+          "lamp, laptop, notebook, pen cup, and blinds remain visible enough to judge"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "If the generated result is a video or multi-frame rollout, the lamp activation and lighting change should be temporally smooth without flicker, popping, or unintended object motion.",
+      "parameters": {
+        "expected_motion": "minimal state-change motion only",
+        "check_for": [
+          "smooth onset of warm light",
+          "no jitter or frame-to-frame instability",
+          "no unrelated movement"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The case requires the same desk scene and protected anchors to remain unchanged while only the brass desk lamp state changes.",
+      "parameters": {
+        "stable_entities": [
+          "laptop",
+          "notebook",
+          "pen cup",
+          "window blinds",
+          "desk lamp"
+        ],
+        "check_for": [
+          "same object identities",
+          "consistent layout and materials",
+          "no scene replacement",
+          "no added unrelated events"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The warm pool of light should behave plausibly for a brass desk lamp, illuminating nearby desk surfaces and perhaps the lamp shade area without impossible shadows or physically incoherent lighting.",
+      "parameters": {
+        "check_for": [
+          "warm localized light on desk under/near lamp",
+          "plausible shadow and highlight changes",
+          "no global relighting inconsistent with a desk lamp"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary requirement is an intentional object-state transition: turn the brass desk lamp on while keeping protected anchors and camera framing unchanged.",
+      "parameters": {
+        "target_entity": "desk lamp",
+        "required_change": "lamp turns on and creates a warm pool of light",
+        "protected_anchors": [
+          "laptop",
+          "notebook",
+          "pen cup",
+          "window blinds"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ],
+        "success_criteria": [
+          "desk lamp remains identifiable as the same brass lamp",
+          "visible warm illumination appears from the lamp",
+          "unrelated anchors remain intact and spatially stable"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly asks for a fixed camera and has no active navigation or camera path to verify."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The requested change is a direct semantic/object-state edit, not a causal response to an explicit physical force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law dynamics are required beyond general plausibility of lamp lighting, which is covered by physical_plausibility_inspector."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon rollout testing progressive degradation across many turns or chunks."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return-to-view requirement."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the target lamp transition is visible in the fixed scene."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

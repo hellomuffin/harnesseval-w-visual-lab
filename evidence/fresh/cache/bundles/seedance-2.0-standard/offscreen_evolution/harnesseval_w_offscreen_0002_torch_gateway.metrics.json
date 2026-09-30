@@ -1,0 +1,233 @@
+{
+  "schema_version": "harnesseval.metric_bundle",
+  "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+  "model_id": "seedance-2.0-standard",
+  "probe_family": "offscreen_evolution",
+  "video": {
+    "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/offscreen_evolution/seedance-2.0-standard/harnesseval_w_offscreen_0002_torch_gateway/output.mp4",
+    "size_bytes": 4400447,
+    "mtime_ns": 1790802127201079853
+  },
+  "skill_results": [
+    {
+      "skill_id": "render_quality_inspector",
+      "status": "ok",
+      "score": 0.652537,
+      "metrics": {
+        "aesthetic": 0.5922,
+        "imaging": 0.504512,
+        "hpsv3": 0.58866,
+        "flickering": 0.924778
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.render_quality",
+        "cache_contract_version": "harnesseval.render_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "status": "ok",
+      "score": 0.981382,
+      "metrics": {
+        "dynamic": 1.0,
+        "smoothness": 0.962763
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.motion_quality",
+        "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "status": "ok",
+      "score": 0.866756,
+      "metrics": {
+        "background": 0.866756
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.appearance_consistency",
+        "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+        "aggregation": "single_required_component",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "status": "ok",
+      "score": 0.50374,
+      "metrics": {
+        "visual_plausibility": 0.50374
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_plausibility.pavrm",
+        "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+        "aggregation": "pavrm_raw_score_divided_by_5",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "status": "ok",
+      "score": 0.939473,
+      "metrics": {
+        "NavScore": 0.939473,
+        "Accuracy": 0.878945,
+        "Consistency": 1.0,
+        "nATE_t": 0.084493,
+        "nATE_r": 0.157616,
+        "cnATE_t": 0.0,
+        "cnATE_r": 0.0,
+        "consistency_pairs": 0,
+        "ATE_t": 0.066399,
+        "ATE_r": 7.79814,
+        "total_path_length": 0.78585,
+        "total_rotation_deg": 49.475491
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+        "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+        "aggregation": "harnesseval_navigation_trajectory_navscore"
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "status": "ok",
+      "score": 0.432413,
+      "metrics": {
+        "closed_loop_pair_consistency": 0.432413,
+        "best_pair_similarity": 0.435975,
+        "mean_pair_similarity": 0.428852,
+        "mean_closed_loop_score": 0.432413,
+        "worst_pair_similarity": 0.432413,
+        "non_static_gate": 1.0,
+        "motion_presence": 1.0,
+        "mean_frame_diff": 0.222011,
+        "peak_frame_diff": 0.30289,
+        "active_frame_pair_ratio": 1.0,
+        "pair_weights": {
+          "best_similarity": 0.5,
+          "mean_similarity": 0.5
+        },
+        "multi_pair_weights": {
+          "mean_pair_score": 0.7,
+          "worst_pair_score": 0.3
+        }
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.return_consistency",
+        "cache_contract_version": "harnesseval.return_consistency.cache_contract",
+        "pair_details": [
+          {
+            "reference_chunk": "c01",
+            "return_chunk": "c08",
+            "best_similarity": 0.435975,
+            "mean_similarity": 0.428852,
+            "pair_score": 0.432413,
+            "comparison_count": 2
+          }
+        ],
+        "formal_gate_accepted": true
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "status": "ok",
+      "score": 0.0,
+      "metrics": {
+        "Q1_pre_visible": 1.0,
+        "Q2_offscreen_absent": 1.0,
+        "Q3_return_visible": 0.0,
+        "Q4_anchor_preservation": 0.0,
+        "Q5_no_reset": 0.0,
+        "Q6_state_change_visible": 0.0,
+        "Q7_evolution_plausible": 0.0,
+        "Q8_judgeable": 1.0,
+        "visibility_score": 0.666667,
+        "validity_gate": 0.5,
+        "anchor_score": 0.0,
+        "evolution_score": 0.0,
+        "core_score": 0.0,
+        "final_score": 0.0,
+        "expected_spec_alignment": 0.442761
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.offscreen_evolution",
+        "prompt_version": "harnesseval.offscreen_evolution.prompt",
+        "cache_contract_version": "harnesseval.offscreen_evolution.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.442761,
+          "target_alignment": 0.333333,
+          "anchor_alignment": 0.272727,
+          "visibility_alignment": 0.722222
+        },
+        "analyze_agent_cache": "[workspace]/artifacts/fresh/cache/skills/offscreen_evolution/analyze_agent/harnesseval_w_offscreen_0002_torch_gateway.json",
+        "analyze_agent_evidence_digest": "76c79724a861c4641d23b8b85cbc954ebf87d693658cea0cc03e97e65645c6c5",
+        "verify_agent_cache": "[workspace]/artifacts/fresh/cache/skills/offscreen_evolution/verify_agent/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+        "verify_agent_evidence_digest": "3a0b74819b1826833e2cc4fbdb15cd2ccba877947f8852a72260fd97fbe395f1"
+      },
+      "notes": [
+        "analyze_agent alignment is a case-audit warning only; scoring uses the canonical offscreen-evolution specification and generated video"
+      ]
+    }
+  ],
+  "skill_runs": {
+    "appearance_consistency_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:06:23.295856+00:00"
+    },
+    "return_consistency_verifier": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/return_consistency/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:08:01.215766+00:00"
+    },
+    "offscreen_evolution_verifier": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/offscreen_evolution/results/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:08:50.803208+00:00"
+    },
+    "motion_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:14:12.765301+00:00"
+    },
+    "render_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:30:06.068170+00:00"
+    },
+    "physical_plausibility_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:37:09.151883+00:00"
+    },
+    "viewpoint_trajectory_verifier": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/viewpoint_trajectory/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T22:03:09.138541+00:00"
+    }
+  },
+  "provenance": {
+    "runner_id": "harnesseval.runner"
+  },
+  "plan": {
+    "path": "[workspace]/upstream/benchmark/plans/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.skill_plan.json",
+    "input_digest": "4b0c1e7bee5c7106c5c538f03135c528322db9ba027e0a1e8289d5679d1ac680"
+  }
+}

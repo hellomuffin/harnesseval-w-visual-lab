@@ -1,0 +1,143 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0006_museum_gallery",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated museum-gallery frames must remain technically clean, artifact-free, and judgeable, with no severe blur, broken geometry, watermarks, or ambiguous visual corruption.",
+      "parameters": {
+        "scene": "museum_gallery",
+        "check_for": [
+          "clean indoor gallery rendering",
+          "no watermark or text artifacts",
+          "no split-screen or collage",
+          "stable readable geometry for walls, floor, doorway, bench, statue, and paintings"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is driven by navigation controls, so motion must be present across chunks and temporally smooth enough to judge the D movement followed by a left turn.",
+      "parameters": {
+        "action_sequence": [
+          "D",
+          "left"
+        ],
+        "check_for": [
+          "visible camera displacement",
+          "smooth transition between frames",
+          "no abrupt teleporting or jitter that prevents action judgment"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable anchors such as the statue plinth, paintings, bench, and arched doorway should preserve identity and spatial relationships as the viewpoint changes.",
+      "parameters": {
+        "stable_anchors": [
+          "statue plinth",
+          "paintings",
+          "bench",
+          "arched doorway"
+        ],
+        "check_for": [
+          "consistent object identity",
+          "consistent materials and lighting",
+          "no unexplained duplication, disappearance, or semantic morphing"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera navigation through an indoor gallery should obey plausible spatial movement without passing through walls, plinths, benches, paintings, or other fixed objects.",
+      "parameters": {
+        "environment": "indoor museum gallery",
+        "check_for": [
+          "plausible first-person camera path",
+          "no object penetration",
+          "floor, walls, doorway, bench, plinth, and paintings remain physically coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory_transition case explicitly requires active navigation: first a D movement, then a left turn, with visible path and near-mid-far anchors making camera motion judgeable.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_chunks": [
+          {
+            "chunk_id": "c01",
+            "action": "D",
+            "expected_effect": "camera translates laterally/rightward relative to the initial first-person view while maintaining coherent gallery geometry"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "left",
+            "expected_effect": "camera yaws left from the post-c01 viewpoint"
+          }
+        ],
+        "reference_anchors": [
+          "statue plinth",
+          "paintings",
+          "bench",
+          "arched doorway"
+        ],
+        "navigation_affordances": [
+          "visible path",
+          "stable near-mid-far anchors",
+          "camera motion judgeable"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint transition, not an explicitly specified semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law check beyond general plausibility of camera movement through the gallery."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short two-chunk navigation rollout, not a long-horizon drift-resistance test with many action turns."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process or evolving object is specified; the world is expected to remain stable during navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

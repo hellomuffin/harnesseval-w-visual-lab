@@ -1,0 +1,136 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0006_support_margin_countertop_v02",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the fixed-camera kitchen countertop rollout is visually clean, with the red crate, yellow brace, permanent support, ruler, floor, and background rendered without artifacts or visibility failures.",
+      "parameters": {
+        "check_targets": [
+          "target_red_overhanging_crate",
+          "yellow temporary brace",
+          "permanent support",
+          "metric ruler",
+          "countertop scene"
+        ],
+        "visibility_expectation": "target_red_overhanging_crate remains inside frame for all 49 frames"
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "Verify that the brace-removal event and any crate response occur with temporally coherent motion at 12 fps rather than jitter, popping, freezing, or discontinuous transforms.",
+      "parameters": {
+        "fps": 12,
+        "frame_start": 1,
+        "frame_end": 49,
+        "key_event_frame": 7,
+        "expected_motion_focus": [
+          "yellow brace removal",
+          "red crate post-removal response"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Check that object identity, color, material, scale, and geometry remain stable through the rollout, especially the saturated red crate and fixed neutral countertop environment.",
+      "parameters": {
+        "tracked_objects": [
+          "target_red_overhanging_crate",
+          "yellow temporary brace",
+          "permanent support",
+          "metric ruler"
+        ],
+        "protected_anchors": [
+          "fixed_floor",
+          "fixed_permanent_support",
+          "fixed_metric_ruler"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Judge whether the crate's response after brace removal is causally plausible under gravity and support contact, with no nonphysical hovering, penetration, sudden energy injection, or unsupported stability.",
+      "parameters": {
+        "gravity_m_s2": 9.81,
+        "intervention": "remove yellow temporary brace",
+        "physical_context": "red crate overhanging a permanent support on a countertop"
+      }
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The primary case requirement is the causal physical transition after removing the yellow brace while the red crate has a signed support margin of 0.02 m.",
+      "parameters": {
+        "action": "remove yellow temporary brace",
+        "target_object": "target_red_overhanging_crate",
+        "support_margin_m": 0.02,
+        "brace_removal_frame": 7,
+        "expected_behavior": "after brace removal, the crate should respond according to center-of-mass support stability; with a positive 0.02 m margin it should remain supported rather than topple unless visual evidence shows the center of mass outside support"
+      }
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "This case specifically probes center-of-mass support stability, so evaluation should check whether the crate topples only when its center of mass falls outside the permanent support footprint and whether increasing support margin lowers toppling risk.",
+      "parameters": {
+        "law": "center_of_mass_support_stability",
+        "support_margin_m": 0.02,
+        "permanent_support_half_width_m": 0.5,
+        "crate_mass_kg": 2,
+        "expected_relation": "toppling_risk_decreases_as_support_margin_increases",
+        "diagnostic_checks": [
+          "red crate center of mass relative to permanent support footprint",
+          "presence or absence of rotation about support edge after brace removal",
+          "settling without toppling for sufficiently positive margin",
+          "no dependence on removed brace after frame 7"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case uses a fixed measurement camera and only requires stable framing and visibility, not active camera movement or navigation."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic edit or object-state change; it is a causal physical response to brace removal."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short 49-frame physical simulation, not a long-horizon multi-turn or multi-chunk drift-resistance task."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static camera loop or returned viewpoint requirement."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The red crate remains visible throughout the rollout, and the case does not require offscreen process continuity."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

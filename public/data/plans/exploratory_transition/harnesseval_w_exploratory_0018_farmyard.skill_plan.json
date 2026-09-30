@@ -1,0 +1,101 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0018_farmyard",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve a polished stylized 3D farmyard render with clean geometry, readable road markings, fields, tower, hatch/vehicle foreground, and no artifacts, text, borders, or watermark.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains forward and forward-right navigation chunks, so frames must show actual movement with smooth temporal progression rather than jitter, freezing, or abrupt discontinuities.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same sparse rural farmyard must remain visually consistent during navigation, including the black hatch/vehicle foreground, red-accent tank trailer, metal tower, road surfaces, fields, and distant landmarks.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person movement through the transport lane should maintain plausible scale, support, occlusion, road curvature, and stable object placement around the large structural tower and farm surfaces.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary case is an exploratory_transition with explicit navigation controls W, W+D, W, requiring forward travel, a rightward steering segment, and continued path following along the partially occluded but traceable farm road.",
+      "parameters": {
+        "expected_control_sequence": [
+          "W",
+          "W+D",
+          "W"
+        ],
+        "environment": "outdoor rural agricultural farmyard",
+        "trajectory_expectation": "advance forward, veer/right-turn during W+D, then continue forward along the visible traffic lane",
+        "key_anchors": [
+          "foreground hatch/vehicle edge",
+          "large metal tower/structural element on the left",
+          "curving paved road/traffic lane",
+          "red tank trailer high-contrast accent",
+          "secondary distant landmark beyond the activity zone"
+        ],
+        "constraints": [
+          "first-person viewpoint with no visible operator",
+          "route remains visually traceable around the large structural element",
+          "sparse scene composition remains coherent"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation through the world, not an explicitly specified semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of camera motion and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short three-chunk rollout, not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previously seen viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify any offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

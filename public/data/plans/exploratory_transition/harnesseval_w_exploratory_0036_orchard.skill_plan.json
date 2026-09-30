@@ -1,0 +1,138 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0036_orchard",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain cinematic-realistic and technically clean in a sparse outdoor orchard with grass, trees, fence, open gate, and distant red barn.",
+      "parameters": {
+        "check_for": [
+          "clean 16:9 frames without UI, borders, captions, or watermarks",
+          "realistic orchard lighting, materials, scale, and depth",
+          "no severe blur, warping, duplicated artifacts, or broken geometry"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains forward and forward-right navigation chunks, so motion should be present, continuous, and smooth rather than jumpy or static.",
+      "parameters": {
+        "action_chunks": [
+          "c01: W",
+          "c02: W+D",
+          "c03: W"
+        ],
+        "expected_motion": "first-person forward movement with a rightward component during the middle chunk"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable landmarks and scene identity must persist during navigation: large foreground tree, fence rails, open gate posts, uneven orchard rows, grassy route, and red barn destination.",
+      "parameters": {
+        "anchors": [
+          "large gnarled tree trunk initially on the left foreground",
+          "wooden fence and open gate in the midground",
+          "orchard rows with uneven spacing",
+          "grassy diagonal route",
+          "red barn in the distance"
+        ],
+        "allowed_changes": [
+          "perspective shift from first-person movement",
+          "near objects moving out of frame as the camera advances"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera should traverse a plausible grassy path through the open gate without clipping through fence rails, trees, terrain, or other solid structures.",
+      "parameters": {
+        "check_for": [
+          "physically plausible first-person height and motion",
+          "consistent ground contact over uneven orchard terrain",
+          "no passing through barriers, gate posts, tree trunks, or barn geometry",
+          "plausible parallax between foreground tree, fence, orchard rows, and distant barn"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This is an exploratory_transition case whose primary axis is transition correctness, with explicit navigation controls requiring movement forward, then forward-right, then forward through the orchard gate toward the destination.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "trajectory": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expectation": "advance forward from the initial first-person view toward the open gate and grassy route"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+D",
+            "expectation": "continue forward while drifting or turning right, aligning more with the open passage and route into the orchard"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W",
+            "expectation": "continue forward along the route beyond or through the gate toward the distant red barn"
+          }
+        ],
+        "trajectory_constraints": [
+          "movement should follow the clear traversable path rather than lateral teleportation",
+          "viewpoint should remain first-person with no visible operator",
+          "destination should become closer or more directly reachable over time",
+          "the open gate and fence should behave as spatial boundaries during passage"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state edit; it requests navigation through an existing orchard scene."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the only specified action is viewpoint navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific causal physical-law response needs validation beyond general navigation plausibility."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

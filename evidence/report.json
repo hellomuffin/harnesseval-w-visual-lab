@@ -1,0 +1,3316 @@
+{
+  "scope": {
+    "paper_cases": 330,
+    "public_cases_downloaded": 100,
+    "fresh_evaluation_videos": 6,
+    "evaluated_generator": "author-supplied Seedance 2.0 Standard rollouts",
+    "judge": "local Qwen3-VL-8B-Instruct; substitute for GPT-5.5",
+    "original_world_model_generation_reproduced": false,
+    "human_alignment_reproduced": false
+  },
+  "hardware": {
+    "python": "3.12.12 | packaged by conda-forge | (main, Jan 26 2026, 23:51:32) [GCC 14.3.0]",
+    "platform": "Linux-5.15.0-136-generic-x86_64-with-glibc2.39",
+    "torch": "2.9.1+cu128",
+    "torch_cuda": "12.8",
+    "gpus": [
+      "NVIDIA L40S, 570.124.06, 46068 MiB",
+      "NVIDIA L40S, 570.124.06, 46068 MiB"
+    ],
+    "note": "Two local L40S GPUs; inference, metrics and generation run on this host. Initial construction image used imagegen."
+  },
+  "created_at": "2026-09-30T22:13:52.615616+00:00",
+  "upstream_commit": "ed4ccc6486b8271723ee8baea60d89b32d0a7518",
+  "fresh_tasks": [
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "motion_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.996071,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+      "skill_id": "motion_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.995718,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "skill_id": "motion_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.498649,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "motion_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.981382,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "skill_id": "motion_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.994807,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_return_0001_city_intersection",
+      "skill_id": "motion_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.983896,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "physical_plausibility_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.63452,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+      "skill_id": "physical_plausibility_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.61816,
+      "cache_hit": true,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "skill_id": "physical_plausibility_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.63494,
+      "cache_hit": true,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "physical_plausibility_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.50374,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "skill_id": "physical_plausibility_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.7231,
+      "cache_hit": true,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_return_0001_city_intersection",
+      "skill_id": "physical_plausibility_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.61362,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "render_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.696093,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+      "skill_id": "render_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.692416,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "skill_id": "render_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.721097,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "render_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.652537,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "skill_id": "render_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.759629,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_return_0001_city_intersection",
+      "skill_id": "render_quality_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.725549,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "skill_id": "physical_law_validator",
+      "skill_status": "not_applicable",
+      "status": "ok",
+      "score": null,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "appearance_consistency_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.918201,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+      "skill_id": "appearance_consistency_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.916741,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "skill_id": "appearance_consistency_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.979323,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "appearance_consistency_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.866756,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "skill_id": "appearance_consistency_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.987443,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_return_0001_city_intersection",
+      "skill_id": "appearance_consistency_inspector",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.890441,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "offscreen_evolution_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.0,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "return_consistency_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.432413,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_return_0001_city_intersection",
+      "skill_id": "return_consistency_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.506603,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "viewpoint_trajectory_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.685421,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+      "skill_id": "viewpoint_trajectory_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.926951,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "skill_id": "viewpoint_trajectory_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.939473,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_return_0001_city_intersection",
+      "skill_id": "viewpoint_trajectory_verifier",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.754596,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "skill_id": "intentional_change_verifier_vlm",
+      "skill_status": "ok_case_audit_warning",
+      "status": "ok",
+      "score": 1.0,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "skill_id": "physical_response_verifier_vlm",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.5,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "drift_degradation_analyzer",
+      "skill_status": "ok",
+      "status": "ok",
+      "score": 0.912167,
+      "cache_hit": false,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "drift_degradation_analyzer",
+      "skill_status": null,
+      "status": "ok",
+      "score": null,
+      "cache_hit": null,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "drift_degradation_analyzer",
+      "skill_status": null,
+      "status": "ok",
+      "score": null,
+      "cache_hit": null,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "drift_degradation_analyzer",
+      "skill_status": null,
+      "status": "ok",
+      "score": null,
+      "cache_hit": null,
+      "error": null
+    },
+    {
+      "case_id": "harnesseval_w_drift_0001_old_town_lane",
+      "skill_id": "drift_degradation_analyzer",
+      "skill_status": null,
+      "status": "ok",
+      "score": null,
+      "cache_hit": null,
+      "error": null
+    }
+  ],
+  "fresh_score_report": {
+    "schema_version": "harnesseval.report",
+    "score_count": 6,
+    "model_count": 1,
+    "schemas": {
+      "harnesseval.skill_eval": 6
+    },
+    "common_case_counts": {
+      "exploratory_transition": 1,
+      "intentional_transition": 1,
+      "physical_transition": 1,
+      "drift_resistance": 1,
+      "return_revisit_consistency": 1,
+      "offscreen_evolution": 1
+    },
+    "scoring_policy": {
+      "name": "all_families_core_observation_50_50",
+      "core_weight": 0.5,
+      "observation_weight": 0.5,
+      "observation_skills": [
+        "render_quality_inspector",
+        "motion_quality_inspector",
+        "appearance_consistency_inspector",
+        "physical_plausibility_inspector"
+      ],
+      "observation_denominator": "numeric_available_dimensions"
+    },
+    "observation_groups": {
+      "quality": [
+        "render_quality_inspector",
+        "motion_quality_inspector",
+        "appearance_consistency_inspector"
+      ],
+      "physical_plausibility": [
+        "physical_plausibility_inspector"
+      ]
+    },
+    "observation_count_distribution": {
+      "4": 6
+    },
+    "leaderboard": [
+      {
+        "model_id": "seedance-2.0-standard",
+        "overall_macro": 0.754987,
+        "overall_core_macro": 0.71894,
+        "overall_observation_macro": 0.791035,
+        "observation_quality_macro": 0.847597,
+        "observation_physical_plausibility_macro": 0.621347,
+        "family_scores": {
+          "exploratory_transition": 0.866355,
+          "intentional_transition": 0.854251,
+          "physical_transition": 0.683122,
+          "drift_resistance": 0.805008,
+          "return_revisit_consistency": 0.716988,
+          "offscreen_evolution": 0.604199
+        },
+        "family_core_scores": {
+          "exploratory_transition": 0.926951,
+          "intentional_transition": 1.0,
+          "physical_transition": 0.5,
+          "drift_resistance": 0.798794,
+          "return_revisit_consistency": 0.630599,
+          "offscreen_evolution": 0.457295
+        },
+        "family_observation_scores": {
+          "exploratory_transition": 0.805759,
+          "intentional_transition": 0.708502,
+          "physical_transition": 0.866245,
+          "drift_resistance": 0.811221,
+          "return_revisit_consistency": 0.803377,
+          "offscreen_evolution": 0.751104
+        },
+        "family_quality_scores": {
+          "exploratory_transition": 0.868292,
+          "intentional_transition": 0.733023,
+          "physical_transition": 0.91396,
+          "drift_resistance": 0.870122,
+          "return_revisit_consistency": 0.866629,
+          "offscreen_evolution": 0.833558
+        },
+        "family_physical_plausibility_scores": {
+          "exploratory_transition": 0.61816,
+          "intentional_transition": 0.63494,
+          "physical_transition": 0.7231,
+          "drift_resistance": 0.63452,
+          "return_revisit_consistency": 0.61362,
+          "offscreen_evolution": 0.50374
+        },
+        "coverage": {
+          "exploratory_transition": 1,
+          "intentional_transition": 1,
+          "physical_transition": 1,
+          "drift_resistance": 1,
+          "return_revisit_consistency": 1,
+          "offscreen_evolution": 1
+        }
+      }
+    ]
+  },
+  "completion_audit": {
+    "schema_version": "harnesseval.completion_audit",
+    "status": "passed",
+    "manifest_count": 1,
+    "case_count": 6,
+    "model_count": 1,
+    "expected_score_count": 6,
+    "actual_score_count": 6,
+    "duplicate_key_count": 0,
+    "missing_key_count": 0,
+    "unexpected_key_count": 0,
+    "schema_counts": {
+      "harnesseval.skill_eval": 6
+    },
+    "expected_family_counts_per_model": {
+      "exploratory_transition": 1,
+      "intentional_transition": 1,
+      "physical_transition": 1,
+      "drift_resistance": 1,
+      "return_revisit_consistency": 1,
+      "offscreen_evolution": 1
+    },
+    "actual_coverage": {
+      "seedance-2.0-standard": {
+        "exploratory_transition": 1,
+        "intentional_transition": 1,
+        "physical_transition": 1,
+        "drift_resistance": 1,
+        "return_revisit_consistency": 1,
+        "offscreen_evolution": 1
+      }
+    },
+    "report": {
+      "schema_version": "harnesseval.report",
+      "score_count": 6,
+      "model_count": 1,
+      "schemas": {
+        "harnesseval.skill_eval": 6
+      },
+      "common_case_counts": {
+        "exploratory_transition": 1,
+        "intentional_transition": 1,
+        "physical_transition": 1,
+        "drift_resistance": 1,
+        "return_revisit_consistency": 1,
+        "offscreen_evolution": 1
+      },
+      "scoring_policy": {
+        "name": "all_families_core_observation_50_50",
+        "core_weight": 0.5,
+        "observation_weight": 0.5,
+        "observation_skills": [
+          "render_quality_inspector",
+          "motion_quality_inspector",
+          "appearance_consistency_inspector",
+          "physical_plausibility_inspector"
+        ],
+        "observation_denominator": "numeric_available_dimensions"
+      },
+      "observation_groups": {
+        "quality": [
+          "render_quality_inspector",
+          "motion_quality_inspector",
+          "appearance_consistency_inspector"
+        ],
+        "physical_plausibility": [
+          "physical_plausibility_inspector"
+        ]
+      },
+      "observation_count_distribution": {
+        "4": 6
+      },
+      "leaderboard": [
+        {
+          "model_id": "seedance-2.0-standard",
+          "overall_macro": 0.754987,
+          "overall_core_macro": 0.71894,
+          "overall_observation_macro": 0.791035,
+          "observation_quality_macro": 0.847597,
+          "observation_physical_plausibility_macro": 0.621347,
+          "family_scores": {
+            "exploratory_transition": 0.866355,
+            "intentional_transition": 0.854251,
+            "physical_transition": 0.683122,
+            "drift_resistance": 0.805008,
+            "return_revisit_consistency": 0.716988,
+            "offscreen_evolution": 0.604199
+          },
+          "family_core_scores": {
+            "exploratory_transition": 0.926951,
+            "intentional_transition": 1.0,
+            "physical_transition": 0.5,
+            "drift_resistance": 0.798794,
+            "return_revisit_consistency": 0.630599,
+            "offscreen_evolution": 0.457295
+          },
+          "family_observation_scores": {
+            "exploratory_transition": 0.805759,
+            "intentional_transition": 0.708502,
+            "physical_transition": 0.866245,
+            "drift_resistance": 0.811221,
+            "return_revisit_consistency": 0.803377,
+            "offscreen_evolution": 0.751104
+          },
+          "family_quality_scores": {
+            "exploratory_transition": 0.868292,
+            "intentional_transition": 0.733023,
+            "physical_transition": 0.91396,
+            "drift_resistance": 0.870122,
+            "return_revisit_consistency": 0.866629,
+            "offscreen_evolution": 0.833558
+          },
+          "family_physical_plausibility_scores": {
+            "exploratory_transition": 0.61816,
+            "intentional_transition": 0.63494,
+            "physical_transition": 0.7231,
+            "drift_resistance": 0.63452,
+            "return_revisit_consistency": 0.61362,
+            "offscreen_evolution": 0.50374
+          },
+          "coverage": {
+            "exploratory_transition": 1,
+            "intentional_transition": 1,
+            "physical_transition": 1,
+            "drift_resistance": 1,
+            "return_revisit_consistency": 1,
+            "offscreen_evolution": 1
+          }
+        }
+      ]
+    },
+    "resume": null,
+    "json_scan": {
+      "file_count": 0,
+      "failure_count": 0,
+      "failures": []
+    },
+    "violation_count": 0,
+    "violations": []
+  },
+  "author_cache_replay": {
+    "schema_version": "harnesseval.report",
+    "score_count": 6,
+    "model_count": 1,
+    "schemas": {
+      "harnesseval.skill_eval": 6
+    },
+    "common_case_counts": {
+      "exploratory_transition": 1,
+      "intentional_transition": 1,
+      "physical_transition": 1,
+      "drift_resistance": 1,
+      "return_revisit_consistency": 1,
+      "offscreen_evolution": 1
+    },
+    "scoring_policy": {
+      "name": "all_families_core_observation_50_50",
+      "core_weight": 0.5,
+      "observation_weight": 0.5,
+      "observation_skills": [
+        "render_quality_inspector",
+        "motion_quality_inspector",
+        "appearance_consistency_inspector",
+        "physical_plausibility_inspector"
+      ],
+      "observation_denominator": "numeric_available_dimensions"
+    },
+    "observation_groups": {
+      "quality": [
+        "render_quality_inspector",
+        "motion_quality_inspector",
+        "appearance_consistency_inspector"
+      ],
+      "physical_plausibility": [
+        "physical_plausibility_inspector"
+      ]
+    },
+    "observation_count_distribution": {
+      "4": 6
+    },
+    "leaderboard": [
+      {
+        "model_id": "seedance-2.0-standard",
+        "overall_macro": 0.787629,
+        "overall_core_macro": 0.784211,
+        "overall_observation_macro": 0.791047,
+        "observation_quality_macro": 0.847664,
+        "observation_physical_plausibility_macro": 0.621197,
+        "family_scores": {
+          "exploratory_transition": 0.866805,
+          "intentional_transition": 0.854834,
+          "physical_transition": 0.858426,
+          "drift_resistance": 0.804672,
+          "return_revisit_consistency": 0.715636,
+          "offscreen_evolution": 0.625403
+        },
+        "family_core_scores": {
+          "exploratory_transition": 0.926948,
+          "intentional_transition": 1.0,
+          "physical_transition": 0.850391,
+          "drift_resistance": 0.79786,
+          "return_revisit_consistency": 0.630584,
+          "offscreen_evolution": 0.499485
+        },
+        "family_observation_scores": {
+          "exploratory_transition": 0.806662,
+          "intentional_transition": 0.709668,
+          "physical_transition": 0.866461,
+          "drift_resistance": 0.811484,
+          "return_revisit_consistency": 0.800688,
+          "offscreen_evolution": 0.751321
+        },
+        "family_quality_scores": {
+          "exploratory_transition": 0.868289,
+          "intentional_transition": 0.733037,
+          "physical_transition": 0.913868,
+          "drift_resistance": 0.870472,
+          "return_revisit_consistency": 0.866744,
+          "offscreen_evolution": 0.833575
+        },
+        "family_physical_plausibility_scores": {
+          "exploratory_transition": 0.62178,
+          "intentional_transition": 0.63956,
+          "physical_transition": 0.72424,
+          "drift_resistance": 0.63452,
+          "return_revisit_consistency": 0.60252,
+          "offscreen_evolution": 0.50456
+        },
+        "coverage": {
+          "exploratory_transition": 1,
+          "intentional_transition": 1,
+          "physical_transition": 1,
+          "drift_resistance": 1,
+          "return_revisit_consistency": 1,
+          "offscreen_evolution": 1
+        }
+      }
+    ]
+  },
+  "baseline_protocol_comparison": {
+    "created_at": "2026-09-30T21:43:49.920824+00:00",
+    "upstream_url": "https://github.com/meituan-longcat/WBench",
+    "commit": "bda8cf9b26d35dcb434f668804200278533d0e69",
+    "judge": "Qwen3-VL-8B-Instruct",
+    "scope": "Official WBench five-question event-edit rubric and aggregation; frame sampling adapted to HarnessEval 12 frames at 512px. Same judge and clips, different rubric. Harness additionally uses an initial image in Analyze and reference specification; not a controlled architecture-only ablation or human accuracy test.",
+    "rows": [
+      {
+        "name": "original",
+        "sampling": {
+          "method": "uniform_full_video",
+          "max_frames": 12,
+          "source_frame_count": 97,
+          "source_fps": 24.0,
+          "sample_indices": [
+            0,
+            8,
+            17,
+            26,
+            34,
+            43,
+            52,
+            61,
+            69,
+            78,
+            87,
+            96
+          ]
+        },
+        "result": {
+          "score": 1.0,
+          "num_turns": 1,
+          "turn_details": [
+            {
+              "turn": 1,
+              "action": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.",
+              "score": 1.0,
+              "correct": 5,
+              "total": 5,
+              "questions": [
+                {
+                  "sub_id": "Q1",
+                  "correct": true,
+                  "answer": "no",
+                  "expected": "no",
+                  "reason": "Mug is tipped onto side with visible liquid spill on table surface in later frames."
+                },
+                {
+                  "sub_id": "Q2",
+                  "correct": true,
+                  "answer": "yes",
+                  "expected": "yes",
+                  "reason": "The mug is tipped onto its side and a small spill is visible on the table, matching the described event. All scene anchors remain unchanged and the camera is fixed."
+                },
+                {
+                  "sub_id": "Q3",
+                  "correct": true,
+                  "answer": "yes",
+                  "expected": "yes",
+                  "reason": "The mug is tipped and spilling liquid, with a visible wet patch on the table, indicating the event has reached a clear conclusion."
+                },
+                {
+                  "sub_id": "Q4",
+                  "correct": true,
+                  "answer": "yes",
+                  "expected": "yes",
+                  "reason": "The mug is tipped onto its side and a spill is visible, but the spill appears as a small puddle, not a 'small local spill' as described. The camera remains fixed and scene anchors are unchanged."
+                },
+                {
+                  "sub_id": "Q5",
+                  "correct": true,
+                  "answer": "no",
+                  "expected": "no",
+                  "reason": "No unexpected objects or anomalies appear. The mug tips and spills as instructed, with no unrelated entities introduced. Scene anchors (sofas, lamp, rug) remain unchanged."
+                }
+              ]
+            }
+          ]
+        },
+        "raw_calls": [
+          {
+            "question": "Does the scene remain largely unchanged, with no clear indication of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' occurring?\n(Criterion: answer No if there is ANY recognizable change related to this event. Only answer Yes if the scene is completely static or changes are entirely unrelated.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-ac83a5ed87a3fb03",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: Mug is tipped onto side with visible liquid spill on table surface in later frames.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804614,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 22,
+                "prompt_tokens": 2054,
+                "total_tokens": 2076,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Does the video show something resembling or consistent with the described event: 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: answer Yes if the core action or change is visually recognizable, even if not every detail matches perfectly. Partial depiction counts as Yes.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-ba7d9ab242bbdbaf",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The mug is tipped onto its side and a small spill is visible on the table, matching the described event. All scene anchors remain unchanged and the camera is fixed.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804615,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 39,
+                "prompt_tokens": 2052,
+                "total_tokens": 2091,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "By the end of this segment, has the described event 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' reached a clear conclusion or outcome?\n(Criterion: answer Yes only if the event has a visible end state or result. If the event is still ongoing, just beginning, or only partially shown, answer No.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-9aaff38955f91327",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The mug is tipped and spilling liquid, with a visible wet patch on the table, indicating the event has reached a clear conclusion.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804616,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 33,
+                "prompt_tokens": 2062,
+                "total_tokens": 2095,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Are the key details of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' accurately depicted, such as the correct objects, agents, directions, and quantities involved?\n(Criterion: focus on the key entities and actions mentioned in the description. Ignore minor background differences or irrelevant details.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-b65f5cd6edeb7f0a",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The mug is tipped onto its side and a spill is visible, but the spill appears as a small puddle, not a 'small local spill' as described. The camera remains fixed and scene anchors are unchanged.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804617,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 49,
+                "prompt_tokens": 2054,
+                "total_tokens": 2103,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Does any unexpected object, entity, or visual anomaly appear in this segment that is clearly unrelated to 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: only answer Yes if something obviously out-of-place appears. Natural consequences of the event do not count. Minor AI rendering artifacts like texture flickering do not count.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-b8b42c5e899160bd",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: No unexpected objects or anomalies appear. The mug tips and spills as instructed, with no unrelated entities introduced. Scene anchors (sofas, lamp, rug) remain unchanged.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804618,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 40,
+                "prompt_tokens": 2064,
+                "total_tokens": 2104,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          }
+        ]
+      },
+      {
+        "name": "frozen",
+        "sampling": {
+          "method": "uniform_full_video",
+          "max_frames": 12,
+          "source_frame_count": 97,
+          "source_fps": 24.0,
+          "sample_indices": [
+            0,
+            8,
+            17,
+            26,
+            34,
+            43,
+            52,
+            61,
+            69,
+            78,
+            87,
+            96
+          ]
+        },
+        "result": {
+          "score": 0.2,
+          "num_turns": 1,
+          "turn_details": [
+            {
+              "turn": 1,
+              "action": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.",
+              "score": 0.2,
+              "correct": 1,
+              "total": 5,
+              "questions": [
+                {
+                  "sub_id": "Q1",
+                  "correct": false,
+                  "answer": "yes",
+                  "expected": "no",
+                  "reason": "No change observed; mug remains upright, no spill visible, scene static."
+                },
+                {
+                  "sub_id": "Q2",
+                  "correct": false,
+                  "answer": "no",
+                  "expected": "yes",
+                  "reason": "The white ceramic mug remains upright and undisturbed in all frames, with no spill or tipping observed. The scene anchors are unchanged, but the core action is entirely absent."
+                },
+                {
+                  "sub_id": "Q3",
+                  "correct": false,
+                  "answer": "no",
+                  "expected": "yes",
+                  "reason": "The white mug remains upright and undisturbed in all frames, with no visible spill or movement indicating the event has occurred."
+                },
+                {
+                  "sub_id": "Q4",
+                  "correct": false,
+                  "answer": "no",
+                  "expected": "yes",
+                  "reason": "The white ceramic mug is not tipped or spilled in any frame; it remains upright and unchanged throughout the sequence."
+                },
+                {
+                  "sub_id": "Q5",
+                  "correct": true,
+                  "answer": "no",
+                  "expected": "no",
+                  "reason": "No unexpected objects or anomalies appear. The scene remains consistent with the instruction and its natural consequences (no spill shown yet). No out-of-place elements are visible."
+                }
+              ]
+            }
+          ]
+        },
+        "raw_calls": [
+          {
+            "question": "Does the scene remain largely unchanged, with no clear indication of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' occurring?\n(Criterion: answer No if there is ANY recognizable change related to this event. Only answer Yes if the scene is completely static or changes are entirely unrelated.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-9b11900b495d9868",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: No change observed; mug remains upright, no spill visible, scene static.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804620,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 21,
+                "prompt_tokens": 2054,
+                "total_tokens": 2075,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Does the video show something resembling or consistent with the described event: 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: answer Yes if the core action or change is visually recognizable, even if not every detail matches perfectly. Partial depiction counts as Yes.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-832b35844075c18d",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The white ceramic mug remains upright and undisturbed in all frames, with no spill or tipping observed. The scene anchors are unchanged, but the core action is entirely absent.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804620,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 41,
+                "prompt_tokens": 2052,
+                "total_tokens": 2093,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "By the end of this segment, has the described event 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' reached a clear conclusion or outcome?\n(Criterion: answer Yes only if the event has a visible end state or result. If the event is still ongoing, just beginning, or only partially shown, answer No.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-b850f57679bcd534",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The white mug remains upright and undisturbed in all frames, with no visible spill or movement indicating the event has occurred.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804621,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 31,
+                "prompt_tokens": 2062,
+                "total_tokens": 2093,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Are the key details of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' accurately depicted, such as the correct objects, agents, directions, and quantities involved?\n(Criterion: focus on the key entities and actions mentioned in the description. Ignore minor background differences or irrelevant details.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-90639ae429cea353",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The white ceramic mug is not tipped or spilled in any frame; it remains upright and unchanged throughout the sequence.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804622,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 2054,
+                "total_tokens": 2082,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Does any unexpected object, entity, or visual anomaly appear in this segment that is clearly unrelated to 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: only answer Yes if something obviously out-of-place appears. Natural consequences of the event do not count. Minor AI rendering artifacts like texture flickering do not count.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-910e548beec109ec",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: No unexpected objects or anomalies appear. The scene remains consistent with the instruction and its natural consequences (no spill shown yet). No out-of-place elements are visible.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804623,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 38,
+                "prompt_tokens": 2064,
+                "total_tokens": 2102,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          }
+        ]
+      },
+      {
+        "name": "reversed",
+        "sampling": {
+          "method": "uniform_full_video",
+          "max_frames": 12,
+          "source_frame_count": 97,
+          "source_fps": 24.0,
+          "sample_indices": [
+            0,
+            8,
+            17,
+            26,
+            34,
+            43,
+            52,
+            61,
+            69,
+            78,
+            87,
+            96
+          ]
+        },
+        "result": {
+          "score": 1.0,
+          "num_turns": 1,
+          "turn_details": [
+            {
+              "turn": 1,
+              "action": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.",
+              "score": 1.0,
+              "correct": 5,
+              "total": 5,
+              "questions": [
+                {
+                  "sub_id": "Q1",
+                  "correct": true,
+                  "answer": "no",
+                  "expected": "no",
+                  "reason": "Mug is tipped onto its side with visible liquid spill on table in initial frames, then uprights; scene anchors unchanged. Event occurred."
+                },
+                {
+                  "sub_id": "Q2",
+                  "correct": true,
+                  "answer": "yes",
+                  "expected": "yes",
+                  "reason": "The mug is tipped onto its side and shows a small spill on the table, though the spill is not clearly liquid and the camera remains fixed with scene anchors unchanged."
+                },
+                {
+                  "sub_id": "Q3",
+                  "correct": true,
+                  "answer": "yes",
+                  "expected": "yes",
+                  "reason": "The mug is upright and dry in the final frame, indicating the spill event has concluded. The camera remains fixed and scene anchors unchanged."
+                },
+                {
+                  "sub_id": "Q4",
+                  "correct": true,
+                  "answer": "yes",
+                  "expected": "yes",
+                  "reason": "The mug is tipped onto its side and a small spill is visible on the table, matching the description. The camera remains fixed, and scene anchors are unchanged. All key entities and actions are accurately depicted."
+                },
+                {
+                  "sub_id": "Q5",
+                  "correct": true,
+                  "answer": "no",
+                  "expected": "no",
+                  "reason": "No unexpected objects or anomalies appear. The mug tipping and spilling is the only event, and all scene anchors remain unchanged as instructed."
+                }
+              ]
+            }
+          ]
+        },
+        "raw_calls": [
+          {
+            "question": "Does the scene remain largely unchanged, with no clear indication of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' occurring?\n(Criterion: answer No if there is ANY recognizable change related to this event. Only answer Yes if the scene is completely static or changes are entirely unrelated.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-a59e210c00e77fae",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: Mug is tipped onto its side with visible liquid spill on table in initial frames, then uprights; scene anchors unchanged. Event occurred.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804624,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 33,
+                "prompt_tokens": 2054,
+                "total_tokens": 2087,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Does the video show something resembling or consistent with the described event: 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: answer Yes if the core action or change is visually recognizable, even if not every detail matches perfectly. Partial depiction counts as Yes.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-823787317a044a88",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The mug is tipped onto its side and shows a small spill on the table, though the spill is not clearly liquid and the camera remains fixed with scene anchors unchanged.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804625,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 39,
+                "prompt_tokens": 2052,
+                "total_tokens": 2091,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "By the end of this segment, has the described event 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' reached a clear conclusion or outcome?\n(Criterion: answer Yes only if the event has a visible end state or result. If the event is still ongoing, just beginning, or only partially shown, answer No.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-985f7145bb8bc6b2",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The mug is upright and dry in the final frame, indicating the spill event has concluded. The camera remains fixed and scene anchors unchanged.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804626,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 33,
+                "prompt_tokens": 2062,
+                "total_tokens": 2095,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Are the key details of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' accurately depicted, such as the correct objects, agents, directions, and quantities involved?\n(Criterion: focus on the key entities and actions mentioned in the description. Ignore minor background differences or irrelevant details.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-ab336725b5dfaac4",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: The mug is tipped onto its side and a small spill is visible on the table, matching the description. The camera remains fixed, and scene anchors are unchanged. All key entities and actions are accurately depicted.\nAnswer: Yes",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804627,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 47,
+                "prompt_tokens": 2054,
+                "total_tokens": 2101,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          },
+          {
+            "question": "Does any unexpected object, entity, or visual anomaly appear in this segment that is clearly unrelated to 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: only answer Yes if something obviously out-of-place appears. Natural consequences of the event do not count. Minor AI rendering artifacts like texture flickering do not count.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+            "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+            "response": {
+              "id": "chatcmpl-b2fc5a238290b5d5",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "index": 0,
+                  "logprobs": null,
+                  "message": {
+                    "content": "Reason: No unexpected objects or anomalies appear. The mug tipping and spilling is the only event, and all scene anchors remain unchanged as instructed.\nAnswer: No",
+                    "refusal": null,
+                    "role": "assistant",
+                    "annotations": null,
+                    "audio": null,
+                    "function_call": null,
+                    "tool_calls": [],
+                    "reasoning": null,
+                    "reasoning_content": null
+                  },
+                  "stop_reason": null,
+                  "token_ids": null
+                }
+              ],
+              "created": 1790804629,
+              "model": "local-judge",
+              "object": "chat.completion",
+              "service_tier": null,
+              "system_fingerprint": null,
+              "usage": {
+                "completion_tokens": 33,
+                "prompt_tokens": 2064,
+                "total_tokens": 2097,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+              },
+              "prompt_logprobs": null,
+              "prompt_token_ids": null,
+              "kv_transfer_params": null
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "local_generation": {
+    "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+    "revision": "b8fff7315c768468a5333511427288870b2e9635",
+    "seed": 42,
+    "prompt": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page. Fixed camera, one continuous shot, natural realistic motion.",
+    "negative_prompt": "blurry, distorted, subtitles, camera movement, low quality",
+    "settings": {
+      "height": 768,
+      "width": 1152,
+      "num_frames": 97,
+      "num_inference_steps": 50,
+      "guidance_scale": 5.0
+    },
+    "fps": 24,
+    "diffusers": "0.37.1",
+    "scope": "New locally generated example; separate from the six author-provided Seedance videos. Not a reproduction of the complete model leaderboard.",
+    "generation_seconds": 373.25793957710266,
+    "evaluation": {
+      "cache_hit": false,
+      "cache_path": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/results/artifacts/harness_video/construction.json",
+      "analyze_agent_cache_path": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/analyze_agent/local_constructed_red_book.json",
+      "verify_agent_cache_path": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/verify_agent/artifacts/harness_video/local_constructed_red_book.json",
+      "result": {
+        "skill_id": "intentional_change_verifier_vlm",
+        "status": "ok_case_audit_warning",
+        "score": 1.0,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.185848
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.intentional_change_vlm",
+          "prompt_version": "harnesseval.intentional_change.prompt",
+          "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+          "case_audit": {
+            "status": "warning",
+            "warning": true,
+            "expected_spec_alignment": 0.185848,
+            "target_alignment": 0.043478,
+            "change_alignment": 0.043478,
+            "anchor_alignment": 0.470588
+          },
+          "analyze_agent_cache": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/analyze_agent/local_constructed_red_book.json",
+          "analyze_agent_evidence_digest": "394008941a2a1f2eb733254f16952f54d5069e526d2410ef4392fea77e35d20e",
+          "verify_agent_cache": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/verify_agent/artifacts/harness_video/local_constructed_red_book.json",
+          "verify_agent_evidence_digest": "327eec0369583a78633c25c1da884a0d59b2f591d467cbe9dc58a1457b2d256b"
+        },
+        "notes": []
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "local-judge",
+          "config_digest": "59a8444136b34b75c6dc28b19b38cc55faf238a1ebee6ef4dff92f3fcc87ade8"
+        },
+        "video": {
+          "path": "[workspace]/artifacts/construction/output.mp4",
+          "size_bytes": 708109,
+          "mtime_ns": 1790805804394128445,
+          "sha256": "e2041a985204066e2dd6f7e5fdc89996add8158183c865767a74be476a7cb917"
+        },
+        "initial_observation": {
+          "path": "[workspace]/artifacts/construction/initial.png",
+          "size_bytes": 2292845,
+          "mtime_ns": 1790803075898934223,
+          "sha256": "686e269ad279e86120595f73478fdd6d6fbd3bc0835b0d46bc61ddc694a6d6cc"
+        },
+        "analyze_agent_cache_hit": false,
+        "verify_agent_cache_hit": false
+      }
+    },
+    "video": "evidence/construction/output.mp4"
+  },
+  "controls": {
+    "semantic": [
+      {
+        "name": "original",
+        "video": "evidence/controls/original.mp4",
+        "result": {
+          "skill_id": "intentional_change_verifier_vlm",
+          "status": "ok_case_audit_warning",
+          "score": 1.0,
+          "metrics": {
+            "Q1_target_visible": 1.0,
+            "Q2_transition_visible": 1.0,
+            "Q3_intended_change": 1.0,
+            "Q4_target_specificity": 1.0,
+            "Q5_final_state": 1.0,
+            "Q6_anchor_preservation": 1.0,
+            "Q7_no_extra_event": 1.0,
+            "Q8_judgeable": 1.0,
+            "target_visibility": 1.0,
+            "change_execution": 1.0,
+            "target_specificity": 1.0,
+            "final_state": 1.0,
+            "preservation": 1.0,
+            "validity_gate": 1.0,
+            "core_score": 1.0,
+            "final_score": 1.0,
+            "expected_spec_alignment": 0.193651
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.intentional_change_vlm",
+            "prompt_version": "harnesseval.intentional_change.prompt",
+            "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+            "case_audit": {
+              "status": "warning",
+              "warning": true,
+              "expected_spec_alignment": 0.193651,
+              "target_alignment": 0.095238,
+              "change_alignment": 0.285714,
+              "anchor_alignment": 0.2
+            },
+            "analyze_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/original/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+            "analyze_agent_evidence_digest": "9253bf13bab57794d2c26f5dfa1db71998d0b19adf0684aaf1d4491d1e9c2d59",
+            "verify_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/original/skills/intentional_change/verify_agent/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+            "verify_agent_evidence_digest": "ba7d9c7bf5c42f6c6bdf5c3d5fbaaa6a3786116cf6b95a9beb74800de9d25291"
+          },
+          "notes": []
+        },
+        "cache": "evidence/controls/cache/20260930T213845/original",
+        "cache_hit": false
+      },
+      {
+        "name": "frozen",
+        "video": "evidence/controls/frozen.mp4",
+        "result": {
+          "skill_id": "intentional_change_verifier_vlm",
+          "status": "ok_case_audit_warning",
+          "score": 0.45,
+          "metrics": {
+            "Q1_target_visible": 1.0,
+            "Q2_transition_visible": 0.0,
+            "Q3_intended_change": 0.0,
+            "Q4_target_specificity": 1.0,
+            "Q5_final_state": 0.0,
+            "Q6_anchor_preservation": 1.0,
+            "Q7_no_extra_event": 1.0,
+            "Q8_judgeable": 1.0,
+            "target_visibility": 1.0,
+            "change_execution": 0.0,
+            "target_specificity": 1.0,
+            "final_state": 0.0,
+            "preservation": 1.0,
+            "validity_gate": 1.0,
+            "core_score": 0.45,
+            "final_score": 0.45,
+            "expected_spec_alignment": 0.193651
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.intentional_change_vlm",
+            "prompt_version": "harnesseval.intentional_change.prompt",
+            "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+            "case_audit": {
+              "status": "warning",
+              "warning": true,
+              "expected_spec_alignment": 0.193651,
+              "target_alignment": 0.095238,
+              "change_alignment": 0.285714,
+              "anchor_alignment": 0.2
+            },
+            "analyze_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/frozen/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+            "analyze_agent_evidence_digest": "c1253069b9a940585fb3e31cd9d3e650057b2f74aa78f1e0a0013a9b453b7df7",
+            "verify_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/frozen/skills/intentional_change/verify_agent/artifacts/harness_video/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+            "verify_agent_evidence_digest": "6d03b50ff41b1e043a83f7d91c5cdc0de75945139be3df7f637d472bccee2aa8"
+          },
+          "notes": []
+        },
+        "cache": "evidence/controls/cache/20260930T213845/frozen",
+        "cache_hit": false
+      },
+      {
+        "name": "reversed",
+        "video": "evidence/controls/reversed.mp4",
+        "result": {
+          "skill_id": "intentional_change_verifier_vlm",
+          "status": "ok_case_audit_warning",
+          "score": 0.875,
+          "metrics": {
+            "Q1_target_visible": 1.0,
+            "Q2_transition_visible": 1.0,
+            "Q3_intended_change": 1.0,
+            "Q4_target_specificity": 1.0,
+            "Q5_final_state": 0.5,
+            "Q6_anchor_preservation": 1.0,
+            "Q7_no_extra_event": 1.0,
+            "Q8_judgeable": 1.0,
+            "target_visibility": 1.0,
+            "change_execution": 1.0,
+            "target_specificity": 1.0,
+            "final_state": 0.5,
+            "preservation": 1.0,
+            "validity_gate": 1.0,
+            "core_score": 0.875,
+            "final_score": 0.875,
+            "expected_spec_alignment": 0.193651
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.intentional_change_vlm",
+            "prompt_version": "harnesseval.intentional_change.prompt",
+            "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+            "case_audit": {
+              "status": "warning",
+              "warning": true,
+              "expected_spec_alignment": 0.193651,
+              "target_alignment": 0.095238,
+              "change_alignment": 0.285714,
+              "anchor_alignment": 0.2
+            },
+            "analyze_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/reversed/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+            "analyze_agent_evidence_digest": "114bada87fb0c4d3559149db31a6a60c15a246befc680d9cacda112d4062ea3c",
+            "verify_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/reversed/skills/intentional_change/verify_agent/artifacts/harness_video/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+            "verify_agent_evidence_digest": "48487fe9f6971a39212cc777951b7f329037c03dbb38800c55285857faa25813"
+          },
+          "notes": []
+        },
+        "cache": "evidence/controls/cache/20260930T213845/reversed",
+        "cache_hit": false
+      }
+    ],
+    "physics": [
+      {
+        "name": "gravity_arc",
+        "video": "evidence/controls/gravity_arc.mp4",
+        "result": {
+          "skill_id": "physical_law_validator",
+          "status": "ok",
+          "score": 1.0,
+          "metrics": {
+            "PhysicalLawScore": 1.0,
+            "law_score": 1.0,
+            "law_count": 1,
+            "scored_law_count": 1,
+            "mean_scored_law_score": 1.0
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.physical_law",
+            "engine_spec": {
+              "source": "case_metadata",
+              "engine_model_id": "projectile_2d",
+              "sample_id": "",
+              "gt": {},
+              "law_checks": []
+            },
+            "laws": [
+              {
+                "law": "projectile_arc",
+                "score": 1.0,
+                "detail": "R2=1.00 a=+"
+              }
+            ],
+            "reliability_assumptions": [
+              "fixed camera",
+              "one dominant moving subject",
+              "static background",
+              "sufficient subject texture",
+              "moderate inter-frame displacement"
+            ]
+          },
+          "notes": [
+            "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+          ]
+        }
+      },
+      {
+        "name": "inverted_arc",
+        "video": "evidence/controls/inverted_arc.mp4",
+        "result": {
+          "skill_id": "physical_law_validator",
+          "status": "ok",
+          "score": 0.5,
+          "metrics": {
+            "PhysicalLawScore": 0.5,
+            "law_score": 0.5,
+            "law_count": 1,
+            "scored_law_count": 1,
+            "mean_scored_law_score": 0.5
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.physical_law",
+            "engine_spec": {
+              "source": "case_metadata",
+              "engine_model_id": "projectile_2d",
+              "sample_id": "",
+              "gt": {},
+              "law_checks": []
+            },
+            "laws": [
+              {
+                "law": "projectile_arc",
+                "score": 0.5,
+                "detail": "R2=1.00 a=-"
+              }
+            ],
+            "reliability_assumptions": [
+              "fixed camera",
+              "one dominant moving subject",
+              "static background",
+              "sufficient subject texture",
+              "moderate inter-frame displacement"
+            ]
+          },
+          "notes": [
+            "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+          ]
+        }
+      },
+      {
+        "name": "frozen_ball",
+        "video": "evidence/controls/frozen_ball.mp4",
+        "result": {
+          "skill_id": "physical_law_validator",
+          "status": "ok",
+          "score": 0.0,
+          "metrics": {
+            "PhysicalLawScore": 0.0,
+            "law_score": 0.0,
+            "law_count": 1,
+            "scored_law_count": 1,
+            "mean_scored_law_score": 0.0
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.physical_law",
+            "engine_spec": {
+              "source": "case_metadata",
+              "engine_model_id": "projectile_2d",
+              "sample_id": "",
+              "gt": {},
+              "law_checks": []
+            },
+            "laws": [
+              {
+                "law": "projectile_arc",
+                "score": 0.0,
+                "detail": "insufficient horizontal travel for an arc"
+              }
+            ],
+            "reliability_assumptions": [
+              "fixed camera",
+              "one dominant moving subject",
+              "static background",
+              "sufficient subject texture",
+              "moderate inter-frame displacement"
+            ]
+          },
+          "notes": [
+            "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+          ]
+        }
+      }
+    ]
+  },
+  "repeatability": {
+    "judge": "Qwen3-VL-8B-Instruct",
+    "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+    "runs": [
+      {
+        "run": 1,
+        "score": 1.0,
+        "cache_hit": false,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.193651
+        }
+      },
+      {
+        "run": 2,
+        "score": 1.0,
+        "cache_hit": false,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.193651
+        }
+      },
+      {
+        "run": 3,
+        "score": 1.0,
+        "cache_hit": false,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.193651
+        }
+      }
+    ],
+    "scope": "Single-case repeatability; not the human Bradley\u2013Terry envelope experiment."
+  },
+  "construction": {
+    "attempts": [
+      {
+        "plan": {
+          "title": "Red Book Opens on Kitchen Counter",
+          "action_text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.",
+          "target_entity": "closed red book",
+          "initial_state": "The red book is closed and lying flat on the wooden countertop.",
+          "expected_outcome": [
+            "The book's front cover is lifted, revealing the inner pages.",
+            "The book is now in an open state, with the first page visible."
+          ],
+          "protected_anchors": [
+            "The red book remains on the same wooden countertop.",
+            "The blue mug and basil plant remain in their original positions.",
+            "The white tiled wall background remains unchanged."
+          ],
+          "negative_constraints": [
+            "The book does not move from its position on the countertop.",
+            "No new objects are introduced into the scene.",
+            "The book does not become damaged or torn during the transition."
+          ],
+          "validation_questions": [
+            "Is the book still on the countertop after the action?",
+            "Are the blue mug and basil plant in the same positions?",
+            "Is the book visibly open with pages exposed?"
+          ]
+        },
+        "validation": {
+          "valid": true,
+          "reason": "The action is physically feasible and aligns with the initial state. The target (closed red book) is clearly visible. The action of lifting the cover to open the book is plausible and results in the expected outcome without violating any constraints. All protected anchors are preserved, and the scenario is judgeable based on visual evidence.",
+          "checks": {
+            "target_visible": true,
+            "action_feasible": true,
+            "specific_outcome": true,
+            "judgeable": true
+          },
+          "issues": []
+        }
+      }
+    ],
+    "title": "Red Book Opens on Kitchen Counter",
+    "image": "evidence/construction/initial.png",
+    "taxonomy": {
+      "environment": "indoor kitchen",
+      "foreground": "closed red book",
+      "midground": "countertop",
+      "density": "low",
+      "appearance": "photorealistic",
+      "perspective": "fixed third person",
+      "probe_family": "intentional_transition"
+    },
+    "action": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.",
+    "plan": {
+      "title": "Red Book Opens on Kitchen Counter",
+      "action_text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.",
+      "target_entity": "closed red book",
+      "initial_state": "The red book is closed and lying flat on the wooden countertop.",
+      "expected_outcome": [
+        "The book's front cover is lifted, revealing the inner pages.",
+        "The book is now in an open state, with the first page visible."
+      ],
+      "protected_anchors": [
+        "The red book remains on the same wooden countertop.",
+        "The blue mug and basil plant remain in their original positions.",
+        "The white tiled wall background remains unchanged."
+      ],
+      "negative_constraints": [
+        "The book does not move from its position on the countertop.",
+        "No new objects are introduced into the scene.",
+        "The book does not become damaged or torn during the transition."
+      ],
+      "validation_questions": [
+        "Is the book still on the countertop after the action?",
+        "Are the blue mug and basil plant in the same positions?",
+        "Is the book visibly open with pages exposed?"
+      ]
+    },
+    "validation": {
+      "valid": true,
+      "reason": "The action is physically feasible and aligns with the initial state. The target (closed red book) is clearly visible. The action of lifting the cover to open the book is plausible and results in the expected outcome without violating any constraints. All protected anchors are preserved, and the scenario is judgeable based on visual evidence.",
+      "checks": {
+        "target_visible": true,
+        "action_feasible": true,
+        "specific_outcome": true,
+        "judgeable": true
+      },
+      "issues": []
+    },
+    "provenance": {
+      "method": "reconstruction of paper \u00a74, not author code",
+      "image_model": "built-in image_gen",
+      "planner_and_validator": "Qwen3-VL-8B-Instruct",
+      "image_prompt": "Indoor kitchen; closed red hardcover book fully visible on pale wooden counter; blue mug, potted herb, white tile anchors; low clutter; photorealistic; fixed three-quarter view; no people or writing."
+    },
+    "previous_attempt": {
+      "plan": {
+        "title": "Red Book Opens to Reveal Recipe",
+        "action_text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to a page with a recipe.",
+        "target_entity": "closed red book",
+        "initial_state": "The red book is closed and lying flat on the wooden countertop.",
+        "expected_outcome": [
+          "The book is now open, revealing its interior pages.",
+          "The visible page contains text or an image consistent with a recipe.",
+          "The book remains on the countertop, no longer closed."
+        ],
+        "protected_anchors": [
+          "The blue mug remains in its position on the left side of the countertop.",
+          "The basil plant in its pot remains on the right side of the countertop.",
+          "The white tiled wall and wooden countertop texture remain unchanged."
+        ],
+        "negative_constraints": [
+          "The book does not float or move to a different location.",
+          "No new objects are introduced into the scene.",
+          "The book does not open to a page that is not visible in the original image (e.g., a page with no text or an unrelated image)."
+        ],
+        "validation_questions": [
+          "Is the book still on the countertop?",
+          "Is the book open to a visible page?",
+          "Are the surrounding objects (mug, plant, tiles) in their original positions?",
+          "Is the book's cover fully lifted, not just slightly ajar?"
+        ]
+      },
+      "validation": {
+        "valid": false,
+        "reason": "The action is not feasible because the book is closed and lying flat on the countertop, and there is no visible page with a recipe inside. The action requires the book to open to a visible recipe page, which cannot be validated from the initial image. The 'expected_outcome' cannot be met as the interior of the book is not visible and no recipe can be confirmed.",
+        "checks": {
+          "target_visible": true,
+          "action_feasible": false,
+          "specific_outcome": false,
+          "judgeable": false
+        },
+        "issues": [
+          "The book's interior is not visible, so it cannot be confirmed to open to a recipe page.",
+          "The action requires the book to be opened, but the initial state does not provide evidence of any page content.",
+          "The 'expected_outcome' is unverifiable from the initial image, making the action non-judgeable."
+        ]
+      },
+      "note": "First separate execution rejected; subsequent execution produced an accepted case."
+    },
+    "routing": {
+      "schema_version": "harnesseval.skill_plan",
+      "planner_version": "harnesseval.planner.v1",
+      "created_at": "2026-09-30T21:20:51.705562+00:00",
+      "routing_mode": "llm_case",
+      "input_digest": "a6ef80ea8619bdb546d6367d4f813acc525891424becfa52a31243816a62c6c1",
+      "case_id": "local_constructed_red_book",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "planner": {
+        "type": "openai_compatible",
+        "version": "harnesseval.planner.v1",
+        "prompt_version": "worlddojo.v2_planner.prompt.v8",
+        "model": "local-judge",
+        "wire_api": "chat_completions",
+        "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+        "response_id": "chatcmpl-bfe289e25ee2b8be",
+        "response_model": "local-judge",
+        "usage": {
+          "prompt_tokens": 2825,
+          "total_tokens": 3320,
+          "completion_tokens": 495,
+          "prompt_tokens_details": null
+        },
+        "elapsed_seconds": 11.817803,
+        "attempt_count": 1
+      },
+      "selected_skills": [
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "The case requires assessing the aesthetic and technical quality of the generated frames, including photorealistic rendering of the book, countertop, and background.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "The case requires verifying that visual appearance remains consistent throughout the transition, including the book's texture, lighting, and the unchanged background elements.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "The case requires evaluating if the book's opening motion is physically plausible (e.g., realistic hinge movement, no tearing) under the specified constraints.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "role": "core",
+          "reason": "The case explicitly targets an intentional semantic transition: opening the red book, while protected anchors (mug, plant, wall) must remain unchanged.",
+          "parameters": {}
+        }
+      ],
+      "selected_skill_ids": [
+        "render_quality_inspector",
+        "appearance_consistency_inspector",
+        "physical_plausibility_inspector",
+        "intentional_change_verifier_vlm"
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "reason": "The case does not require camera movement or navigation; the viewpoint is fixed."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "The case targets an intentional semantic transition (book opening), not a causal physical response to an external force."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "No case-specific physical-law check is required; the motion is a simple, controlled object state change."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "The case is a short, single-action transition, not a long-horizon rollout."
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "reason": "The case does not involve a non-static loop or revisit."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "The case does not involve offscreen processes or their evolution."
+        }
+      ],
+      "validation": {
+        "status": "ok",
+        "registered_skill_count": 11,
+        "selected_skill_count": 4,
+        "selection_source": "planner",
+        "selection_modified": false
+      }
+    }
+  },
+  "case_audit_wording_check": {
+    "method": "Actual released case_audit function; only intended_change description changes; all anchors and eight video judgments stay fixed. No VLM calls or fabricated judgments.",
+    "finding": "This diagnostic is word-overlap based and sensitive to wording; its warning is not an independent visual failure judgment. It does not alter the numeric grade.",
+    "rows": [
+      {
+        "label": "Concise intended change: open (actual Analyze output)",
+        "expected_spec": {
+          "target": "red book",
+          "initial_state": "closed",
+          "intended_change": "open",
+          "change_type": "object_state",
+          "completion_criteria": "book cover is fully lifted and pages are visible",
+          "protected_anchors": [
+            "blue mug",
+            "potted basil plant",
+            "wooden countertop",
+            "white tiled wall"
+          ],
+          "negative_constraints": [
+            "book should not be moved from its position",
+            "book should not be rotated",
+            "book should not be damaged"
+          ],
+          "failure_modes": [
+            "book remains closed",
+            "book is partially opened",
+            "book is moved or rotated",
+            "book cover is torn or damaged"
+          ]
+        },
+        "audit": {
+          "status": "warning",
+          "warning": true,
+          "expected_spec_alignment": 0.185848,
+          "target_alignment": 0.043478,
+          "change_alignment": 0.043478,
+          "anchor_alignment": 0.470588
+        },
+        "recomputed_result": {
+          "skill_id": "intentional_change_verifier_vlm",
+          "status": "ok_case_audit_warning",
+          "score": 1.0,
+          "metrics": {
+            "Q1_target_visible": 1.0,
+            "Q2_transition_visible": 1.0,
+            "Q3_intended_change": 1.0,
+            "Q4_target_specificity": 1.0,
+            "Q5_final_state": 1.0,
+            "Q6_anchor_preservation": 1.0,
+            "Q7_no_extra_event": 1.0,
+            "Q8_judgeable": 1.0,
+            "target_visibility": 1.0,
+            "change_execution": 1.0,
+            "target_specificity": 1.0,
+            "final_state": 1.0,
+            "preservation": 1.0,
+            "validity_gate": 1.0,
+            "core_score": 1.0,
+            "final_score": 1.0,
+            "expected_spec_alignment": 0.185848
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.intentional_change_vlm",
+            "prompt_version": "harnesseval.intentional_change.prompt",
+            "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+            "case_audit": {
+              "status": "warning",
+              "warning": true,
+              "expected_spec_alignment": 0.185848,
+              "target_alignment": 0.043478,
+              "change_alignment": 0.043478,
+              "anchor_alignment": 0.470588
+            }
+          },
+          "notes": []
+        }
+      },
+      {
+        "label": "Full authored intended-change instruction",
+        "expected_spec": {
+          "target": "red book",
+          "initial_state": "closed",
+          "intended_change": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page. The book's front cover is lifted, revealing the inner pages. The book is now in an open state, with the first page visible.",
+          "change_type": "object_state",
+          "completion_criteria": "book cover is fully lifted and pages are visible",
+          "protected_anchors": [
+            "blue mug",
+            "potted basil plant",
+            "wooden countertop",
+            "white tiled wall"
+          ],
+          "negative_constraints": [
+            "book should not be moved from its position",
+            "book should not be rotated",
+            "book should not be damaged"
+          ],
+          "failure_modes": [
+            "book remains closed",
+            "book is partially opened",
+            "book is moved or rotated",
+            "book cover is torn or damaged"
+          ]
+        },
+        "audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.504689,
+          "target_alignment": 0.043478,
+          "change_alignment": 1.0,
+          "anchor_alignment": 0.470588
+        },
+        "recomputed_result": {
+          "skill_id": "intentional_change_verifier_vlm",
+          "status": "ok",
+          "score": 1.0,
+          "metrics": {
+            "Q1_target_visible": 1.0,
+            "Q2_transition_visible": 1.0,
+            "Q3_intended_change": 1.0,
+            "Q4_target_specificity": 1.0,
+            "Q5_final_state": 1.0,
+            "Q6_anchor_preservation": 1.0,
+            "Q7_no_extra_event": 1.0,
+            "Q8_judgeable": 1.0,
+            "target_visibility": 1.0,
+            "change_execution": 1.0,
+            "target_specificity": 1.0,
+            "final_state": 1.0,
+            "preservation": 1.0,
+            "validity_gate": 1.0,
+            "core_score": 1.0,
+            "final_score": 1.0,
+            "expected_spec_alignment": 0.504689
+          },
+          "diagnostics": {
+            "definition_version": "harnesseval.intentional_change_vlm",
+            "prompt_version": "harnesseval.intentional_change.prompt",
+            "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+            "case_audit": {
+              "status": "ok",
+              "warning": false,
+              "expected_spec_alignment": 0.504689,
+              "target_alignment": 0.043478,
+              "change_alignment": 1.0,
+              "anchor_alignment": 0.470588
+            }
+          },
+          "notes": []
+        }
+      }
+    ]
+  },
+  "formula_checks": {
+    "seed": 330,
+    "checks": [
+      {
+        "skill": "intentional",
+        "vectors": 1000,
+        "mismatches": 0,
+        "examples": []
+      },
+      {
+        "skill": "physical",
+        "vectors": 1000,
+        "mismatches": 0,
+        "examples": []
+      },
+      {
+        "skill": "offscreen",
+        "vectors": 1000,
+        "mismatches": 0,
+        "examples": []
+      }
+    ],
+    "scope": "Complete 8-question inputs; does not validate the VLM judgments or missing-input behavior."
+  },
+  "weights_audit": {
+    "status": "passed",
+    "files": [
+      {
+        "repository": "WBench-weights",
+        "path": "weights/HPSv3/.gitkeep",
+        "bytes": 0,
+        "expected_bytes": 0,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/HPSv3/HPSv3.safetensors",
+        "bytes": 16584387300,
+        "expected_bytes": 16584387300,
+        "sha256": "a13d7ff5a07b7ffa0f7824e60d62e6ae144541ceefd5224b4c08fda7ab39f353",
+        "expected_sha256": "a13d7ff5a07b7ffa0f7824e60d62e6ae144541ceefd5224b4c08fda7ab39f353",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/HPSv3/HPSv3_7B_local.yaml",
+        "bytes": 1313,
+        "expected_bytes": 1313,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/HPSv3/LICENSE",
+        "bytes": 11357,
+        "expected_bytes": 11357,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/chat_template.json",
+        "bytes": 1050,
+        "expected_bytes": 1050,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/config.json",
+        "bytes": 1197,
+        "expected_bytes": 1197,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/generation_config.json",
+        "bytes": 244,
+        "expected_bytes": 244,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/merges.txt",
+        "bytes": 1671839,
+        "expected_bytes": 1671839,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/model-00001-of-00005.safetensors",
+        "bytes": 3898649896,
+        "expected_bytes": 3898649896,
+        "sha256": "eab4f4dc1abf860794c98ce3759b4ace1059fc0fc041ede76b88988b3557c132",
+        "expected_sha256": "eab4f4dc1abf860794c98ce3759b4ace1059fc0fc041ede76b88988b3557c132",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/model-00002-of-00005.safetensors",
+        "bytes": 3864726320,
+        "expected_bytes": 3864726320,
+        "sha256": "0546b7cd070ff239de0f61a28770de6a0ac517ad313071e151653e38911ffb25",
+        "expected_sha256": "0546b7cd070ff239de0f61a28770de6a0ac517ad313071e151653e38911ffb25",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/model-00003-of-00005.safetensors",
+        "bytes": 3864726424,
+        "expected_bytes": 3864726424,
+        "sha256": "11368ea1e9c0039ca54012a74ac32d543a9e9d980b2d0ad7e93af0341ace1fe6",
+        "expected_sha256": "11368ea1e9c0039ca54012a74ac32d543a9e9d980b2d0ad7e93af0341ace1fe6",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/model-00004-of-00005.safetensors",
+        "bytes": 3864733680,
+        "expected_bytes": 3864733680,
+        "sha256": "381e110d74db594cc24956af0e74a01ae02104497113a78926990c5bd1f395f6",
+        "expected_sha256": "381e110d74db594cc24956af0e74a01ae02104497113a78926990c5bd1f395f6",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/model-00005-of-00005.safetensors",
+        "bytes": 1089994880,
+        "expected_bytes": 1089994880,
+        "sha256": "e76ec4dc2e7c0dcbe3432e58fae08e62204a2ef2323069d85c8fa0affb87332a",
+        "expected_sha256": "e76ec4dc2e7c0dcbe3432e58fae08e62204a2ef2323069d85c8fa0affb87332a",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/model.safetensors.index.json",
+        "bytes": 56470,
+        "expected_bytes": 56470,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/preprocessor_config.json",
+        "bytes": 347,
+        "expected_bytes": 347,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/tokenizer.json",
+        "bytes": 7029741,
+        "expected_bytes": 7029741,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/tokenizer_config.json",
+        "bytes": 4190,
+        "expected_bytes": 4190,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/Qwen2-VL-7B-Instruct/vocab.json",
+        "bytes": 2776833,
+        "expected_bytes": 2776833,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/aesthetic/.gitkeep",
+        "bytes": 0,
+        "expected_bytes": 0,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/aesthetic/LICENSE",
+        "bytes": 1065,
+        "expected_bytes": 1065,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/aesthetic/sa_0_4_vit_l_14_linear.pth",
+        "bytes": 4071,
+        "expected_bytes": 4071,
+        "sha256": "2cd4e60f4f24ae3bcd57b847b13c1f3ba27edc28cc1a7f9ce74ee9f421243cba",
+        "expected_sha256": "2cd4e60f4f24ae3bcd57b847b13c1f3ba27edc28cc1a7f9ce74ee9f421243cba",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/amt/.gitkeep",
+        "bytes": 0,
+        "expected_bytes": 0,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/amt/LICENSE",
+        "bytes": 18208,
+        "expected_bytes": 18208,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/amt/amt-s.pth",
+        "bytes": 12038359,
+        "expected_bytes": 12038359,
+        "sha256": "07e7e03405c213fe4405678db9b42d05671e48c56faf6a441b99bb0047d3cf77",
+        "expected_sha256": "07e7e03405c213fe4405678db9b42d05671e48c56faf6a441b99bb0047d3cf77",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/clip/.gitkeep",
+        "bytes": 0,
+        "expected_bytes": 0,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/clip/LICENSE",
+        "bytes": 1064,
+        "expected_bytes": 1064,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/clip/ViT-B-32.pt",
+        "bytes": 353976522,
+        "expected_bytes": 353976522,
+        "sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af",
+        "expected_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/clip/ViT-L-14.pt",
+        "bytes": 932768134,
+        "expected_bytes": 932768134,
+        "sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+        "expected_sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/LICENSE",
+        "bytes": 11358,
+        "expected_bytes": 11358,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/depth_anything_vitl14.pth",
+        "bytes": 1341401882,
+        "expected_bytes": 1341401882,
+        "sha256": "6c6a383e33e51c5fdfbf31e7ebcda943973a9e6a1cbef1564afe58d7f2e8fe63",
+        "expected_sha256": "6c6a383e33e51c5fdfbf31e7ebcda943973a9e6a1cbef1564afe58d7f2e8fe63",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/blobs/13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+        "bytes": 1452916608,
+        "expected_bytes": 1452916608,
+        "sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+        "expected_sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/blobs/9161783235097a46641d2770ff857db20f9016fe",
+        "bytes": 1329,
+        "expected_bytes": 1329,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/snapshots/1d0d3c52f60b5164629d279bb9a7546458e6dcc4/config.json",
+        "bytes": 1329,
+        "expected_bytes": 1329,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/snapshots/1d0d3c52f60b5164629d279bb9a7546458e6dcc4/model.safetensors",
+        "bytes": 1452916608,
+        "expected_bytes": 1452916608,
+        "sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+        "expected_sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/megasam_final.pth",
+        "bytes": 20812149,
+        "expected_bytes": 20812149,
+        "sha256": "f386b79d7cf41ac3c339ec4364a40378a1529a9cee74271bedf5eb10e43e748a",
+        "expected_sha256": "f386b79d7cf41ac3c339ec4364a40378a1529a9cee74271bedf5eb10e43e748a",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/torch_hub_checkpoints/dinov2_vitl14_pretrain.pth",
+        "bytes": 1217586395,
+        "expected_bytes": 1217586395,
+        "sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+        "expected_sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/megasam/torch_hub_checkpoints/metric_depth_vit_large_800k.pth",
+        "bytes": 1647972663,
+        "expected_bytes": 1647972663,
+        "sha256": "15328ffc42b528b95f188687418f6f03b3f123eb34ccdbd686c112abbea6d972",
+        "expected_sha256": "15328ffc42b528b95f188687418f6f03b3f123eb34ccdbd686c112abbea6d972",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/pyiqa/.gitkeep",
+        "bytes": 0,
+        "expected_bytes": 0,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/pyiqa/LICENSE",
+        "bytes": 11358,
+        "expected_bytes": 11358,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/pyiqa/musiq_koniq_ckpt-e95806b9.pth",
+        "bytes": 108610983,
+        "expected_bytes": 108610983,
+        "sha256": "e95806b9eae5f3814c410f574ba8e552362bd5bc63d758ed5b97860f5d6185aa",
+        "expected_sha256": "e95806b9eae5f3814c410f574ba8e552362bd5bc63d758ed5b97860f5d6185aa",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/added_tokens.json",
+        "bytes": 707,
+        "expected_bytes": 707,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/args.json",
+        "bytes": 19033,
+        "expected_bytes": 19033,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/chat_template.jinja",
+        "bytes": 5292,
+        "expected_bytes": 5292,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/config.json",
+        "bytes": 1844,
+        "expected_bytes": 1844,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/generation_config.json",
+        "bytes": 213,
+        "expected_bytes": 213,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/merges.txt",
+        "bytes": 1671853,
+        "expected_bytes": 1671853,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00001-of-00013.safetensors",
+        "bytes": 4230392720,
+        "expected_bytes": 4230392720,
+        "sha256": "2bef361db50ec3ced88d80c969fd90f807c95a7470e1f83c7e8d7b513b6acf80",
+        "expected_sha256": "2bef361db50ec3ced88d80c969fd90f807c95a7470e1f83c7e8d7b513b6acf80",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00002-of-00013.safetensors",
+        "bytes": 4984970872,
+        "expected_bytes": 4984970872,
+        "sha256": "678b024b308476928bfd255d506a2bd9404c063a6e18614e0eef493512e1ef18",
+        "expected_sha256": "678b024b308476928bfd255d506a2bd9404c063a6e18614e0eef493512e1ef18",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00003-of-00013.safetensors",
+        "bytes": 4984970848,
+        "expected_bytes": 4984970848,
+        "sha256": "5a433a54d3b65d2afdd31d5541b7a29d4c6e650dac75607d7d6cf5ee711d8e53",
+        "expected_sha256": "5a433a54d3b65d2afdd31d5541b7a29d4c6e650dac75607d7d6cf5ee711d8e53",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00004-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "e5fdbe4569bf979646044f351080143194da8b904bd4f9c687150118031c4b5d",
+        "expected_sha256": "e5fdbe4569bf979646044f351080143194da8b904bd4f9c687150118031c4b5d",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00005-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "3f957ee830a192f2f6bf69ff588e3bd09f14907e0cb2f0c683ce95cef88c3860",
+        "expected_sha256": "3f957ee830a192f2f6bf69ff588e3bd09f14907e0cb2f0c683ce95cef88c3860",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00006-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "83e5cbcc7b769d4791ff9edd58f06987f6bee9f9bfbc5bc763bec4b7856bf960",
+        "expected_sha256": "83e5cbcc7b769d4791ff9edd58f06987f6bee9f9bfbc5bc763bec4b7856bf960",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00007-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "a50123dd33973944bb2f5099b64bc847766a14c75ba3f1b3257ca8e1215a3d65",
+        "expected_sha256": "a50123dd33973944bb2f5099b64bc847766a14c75ba3f1b3257ca8e1215a3d65",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00008-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "1e4f53ac4119617191dafef2e1e75306a64372c9e179f8c535d76db6f8b8617d",
+        "expected_sha256": "1e4f53ac4119617191dafef2e1e75306a64372c9e179f8c535d76db6f8b8617d",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00009-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "5f445dbc7f87f2b90e4dbb9f382464041643ebd02f3ec3ebb0c3bad65010b49f",
+        "expected_sha256": "5f445dbc7f87f2b90e4dbb9f382464041643ebd02f3ec3ebb0c3bad65010b49f",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00010-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "2ba25ef86f9af899b510d99696c1694da45b8590e23d265d7408ff056346b98d",
+        "expected_sha256": "2ba25ef86f9af899b510d99696c1694da45b8590e23d265d7408ff056346b98d",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00011-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "cb70e7fa8766c05bcc1fd52dbdd1c929fb5dd139ac0ead1a08157d7495cc8ae1",
+        "expected_sha256": "cb70e7fa8766c05bcc1fd52dbdd1c929fb5dd139ac0ead1a08157d7495cc8ae1",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00012-of-00013.safetensors",
+        "bytes": 4984970912,
+        "expected_bytes": 4984970912,
+        "sha256": "00b1ae304b4a5174e60d6d3f649d6784a9f41dc2313d836d0871eda645d6ba33",
+        "expected_sha256": "00b1ae304b4a5174e60d6d3f649d6784a9f41dc2313d836d0871eda645d6ba33",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model-00013-of-00013.safetensors",
+        "bytes": 3076545184,
+        "expected_bytes": 3076545184,
+        "sha256": "c2316931134a3a4124c6c6e0f35ed968759d612f2234276383cee481035ebcdd",
+        "expected_sha256": "c2316931134a3a4124c6c6e0f35ed968759d612f2234276383cee481035ebcdd",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/model.safetensors.index.json",
+        "bytes": 80780,
+        "expected_bytes": 80780,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/preprocessor_config.json",
+        "bytes": 390,
+        "expected_bytes": 390,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/special_tokens_map.json",
+        "bytes": 613,
+        "expected_bytes": 613,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/tokenizer.json",
+        "bytes": 11422654,
+        "expected_bytes": 11422654,
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "expected_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/tokenizer_config.json",
+        "bytes": 5445,
+        "expected_bytes": 5445,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/video_preprocessor_config.json",
+        "bytes": 817,
+        "expected_bytes": 817,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/qwen3vl-a3b-visual-plausibility/vocab.json",
+        "bytes": 2776833,
+        "expected_bytes": 2776833,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/raft/.gitkeep",
+        "bytes": 0,
+        "expected_bytes": 0,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/raft/LICENSE",
+        "bytes": 1512,
+        "expected_bytes": 1512,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "WBench-weights",
+        "path": "weights/raft/raft-things.pth",
+        "bytes": 21108000,
+        "expected_bytes": 21108000,
+        "sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+        "expected_sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/.gitattributes",
+        "bytes": 1519,
+        "expected_bytes": 1519,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/README.md",
+        "bytes": 7133,
+        "expected_bytes": 7133,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/chat_template.json",
+        "bytes": 5499,
+        "expected_bytes": 5499,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/config.json",
+        "bytes": 1474,
+        "expected_bytes": 1474,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/generation_config.json",
+        "bytes": 269,
+        "expected_bytes": 269,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/merges.txt",
+        "bytes": 1671839,
+        "expected_bytes": 1671839,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/model-00001-of-00004.safetensors",
+        "bytes": 4902275944,
+        "expected_bytes": 4902275944,
+        "sha256": "d5d0aef0eb170fc7453a296c43c0849a56f510555d3588e4fd662bb35490aefa",
+        "expected_sha256": "d5d0aef0eb170fc7453a296c43c0849a56f510555d3588e4fd662bb35490aefa",
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/model-00002-of-00004.safetensors",
+        "bytes": 4915962496,
+        "expected_bytes": 4915962496,
+        "sha256": "8be88fb5501e4d5719a6d4cc212e6a13480330e74f3e8c77daa1a68f199106b5",
+        "expected_sha256": "8be88fb5501e4d5719a6d4cc212e6a13480330e74f3e8c77daa1a68f199106b5",
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/model-00003-of-00004.safetensors",
+        "bytes": 4999831048,
+        "expected_bytes": 4999831048,
+        "sha256": "83de00eafe6e0d57ccd009dbcf71c9974d74df2f016c27afb7e95aafd16b2192",
+        "expected_sha256": "83de00eafe6e0d57ccd009dbcf71c9974d74df2f016c27afb7e95aafd16b2192",
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/model-00004-of-00004.safetensors",
+        "bytes": 2716270024,
+        "expected_bytes": 2716270024,
+        "sha256": "0a88b98e9f96270973f567e6a2c103ede6ccdf915ca3075e21c755604d0377a5",
+        "expected_sha256": "0a88b98e9f96270973f567e6a2c103ede6ccdf915ca3075e21c755604d0377a5",
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/model.safetensors.index.json",
+        "bytes": 67759,
+        "expected_bytes": 67759,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/preprocessor_config.json",
+        "bytes": 390,
+        "expected_bytes": 390,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/tokenizer.json",
+        "bytes": 7032403,
+        "expected_bytes": 7032403,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/tokenizer_config.json",
+        "bytes": 10868,
+        "expected_bytes": 10868,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/video_preprocessor_config.json",
+        "bytes": 385,
+        "expected_bytes": 385,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      },
+      {
+        "repository": "Qwen3-VL-8B-Instruct",
+        "path": "weights/judge/vocab.json",
+        "bytes": 2776833,
+        "expected_bytes": 2776833,
+        "sha256": null,
+        "expected_sha256": null,
+        "valid": true
+      }
+    ],
+    "file_count": 85,
+    "excluded_runtime_config": "_HPSv3_7B_resolved.yaml is rewritten by upstream to resolve local paths; it is not a model checkpoint."
+  },
+  "ui_checks": {
+    "desktop": "1440x1000",
+    "mobile": "390x844",
+    "case_count": 6,
+    "skills": 11,
+    "tab_interactions": "passed",
+    "aggregation_gate": "passed",
+    "image_dialog": "passed",
+    "public_filter": "passed",
+    "horizontal_overflow": false,
+    "browser_errors": [],
+    "skill_source_links": [
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_render_quality.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_motion_quality.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_appearance_consistency.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_physical_plausibility.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_viewpoint_trajectory.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_intentional_change_vlm.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_physical_response_vlm.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_physical_law.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_drift_degradation.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_return_consistency.py",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_offscreen_evolution.py",
+        "status": 200
+      }
+    ],
+    "live_validator_form": "passed"
+  },
+  "runtime_adaptation_check": {
+    "tests": [
+      {
+        "dtype": "torch.float32",
+        "max_absolute_difference": 3.5762786865234375e-07,
+        "allclose": true
+      },
+      {
+        "dtype": "torch.bfloat16",
+        "max_absolute_difference": 0.0,
+        "allclose": true
+      }
+    ],
+    "scope": "Single-patch Conv3d vs linear, toy random weights and inputs; not whole-checkpoint bitwise equivalence."
+  },
+  "vision_chunk_check": {
+    "max_absolute_differences": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "allclose": true,
+    "test": "FP32 two-layer Qwen3 vision model, same weights and input, 4 temporal groups vs 2+2, including deepstack outputs"
+  },
+  "sparse_experts_check": {
+    "tests": [
+      {
+        "dtype": "torch.float32",
+        "max_absolute_difference": 9.313225746154785e-10,
+        "allclose": true
+      },
+      {
+        "dtype": "torch.bfloat16",
+        "max_absolute_difference": 0.0,
+        "allclose": true
+      }
+    ],
+    "scope": "Same toy MoE parameters, inputs and routing. No-dropout expert container only; not whole-model equivalence."
+  },
+  "known_gaps": [
+    "Full 330-case x 18-model experiment and 5,000 human pairwise labels are not available in this checkout; population correlation, ranking, and WBench comparison claims are not reproduced.",
+    "The semantic implementation has one Analyze call and one eight-question Verify call, rather than independent per-question verifier sub-agents.",
+    "Physical observation code returns PAVRM raw/5 only; paper Appendix C describes a visual + causal mean.",
+    "Paper Appendix C gives mean/worst return-pair weights 0.5/0.5; released code uses 0.7/0.3 and an additional non-static gate.",
+    "Wind-flag case selects physical_law_validator but has no registered engine: not_applicable is not a numerical success.",
+    "Case construction is a reconstruction using a new imagegen initial image and local VLM planning/validation; the full authors' construction pipeline is absent.",
+    "Future recursive skill acquisition and self-improvement are future work, not implemented contributions."
+  ]
+}

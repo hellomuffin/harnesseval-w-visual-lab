@@ -1,0 +1,139 @@
+diff --git a/src/harnesseval.egg-info/SOURCES.txt b/src/harnesseval.egg-info/SOURCES.txt
+index ad7143b..1ea6ebd 100644
+--- a/src/harnesseval.egg-info/SOURCES.txt
++++ b/src/harnesseval.egg-info/SOURCES.txt
+@@ -36,6 +36,28 @@ src/harnesseval/metrics/video_quality/hpsv3_quality.py
+ src/harnesseval/metrics/video_quality/imaging_quality.py
+ src/harnesseval/metrics/video_quality/motion_smoothness.py
+ src/harnesseval/metrics/video_quality/temporal_flickering.py
++src/harnesseval/models/__init__.py
++src/harnesseval/models/__main__.py
++src/harnesseval/models/base.py
++src/harnesseval/models/conditioning.py
++src/harnesseval/models/media.py
++src/harnesseval/models/navigation.py
++src/harnesseval/models/process.py
++src/harnesseval/models/action/__init__.py
++src/harnesseval/models/action/actions.py
++src/harnesseval/models/action/base.py
++src/harnesseval/models/action/sana_wm_streaming/__init__.py
++src/harnesseval/models/action/sana_wm_streaming/entry.py
++src/harnesseval/models/action/sana_wm_streaming/model.py
++src/harnesseval/models/camera/__init__.py
++src/harnesseval/models/camera/base.py
++src/harnesseval/models/camera/hy_worldplay/__init__.py
++src/harnesseval/models/camera/hy_worldplay/model.py
++src/harnesseval/models/camera/hy_worldplay/poses.py
++src/harnesseval/models/text/__init__.py
++src/harnesseval/models/text/api_client.py
++src/harnesseval/models/text/prompt_builder.py
++src/harnesseval/models/text/seedance.py
+ src/harnesseval/pipeline/__init__.py
+ src/harnesseval/pipeline/backends.py
+ src/harnesseval/pipeline/inventory.py
+@@ -67,4 +89,7 @@ src/harnesseval/skills/skill_physical_plausibility.py
+ src/harnesseval/skills/skill_physical_response_vlm.py
+ src/harnesseval/skills/skill_render_quality.py
+ src/harnesseval/skills/skill_return_consistency.py
+-src/harnesseval/skills/skill_viewpoint_trajectory.py
+\ No newline at end of file
++src/harnesseval/skills/skill_viewpoint_trajectory.py
++tests/test_cli_score.py
++tests/test_native_ar_models.py
++tests/test_seedance_model.py
+\ No newline at end of file
+diff --git a/src/harnesseval/metrics/physical_plausibility.py b/src/harnesseval/metrics/physical_plausibility.py
+index ee2e7ae..7df4db1 100644
+--- a/src/harnesseval/metrics/physical_plausibility.py
++++ b/src/harnesseval/metrics/physical_plausibility.py
+@@ -13,6 +13,7 @@ Usage:
+ from __future__ import annotations
+ 
+ import os
++import types
+ from typing import Any, Dict, List, Optional
+ 
+ import numpy as np
+@@ -35,6 +36,42 @@ ANCHOR_TOKEN_IDS = [51041, 15216, 60795, 84103, 17082]
+ ANCHOR_WEIGHTS = torch.tensor([5.0, 4.0, 3.0, 2.0, 1.0])
+ 
+ 
++def _linear_patch_embedding(self, hidden_states):
++    """Equivalent single-patch Conv3d projection, without tiny-convolution overhead.
++
++    Each input is exactly one kernel-sized patch; stride equals kernel size.
++    Opt-in runtime adaptation for this reproduction's Torch 2.9 / L40S setup.
++    """
++    weight = self.proj.weight
++    patches = hidden_states.reshape(-1, weight[0].numel()).to(
++        device=weight.device, dtype=weight.dtype
++    )
++    return torch.nn.functional.linear(patches, weight.flatten(1), self.proj.bias)
++
++
++def _chunked_vision_forward(self, hidden_states, grid_thw, **kwargs):
++    """Batch independent temporal patch groups without changing sampled frames.
++
++    Qwen3's vision attention uses a separate cu_seqlens interval per temporal
++    group. Positional embeddings repeat across those groups. Language attention
++    still sees every resulting video token together.
++    """
++    chunk_t = int(os.environ.get("HARNESSEVAL_VISION_CHUNK_T", "4"))
++    outputs, stacks, offset = [], [], 0
++    for t, h, w in grid_thw.tolist():
++        for start in range(0, t, chunk_t):
++            count = min(chunk_t, t - start)
++            n = count * h * w
++            grid = grid_thw.new_tensor([[count, h, w]])
++            output, stack = self._harnesseval_original_forward(
++                hidden_states[offset:offset+n], grid, **kwargs
++            )
++            outputs.append(output)
++            stacks.append(stack)
++            offset += n
++    return torch.cat(outputs), [torch.cat([s[i] for s in stacks]) for i in range(len(stacks[0]))]
++
++
+ class PhysicalPlausibilityEvaluator:
+     """Local PAVRM inference using Qwen3-VL reward model (transformers backend)."""
+ 
+@@ -66,6 +103,24 @@ class PhysicalPlausibilityEvaluator:
+                 model_path, dtype=torch.bfloat16,
+                 device_map="auto",
+             )
++        if os.environ.get("HARNESSEVAL_LINEAR_PATCH_EMBED") == "1":
++            for module in self.model.modules():
++                if type(module).__name__ == "Qwen3VLMoeVisionPatchEmbed":
++                    module.forward = types.MethodType(_linear_patch_embedding, module)
++        if int(os.environ.get("HARNESSEVAL_VISION_CHUNK_T", "0")) > 0:
++            for module in self.model.modules():
++                if type(module).__name__ == "Qwen3VLMoeVisionModel":
++                    module._harnesseval_original_forward = module.forward
++                    module.forward = types.MethodType(_chunked_vision_forward, module)
++        if os.environ.get("HARNESSEVAL_SPARSE_EXPERTS") == "1":
++            for module in self.model.modules():
++                if type(module).__name__ == "Qwen3VLMoeTextExperts":
++                    # This module has no dropout. Its training branch computes
++                    # only routed experts; the eval branch replicates every
++                    # token across all 128 experts and OOMs on long videos.
++                    # Only this parameter-only expert container changes branch;
++                    # the rest of the model remains in eval/no-grad mode.
++                    module.training = True
+         self.processor = AutoProcessor.from_pretrained(model_path)
+         self.device = device
+ 
+diff --git a/src/harnesseval/metrics/video_quality/motion_smoothness.py b/src/harnesseval/metrics/video_quality/motion_smoothness.py
+index cae6611..6679760 100644
+--- a/src/harnesseval/metrics/video_quality/motion_smoothness.py
++++ b/src/harnesseval/metrics/video_quality/motion_smoothness.py
+@@ -47,7 +47,9 @@ class MotionSmoothnessMetric(BaseMetric):
+         finally:
+             if _AMT_ROOT in sys.path:
+                 sys.path.remove(_AMT_ROOT)
+-        ckpt = torch.load(ckpt_path, map_location="cpu")
++        # Released AMT checkpoint contains typing.OrderedDict. Match the
++        # paper's pre-2.6 torch.load behavior for this downloaded checkpoint.
++        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+         state_dict = ckpt.get('state_dict', ckpt)
+         model.load_state_dict({k.replace('module.', ''): v for k, v in state_dict.items()})
+         return model.to(self.device).eval()

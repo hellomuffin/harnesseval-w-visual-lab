@@ -1,0 +1,97 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0043_forest",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the forest rollout remains technically clean and game-engine realistic, with coherent terrain, trail, rocks, ferns, lighting, and no artifacts, text, UI, borders, or watermark.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The interaction is a three-chunk navigation sequence, so the result should show present, smooth forward and forward-right camera/viewpoint motion without jitter, stutter, or abrupt discontinuities.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same sparse forest world should persist across the transition, preserving landmarks such as the central large tree, cracked foreground boulder when visible, mossy rocks, ferns, trail boundary, and realistic material style.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward navigation through a natural trail must keep plausible scale, parallax, occlusion, ground contact, terrain geometry, and support relationships for rocks, roots, ferns, tree trunks, and the path surface.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition_correctness for an exploratory_transition, with explicit navigation controls W, then W+D, then W; evaluation must verify movement forward along the trail, veering right during the middle chunk, while respecting navigation/non-navigation boundaries.",
+      "parameters": {
+        "expected_actions": [
+          "W",
+          "W+D",
+          "W"
+        ],
+        "expected_trajectory": "advance forward through the broad central activity area, drift/right-strafe or turn toward the right visual zone during the second chunk, then continue forward",
+        "key_world_anchors": [
+          "central dirt trail/navigation surface",
+          "clear boundary between trail and surrounding non-navigation terrain",
+          "large central tree",
+          "unevenly spaced mossy rocks",
+          "ferns and forest edge",
+          "foreground cracked boulder/surface wear pattern when still in view"
+        ],
+        "camera_context": "third-person observer viewpoint; no visible movable subject is required, so judge camera/viewpoint navigation"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state change; it requests navigation through the existing forest world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome is targeted beyond general plausibility of navigation and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks, not a long-horizon many-turn drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not require leaving and returning to a previous view or loop closure."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

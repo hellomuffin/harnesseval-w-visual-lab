@@ -1,0 +1,79 @@
+{
+  "judge": "Qwen3-VL-8B-Instruct",
+  "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+  "runs": [
+    {
+      "run": 1,
+      "score": 1.0,
+      "cache_hit": false,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.193651
+      }
+    },
+    {
+      "run": 2,
+      "score": 1.0,
+      "cache_hit": false,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.193651
+      }
+    },
+    {
+      "run": 3,
+      "score": 1.0,
+      "cache_hit": false,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.193651
+      }
+    }
+  ],
+  "scope": "Single-case repeatability; not the human Bradley\u2013Terry envelope experiment."
+}

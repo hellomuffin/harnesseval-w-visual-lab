@@ -1,0 +1,117 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0021_monument_grounds",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result should remain a clean photorealistic third-person view of sparse outdoor monument grounds without artifacts, UI, unreadable distortions, or degraded rendering.",
+      "parameters": {
+        "check_photorealism": true,
+        "check_artifacts": true,
+        "scene_context": "outdoor historical monument grounds with foreground chair, curved stone path, column base, distant monument, scattered stones, grass, and trees"
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should show a visible transition of the foreground chair tipping onto its right side, with smooth temporal change rather than popping, flicker, or missing motion.",
+      "parameters": {
+        "target_motion": "foreground weathered blue wooden chair rotates/tips onto its right side",
+        "expect_motion_present": true,
+        "check_temporal_smoothness": true
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The chair and protected background anchors must keep consistent identity, materials, scale, lighting, and spatial layout during the transition.",
+      "parameters": {
+        "target_object": "weathered blue wooden chair in the foreground",
+        "protected_anchors": [
+          "stone path",
+          "large column",
+          "distant monument",
+          "scattered stones",
+          "monument grounds clearing"
+        ],
+        "check_identity_preservation": true,
+        "check_lighting_and_geometry_consistency": true
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Although the requested edit is intentional, the chair's tipping motion and final rest pose should look physically plausible, with coherent rotation, contact, support, and no impossible deformation or floating.",
+      "parameters": {
+        "target_object": "foreground wooden chair",
+        "expected_final_state": "resting on its right side on the ground",
+        "check_contact_and_support": true,
+        "check_rigid_body_plausibility": true
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary task is an explicitly specified object-state transition: tip the weathered blue wooden chair in the foreground onto its right side while leaving named anchors unchanged.",
+      "parameters": {
+        "target_object": "weathered blue wooden chair in the foreground",
+        "required_change": "chair is tipped onto its right side",
+        "initial_state": "chair upright in the foreground",
+        "final_state": "chair lying on its right side",
+        "protected_anchors": [
+          "stone path unchanged",
+          "column unchanged",
+          "distant monument unchanged",
+          "scattered stones unchanged"
+        ],
+        "must_preserve_scene": true
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require camera navigation or an active viewpoint trajectory; the important constraint is preserving the scene while changing the chair state."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The action is a directly specified semantic object-state edit, not a causal response to an explicit physical force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of the chair's tip and resting contact."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is a single intentional transition, not a long-horizon multi-turn rollout testing progressive degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return to a previous viewpoint to verify."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The requested change occurs to a visible foreground chair; no offscreen process is expected to continue evolving."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

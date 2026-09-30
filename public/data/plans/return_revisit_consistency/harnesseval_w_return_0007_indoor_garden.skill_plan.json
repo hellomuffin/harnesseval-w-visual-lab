@@ -1,0 +1,140 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0007_indoor_garden",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess technical and aesthetic cleanliness of the stylized 3D indoor garden frames, including readable bridge, plants, railings, wall panels, skylight patch, and rear opening without artifacts, text/UI, borders, or watermark.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout contains an eight-chunk first-person navigation loop, so motion should be present, smooth, and free of jitter, frame popping, or abrupt discontinuities during forward, strafe, turn, and reverse actions.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same indoor garden world must persist across the loop, with stable materials and identities for the bridge, railings, planted beds, concrete walls, exhibit panels, directional light patch, and bright rear opening.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person movement should respect plausible indoor scale, walkable surfaces, bridge geometry, railing placement, plant-bed boundaries, and camera height without clipping through objects or impossible spatial relationships.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly specifies active first-person navigation: move forward twice along the bridge, strafe right, turn right, undo the turn, strafe left, then step backward twice.",
+      "parameters": {
+        "expected_chunks": [
+          {
+            "chunk_id": "c01",
+            "expected_action": "forward along bridge"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_action": "continue forward along bridge"
+          },
+          {
+            "chunk_id": "c03",
+            "expected_action": "shift slightly right"
+          },
+          {
+            "chunk_id": "c04",
+            "expected_action": "turn right"
+          },
+          {
+            "chunk_id": "c05",
+            "expected_action": "turn left to undo right turn"
+          },
+          {
+            "chunk_id": "c06",
+            "expected_action": "strafe back left"
+          },
+          {
+            "chunk_id": "c07",
+            "expected_action": "step backward"
+          },
+          {
+            "chunk_id": "c08",
+            "expected_action": "step backward to initial viewpoint"
+          }
+        ],
+        "control_scheme": "harnesseval_navigation_v1",
+        "closed_loop": true
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return_revisit_consistency: after the non-static balanced navigation loop, the final frame should return to the initial bridge-facing viewpoint with the same layout, anchors, lighting, and object positions.",
+      "parameters": {
+        "reference_view": "initial_observation",
+        "return_chunks": [
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "key_anchors": [
+          "open concrete foreground floor",
+          "midground bridge and railings",
+          "indoor garden plant beds",
+          "concrete wall panels",
+          "exhibit panels",
+          "localized skylight light patch",
+          "bright rear opening",
+          "asymmetric right-edge foliage/detail"
+        ],
+        "expected_final_relation": "near-match to initial bridge-facing first-person view after inverse navigation"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state change; the target is navigation out and back while preserving the world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a dynamic object response; only camera/navigation movement is specified."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of first-person movement and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short eight-chunk closed loop, not a long-horizon many-turn drift-resistance case."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify an offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

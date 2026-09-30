@@ -1,0 +1,102 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "planner_version": "harnesseval.planner.v1",
+  "created_at": "2026-09-30T21:08:23.209245+00:00",
+  "routing_mode": "llm_case",
+  "input_digest": "90405a65ddf8239edf9c577a33d3d31bcfb533dd8480b2722ea89b2318a96bd8",
+  "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "planner": {
+    "type": "openai_compatible",
+    "version": "harnesseval.planner.v1",
+    "prompt_version": "worlddojo.v2_planner.prompt.v8",
+    "model": "local-judge",
+    "wire_api": "chat_completions",
+    "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "response_id": "chatcmpl-903b0247ccb16d6b",
+    "response_model": "local-judge",
+    "usage": {
+      "prompt_tokens": 2302,
+      "total_tokens": 2779,
+      "completion_tokens": 477,
+      "prompt_tokens_details": null
+    },
+    "elapsed_seconds": 12.39459,
+    "attempt_count": 1
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The initial observation image must be free of severe artifacts, watermarks, or ambiguity as per validation questions.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The case requires navigation actions (W, left), so motion quality must be evaluated for temporal smoothness.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The rollout involves navigation, so visual appearance must remain consistent across frames.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation actions imply physical movement, requiring evaluation of causal plausibility.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires navigation movement (W, left) along a path, making viewpoint trajectory verification applicable.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not specify an intentional semantic or object-state transition; it requires navigation."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The case does not involve a physical intervention or force; it involves navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required for navigation."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is short (2 chunks), not long-horizon."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "No non-static loop is specified."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

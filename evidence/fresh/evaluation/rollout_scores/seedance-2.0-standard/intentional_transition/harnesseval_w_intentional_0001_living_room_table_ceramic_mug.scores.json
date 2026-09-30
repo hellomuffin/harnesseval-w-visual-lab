@@ -1,0 +1,271 @@
+{
+  "schema_version": "harnesseval.skill_eval",
+  "scorer_id": "harnesseval.score",
+  "created_at": "2026-09-30T21:37:44.813378+00:00",
+  "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+  "action_id": "intentional_0001",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "model": "ep-20260816184220-sdqt8",
+  "model_id": "seedance-2.0-standard",
+  "paths": {
+    "metadata": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/intentional_transition/seedance-2.0-standard/harnesseval_w_intentional_0001_living_room_table_ceramic_mug/metadata.json",
+    "output_video": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/intentional_transition/seedance-2.0-standard/harnesseval_w_intentional_0001_living_room_table_ceramic_mug/output.mp4",
+    "skill_plan": "[workspace]/upstream/benchmark/plans/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.skill_plan.json",
+    "metric_bundle": "[workspace]/artifacts/fresh/cache/bundles/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.metrics.json"
+  },
+  "video_validity": {
+    "status": "ok",
+    "score": 1.0,
+    "score_type": "cache_fingerprint_verified"
+  },
+  "skill_plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "routing_mode": "shipped_case_plan",
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "intentional_change_verifier_vlm"
+    ],
+    "observation_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector"
+    ],
+    "core_skill_ids": [
+      "intentional_change_verifier_vlm"
+    ],
+    "diagnostic_skill_ids": [],
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "Generated frames must be technically clean and realistic enough to judge the mug, spill, coffee table, sofa, rug, and floor lamp without artifacts, watermarks, blur, or ambiguity.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "The requested transition should show a visible change from upright mug to tipped mug with spill, and any rollout motion should be temporally coherent rather than flickering or jumping.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "The living room layout, lighting, materials, and the white ceramic mug identity should remain consistent while only the mug state and small local spill change.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "A ceramic mug tipping onto its side and producing a small nearby spill should look causally and spatially plausible on the coffee table, with the spill staying local and the mug resting naturally.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "role": "core",
+        "reason": "Primary requirement is an explicitly specified intentional object-state transition: tip the white ceramic mug onto its side and create a small local spill while protected anchors remain unchanged and camera fixed.",
+        "parameters": {
+          "target_entity": "white ceramic mug",
+          "required_state_change": "upright mug becomes tipped onto its side",
+          "required_secondary_effect": "small local spill near the mug",
+          "protected_anchors": [
+            "sofa",
+            "coffee table",
+            "rug",
+            "floor lamp"
+          ],
+          "negative_constraints": [
+            "do not replace the whole scene",
+            "do not add unrelated extra events",
+            "do not change camera viewpoint"
+          ]
+        }
+      }
+    ]
+  },
+  "skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "status": "ok",
+      "score": 0.721097,
+      "metrics": {
+        "aesthetic": 0.558087,
+        "imaging": 0.675299,
+        "hpsv3": 0.653062,
+        "flickering": 0.997939
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.render_quality",
+        "cache_contract_version": "harnesseval.render_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "Generated frames must be technically clean and realistic enough to judge the mug, spill, coffee table, sofa, rug, and floor lamp without artifacts, watermarks, blur, or ambiguity.",
+      "plan_parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "status": "ok",
+      "score": 0.498649,
+      "metrics": {
+        "dynamic": 0.0,
+        "smoothness": 0.997298
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.motion_quality",
+        "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "The requested transition should show a visible change from upright mug to tipped mug with spill, and any rollout motion should be temporally coherent rather than flickering or jumping.",
+      "plan_parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "status": "ok",
+      "score": 0.979323,
+      "metrics": {
+        "background": 0.979323
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.appearance_consistency",
+        "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+        "aggregation": "single_required_component",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "The living room layout, lighting, materials, and the white ceramic mug identity should remain consistent while only the mug state and small local spill change.",
+      "plan_parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "status": "ok",
+      "score": 0.63494,
+      "metrics": {
+        "visual_plausibility": 0.63494
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_plausibility.pavrm",
+        "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+        "aggregation": "pavrm_raw_score_divided_by_5",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "A ceramic mug tipping onto its side and producing a small nearby spill should look causally and spatially plausible on the coffee table, with the spill staying local and the mug resting naturally.",
+      "plan_parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok_case_audit_warning",
+      "score": 1.0,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.326984
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "warning",
+          "warning": true,
+          "expected_spec_alignment": 0.326984,
+          "target_alignment": 0.095238,
+          "change_alignment": 0.285714,
+          "anchor_alignment": 0.6
+        },
+        "analyze_agent_cache": "[workspace]/artifacts/fresh/cache/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+        "analyze_agent_evidence_digest": "41f26b8bbb87256dedb94823b8ccb0336e8c91434928f4aed10929b620ad7312",
+        "verify_agent_cache": "[workspace]/artifacts/fresh/cache/skills/intentional_change/verify_agent/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+        "verify_agent_evidence_digest": "357aa02966c57c47a704a455ae9716ac6deec0f5b25121e31fdb3561b81573a7"
+      },
+      "notes": [],
+      "plan_role": "core",
+      "plan_reason": "Primary requirement is an explicitly specified intentional object-state transition: tip the white ceramic mug onto its side and create a small local spill while protected anchors remain unchanged and camera fixed.",
+      "plan_parameters": {
+        "target_entity": "white ceramic mug",
+        "required_state_change": "upright mug becomes tipped onto its side",
+        "required_secondary_effect": "small local spill near the mug",
+        "protected_anchors": [
+          "sofa",
+          "coffee table",
+          "rug",
+          "floor lamp"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ]
+      }
+    }
+  ],
+  "case_score": {
+    "score": 1.0,
+    "status": "ok",
+    "score_type": "selected_core_mean",
+    "core_skill_ids": [
+      "intentional_change_verifier_vlm"
+    ],
+    "weights": {
+      "intentional_change_verifier_vlm": 1.0
+    },
+    "routing_mode": "shipped_case_plan"
+  },
+  "observation_quality": {
+    "status": "ok",
+    "dimensions": {
+      "render_quality_inspector": 0.721097,
+      "motion_quality_inspector": 0.498649,
+      "appearance_consistency_inspector": 0.979323,
+      "physical_plausibility_inspector": 0.63494
+    },
+    "evidence_score": 0.708502,
+    "score_type": "selected_observation_mean"
+  },
+  "final_score": {
+    "score": 0.854251,
+    "status": "ok",
+    "score_type": "core_others_50_50",
+    "core_score": 1.0,
+    "others_score": 0.708502,
+    "core_weight": 0.5,
+    "others_weight": 0.5
+  },
+  "provenance": {
+    "scorer_id": "harnesseval.score",
+    "input_digest": "d3ca1139354db0019a689546d0f2dd1b1ff1074cc93260fe4b6e65b1da451504",
+    "cache_only": true
+  }
+}

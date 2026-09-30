@@ -1,0 +1,47 @@
+{
+  "cases": [
+    {
+      "case_id": "local_constructed_red_book",
+      "taxonomy": {
+        "primary_axis": "transition_correctness",
+        "probe_family": "intentional_transition"
+      },
+      "world": {
+        "world_id": "local_red_book",
+        "initial_observation": {
+          "type": "image",
+          "path": "[workspace]/artifacts/construction/initial.png"
+        },
+        "source_tags": {
+          "scene": "kitchen_counter",
+          "style": "photorealistic"
+        }
+      },
+      "interaction": {
+        "action": {
+          "type": "text_based_state_change",
+          "action_id": "book_open",
+          "text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page."
+        }
+      },
+      "non_model_facing": {
+        "target_entity": "closed red book",
+        "expected_outcome": [
+          "The book's front cover is lifted, revealing the inner pages.",
+          "The book is now in an open state, with the first page visible."
+        ],
+        "protected_anchors": [
+          "The red book remains on the same wooden countertop.",
+          "The blue mug and basil plant remain in their original positions.",
+          "The white tiled wall background remains unchanged."
+        ],
+        "negative_constraints": [
+          "The book does not move from its position on the countertop.",
+          "No new objects are introduced into the scene.",
+          "The book does not become damaged or torn during the transition."
+        ],
+        "case_quality_status": "accepted"
+      }
+    }
+  ]
+}

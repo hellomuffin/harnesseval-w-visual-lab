@@ -1,0 +1,172 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0002_garden_loop",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess all generated garden frames for technical cleanliness, realistic rendering, absence of severe artifacts, watermarks, broken geometry, or ambiguity that would undermine judging the return loop.",
+      "parameters": {
+        "domain": "realistic",
+        "scene": "garden_loop",
+        "initial_observation_path": "data/initial_observations/harnesseval_w_return_0002_garden_loop.jpg"
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is a multi-chunk navigation sequence, so generated motion should be present, temporally smooth, and free of jumps or flicker while moving away and returning.",
+      "parameters": {
+        "chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "action_sequence": [
+          "A",
+          "D",
+          "W+left",
+          "S+D",
+          "right",
+          "left",
+          "W",
+          "S"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same realistic garden world should maintain stable object appearance, lighting, materials, and layout across the navigation loop, especially for the gazebo, pond edge, stone path, and hedge gate.",
+      "parameters": {
+        "protected_anchors": [
+          "gazebo",
+          "pond edge",
+          "stone path",
+          "hedge gate"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement through a garden should remain physically plausible, with coherent parallax, scale, occlusion, ground contact, and no impossible warping of the path, pond, hedge, or gazebo.",
+      "parameters": {
+        "environment": "outdoor garden",
+        "movement_type": "first_person_navigation"
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly requires active first-person navigation through an eight-chunk path, moving away from the initial viewpoint and then returning via inverse-balanced navigation tokens.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "action": "A"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "D"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W+left"
+          },
+          {
+            "chunk_id": "c04",
+            "action": "S+D"
+          },
+          {
+            "chunk_id": "c05",
+            "action": "right"
+          },
+          {
+            "chunk_id": "c06",
+            "action": "left"
+          },
+          {
+            "chunk_id": "c07",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c08",
+            "action": "S"
+          }
+        ],
+        "expected_behavior": "non-static closed-loop camera trajectory without scene reset"
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "This is a return_revisit_consistency case: chunk c08 should return to a compatible view of the same world seen near c01 after moving away, preserving stable anchors and spatial relationships.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "closed_loop_pairs": [
+          {
+            "reference_chunk": "c01",
+            "return_chunk": "c08"
+          }
+        ],
+        "stable_anchors": [
+          "gazebo",
+          "pond edge",
+          "stone path",
+          "hedge gate"
+        ],
+        "expected_return": "compatible view, not an exact reset, with same-world persistence"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "No explicit semantic or object-state edit is requested; the target is navigation away and return consistency."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a dynamic object response."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law check beyond general camera and scene plausibility."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "Although consistency matters, this is an eight-chunk closed loop rather than a long-horizon many-turn drift-resistance rollout."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

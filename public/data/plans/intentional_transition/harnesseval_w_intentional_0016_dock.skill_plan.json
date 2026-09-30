@@ -1,0 +1,98 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0016_dock",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result must remain photorealistic and technically clean in a sparse outdoor dock scene with water, wooden planks, worn surfaces, and a close foreground suitcase.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The suitcase relocation should be represented with clear, temporally smooth motion or transition rather than flicker, popping, or missing movement.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The scratched gray suitcase, dock planks, water channel, rails, bollard, distant silhouette, lighting, and camera perspective should stay visually consistent before and after the edit.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Moving the suitcase onto the dock center must preserve plausible scale, support on the wooden planks, upright orientation, closed state, and contact shadows without floating or intersecting geometry.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary requirement is an intentional object-state/location edit: move the scratched gray suitcase from the left foreground to the center of the wooden dock planks while keeping protected scene anchors intact.",
+      "parameters": {
+        "target_object": "scratched gray suitcase",
+        "source_location": "left foreground",
+        "target_location": "center of the wooden dock planks",
+        "required_state": [
+          "upright",
+          "closed"
+        ],
+        "protected_anchors": [
+          "coastal dock environment",
+          "water channel",
+          "pier rails",
+          "bollard",
+          "distant silhouette",
+          "worn wooden planks",
+          "photorealistic third-person framing"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The action does not require active camera navigation or a specified viewpoint path; the main task is a local suitcase relocation."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The case is not asking for a causal response to an applied force or physical intervention; it directly specifies an intentional object movement."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law evaluation is required beyond general plausibility of suitcase support, orientation, and contact."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon multi-turn rollout targeting progressive drift resistance."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return-to-view requirement."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

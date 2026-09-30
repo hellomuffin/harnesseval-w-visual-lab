@@ -1,0 +1,145 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0038_tundra",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Evaluate general technical and aesthetic quality of the sparse anime tundra rollout, including clean rendering of snow, frozen water, trail, ice formation, distant silhouette, and absence of artifacts, text, borders, or watermark.",
+      "parameters": {
+        "check_aspects": [
+          "anime-style visual coherence",
+          "clean frame rendering",
+          "sparse tundra readability",
+          "foreground frozen water quality",
+          "trail and landmark clarity",
+          "no UI/text/watermark/collage artifacts"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The result is a navigation rollout with two action chunks, so motion should be present, smooth, and temporally continuous rather than jittery, popping, or frozen.",
+      "parameters": {
+        "action_sequence": [
+          "W",
+          "W+left"
+        ],
+        "check_aspects": [
+          "forward motion presence",
+          "smooth turn during left input",
+          "temporal stability",
+          "no abrupt frame jumps",
+          "no unintended static output"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same tundra world should persist across the transition: snowfield, frozen pond, winding trail, ice spire, wooden post, deer or distant landmarks should not change identity, style, scale, or layout implausibly.",
+      "parameters": {
+        "anchors": [
+          "frozen pond/water body",
+          "snow trail",
+          "large ice formation",
+          "wooden post/entrance marker",
+          "distant hill or silhouette",
+          "sparse tundra vegetation"
+        ],
+        "check_aspects": [
+          "style consistency",
+          "landmark persistence",
+          "geometry consistency",
+          "lighting/weather continuity",
+          "no semantic morphing"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward-left movement through a snowy tundra path must maintain plausible camera travel, terrain support, parallax, scale, and spatial relationships around the pond, trail, ice, and snow surface.",
+      "parameters": {
+        "check_aspects": [
+          "plausible camera height and path following",
+          "terrain support",
+          "consistent parallax",
+          "stable horizon and perspective",
+          "no impossible object motion",
+          "no clipping through pond/ice/snowbanks"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition correctness for an exploratory navigation action: the camera should move forward along the visible trail and then curve/turn left according to W followed by W+left while remaining in the same tundra environment.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "action_chunks": [
+          {
+            "chunk_id": "c01",
+            "expected_motion": "move forward from the third-person observer viewpoint along the available trail direction"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_motion": "continue forward while steering left toward one plausible branch/direction in the junction-like composition"
+          }
+        ],
+        "scene_constraints": [
+          "preserve junction-like two-direction layout during navigation",
+          "keep identifiable entrance/exit and asymmetric landmarks useful for orientation",
+          "maintain same outdoor natural tundra world",
+          "avoid teleporting to unrelated scene"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state edit; it requests exploratory navigation through the existing tundra scene."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the target; movement is viewpoint/navigation control."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of camera movement and terrain."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short two-chunk rollout, not a long-horizon many-turn drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include a loop or return to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

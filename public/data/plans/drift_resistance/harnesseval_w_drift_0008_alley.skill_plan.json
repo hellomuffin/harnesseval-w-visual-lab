@@ -1,0 +1,84 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0008_alley",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the stylized 3D alley rollout remains technically clean, with coherent dense urban detail, readable shapes, no UI/watermark/readable text artifacts, and no frame-level rendering defects.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a 10-chunk forward navigation sequence, so frames should show present, smooth first-person motion without jitter, stalls, teleporting, or abrupt speed/heading discontinuities.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same alley world should keep stable materials and style across the long rollout, including brick walls, rusted cabinet, cracked pavement, lampposts, graffiti, bicycles, fire escapes, curbs, and distant buildings.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward movement through the alley should preserve plausible camera height, scale, parallax, collision avoidance, object support, curb/elevation relationships, and passable traffic-lane geometry.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active first-person navigation: moving steadily forward from just right of the rusted cabinet, past named landmarks, with small steering corrections to stay centered and avoid curbs.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "The primary axis is world_persistence with probe_family drift_resistance, and the rollout has many navigation chunks intended to test resistance to progressive visual, geometric, and semantic degradation over distance.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "There is no requested semantic edit or object-state transition; the target is navigation and persistence through the same alley."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The action does not apply a force or physical intervention requiring causal object response; it is camera navigation only."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law event, collision response, gravity behavior, or dynamics check is required beyond general physical plausibility during navigation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The trajectory does not specify a loop or returning to a previous viewpoint for revisit consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

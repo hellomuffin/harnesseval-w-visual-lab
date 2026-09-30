@@ -1,0 +1,95 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "planner_version": "harnesseval.planner.v1",
+  "created_at": "2026-09-30T21:08:36.131650+00:00",
+  "routing_mode": "llm_case",
+  "input_digest": "4e0e94dc198eb7d22709f31c77b72613e949343c1c4f49e9338b2ee8c16eebf4",
+  "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "planner": {
+    "type": "openai_compatible",
+    "version": "harnesseval.planner.v1",
+    "prompt_version": "worlddojo.v2_planner.prompt.v8",
+    "model": "local-judge",
+    "wire_api": "chat_completions",
+    "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "response_id": "chatcmpl-a286b555402158dc",
+    "response_model": "local-judge",
+    "usage": {
+      "prompt_tokens": 2341,
+      "total_tokens": 2848,
+      "completion_tokens": 507,
+      "prompt_tokens_details": null
+    },
+    "elapsed_seconds": 12.914642,
+    "attempt_count": 1
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The case requires no artifacts or watermarks, and the initial observation is from a realistic procedural prompt, necessitating aesthetic and technical quality evaluation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The ceramic mug must remain identifiable as the same entity throughout the transition, requiring visual consistency across frames.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The action involves a physical intervention (tipping) that must be physically and causally plausible, including the spill dynamics, which is an observation-level requirement.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The case explicitly requests an intentional semantic transition: tipping the ceramic mug and creating a spill, while protecting anchors. This matches the core_for field for intentional_transition.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly states 'keep the camera fixed', so no viewpoint movement is required."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The action is an intentional semantic transition (tipping the mug), not a response to a physical intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general physical plausibility, which is covered by the physical_plausibility_inspector."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case does not involve a long-horizon rollout with many action turns or chunks."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve a non-static loop or return to a previous state."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not involve offscreen processes evolving in the same world."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 4,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

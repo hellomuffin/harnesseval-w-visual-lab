@@ -1,0 +1,16 @@
+{
+  "repo": "meituan-longcat/WBench-weights",
+  "revision": "1c5fde9aed33c2659a620e244d0151b7741e237d",
+  "path": "weights",
+  "patterns": [
+    "clip/*",
+    "aesthetic/*",
+    "pyiqa/*",
+    "amt/*",
+    "raft/*",
+    "HPSv3/*",
+    "Qwen2-VL-7B-Instruct/*",
+    "qwen3vl-a3b-visual-plausibility/*",
+    "megasam/*"
+  ]
+}

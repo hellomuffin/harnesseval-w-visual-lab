@@ -1,0 +1,112 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0002_water_dye_advection_v02",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the transparent flow-channel scene, water, dye marker, tracers, and lab apparatus render cleanly without artifacts that would obscure judging dye advection.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout must show temporally smooth downstream motion of the dye front and water tracers over frames 1-49 at 12 fps.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The channel, water surface, dye color, tracers, and fixed lab setup should remain visually consistent while only the fluid markers advect.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The dye and tracers should move causally with the water flow inside the channel, without impossible jumps, reversals, leakage through walls, or unrelated object motion.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The primary target is the physical response to releasing an orange dye marker into flowing water with mean speed 0.5 m/s.",
+      "parameters": {
+        "target_objects": [
+          "target_orange_dye_front",
+          "water_tracer_00",
+          "water_tracer_01",
+          "water_tracer_02",
+          "water_tracer_03",
+          "water_tracer_04",
+          "water_tracer_05",
+          "water_tracer_06",
+          "water_tracer_07",
+          "water_tracer_08",
+          "water_tracer_09",
+          "water_tracer_10",
+          "water_tracer_11",
+          "water_tracer_12",
+          "water_tracer_13"
+        ],
+        "expected_behavior": "dye front and tracers advect downstream with the channel flow"
+      }
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "The case requires checking plug-advection consistency: at 0.5 m/s over the observation interval, the final dye-front displacement should be about 2.0 m and should follow the group relation that faster flow gives greater displacement.",
+      "parameters": {
+        "model": "plug_advection_incompressible_channel_v1",
+        "mean_water_speed_m_per_s": 0.5,
+        "fps": 12,
+        "frame_start": 1,
+        "frame_end": 49,
+        "expected_final_dye_front_displacement_m": 2,
+        "initial_dye_front_x_m": -2,
+        "relation": "dye_front_displacement_increases_as_mean_water_speed_increases"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case uses a fixed camera observation and does not require active camera or navigation movement."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The requested transition is not an intentional semantic edit or object-state change; it is a physical fluid-response rollout."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short deterministic physical rollout, not a long-horizon multi-turn drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return-to-view requirement."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The process is expected to remain visible in the flow channel rather than evolving offscreen."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

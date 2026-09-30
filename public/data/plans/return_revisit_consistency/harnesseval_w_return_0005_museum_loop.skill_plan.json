@@ -1,0 +1,190 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0005_museum_loop",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The generated museum frames must be technically clean enough to judge the central statue, red wall painting, bench, and arched exit without severe artifacts, blur, watermarks, or ambiguity.",
+      "parameters": {
+        "domain": "realistic",
+        "initial_observation_path": "data/initial_observations/harnesseval_w_return_0005_museum_loop.jpg",
+        "key_visible_anchors": [
+          "central statue",
+          "red wall painting",
+          "bench",
+          "arched exit"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is an active navigation sequence, so generated motion should be present, temporally smooth, and free of jitter or frame-to-frame discontinuities.",
+      "parameters": {
+        "action_sequence": [
+          "left",
+          "left",
+          "right",
+          "right",
+          "W",
+          "S",
+          "up",
+          "down"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same museum world should persist through the closed loop, with stable visual identity for the statue, painting, bench, arched exit, room materials, and layout.",
+      "parameters": {
+        "protected_anchors": [
+          "central statue",
+          "red wall painting",
+          "bench",
+          "arched exit"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement through the museum should remain plausible in a first-person realistic space, with coherent perspective shifts, occlusion, scale, and spatial continuity.",
+      "parameters": {
+        "perspective": "first_person",
+        "scene": "museum_loop"
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active navigation away from the initial viewpoint and back via a specified balanced sequence of left/right, forward/back, and up/down movements.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "actions": [
+              "left"
+            ]
+          },
+          {
+            "chunk_id": "c02",
+            "actions": [
+              "left"
+            ]
+          },
+          {
+            "chunk_id": "c03",
+            "actions": [
+              "right"
+            ]
+          },
+          {
+            "chunk_id": "c04",
+            "actions": [
+              "right"
+            ]
+          },
+          {
+            "chunk_id": "c05",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c06",
+            "actions": [
+              "S"
+            ]
+          },
+          {
+            "chunk_id": "c07",
+            "actions": [
+              "up"
+            ]
+          },
+          {
+            "chunk_id": "c08",
+            "actions": [
+              "down"
+            ]
+          }
+        ],
+        "expected_behavior": "move away from the initial viewpoint and return via inverse balanced navigation without scene reset"
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "This is a return_revisit_consistency case; chunk c08 should return to a compatible view of the same world as reference chunk c01 after a non-static loop.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "closed_loop_pairs": [
+          {
+            "reference_chunk": "c01",
+            "return_chunk": "c08"
+          }
+        ],
+        "protected_anchors": [
+          "central statue",
+          "red wall painting",
+          "bench",
+          "arched exit"
+        ],
+        "consistency_targets": [
+          "anchor presence",
+          "anchor appearance",
+          "relative spatial arrangement",
+          "room geometry",
+          "compatible camera viewpoint"
+        ],
+        "reset_disallowed": true
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for a semantic or object-state edit; the primary target is navigation away and return while preserving the same world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the actions are camera/navigation commands."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general plausibility of first-person navigation through a room."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "Although consistency matters, this is a short eight-chunk closed-loop return case rather than a long-horizon drift-resistance rollout."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not involve an offscreen process that must continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

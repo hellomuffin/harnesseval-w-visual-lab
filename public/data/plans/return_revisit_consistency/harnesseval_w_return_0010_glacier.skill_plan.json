@@ -1,0 +1,163 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0010_glacier",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result should remain photorealistic and technically clean for a sparse first-person glacier landscape with river, trail, blue ice, mountains, rocks, and localized light.",
+      "parameters": {
+        "check_for": [
+          "photorealistic glacier, river, rocky bank, trail, and mountain rendering",
+          "absence of UI, text, watermarks, borders, collage artifacts, or stock-scene symmetry",
+          "stable sparse composition with plausible scale and geometry"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout includes multiple navigation chunks plus a dynamic foreground river, so camera motion and water motion should be present, smooth, and temporally coherent.",
+      "parameters": {
+        "check_for": [
+          "smooth left and right turns",
+          "smooth short forward and reverse movement along the riverbank",
+          "continuous flowing water without stutter, freezing, or flicker"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same glacier world must persist through the loop, preserving the river, winding trail, blue ice wall, mountains, rocks, lighting patch, and restrained high-contrast accent.",
+      "parameters": {
+        "protected_anchors": [
+          "foreground flowing river",
+          "rocky riverbank",
+          "winding midground trail",
+          "blue glacier face",
+          "asymmetric mountain ridges",
+          "localized directional light patch",
+          "restrained high-contrast accent attached to a real scene object"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The first-person movement should stay on a plausible rocky bank/trail area without impossible translation through water, rocks, ice, or terrain, while the river continues flowing naturally.",
+      "parameters": {
+        "check_for": [
+          "camera remains at plausible human eye height",
+          "movement follows traversable ground parallel to the river",
+          "no clipping through rocks, river surface, glacier, or terrain",
+          "water motion follows river channel direction and terrain slope"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active first-person closed-loop navigation: turn left, move forward twice along the rocky riverbank, turn right, then invert with left, backward twice, and right.",
+      "parameters": {
+        "expected_chunks": [
+          {
+            "chunk_id": "c01",
+            "expected": "left turn to look along the rocky riverbank"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "short forward movement parallel to flowing water"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "continued short forward movement parallel to flowing water"
+          },
+          {
+            "chunk_id": "c04",
+            "expected": "right turn after the outbound movement"
+          },
+          {
+            "chunk_id": "c05",
+            "expected": "left turn beginning inverse return"
+          },
+          {
+            "chunk_id": "c06",
+            "expected": "short backward movement retracing path"
+          },
+          {
+            "chunk_id": "c07",
+            "expected": "continued backward movement retracing path"
+          },
+          {
+            "chunk_id": "c08",
+            "expected": "right turn back to original glacier-facing viewpoint"
+          }
+        ],
+        "trajectory_constraints": [
+          "motion remains near the riverbank",
+          "movement is short-distance and reversible",
+          "no teleportation or large unintended viewpoint jump"
+        ]
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return_revisit_consistency: after the non-static loop, the final glacier-facing view should align with the initial river, winding trail, blue ice, and mountains.",
+      "parameters": {
+        "initial_view_reference": "data/initial_observations/harnesseval_w_return_0010_glacier.jpg",
+        "return_requirements": [
+          "final viewpoint faces the glacier as in the initial observation",
+          "foreground river position and flow are consistent with the initial view",
+          "winding trail alignment returns to the same midground path",
+          "blue ice wall and mountain silhouettes match the original layout",
+          "localized light patch and asymmetric edge detail remain in the same world positions",
+          "objects do not disappear, duplicate, rotate, or reconfigure after the loop"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic or object-state transition; it is a closed-loop navigation and return consistency test."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of navigation and river flow."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight short navigation chunks and is not a long-horizon many-turn drift-resistance probe."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not ask for an offscreen process to continue evolving while hidden; the river remains part of the observed world during navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

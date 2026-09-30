@@ -1,0 +1,130 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_offscreen_0004_mall_concourse",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "offscreen_evolution"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The realistic mall concourse rollout must remain technically clean, without severe artifacts, watermarks, broken geometry, or ambiguity that would prevent judging the crowd and anchors.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The sequence requires turning, moving forward, pausing, moving back, and returning; generated motion should be present, smooth, and temporally coherent across all chunks.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The mall concourse, escalator, skylight, information kiosk, storefronts, and crowd should preserve a consistent realistic appearance through the look-away-and-return sequence.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement, pedestrian motion, escalator placement, concourse geometry, and crowd behavior should remain physically and causally plausible in a realistic indoor mall.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly requires an active camera trajectory: turn away while the crowd is visible, continue until it leaves view, move while looking away, then turn back to the same area.",
+      "parameters": {
+        "chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "leave_chunk": "c02",
+        "return_chunk": "c07"
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The final returned view must be compatible with the original world, preserving protected anchors such as the escalator, skylight, information kiosk, and storefronts after a non-static loop.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "protected_anchors": [
+          "escalator",
+          "skylight",
+          "information kiosk",
+          "storefronts"
+        ]
+      }
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "role": "core",
+      "reason": "The primary requirement is that walking crowd positions leave view, continue evolving while offscreen, and return as the same ongoing process rather than a frozen copy, reset, or identity swap.",
+      "parameters": {
+        "target_process": "walking crowd positions",
+        "pre_visible_chunks": [
+          "c01"
+        ],
+        "offscreen_chunks": [
+          "c03",
+          "c04",
+          "c05"
+        ],
+        "return_visible_chunks": [
+          "c07",
+          "c08"
+        ],
+        "failure_modes": [
+          "target never leaves view",
+          "target never returns",
+          "frozen copy",
+          "world reset",
+          "identity swap"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier",
+    "offscreen_evolution_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic or object-state edit; it is offscreen continuation of pedestrian positions during navigation."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case needs general plausibility of mall navigation and crowd motion, not a case-specific physical-law validation of an intervention response."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight chunks but is not a long-horizon drift-resistance case with many turns focused on progressive degradation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

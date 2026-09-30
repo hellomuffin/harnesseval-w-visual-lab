@@ -1,0 +1,143 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0016_factory_yard",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve a clean realistic game-engine factory yard with coherent industrial materials, sparse composition, readable geometry, and no artifacts, text, UI, borders, or watermark.",
+      "parameters": {
+        "check_for": [
+          "technical cleanliness across all generated frames",
+          "realistic industrial yard materials such as rusted metal, concrete, barrels, lane markings, warehouse surfaces, and cloudy sky",
+          "coherent scale and geometry for the gate, wall, traffic lane, distant chimney, crane, and warehouse",
+          "absence of readable text, labels, captions, UI, split-screen layout, borders, or watermark"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains three navigation chunks, so evaluation must confirm visible forward/rightward motion is present, smooth, and free of jitter or temporal discontinuities.",
+      "parameters": {
+        "expected_motion": "first-person forward movement for W, continued forward movement for W, then diagonal forward-right movement for W+D",
+        "check_for": [
+          "continuous frame-to-frame motion",
+          "no teleporting or frozen camera",
+          "no excessive jitter, warping, or abrupt acceleration",
+          "stable temporal rendering of nearby foreground gate and wall during motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same compact enclosed factory yard must remain visually consistent as the viewpoint advances through the partially open gate and traffic lane.",
+      "parameters": {
+        "anchors": [
+          "rusted partially open industrial gate in the foreground",
+          "broken concrete wall edge creating partial occlusion on the right",
+          "yellow traffic lane markings",
+          "barrels and fenced/yard elements",
+          "dark warehouse doorway ahead",
+          "distant chimney and crane landmark"
+        ],
+        "check_for": [
+          "stable identities and relative placement of landmarks",
+          "consistent lighting, weather, and material appearance",
+          "no object duplication, disappearance, or semantic drift inconsistent with camera motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The generated first-person navigation through an industrial yard must obey plausible spatial relationships, collision constraints, occlusion changes, and perspective/parallax.",
+      "parameters": {
+        "check_for": [
+          "camera remains at plausible human first-person height",
+          "movement follows the open traffic lane without passing through the gate, wall, barrels, containers, or warehouse structures",
+          "near objects show stronger parallax than distant chimney and crane",
+          "occlusions change consistently as the camera moves forward and then forward-right",
+          "ground plane, lane markings, and structural supports remain physically coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory_transition case explicitly specifies a first-person navigation action sequence of W, W, then W+D through the factory yard traffic lane.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "trajectory": [
+          {
+            "chunk_id": "c01",
+            "expected_action": "W",
+            "expected_effect": "camera advances forward from the partially open gate into the yard along the traffic lane"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_action": "W",
+            "expected_effect": "camera continues forward, making the gate recede and the warehouse/yard features ahead grow closer"
+          },
+          {
+            "chunk_id": "c03",
+            "expected_action": "W+D",
+            "expected_effect": "camera moves diagonally forward-right, shifting viewpoint toward the right side of the lane while maintaining forward progress"
+          }
+        ],
+        "reference_scene_constraints": [
+          "first-person viewpoint with no visible operator",
+          "open traffic lane remains the navigable route",
+          "foreground gate and right wall should recede according to forward motion",
+          "distant chimney and crane remain stable landmarks with slower apparent motion"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case targets navigation/viewpoint transition, not an intentional semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a dynamic object response; the requested change is camera navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general movement plausibility and collision/occlusion checks."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not leave and return to a previously seen view or require loop consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

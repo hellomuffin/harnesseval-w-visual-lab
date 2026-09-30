@@ -1,0 +1,22 @@
+"""Paper §4 reconstruction; new image + independent local VLM planning and validation."""
+from pathlib import Path
+import json,base64,requests,time,sys
+R=Path(__file__).resolve().parents[1];A=R/'artifacts/construction'
+image=A/'initial.png';url='data:image/png;base64,'+base64.b64encode(image.read_bytes()).decode()
+taxonomy={'environment':'indoor kitchen','foreground':'closed red book','midground':'countertop','density':'low','appearance':'photorealistic','perspective':'fixed third person','probe_family':'intentional_transition'}
+def call(name,prompt):
+ body={'model':'local-judge','temperature':0,'max_tokens':1800,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':'You author rigorous, visually grounded world-model benchmark cases. Return JSON only.'},{'role':'user','content':[{'type':'text','text':prompt},{'type':'image_url','image_url':{'url':url}}]}]}
+ t=time.time();r=requests.post('http://127.0.0.1:8000/v1/chat/completions',json=body,timeout=600);r.raise_for_status();raw=r.json();(A/(name+'-receipt.json')).write_text(json.dumps({'request_prompt':prompt,'response':raw,'elapsed':time.time()-t},indent=2));return json.loads(raw['choices'][0]['message']['content'])
+prompt='Assigned taxonomy: '+json.dumps(taxonomy)+'. Inspect the image. Propose one intentional_transition case in which the red book opens. Do not invent non-visible objects or change the assigned family. Return {"title":str,"action_text":str,"target_entity":str,"initial_state":str,"expected_outcome":[str],"protected_anchors":[str],"negative_constraints":[str],"validation_questions":[str]}.'
+plan=call('planner',prompt)
+validation=call('validator','Independently validate the pictured initial world and proposed action: '+json.dumps(plan)+'. Check visible target, feasible action, specific outcome, protected anchors, and judgeability. Return {"valid":boolean,"reason":str,"checks":{"target_visible":boolean,"action_feasible":boolean,"specific_outcome":boolean,"judgeable":boolean},"issues":[str]}. Reject if any essential requirement fails.')
+attempts=[{'plan':plan,'validation':validation}]
+for attempt in range(2):
+ if validation.get('valid'):break
+ plan=call('planner-revision-'+str(attempt),prompt+' Revise the previous proposal to address this rejection: '+json.dumps(validation)+'. Only require visible geometric opening of the cover; do not assume any writing, recipe, or hidden page content. A future action need not already be visible in the initial image. Previous plan: '+json.dumps(plan))
+ validation=call('validator-revision-'+str(attempt),'Independently validate this image-action pair for a FUTURE generated rollout: '+json.dumps(plan)+'. The initial image should show the target before the action, not its completed outcome. Check target visibility, physically possible action, observable final geometry, specificity, preservation constraints. Do not require unobserved text or a recipe. Return {"valid":boolean,"reason":str,"checks":{"target_visible":boolean,"action_feasible":boolean,"specific_outcome":boolean,"judgeable":boolean},"issues":[str]}.')
+ attempts.append({'plan':plan,'validation':validation})
+result={'attempts':attempts,'title':plan['title'],'image':'evidence/construction/initial.png','taxonomy':taxonomy,'action':plan['action_text'],'plan':plan,'validation':validation,'provenance':{'method':'reconstruction of paper §4, not author code','image_model':'built-in image_gen','planner_and_validator':'Qwen3-VL-8B-Instruct','image_prompt':'Indoor kitchen; closed red hardcover book fully visible on pale wooden counter; blue mug, potted herb, white tile anchors; low clutter; photorealistic; fixed three-quarter view; no people or writing.'}}
+(A/'result.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2))
+case={'case_id':'local_constructed_red_book','taxonomy':{'primary_axis':'transition_correctness','probe_family':'intentional_transition'},'world':{'world_id':'local_red_book','initial_observation':{'type':'image','path':str(image)},'source_tags':{'scene':'kitchen_counter','style':'photorealistic'}},'interaction':{'action':{'type':'text_based_state_change','action_id':'book_open','text':plan['action_text']}},'non_model_facing':{'target_entity':plan['target_entity'],'expected_outcome':plan['expected_outcome'],'protected_anchors':plan['protected_anchors'],'negative_constraints':plan['negative_constraints'],'case_quality_status':'accepted' if validation['valid'] else 'rejected'}}
+(A/'manifest.json').write_text(json.dumps({'cases':[case]},indent=2))

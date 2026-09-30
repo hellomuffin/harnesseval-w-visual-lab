@@ -1,0 +1,864 @@
+{
+  "created_at": "2026-09-30T21:43:49.920824+00:00",
+  "upstream_url": "https://github.com/meituan-longcat/WBench",
+  "commit": "bda8cf9b26d35dcb434f668804200278533d0e69",
+  "judge": "Qwen3-VL-8B-Instruct",
+  "scope": "Official WBench five-question event-edit rubric and aggregation; frame sampling adapted to HarnessEval 12 frames at 512px. Same judge and clips, different rubric. Harness additionally uses an initial image in Analyze and reference specification; not a controlled architecture-only ablation or human accuracy test.",
+  "rows": [
+    {
+      "name": "original",
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "source_frame_count": 97,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          8,
+          17,
+          26,
+          34,
+          43,
+          52,
+          61,
+          69,
+          78,
+          87,
+          96
+        ]
+      },
+      "result": {
+        "score": 1.0,
+        "num_turns": 1,
+        "turn_details": [
+          {
+            "turn": 1,
+            "action": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.",
+            "score": 1.0,
+            "correct": 5,
+            "total": 5,
+            "questions": [
+              {
+                "sub_id": "Q1",
+                "correct": true,
+                "answer": "no",
+                "expected": "no",
+                "reason": "Mug is tipped onto side with visible liquid spill on table surface in later frames."
+              },
+              {
+                "sub_id": "Q2",
+                "correct": true,
+                "answer": "yes",
+                "expected": "yes",
+                "reason": "The mug is tipped onto its side and a small spill is visible on the table, matching the described event. All scene anchors remain unchanged and the camera is fixed."
+              },
+              {
+                "sub_id": "Q3",
+                "correct": true,
+                "answer": "yes",
+                "expected": "yes",
+                "reason": "The mug is tipped and spilling liquid, with a visible wet patch on the table, indicating the event has reached a clear conclusion."
+              },
+              {
+                "sub_id": "Q4",
+                "correct": true,
+                "answer": "yes",
+                "expected": "yes",
+                "reason": "The mug is tipped onto its side and a spill is visible, but the spill appears as a small puddle, not a 'small local spill' as described. The camera remains fixed and scene anchors are unchanged."
+              },
+              {
+                "sub_id": "Q5",
+                "correct": true,
+                "answer": "no",
+                "expected": "no",
+                "reason": "No unexpected objects or anomalies appear. The mug tips and spills as instructed, with no unrelated entities introduced. Scene anchors (sofas, lamp, rug) remain unchanged."
+              }
+            ]
+          }
+        ]
+      },
+      "raw_calls": [
+        {
+          "question": "Does the scene remain largely unchanged, with no clear indication of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' occurring?\n(Criterion: answer No if there is ANY recognizable change related to this event. Only answer Yes if the scene is completely static or changes are entirely unrelated.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-ac83a5ed87a3fb03",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: Mug is tipped onto side with visible liquid spill on table surface in later frames.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804614,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 22,
+              "prompt_tokens": 2054,
+              "total_tokens": 2076,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Does the video show something resembling or consistent with the described event: 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: answer Yes if the core action or change is visually recognizable, even if not every detail matches perfectly. Partial depiction counts as Yes.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-ba7d9ab242bbdbaf",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The mug is tipped onto its side and a small spill is visible on the table, matching the described event. All scene anchors remain unchanged and the camera is fixed.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804615,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 39,
+              "prompt_tokens": 2052,
+              "total_tokens": 2091,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "By the end of this segment, has the described event 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' reached a clear conclusion or outcome?\n(Criterion: answer Yes only if the event has a visible end state or result. If the event is still ongoing, just beginning, or only partially shown, answer No.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-9aaff38955f91327",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The mug is tipped and spilling liquid, with a visible wet patch on the table, indicating the event has reached a clear conclusion.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804616,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 33,
+              "prompt_tokens": 2062,
+              "total_tokens": 2095,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Are the key details of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' accurately depicted, such as the correct objects, agents, directions, and quantities involved?\n(Criterion: focus on the key entities and actions mentioned in the description. Ignore minor background differences or irrelevant details.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-b65f5cd6edeb7f0a",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The mug is tipped onto its side and a spill is visible, but the spill appears as a small puddle, not a 'small local spill' as described. The camera remains fixed and scene anchors are unchanged.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804617,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 49,
+              "prompt_tokens": 2054,
+              "total_tokens": 2103,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Does any unexpected object, entity, or visual anomaly appear in this segment that is clearly unrelated to 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: only answer Yes if something obviously out-of-place appears. Natural consequences of the event do not count. Minor AI rendering artifacts like texture flickering do not count.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-b8b42c5e899160bd",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: No unexpected objects or anomalies appear. The mug tips and spills as instructed, with no unrelated entities introduced. Scene anchors (sofas, lamp, rug) remain unchanged.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804618,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 40,
+              "prompt_tokens": 2064,
+              "total_tokens": 2104,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "frozen",
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "source_frame_count": 97,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          8,
+          17,
+          26,
+          34,
+          43,
+          52,
+          61,
+          69,
+          78,
+          87,
+          96
+        ]
+      },
+      "result": {
+        "score": 0.2,
+        "num_turns": 1,
+        "turn_details": [
+          {
+            "turn": 1,
+            "action": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.",
+            "score": 0.2,
+            "correct": 1,
+            "total": 5,
+            "questions": [
+              {
+                "sub_id": "Q1",
+                "correct": false,
+                "answer": "yes",
+                "expected": "no",
+                "reason": "No change observed; mug remains upright, no spill visible, scene static."
+              },
+              {
+                "sub_id": "Q2",
+                "correct": false,
+                "answer": "no",
+                "expected": "yes",
+                "reason": "The white ceramic mug remains upright and undisturbed in all frames, with no spill or tipping observed. The scene anchors are unchanged, but the core action is entirely absent."
+              },
+              {
+                "sub_id": "Q3",
+                "correct": false,
+                "answer": "no",
+                "expected": "yes",
+                "reason": "The white mug remains upright and undisturbed in all frames, with no visible spill or movement indicating the event has occurred."
+              },
+              {
+                "sub_id": "Q4",
+                "correct": false,
+                "answer": "no",
+                "expected": "yes",
+                "reason": "The white ceramic mug is not tipped or spilled in any frame; it remains upright and unchanged throughout the sequence."
+              },
+              {
+                "sub_id": "Q5",
+                "correct": true,
+                "answer": "no",
+                "expected": "no",
+                "reason": "No unexpected objects or anomalies appear. The scene remains consistent with the instruction and its natural consequences (no spill shown yet). No out-of-place elements are visible."
+              }
+            ]
+          }
+        ]
+      },
+      "raw_calls": [
+        {
+          "question": "Does the scene remain largely unchanged, with no clear indication of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' occurring?\n(Criterion: answer No if there is ANY recognizable change related to this event. Only answer Yes if the scene is completely static or changes are entirely unrelated.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-9b11900b495d9868",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: No change observed; mug remains upright, no spill visible, scene static.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804620,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 21,
+              "prompt_tokens": 2054,
+              "total_tokens": 2075,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Does the video show something resembling or consistent with the described event: 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: answer Yes if the core action or change is visually recognizable, even if not every detail matches perfectly. Partial depiction counts as Yes.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-832b35844075c18d",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The white ceramic mug remains upright and undisturbed in all frames, with no spill or tipping observed. The scene anchors are unchanged, but the core action is entirely absent.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804620,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 41,
+              "prompt_tokens": 2052,
+              "total_tokens": 2093,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "By the end of this segment, has the described event 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' reached a clear conclusion or outcome?\n(Criterion: answer Yes only if the event has a visible end state or result. If the event is still ongoing, just beginning, or only partially shown, answer No.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-b850f57679bcd534",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The white mug remains upright and undisturbed in all frames, with no visible spill or movement indicating the event has occurred.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804621,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 31,
+              "prompt_tokens": 2062,
+              "total_tokens": 2093,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Are the key details of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' accurately depicted, such as the correct objects, agents, directions, and quantities involved?\n(Criterion: focus on the key entities and actions mentioned in the description. Ignore minor background differences or irrelevant details.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-90639ae429cea353",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The white ceramic mug is not tipped or spilled in any frame; it remains upright and unchanged throughout the sequence.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804622,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 28,
+              "prompt_tokens": 2054,
+              "total_tokens": 2082,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Does any unexpected object, entity, or visual anomaly appear in this segment that is clearly unrelated to 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: only answer Yes if something obviously out-of-place appears. Natural consequences of the event do not count. Minor AI rendering artifacts like texture flickering do not count.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-910e548beec109ec",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: No unexpected objects or anomalies appear. The scene remains consistent with the instruction and its natural consequences (no spill shown yet). No out-of-place elements are visible.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804623,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 38,
+              "prompt_tokens": 2064,
+              "total_tokens": 2102,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "reversed",
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "source_frame_count": 97,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          8,
+          17,
+          26,
+          34,
+          43,
+          52,
+          61,
+          69,
+          78,
+          87,
+          96
+        ]
+      },
+      "result": {
+        "score": 1.0,
+        "num_turns": 1,
+        "turn_details": [
+          {
+            "turn": 1,
+            "action": "tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.",
+            "score": 1.0,
+            "correct": 5,
+            "total": 5,
+            "questions": [
+              {
+                "sub_id": "Q1",
+                "correct": true,
+                "answer": "no",
+                "expected": "no",
+                "reason": "Mug is tipped onto its side with visible liquid spill on table in initial frames, then uprights; scene anchors unchanged. Event occurred."
+              },
+              {
+                "sub_id": "Q2",
+                "correct": true,
+                "answer": "yes",
+                "expected": "yes",
+                "reason": "The mug is tipped onto its side and shows a small spill on the table, though the spill is not clearly liquid and the camera remains fixed with scene anchors unchanged."
+              },
+              {
+                "sub_id": "Q3",
+                "correct": true,
+                "answer": "yes",
+                "expected": "yes",
+                "reason": "The mug is upright and dry in the final frame, indicating the spill event has concluded. The camera remains fixed and scene anchors unchanged."
+              },
+              {
+                "sub_id": "Q4",
+                "correct": true,
+                "answer": "yes",
+                "expected": "yes",
+                "reason": "The mug is tipped onto its side and a small spill is visible on the table, matching the description. The camera remains fixed, and scene anchors are unchanged. All key entities and actions are accurately depicted."
+              },
+              {
+                "sub_id": "Q5",
+                "correct": true,
+                "answer": "no",
+                "expected": "no",
+                "reason": "No unexpected objects or anomalies appear. The mug tipping and spilling is the only event, and all scene anchors remain unchanged as instructed."
+              }
+            ]
+          }
+        ]
+      },
+      "raw_calls": [
+        {
+          "question": "Does the scene remain largely unchanged, with no clear indication of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' occurring?\n(Criterion: answer No if there is ANY recognizable change related to this event. Only answer Yes if the scene is completely static or changes are entirely unrelated.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-a59e210c00e77fae",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: Mug is tipped onto its side with visible liquid spill on table in initial frames, then uprights; scene anchors unchanged. Event occurred.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804624,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 33,
+              "prompt_tokens": 2054,
+              "total_tokens": 2087,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Does the video show something resembling or consistent with the described event: 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: answer Yes if the core action or change is visually recognizable, even if not every detail matches perfectly. Partial depiction counts as Yes.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-823787317a044a88",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The mug is tipped onto its side and shows a small spill on the table, though the spill is not clearly liquid and the camera remains fixed with scene anchors unchanged.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804625,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 39,
+              "prompt_tokens": 2052,
+              "total_tokens": 2091,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "By the end of this segment, has the described event 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' reached a clear conclusion or outcome?\n(Criterion: answer Yes only if the event has a visible end state or result. If the event is still ongoing, just beginning, or only partially shown, answer No.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-985f7145bb8bc6b2",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The mug is upright and dry in the final frame, indicating the spill event has concluded. The camera remains fixed and scene anchors unchanged.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804626,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 33,
+              "prompt_tokens": 2062,
+              "total_tokens": 2095,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Are the key details of 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.' accurately depicted, such as the correct objects, agents, directions, and quantities involved?\n(Criterion: focus on the key entities and actions mentioned in the description. Ignore minor background differences or irrelevant details.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-ab336725b5dfaac4",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: The mug is tipped onto its side and a small spill is visible on the table, matching the description. The camera remains fixed, and scene anchors are unchanged. All key entities and actions are accurately depicted.\nAnswer: Yes",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804627,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 47,
+              "prompt_tokens": 2054,
+              "total_tokens": 2101,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        },
+        {
+          "question": "Does any unexpected object, entity, or visual anomaly appear in this segment that is clearly unrelated to 'tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.'?\n(Criterion: only answer Yes if something obviously out-of-place appears. Natural consequences of the event do not count. Minor AI rendering artifacts like texture flickering do not count.)\n\nUse this EXACT format (max 50 words):\nReason: <only describe specific issues found; if score is not full marks you MUST name the exact problem; do not describe what looks good>\nAnswer: Yes or No",
+          "system_prompt": "You are evaluating AI-generated video segments from interactive world models. Each video segment corresponds to one interaction turn where a specific event was instructed to happen.\n\nYour task: answer each question with ONLY 'Yes' or 'No' based on what you observe in the provided frames. Follow these guidelines:\n- These are AI-generated videos, not real footage. Minor visual artifacts, slight inconsistencies, or imperfect rendering should NOT cause a 'No' if the overall intent is recognizable.\n- Focus on whether the CORE semantic meaning of the described event is visually present, not whether every literal detail matches perfectly.\n- A long or detailed event description may only be partially depicted. Judge based on whether the main action or change is recognizable.\n- When in doubt between Yes and No, lean toward the interpretation that better matches what you actually see, not what you expect to see.",
+          "response": {
+            "id": "chatcmpl-b2fc5a238290b5d5",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Reason: No unexpected objects or anomalies appear. The mug tipping and spilling is the only event, and all scene anchors remain unchanged as instructed.\nAnswer: No",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [],
+                  "reasoning": null,
+                  "reasoning_content": null
+                },
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ],
+            "created": 1790804629,
+            "model": "local-judge",
+            "object": "chat.completion",
+            "service_tier": null,
+            "system_fingerprint": null,
+            "usage": {
+              "completion_tokens": 33,
+              "prompt_tokens": 2064,
+              "total_tokens": 2097,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": null
+            },
+            "prompt_logprobs": null,
+            "prompt_token_ids": null,
+            "kv_transfer_params": null
+          }
+        }
+      ]
+    }
+  ]
+}

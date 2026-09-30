@@ -1,0 +1,65 @@
+{
+  "schema_version": "harnesseval.render_quality.cache",
+  "skill_id": "render_quality_inspector",
+  "definition_version": "harnesseval.render_quality",
+  "metrics": {
+    "aesthetic": 0.5233600174679476,
+    "imaging": 0.5837795243543737,
+    "hpsv3": 0.7082874131202698,
+    "flickering": 0.9542385288313323
+  },
+  "details": {
+    "aesthetic_quality": {
+      "component": "aesthetic",
+      "raw_score": 0.5233600174679476,
+      "score": 0.5233600174679476,
+      "sampling": {
+        "fps": 2.0
+      },
+      "sampled_frames": 17
+    },
+    "imaging_quality": {
+      "component": "imaging",
+      "raw_score": 0.5837795243543737,
+      "score": 0.5837795243543737,
+      "sampling": {
+        "fps": 2.0
+      },
+      "sampled_frames": 17
+    },
+    "hpsv3_quality": {
+      "component": "hpsv3",
+      "raw_score": 6.165748262405396,
+      "score": 0.7082874131202698,
+      "sampling": {
+        "max_frames": 20,
+        "method": "linspace_floor"
+      },
+      "sampled_frames": 20
+    },
+    "temporal_flickering": {
+      "component": "flickering",
+      "raw_score": 0.9542385288313323,
+      "score": 0.9542385288313323,
+      "sampling": {
+        "fps": 10.0
+      },
+      "sampled_frames": 97
+    }
+  },
+  "provenance": {
+    "input_digest": "cf96bd646a7342d4b0678d032dca7805713276ad911562ca1dfc5f7516975d10",
+    "cache_contract_version": "harnesseval.render_quality.cache_contract",
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/exploratory_transition/seedance-2.0-standard/harnesseval_w_exploratory_0001_urban_crosswalk/output.mp4",
+      "size_bytes": 871937,
+      "mtime_ns": 1790802127017175262
+    },
+    "backend": {
+      "backend_id": "harnesseval.render_quality",
+      "backend_version": "harnesseval.render_quality.four_metrics",
+      "config_digest": "defec4b60939d2dab0b70132cf4e650d0ec441890b563456c641dfac3dfa0e06"
+    },
+    "execution_mode": "local"
+  }
+}

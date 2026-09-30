@@ -1,0 +1,105 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "planner_version": "harnesseval.planner.v1",
+  "created_at": "2026-09-30T21:09:17.577058+00:00",
+  "routing_mode": "llm_case",
+  "input_digest": "b2b3507186f36ef7a56abef49f5ac7b39604435b5d33bb2d14fe506f86f6ff2c",
+  "case_id": "harnesseval_w_return_0001_city_intersection",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "planner": {
+    "type": "openai_compatible",
+    "version": "harnesseval.planner.v1",
+    "prompt_version": "worlddojo.v2_planner.prompt.v8",
+    "model": "local-judge",
+    "wire_api": "chat_completions",
+    "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "response_id": "chatcmpl-bbff8d6cb70396c1",
+    "response_model": "local-judge",
+    "usage": {
+      "prompt_tokens": 2638,
+      "total_tokens": 3195,
+      "completion_tokens": 557,
+      "prompt_tokens_details": null
+    },
+    "elapsed_seconds": 13.164059,
+    "attempt_count": 1
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Initial observation is a realistic city intersection image requiring aesthetic and technical cleanliness evaluation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The case involves a closed-loop navigation sequence requiring evaluation of temporal smoothness of generated motion.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The case requires returning to a compatible view, necessitating evaluation of visual consistency across chunks.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation actions imply physical movement; plausibility of motion and environment interaction must be assessed.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active camera/navigation movement along a specified action sequence (W, S, left, right, A, D).",
+      "parameters": {}
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The case's primary target is return_revisit_consistency, requiring verification that the returned view (c08) matches the initial state (c01) spatially and semantically.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not require an intentional semantic or object-state transition; it requires navigation and return."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The case does not involve a causal physical intervention or force; it involves navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required; plausibility is covered by physical_plausibility_inspector."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is short (8 chunks) and not long-horizon; drift resistance is not the target."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not involve offscreen processes evolving; all actions are in-view navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

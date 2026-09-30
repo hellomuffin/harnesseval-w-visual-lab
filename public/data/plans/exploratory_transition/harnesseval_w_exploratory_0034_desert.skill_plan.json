@@ -1,0 +1,139 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0034_desert",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain photorealistic and technically clean in a sparse desert scene with a foreground gate, sandy trail, dunes, cactus, and distant rock landmark.",
+      "parameters": {
+        "check_for": [
+          "photorealistic desert lighting and materials",
+          "clean frame synthesis without warping, tearing, watermarks, UI, captions, or collage artifacts",
+          "stable readable scene structure across foreground gate, trail, dunes, and distant landmark"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains three navigation chunks, so generated motion should be present, smooth, and free of temporal jitter during forward and forward-right movement.",
+      "parameters": {
+        "expected_motion": "first-person camera advances forward twice along the trail, then advances while veering right",
+        "check_for": [
+          "continuous apparent movement",
+          "no abrupt frame jumps or frozen rollout",
+          "smooth parallax between gate, trail, dunes, cactus, and distant rock formation"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same desert world must persist while moving through the gate and along the trail, preserving the gate, navigation surface, boundary to sand, cactus, dunes, and distant landmark where visible.",
+      "parameters": {
+        "anchors": [
+          "weathered foreground gate/arch at start",
+          "sandy vehicle trail/navigation surface",
+          "clear boundary between trail and surrounding non-navigation sand",
+          "cactus",
+          "dunes",
+          "distant rock formation or secondary landmark"
+        ],
+        "check_for": [
+          "no unexplained object identity changes",
+          "no sudden style shift away from photorealism",
+          "consistent desert geometry and elevations during the transition"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The navigation should obey plausible first-person movement through an architectural gate and along a desert trail, with coherent scale, occlusion, support, and parallax.",
+      "parameters": {
+        "check_for": [
+          "camera does not pass through solid gate pillars or walls",
+          "ground contact and elevation changes remain plausible",
+          "near objects move faster than distant landmarks under forward motion",
+          "trail, dunes, and structures keep plausible scale and spatial relationships"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition correctness for an exploratory navigation sequence: W, W, then W+D from a first-person viewpoint along the visible trail through the identifiable entrance/exit.",
+      "parameters": {
+        "control_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expected_effect": "move forward from the gate toward/through the entrance along the sandy trail"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W",
+            "expected_effect": "continue forward deeper into the desert along the navigation surface"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W+D",
+            "expected_effect": "continue forward while shifting or turning right relative to the trail/world"
+          }
+        ],
+        "trajectory_requirements": [
+          "first-person camera movement, not object-state editing",
+          "movement follows navigable trail rather than drifting into non-navigation sand unless implied by W+D",
+          "foreground gate should recede or pass out of frame as the camera advances",
+          "distant landmark should remain spatially consistent and change slowly relative to nearer elements"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case targets exploratory viewpoint/navigation transition, not an explicitly specified semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is required beyond general plausibility of first-person navigation."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include a loop or return to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_offscreen_0003_campfire_site",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "offscreen_evolution"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated campfire-site frames must be technically clean, realistic, free of severe artifacts, watermarks, blur, broken geometry, split-screen, or ambiguity that would prevent judging the rollout.",
+      "parameters": {
+        "scene": "realistic first-person campfire site",
+        "check_artifacts": [
+          "watermark",
+          "text artifacts",
+          "split-screen",
+          "collage",
+          "duplicated objects",
+          "broken geometry",
+          "extreme blur"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The sequence requires visible camera turning, moving away, pausing, moving back, and returning, plus temporally changing flame and smoke, so motion should be present and smooth.",
+      "parameters": {
+        "chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "motion_targets": [
+          "camera/viewpoint",
+          "campfire flame",
+          "smoke"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same campsite world and protected anchors should persist across the look-away-and-return sequence without visual style shifts, object identity swaps, or unexplained changes.",
+      "parameters": {
+        "protected_anchors": [
+          "fire ring",
+          "logs",
+          "tent",
+          "cooler"
+        ],
+        "target_process": "campfire flame and smoke"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Flame flicker, smoke drift, camera movement, and campsite geometry should remain physically plausible during visible, offscreen, and return intervals.",
+      "parameters": {
+        "physical_processes": [
+          "flame flicker",
+          "smoke rising and dispersing",
+          "first-person navigation"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly requires an active look-away-and-return camera trajectory: turn away, continue until the fire leaves view, move while looking away, then turn back to the same campfire.",
+      "parameters": {
+        "expected_trajectory": [
+          {
+            "chunk_id": "c01",
+            "expectation": "campfire flame and smoke still visible while camera starts turning away"
+          },
+          {
+            "chunk_id": "c02",
+            "expectation": "camera continues turning until campfire flame and smoke leaves view"
+          },
+          {
+            "chunk_id": "c03",
+            "expectation": "camera moves forward while target remains offscreen"
+          },
+          {
+            "chunk_id": "c04",
+            "expectation": "brief pause with target still offscreen"
+          },
+          {
+            "chunk_id": "c05",
+            "expectation": "camera moves back toward original area while not facing target"
+          },
+          {
+            "chunk_id": "c06",
+            "expectation": "camera turns back toward the same campfire"
+          },
+          {
+            "chunk_id": "c07",
+            "expectation": "campfire flame and smoke returns to view"
+          },
+          {
+            "chunk_id": "c08",
+            "expectation": "final view settles into a viewpoint compatible with the original campsite"
+          }
+        ]
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The case requires returning to the same world after a non-static loop, with fire ring, logs, tent, and cooler remaining spatially consistent rather than a reset or different campsite.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "protected_anchors": [
+          "fire ring",
+          "logs",
+          "tent",
+          "cooler"
+        ],
+        "failure_modes": [
+          "world reset",
+          "identity swap",
+          "anchor relocation",
+          "missing protected anchor"
+        ]
+      }
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "role": "core",
+      "reason": "This is the primary case target: the campfire flame and smoke must leave view, remain offscreen for several chunks, continue evolving, and return as the same ongoing process rather than a frozen copy.",
+      "parameters": {
+        "target_process": "campfire flame and smoke",
+        "pre_visible_chunks": [
+          "c01"
+        ],
+        "leave_chunk": "c02",
+        "offscreen_chunks": [
+          "c03",
+          "c04",
+          "c05"
+        ],
+        "return_visible_chunks": [
+          "c07",
+          "c08"
+        ],
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "expected_evolution": [
+          "flame shape/intensity changes naturally",
+          "smoke plume shape/density/drift changes naturally",
+          "process remains tied to the same fire ring and logs",
+          "returned target is not an exact frozen copy"
+        ],
+        "failure_modes": [
+          "target never leaves view",
+          "target never returns",
+          "frozen copy",
+          "world reset",
+          "identity swap"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier",
+    "offscreen_evolution_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for an intentional semantic or object-state edit; the target is offscreen continuation of an ongoing fire and smoke process."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a response; the fire and smoke should simply keep evolving while offscreen."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of flame, smoke, and camera motion."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight chunks and targets offscreen persistence, not a long-horizon many-turn drift-resistance stress test."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

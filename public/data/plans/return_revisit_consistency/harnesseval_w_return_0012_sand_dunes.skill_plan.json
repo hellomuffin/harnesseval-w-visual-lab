@@ -1,0 +1,142 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0012_sand_dunes",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result must preserve a cinematic realistic sparse sand-dune scene without artifacts, UI/text, collage effects, or broken geometry.",
+      "parameters": {
+        "check_for": [
+          "clean 16:9 realistic rendering",
+          "natural sand, rocks, shrubs, cactus, and dune materials",
+          "no readable text, labels, borders, or watermark",
+          "no distorted or duplicated landscape artifacts"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The closed-loop navigation rollout should show present, smooth camera motion across multiple chunks rather than frozen, jumpy, or temporally unstable frames.",
+      "parameters": {
+        "expected_motion": "first-person forward, strafe, turn, forward, then exact inverse movement",
+        "check_for": [
+          "continuous temporal progression",
+          "no sudden teleport cuts unless implied by action chunk boundaries",
+          "no jitter, warping, or frame-to-frame popping"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The desert world should maintain consistent lighting, color grading, material appearance, and object identity throughout the leave-and-return path.",
+      "parameters": {
+        "persistent_elements": [
+          "tall central sand spire",
+          "irregular stone/ground boundary loop",
+          "scattered shrubs with uneven spacing",
+          "right-side cactus and rock cluster",
+          "surrounding sand dunes"
+        ],
+        "check_for": [
+          "stable object appearance across viewpoint changes",
+          "consistent shadows and sun direction",
+          "no semantic replacement of rocks, shrubs, cactus, or spire"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The generated first-person movement through open sand must remain spatially and physically plausible in scale, parallax, support, and camera height.",
+      "parameters": {
+        "check_for": [
+          "plausible walking/ground-level camera displacement",
+          "correct parallax between foreground rocks, shrubs, central spire, and distant dunes",
+          "objects remain grounded on sand",
+          "no impossible clipping through terrain or objects"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly specifies an active first-person navigation path with ordered movement chunks: forward, right strafe, right turn, forward, then inverse movement.",
+      "parameters": {
+        "reference_chunks": [
+          "c01: W toward central spire",
+          "c02: D toward cactus-and-rock side",
+          "c03: turn right",
+          "c04: W briefly"
+        ],
+        "return_chunks": [
+          "c05: S",
+          "c06: left turn",
+          "c07: A",
+          "c08: S"
+        ],
+        "expected_path_property": "inverse-balanced closed-loop navigation"
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return_revisit_consistency: after leaving the initial view and reversing the moves, the final view should be compatible with the original sand-dune scene.",
+      "parameters": {
+        "initial_view_anchors": [
+          "central spiral/tall sand spire in the midground",
+          "broad open sandy activity area",
+          "irregular boundary between different ground materials",
+          "unevenly spaced shrubs",
+          "right-side cactus with nearby rock cluster",
+          "distant dune ridges"
+        ],
+        "return_expectation": "final frames should recover a compatible composition, spatial layout, object identities, and relative positions from the initial observation, allowing only small viewpoint tolerance"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state transformation; it requests navigation away from and back to the same scene."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit force or physical intervention requiring evaluation of a causal object response."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome such as collision, falling, fluid motion, or deformation is targeted."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight short navigation chunks and targets closed-loop return consistency, not long-horizon degradation resistance."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving while outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

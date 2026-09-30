@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "[workspace]/.venv/bin/python",
+      "-m",
+      "harnesseval.cli",
+      "eval",
+      "inventory",
+      "--manifest",
+      "[workspace]/upstream/runs/example/results_example/manifest.json",
+      "--generation-root",
+      "[workspace]/upstream/runs/example/results_example/generation",
+      "--assets-root",
+      "[workspace]/upstream",
+      "--model",
+      "seedance-2.0-standard",
+      "--output-root",
+      "[workspace]/artifacts/fresh/inventory",
+      "--full-decode",
+      "--execute",
+      "--workers",
+      "4"
+    ],
+    "exit": 0
+  }
+]

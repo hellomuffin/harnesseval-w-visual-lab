@@ -1,0 +1,80 @@
+[
+  {
+    "name": "drift-physical",
+    "command": [
+      "[workspace]/.venv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "drift_degradation_analyzer",
+      "--drift-stage",
+      "physical"
+    ],
+    "exit": 0,
+    "seconds": 34.75
+  },
+  {
+    "name": "render-final",
+    "command": [
+      "[workspace]/.hpsenv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "render_quality_inspector"
+    ],
+    "exit": 0,
+    "seconds": 81.6
+  },
+  {
+    "name": "drift-render",
+    "command": [
+      "[workspace]/.hpsenv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "drift_degradation_analyzer",
+      "--drift-stage",
+      "render"
+    ],
+    "exit": 0,
+    "seconds": 82.1
+  },
+  {
+    "name": "trajectory",
+    "command": [
+      "[workspace]/.venv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "viewpoint_trajectory_verifier"
+    ],
+    "exit": 2,
+    "seconds": 28.46
+  },
+  {
+    "name": "drift-motion",
+    "command": [
+      "[workspace]/.venv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "drift_degradation_analyzer",
+      "--drift-stage",
+      "motion"
+    ],
+    "exit": 0,
+    "seconds": 20.41
+  },
+  {
+    "name": "drift-clip",
+    "command": [
+      "[workspace]/.venv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "drift_degradation_analyzer",
+      "--drift-stage",
+      "clip"
+    ],
+    "exit": 0,
+    "seconds": 11.52
+  },
+  {
+    "name": "drift-final",
+    "command": [
+      "[workspace]/.venv/bin/python",
+      "[workspace]/scripts/run_skill.py",
+      "drift_degradation_analyzer"
+    ],
+    "exit": 0,
+    "seconds": 0.53
+  }
+]

@@ -1,0 +1,136 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0017_bank",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result must remain a clean anime-style indoor bank scene with coherent geometry, readable glass surfaces, chair, plant, counter, tiled floor, and entrance details without artifacts, text/UI/watermarks, or broken perspective.",
+      "parameters": {
+        "check_for": [
+          "technical artifacts, blur, warping, flicker, or compositing seams",
+          "coherent anime rendering style matching the initial observation",
+          "plausible bank entrance materials including glass, metal frames, wood chair, potted plant, counter, tile floor, and step/threshold",
+          "no new readable labels, captions, UI, borders, or watermark"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "Closing a partially open glass door implies temporal change; the rollout should show present, smooth motion rather than abrupt teleportation or frame-to-frame instability.",
+      "parameters": {
+        "expected_motion": "the glass door closes smoothly from its partially open state",
+        "check_for": [
+          "continuous door movement across frames if motion is shown",
+          "absence of jitter, stutter, pulsing geometry, or sudden jumps",
+          "stable surrounding scene during the transition"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Protected anchors are explicitly named, so the wooden chair, potted plant, counter, bank layout, lighting, first-person framing, and anime appearance should remain visually consistent while only the door state changes.",
+      "parameters": {
+        "protected_anchors": [
+          "wooden chair in the foreground left",
+          "potted plant behind/right of the glass entrance",
+          "service counter in the bank interior",
+          "bank entrance structure, tiled threshold, and step/elevation change"
+        ],
+        "check_for": [
+          "no object identity drift or redesign of anchors",
+          "no major layout, camera, lighting, or style changes",
+          "glass transparency/reflections remain consistent with the bank setting"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The glass bank door must close in a physically plausible way around its frame/track or hinge without intersecting the floor, wall, handles, plant, counter, or other fixtures.",
+      "parameters": {
+        "check_for": [
+          "door follows a plausible closing path for the observed glass entrance",
+          "handle, frame, and glass panel remain rigid and aligned",
+          "no penetration through walls, frames, floor, chair, plant, or counter",
+          "closed final state fits the doorway geometry and threshold"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary requirement is an explicit intentional object-state transition: close the partially open glass bank door while keeping the wooden chair, potted plant, and counter unchanged.",
+      "parameters": {
+        "target_change": "partially open glass bank door becomes closed",
+        "target_object": "glass door at the bank entrance",
+        "must_preserve": [
+          "wooden chair",
+          "potted plant",
+          "counter",
+          "overall bank interior/exterior layout",
+          "first-person viewpoint"
+        ],
+        "success_criteria": [
+          "the same entrance door is visibly closed in the final state",
+          "the closed door remains recognizable as glass with appropriate frame/handle alignment",
+          "protected anchors remain in place, with matching appearance and scale",
+          "no unrelated semantic edits dominate the scene"
+        ],
+        "failure_modes": [
+          "door remains open or becomes ambiguous",
+          "wrong door/panel changes",
+          "door disappears, changes material, or becomes opaque/unrecognizable",
+          "chair, plant, or counter are moved, removed, redesigned, or occluded by unrelated changes"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The action does not require camera navigation or an active viewpoint trajectory; the first-person framing should stay stable while the door state changes."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The target is a directly specified intentional semantic/object-state edit, not a causal physical response to an explicit force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of the door closing; the task is not a physical-transition probe."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon rollout with many turns or chunks where progressive degradation resistance is the explicit target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a prior view after a non-static loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the relevant change is visible at the bank entrance."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

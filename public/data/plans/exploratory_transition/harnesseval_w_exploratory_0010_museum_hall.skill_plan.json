@@ -1,0 +1,135 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0010_museum_hall",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated museum-hall frames must remain technically clean and cinematic-realistic, with recognizable marble surfaces, columns, artwork, statues, and doorway without artifacts or distortions.",
+      "parameters": {
+        "check_for": [
+          "clean realistic rendering",
+          "stable exposure and focus",
+          "no severe warping, smearing, duplicate geometry, or broken human/statue forms",
+          "museum materials remain legible: marble floor, columns, bronze sculpture, painted walls"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The two W navigation chunks require visible forward camera motion that is temporally smooth rather than static, jittery, or jump-cut.",
+      "parameters": {
+        "expected_motion": "continuous forward push through the central aisle over two movement chunks",
+        "check_for": [
+          "motion is present",
+          "no abrupt teleportation",
+          "no excessive jitter or oscillation",
+          "consistent forward optical flow"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Protected anchors must remain recognizable while the viewpoint advances: long hall geometry, dark inlaid center line, bronze lion pedestal, white columns, far arch, and statue beyond the arch.",
+      "parameters": {
+        "protected_anchors": [
+          "long rectangular museum hall geometry",
+          "dark inlaid floor center line",
+          "bronze lion sculpture on square marble pedestal",
+          "repeating white columns",
+          "wide far arched doorway",
+          "monumental white marble statue beyond the arch"
+        ],
+        "check_for": [
+          "scene identity remains a cinematic-realistic museum hall",
+          "objects do not change category or material",
+          "layout remains spatially coherent",
+          "no unexplained disappearance or replacement of landmarks"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The forward navigation should obey plausible first-person camera movement through an indoor aisle around a central obstacle, without passing through the lion pedestal, columns, walls, or floor.",
+      "parameters": {
+        "check_for": [
+          "camera path respects solid obstacles",
+          "scale and perspective changes are plausible",
+          "pedestal grows closer appropriately",
+          "floor, columns, and doorway maintain believable geometry"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory transition explicitly specifies active navigation: two forward W controls along the dark inlaid floor line toward and around the bronze lion pedestal, continuing toward the wide far arched doorway.",
+      "parameters": {
+        "control_sequence": [
+          "W",
+          "W"
+        ],
+        "expected_trajectory": "forward movement down the central aisle along the dark inlaid floor line, approaching the bronze lion pedestal and far arched doorway",
+        "success_conditions": [
+          "camera advances from the initial viewpoint",
+          "bronze lion sculpture and marble pedestal become closer and/or more central",
+          "wide arched doorway and white statue remain aligned ahead",
+          "movement follows the primary route rather than lateral wandering or teleporting"
+        ],
+        "negative_constraints": [
+          "do not teleport to the destination",
+          "do not change scene identity, style, or subject identity",
+          "do not perform semantic edits or physical events"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint change, not an intentional semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a specialized physical-law check beyond general plausibility of camera motion and obstacle avoidance."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short two-chunk rollout, not a long-horizon sequence explicitly probing progressive drift degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action does not form a loop or require returning to a prior viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the expected outcome is forward navigation in the same visible museum hall."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

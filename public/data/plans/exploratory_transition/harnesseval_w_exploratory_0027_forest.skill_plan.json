@@ -1,0 +1,146 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0027_forest",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames should remain photorealistic and technically clean for a sparse outdoor forest route with concrete barrier, path, trees, ground-material boundary, person, and red gate accents; evaluate artifacts, blur, warping, text/UI/watermarks, and unnatural image degradation.",
+      "parameters": {
+        "check_photorealism": true,
+        "expected_scene": "sparse forest path with concrete wall/gate opening and restrained red accents",
+        "forbidden_artifacts": [
+          "readable text overlays",
+          "UI",
+          "borders",
+          "watermarks",
+          "collage or split-screen composition"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout contains three navigation chunks, so motion should be present, temporally smooth, and free of jitter, stutter, teleporting, or abrupt frame-to-frame scene changes.",
+      "parameters": {
+        "action_sequence": [
+          "W",
+          "W",
+          "W+D"
+        ],
+        "expect_motion": "continuous forward movement followed by forward-right movement"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same forest world must persist while moving through the route: the concrete barrier opening, paved path, trees, wall segments, person scale/appearance if visible, red gate accents, and irregular ground boundary should remain visually consistent rather than morphing.",
+      "parameters": {
+        "anchors": [
+          "paved route",
+          "concrete barrier and opening",
+          "red gate posts or accents",
+          "forest trees",
+          "wall segments",
+          "irregular ground-material boundary",
+          "single person if still in view"
+        ],
+        "allow_occlusion_from_navigation": true
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward navigation through a real forest entrance should obey plausible camera height, parallax, depth changes, ground contact, obstacle avoidance, and solid geometry; the camera should not pass through the wall, gate posts, trees, ground, or person.",
+      "parameters": {
+        "camera_context": "first-person navigation",
+        "obstacles": [
+          "concrete wall",
+          "gate posts",
+          "trees",
+          "person",
+          "bins or small fixtures"
+        ],
+        "expected_physics": [
+          "stable horizon",
+          "plausible walking/locomotion scale",
+          "consistent parallax",
+          "no clipping through barriers"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This is an exploratory_transition case with explicit navigation controls W, W, then W+D; evaluation must verify the generated viewpoint moves forward along the path toward/through the barrier opening and then shifts forward-right consistently with the final command.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "expected": "move forward along the paved route toward the gate opening"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "continue forward deeper through or toward the opening, increasing apparent proximity to midground landmarks"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "continue forward while veering right, changing lateral alignment relative to the path, wall, and trees"
+          }
+        ],
+        "success_criteria": [
+          "net forward displacement is visible",
+          "route landmarks grow closer and pass with correct parallax",
+          "final segment includes rightward lateral component",
+          "movement follows traversable path rather than drifting into barriers"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state edit; it is a navigation/viewpoint transition."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the main target is camera traversal."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general navigation plausibility and obstacle clipping checks."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks, not a long-horizon drift-resistance probe with many turns."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not loop back or require revisiting a prior viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

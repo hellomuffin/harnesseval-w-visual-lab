@@ -1,0 +1,256 @@
+{
+  "schema_version": "harnesseval.metric_bundle",
+  "case_id": "harnesseval_w_drift_0001_old_town_lane",
+  "model_id": "seedance-2.0-standard",
+  "probe_family": "drift_resistance",
+  "video": {
+    "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/drift_resistance/seedance-2.0-standard/harnesseval_w_drift_0001_old_town_lane/output.mp4",
+    "size_bytes": 3591180,
+    "mtime_ns": 1790802127097082191
+  },
+  "skill_results": [
+    {
+      "skill_id": "render_quality_inspector",
+      "status": "ok",
+      "score": 0.696093,
+      "metrics": {
+        "aesthetic": 0.509749,
+        "imaging": 0.665042,
+        "hpsv3": 0.655078,
+        "flickering": 0.954504
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.render_quality",
+        "cache_contract_version": "harnesseval.render_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "status": "ok",
+      "score": 0.996071,
+      "metrics": {
+        "dynamic": 1.0,
+        "smoothness": 0.992142
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.motion_quality",
+        "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "status": "ok",
+      "score": 0.918201,
+      "metrics": {
+        "background": 0.918201
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.appearance_consistency",
+        "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+        "aggregation": "single_required_component",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "status": "ok",
+      "score": 0.63452,
+      "metrics": {
+        "visual_plausibility": 0.63452
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_plausibility.pavrm",
+        "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+        "aggregation": "pavrm_raw_score_divided_by_5",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "status": "ok",
+      "score": 0.685421,
+      "metrics": {
+        "NavScore": 0.685421,
+        "Accuracy": 0.724922,
+        "Consistency": 0.645921,
+        "nATE_t": 0.175508,
+        "nATE_r": 0.374649,
+        "cnATE_t": 0.365418,
+        "cnATE_r": 0.34274,
+        "consistency_pairs": 7,
+        "ATE_t": 1.006504,
+        "ATE_r": 17.891829,
+        "total_path_length": 5.734804,
+        "total_rotation_deg": 47.756286
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+        "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+        "aggregation": "harnesseval_navigation_trajectory_navscore"
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "status": "ok",
+      "score": 0.912167,
+      "metrics": {
+        "cross_chunk_consistency": 0.911971,
+        "quality_trend": 1.0,
+        "quality_retention": 0.978917,
+        "worst_chunk_quality": 0.716853,
+        "chunk_quality_stability": 0.924076,
+        "quality_slope": 0.030151,
+        "chunk_quality": [
+          0.840296,
+          0.716853,
+          0.832518,
+          0.836425,
+          0.825677,
+          0.807293,
+          0.831302,
+          0.82258
+        ],
+        "chunk_appearance_similarity": [
+          0.970325,
+          0.961551,
+          0.947385,
+          0.934025,
+          0.920326,
+          0.892538,
+          0.893672
+        ],
+        "score_weights": {
+          "cross_chunk_consistency": 0.35,
+          "quality_trend": 0.2,
+          "quality_retention": 0.15,
+          "worst_chunk_quality": 0.15,
+          "chunk_quality_stability": 0.15
+        }
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.drift_degradation",
+        "cache_contract_version": "harnesseval.drift_degradation.cache_contract",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "render_quality": 0.748837,
+            "motion_quality": 0.994611,
+            "appearance_quality": 0.982277,
+            "physical_quality": 0.63546,
+            "chunk_quality": 0.840296
+          },
+          {
+            "chunk_id": "c02",
+            "render_quality": 0.7273,
+            "motion_quality": 0.496314,
+            "appearance_quality": 0.975638,
+            "physical_quality": 0.66816,
+            "chunk_quality": 0.716853
+          },
+          {
+            "chunk_id": "c03",
+            "render_quality": 0.703244,
+            "motion_quality": 0.995091,
+            "appearance_quality": 0.975478,
+            "physical_quality": 0.65626,
+            "chunk_quality": 0.832518
+          },
+          {
+            "chunk_id": "c04",
+            "render_quality": 0.711527,
+            "motion_quality": 0.996088,
+            "appearance_quality": 0.973444,
+            "physical_quality": 0.66464,
+            "chunk_quality": 0.836425
+          },
+          {
+            "chunk_id": "c05",
+            "render_quality": 0.692158,
+            "motion_quality": 0.9959,
+            "appearance_quality": 0.97189,
+            "physical_quality": 0.64276,
+            "chunk_quality": 0.825677
+          },
+          {
+            "chunk_id": "c06",
+            "render_quality": 0.656659,
+            "motion_quality": 0.99631,
+            "appearance_quality": 0.937043,
+            "physical_quality": 0.63916,
+            "chunk_quality": 0.807293
+          },
+          {
+            "chunk_id": "c07",
+            "render_quality": 0.702324,
+            "motion_quality": 0.996552,
+            "appearance_quality": 0.977351,
+            "physical_quality": 0.64898,
+            "chunk_quality": 0.831302
+          },
+          {
+            "chunk_id": "c08",
+            "render_quality": 0.668975,
+            "motion_quality": 0.997178,
+            "appearance_quality": 0.960348,
+            "physical_quality": 0.66382,
+            "chunk_quality": 0.82258
+          }
+        ],
+        "segmentation": "case_defined_chunks"
+      },
+      "notes": []
+    }
+  ],
+  "skill_runs": {
+    "appearance_consistency_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:06:21.705819+00:00"
+    },
+    "motion_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:13:56.180740+00:00"
+    },
+    "render_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:29:53.562902+00:00"
+    },
+    "drift_degradation_analyzer": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/drift_degradation/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:32:39.194629+00:00"
+    },
+    "physical_plausibility_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:37:05.119250+00:00"
+    },
+    "viewpoint_trajectory_verifier": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/viewpoint_trajectory/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:51:07.381117+00:00"
+    }
+  },
+  "provenance": {
+    "runner_id": "harnesseval.runner"
+  },
+  "plan": {
+    "path": "[workspace]/upstream/benchmark/plans/drift_resistance/harnesseval_w_drift_0001_old_town_lane.skill_plan.json",
+    "input_digest": "50e5f7ce12d3687f410e200f112ac03464162ceb35f3d747fa85a4404b0440d3"
+  }
+}

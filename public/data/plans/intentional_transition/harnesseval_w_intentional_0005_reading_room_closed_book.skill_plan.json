@@ -1,0 +1,119 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0005_reading_room_closed_book",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated frames must remain realistic and free of artifacts, watermarks, severe blur, broken geometry, or ambiguity in the reading room scene.",
+      "parameters": {
+        "domain": "realistic",
+        "scene": "reading_room",
+        "check_for": [
+          "technical cleanliness",
+          "no severe artifacts",
+          "no watermark or text artifacts",
+          "clear visibility of table, lamp, bookshelves, chair, and book"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should show the book opening with present, temporally smooth motion rather than a jarring jump or flicker.",
+      "parameters": {
+        "expected_motion": "brown book opens on the reading table"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same brown book, table, green lamp, bookshelves, and chair should retain consistent identity and appearance across frames.",
+      "parameters": {
+        "target_entity": "brown closed book",
+        "stable_anchors": [
+          "reading table",
+          "green lamp",
+          "bookshelves",
+          "chair"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The opening book should behave plausibly on the table, with pages and cover moving in a believable way without impossible deformation or floating.",
+      "parameters": {
+        "object": "brown book",
+        "surface": "reading table",
+        "expected_state": "open with pale pages visible"
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary requirement is an intentional object-state transition: open the brown book so pale pages are visible while protected anchors remain unchanged and the camera stays fixed.",
+      "parameters": {
+        "target_entity": "closed brown book",
+        "required_transition": "closed book becomes open book with pale pages visible",
+        "identity_constraint": "book remains identifiable as the same entity",
+        "protected_anchors": [
+          "reading table",
+          "green lamp",
+          "bookshelves",
+          "chair"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly requires a fixed camera, not active navigation or a viewpoint trajectory."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The target is a directly specified intentional object-state edit, not a causal response to an explicit physical force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of the book opening."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon rollout testing progressive visual or semantic degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return to a previously visited view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

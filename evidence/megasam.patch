@@ -1,0 +1,22 @@
+diff --git a/UniDepth/unidepth/layers/nystrom_attention.py b/UniDepth/unidepth/layers/nystrom_attention.py
+index 9f7476f..aa2e3a8 100644
+--- a/UniDepth/unidepth/layers/nystrom_attention.py
++++ b/UniDepth/unidepth/layers/nystrom_attention.py
+@@ -4,7 +4,10 @@ import torch
+ import torch.nn as nn
+ import torch.nn.functional as F
+ from einops import rearrange
+-from xformers.components.attention import NystromAttention
++try:
++    from xformers.components.attention import NystromAttention
++except ImportError:
++    from .legacy_nystrom import NystromAttention
+ 
+ from .attention import AttentionBlock
+ 
+diff --git a/base b/base
+--- a/base
++++ b/base
+@@ -1 +1 @@
+-Subproject commit ee9ac6af512c09ed48264c6933eeeb66d31a0dc9
++Subproject commit ee9ac6af512c09ed48264c6933eeeb66d31a0dc9-dirty

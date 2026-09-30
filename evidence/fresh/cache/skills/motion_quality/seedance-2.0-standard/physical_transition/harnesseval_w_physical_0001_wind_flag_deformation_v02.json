@@ -1,0 +1,44 @@
+{
+  "schema_version": "harnesseval.motion_quality.cache",
+  "skill_id": "motion_quality_inspector",
+  "definition_version": "harnesseval.motion_quality",
+  "metrics": {
+    "dynamic": 1.0,
+    "smoothness": 0.989614
+  },
+  "details": {
+    "dynamic_degree": {
+      "component": "dynamic",
+      "raw_score": 1.0,
+      "score": 1.0,
+      "sampling": {
+        "fps": 8.0
+      },
+      "sampled_frames": 33
+    },
+    "motion_smoothness": {
+      "component": "smoothness",
+      "raw_score": 0.9896144390641147,
+      "score": 0.9896144390641147,
+      "sampling": {
+        "fps": 10.0
+      },
+      "sampled_frames": 49
+    }
+  },
+  "provenance": {
+    "input_digest": "1c1c2c37a0d5dd830132ce86b2815fccc885151dbd8ed04762aa36944d9ba40c",
+    "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/physical_transition/seedance-2.0-standard/harnesseval_w_physical_0001_wind_flag_deformation_v02/output.mp4",
+      "size_bytes": 694141,
+      "mtime_ns": 1790802127085868734
+    },
+    "backend": {
+      "backend_id": "harnesseval.motion_quality",
+      "backend_version": "harnesseval.motion_quality.two_metrics",
+      "config_digest": "1b748debcfeb5b2b1aa62cd23c48a4d0902fa598db8ee34d8d5179944b6a9258"
+    },
+    "execution_mode": "local"
+  }
+}

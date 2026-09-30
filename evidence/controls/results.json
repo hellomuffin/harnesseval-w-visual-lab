@@ -1,0 +1,279 @@
+{
+  "semantic": [
+    {
+      "name": "original",
+      "video": "evidence/controls/original.mp4",
+      "result": {
+        "skill_id": "intentional_change_verifier_vlm",
+        "status": "ok_case_audit_warning",
+        "score": 1.0,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.193651
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.intentional_change_vlm",
+          "prompt_version": "harnesseval.intentional_change.prompt",
+          "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+          "case_audit": {
+            "status": "warning",
+            "warning": true,
+            "expected_spec_alignment": 0.193651,
+            "target_alignment": 0.095238,
+            "change_alignment": 0.285714,
+            "anchor_alignment": 0.2
+          },
+          "analyze_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/original/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+          "analyze_agent_evidence_digest": "9253bf13bab57794d2c26f5dfa1db71998d0b19adf0684aaf1d4491d1e9c2d59",
+          "verify_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/original/skills/intentional_change/verify_agent/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+          "verify_agent_evidence_digest": "ba7d9c7bf5c42f6c6bdf5c3d5fbaaa6a3786116cf6b95a9beb74800de9d25291"
+        },
+        "notes": []
+      },
+      "cache": "evidence/controls/cache/20260930T213845/original",
+      "cache_hit": false
+    },
+    {
+      "name": "frozen",
+      "video": "evidence/controls/frozen.mp4",
+      "result": {
+        "skill_id": "intentional_change_verifier_vlm",
+        "status": "ok_case_audit_warning",
+        "score": 0.45,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 0.0,
+          "Q3_intended_change": 0.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 0.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 0.0,
+          "target_specificity": 1.0,
+          "final_state": 0.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 0.45,
+          "final_score": 0.45,
+          "expected_spec_alignment": 0.193651
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.intentional_change_vlm",
+          "prompt_version": "harnesseval.intentional_change.prompt",
+          "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+          "case_audit": {
+            "status": "warning",
+            "warning": true,
+            "expected_spec_alignment": 0.193651,
+            "target_alignment": 0.095238,
+            "change_alignment": 0.285714,
+            "anchor_alignment": 0.2
+          },
+          "analyze_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/frozen/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+          "analyze_agent_evidence_digest": "c1253069b9a940585fb3e31cd9d3e650057b2f74aa78f1e0a0013a9b453b7df7",
+          "verify_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/frozen/skills/intentional_change/verify_agent/artifacts/harness_video/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+          "verify_agent_evidence_digest": "6d03b50ff41b1e043a83f7d91c5cdc0de75945139be3df7f637d472bccee2aa8"
+        },
+        "notes": []
+      },
+      "cache": "evidence/controls/cache/20260930T213845/frozen",
+      "cache_hit": false
+    },
+    {
+      "name": "reversed",
+      "video": "evidence/controls/reversed.mp4",
+      "result": {
+        "skill_id": "intentional_change_verifier_vlm",
+        "status": "ok_case_audit_warning",
+        "score": 0.875,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 0.5,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 0.5,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 0.875,
+          "final_score": 0.875,
+          "expected_spec_alignment": 0.193651
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.intentional_change_vlm",
+          "prompt_version": "harnesseval.intentional_change.prompt",
+          "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+          "case_audit": {
+            "status": "warning",
+            "warning": true,
+            "expected_spec_alignment": 0.193651,
+            "target_alignment": 0.095238,
+            "change_alignment": 0.285714,
+            "anchor_alignment": 0.2
+          },
+          "analyze_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/reversed/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+          "analyze_agent_evidence_digest": "114bada87fb0c4d3559149db31a6a60c15a246befc680d9cacda112d4062ea3c",
+          "verify_agent_cache": "[workspace]/artifacts/controls/cache/20260930T213845/reversed/skills/intentional_change/verify_agent/artifacts/harness_video/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+          "verify_agent_evidence_digest": "48487fe9f6971a39212cc777951b7f329037c03dbb38800c55285857faa25813"
+        },
+        "notes": []
+      },
+      "cache": "evidence/controls/cache/20260930T213845/reversed",
+      "cache_hit": false
+    }
+  ],
+  "physics": [
+    {
+      "name": "gravity_arc",
+      "video": "evidence/controls/gravity_arc.mp4",
+      "result": {
+        "skill_id": "physical_law_validator",
+        "status": "ok",
+        "score": 1.0,
+        "metrics": {
+          "PhysicalLawScore": 1.0,
+          "law_score": 1.0,
+          "law_count": 1,
+          "scored_law_count": 1,
+          "mean_scored_law_score": 1.0
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.physical_law",
+          "engine_spec": {
+            "source": "case_metadata",
+            "engine_model_id": "projectile_2d",
+            "sample_id": "",
+            "gt": {},
+            "law_checks": []
+          },
+          "laws": [
+            {
+              "law": "projectile_arc",
+              "score": 1.0,
+              "detail": "R2=1.00 a=+"
+            }
+          ],
+          "reliability_assumptions": [
+            "fixed camera",
+            "one dominant moving subject",
+            "static background",
+            "sufficient subject texture",
+            "moderate inter-frame displacement"
+          ]
+        },
+        "notes": [
+          "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+        ]
+      }
+    },
+    {
+      "name": "inverted_arc",
+      "video": "evidence/controls/inverted_arc.mp4",
+      "result": {
+        "skill_id": "physical_law_validator",
+        "status": "ok",
+        "score": 0.5,
+        "metrics": {
+          "PhysicalLawScore": 0.5,
+          "law_score": 0.5,
+          "law_count": 1,
+          "scored_law_count": 1,
+          "mean_scored_law_score": 0.5
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.physical_law",
+          "engine_spec": {
+            "source": "case_metadata",
+            "engine_model_id": "projectile_2d",
+            "sample_id": "",
+            "gt": {},
+            "law_checks": []
+          },
+          "laws": [
+            {
+              "law": "projectile_arc",
+              "score": 0.5,
+              "detail": "R2=1.00 a=-"
+            }
+          ],
+          "reliability_assumptions": [
+            "fixed camera",
+            "one dominant moving subject",
+            "static background",
+            "sufficient subject texture",
+            "moderate inter-frame displacement"
+          ]
+        },
+        "notes": [
+          "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+        ]
+      }
+    },
+    {
+      "name": "frozen_ball",
+      "video": "evidence/controls/frozen_ball.mp4",
+      "result": {
+        "skill_id": "physical_law_validator",
+        "status": "ok",
+        "score": 0.0,
+        "metrics": {
+          "PhysicalLawScore": 0.0,
+          "law_score": 0.0,
+          "law_count": 1,
+          "scored_law_count": 1,
+          "mean_scored_law_score": 0.0
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.physical_law",
+          "engine_spec": {
+            "source": "case_metadata",
+            "engine_model_id": "projectile_2d",
+            "sample_id": "",
+            "gt": {},
+            "law_checks": []
+          },
+          "laws": [
+            {
+              "law": "projectile_arc",
+              "score": 0.0,
+              "detail": "insufficient horizontal travel for an arc"
+            }
+          ],
+          "reliability_assumptions": [
+            "fixed camera",
+            "one dominant moving subject",
+            "static background",
+            "sufficient subject texture",
+            "moderate inter-frame displacement"
+          ]
+        },
+        "notes": [
+          "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+        ]
+      }
+    }
+  ]
+}

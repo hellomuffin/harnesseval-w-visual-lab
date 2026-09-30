@@ -1,0 +1,138 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0031_frozen_lake",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain photorealistic and technically clean in a sparse snowy frozen-lake shoreline scene with pier, island, logs, ice, and falling snow visible without artifacts, warping, unreadable overlays, borders, or composition collapse.",
+      "parameters": {
+        "check_for": [
+          "photorealistic frozen lake/coastal shoreline appearance",
+          "clean rendering of pier, rocks, logs, ice, island, snow, and water/ice boundary",
+          "no text, UI, watermark, collage, or frame corruption",
+          "sparse wide environmental view remains legible"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The generated result must show motion from the W, W+D, W navigation chunks and the ongoing snowfall should move smoothly rather than flicker, strobe, or disappear between frames.",
+      "parameters": {
+        "check_for": [
+          "forward movement over time",
+          "rightward component during W+D segment",
+          "temporally smooth snowfall",
+          "no frame jumps, freezes, or jitter inconsistent with navigation"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same frozen-lake world should persist across the transition: the wooden pier on the left, shoreline curve, log pile, icy water, island landmark, snow cover, and sparse layout should remain consistent as viewpoint changes.",
+      "parameters": {
+        "anchors": [
+          "wooden pier left of route",
+          "small island ahead",
+          "log pile near waterline",
+          "irregular sand/rock/snow shoreline boundary",
+          "frozen lake and open water/ice surface"
+        ],
+        "check_for": [
+          "stable object identity",
+          "consistent lighting/weather",
+          "no semantic swaps or sudden landmark relocation",
+          "no scale or material drift"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation along a snowy shoreline beside frozen water must preserve plausible camera height, ground contact, parallax, support geometry, shoreline scale, and snowfall behavior without sliding through objects, floating, or crossing unsafe surfaces unrealistically unless shown by the path.",
+      "parameters": {
+        "check_for": [
+          "first-person walking-height camera",
+          "plausible parallax between foreground shore, pier, logs, and distant island",
+          "no clipping through pier posts, logs, rocks, ice chunks, or shoreline",
+          "snow falls downward with wind-consistent streaks",
+          "frozen water, ice, sand, rocks, and snow maintain plausible material boundaries"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case is an exploratory_transition driven by explicit navigation controls W, then W+D, then W from a first-person viewpoint, so evaluation must verify the camera follows the intended forward and forward-right path through the shoreline environment.",
+      "parameters": {
+        "action_sequence": [
+          {
+            "chunk_id": "c01",
+            "expected_motion": "forward"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_motion": "forward plus right strafe/turn component"
+          },
+          {
+            "chunk_id": "c03",
+            "expected_motion": "forward"
+          }
+        ],
+        "trajectory_constraints": [
+          "active first-person viewpoint movement is required",
+          "route should remain traversable along the shoreline/near-pier area",
+          "landmarks should shift with correct parallax as the camera advances",
+          "no unintended teleport, reverse movement, or static camera"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The primary target is navigation transition correctness, not an explicitly requested semantic or object-state edit with protected anchors."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the main target; snowfall is ambient and navigation is viewpoint movement."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of walking, parallax, snow, ice, and shoreline geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previous viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not ask for an offscreen process to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

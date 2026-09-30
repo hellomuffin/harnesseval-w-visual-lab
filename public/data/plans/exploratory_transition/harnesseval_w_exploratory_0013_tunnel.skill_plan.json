@@ -1,0 +1,129 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0013_tunnel",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result should remain photorealistic and technically clean while rendering a semi-outdoor tunnel, archway, floor material boundary, boxes, light patch, and exterior opening across generated frames.",
+      "parameters": {
+        "check_for": [
+          "photorealistic tunnel materials and lighting",
+          "absence of artifacts, warping, unreadable overlays, borders, or watermarks",
+          "clear visibility of the open path, archway, and depth cues"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains three forward navigation chunks, so generated motion should be present, continuous, and smooth rather than static or jumpy.",
+      "parameters": {
+        "expected_motion": "forward first-person movement through the tunnel toward the archway/exterior",
+        "check_for": [
+          "temporal smoothness across W, W, W chunks",
+          "no sudden cuts, freezes, or inconsistent acceleration",
+          "stable optical flow consistent with forward travel"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The tunnel world contains distinctive anchors that should persist during the transition, including the directional light patch, red object color accent, irregular floor-material boundary, boxes, curved walls, archway, and exterior reference points.",
+      "parameters": {
+        "anchors": [
+          "curved tunnel walls",
+          "archway / portal",
+          "localized directional light patch",
+          "restrained red high-contrast object",
+          "irregular boundary between floor materials",
+          "boxes and objects along the route",
+          "bright exterior opening and outdoor path"
+        ],
+        "check_for": [
+          "no identity swaps or disappearing landmarks except by natural occlusion/passing",
+          "consistent materials, colors, and lighting direction",
+          "stable scene layout as the camera advances"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward navigation through a real tunnel must preserve plausible scale, support, perspective, collision behavior, and spatial relationships between floor, walls, archway, objects, and outdoor path.",
+      "parameters": {
+        "check_for": [
+          "camera stays on the open walkable path",
+          "objects remain supported by the ground or walls",
+          "no impossible geometry, wall penetration, or scale changes",
+          "near-to-far perspective changes plausibly with forward motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case is an exploratory_transition with explicit first-person navigation controls W, W, W; the primary target is transition correctness along the open tunnel path toward and through the archway.",
+      "parameters": {
+        "control_sequence": [
+          "W",
+          "W",
+          "W"
+        ],
+        "expected_trajectory": "forward first-person movement along the central open path from inside the tunnel toward the archway and exterior route",
+        "trajectory_constraints": [
+          "progress toward the bright exterior opening should increase over chunks",
+          "viewpoint should not turn around, sidestep substantially, or remain fixed",
+          "camera should respect the tunnel floor and avoid clipping through walls, boxes, or the portal",
+          "near-to-far reference points should expand/shift consistently with forward motion"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not specify an intentional semantic or object-state transition; it specifies navigation through an existing tunnel scene."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing object dynamics; the action is first-person forward navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of camera motion and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include a loop or revisiting a previous view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not require any offscreen process to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

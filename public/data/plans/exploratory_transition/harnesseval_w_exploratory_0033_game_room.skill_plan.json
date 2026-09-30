@@ -1,0 +1,135 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0033_game_room",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve a cinematic realistic indoor game-room image with clean geometry, lighting, and recognizable arcade cabinets, open floor, furniture, and secondary objects.",
+      "parameters": {
+        "check_for": [
+          "technical artifacts",
+          "blur or warped arcade machines",
+          "unreadable or UI-like overlays",
+          "implausible object scale",
+          "loss of moderate scene density"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains active navigation chunks, so generated frames should show present, smooth forward, forward-right, and right-turn motion without jitter or abrupt discontinuities.",
+      "parameters": {
+        "expected_motion": [
+          "forward movement during W",
+          "forward-right drift during W+D",
+          "rightward camera rotation during right"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same game room must remain visually consistent across the exploratory transition, including the neon arcade cabinet on the left, darker back arcade cabinet, foosball or pinball-like machine on the right, red floor boundary, shelves, plants, and table objects.",
+      "parameters": {
+        "anchors": [
+          "left neon arcade cabinet with restrained high-contrast red accent",
+          "dark arcade cabinet near back wall",
+          "right-side game machine",
+          "red boundary line separating navigation and non-navigation space",
+          "open polished concrete floor",
+          "small cluster of game-room objects and furniture"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The first-person navigation should remain physically plausible in an indoor room, with stable floors and walls, supported cabinets and furniture, and no camera passing through arcade machines, chairs, plants, tables, or the red-bounded non-navigation area.",
+      "parameters": {
+        "collision_risks": [
+          "left arcade cabinet",
+          "back arcade cabinet",
+          "right-side game machine",
+          "chair",
+          "plant pots",
+          "table and seating area behind red boundary"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition correctness for an exploratory first-person navigation sequence: W, then W+D, then right. Evaluation must verify the camera follows that path relative to the open floor and stable landmarks.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "action_chunks": [
+          {
+            "chunk_id": "c01",
+            "expected": "move forward along the open floor route"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "continue forward while shifting slightly right"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "rotate or turn view to the right without translating into obstacles"
+          }
+        ],
+        "navigation_constraints": [
+          "maintain first-person viewpoint",
+          "use open floor as traversable space",
+          "respect the red boundary between navigation and non-navigation space",
+          "avoid immediate collision with game machines and furniture"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case targets viewpoint/navigation transition correctness, not an explicitly specified semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome is required beyond general plausibility and collision-free navigation."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short three-chunk exploratory transition, not a long-horizon rollout designed to test progressive drift resistance."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not leave and return to a prior viewpoint or require revisit consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

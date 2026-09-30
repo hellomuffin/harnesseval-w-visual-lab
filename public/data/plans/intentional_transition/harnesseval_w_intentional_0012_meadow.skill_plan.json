@@ -1,0 +1,81 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0012_meadow",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The generated rollout must remain technically clean and realistic for a game-engine meadow scene with wooden gate, stone pillars, cracked threshold, grass slope, rocks, and distant trees.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested result includes visible gate motion, so the swing from open to closed should be present, temporally smooth, and free of flicker or discontinuous jumps.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The stone pillars, meadow slope, rocks, distant trees, lighting patch, surface wear, and overall realistic third-person appearance must remain consistent while only the gate state changes.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The wooden gate should rotate plausibly around its hinge on the left stone pillar and close across the cracked stone entrance without warping, sliding, penetrating the pillars, or changing scale.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary target is an explicit intentional object-state transition: swing the open wooden gate closed across the entrance while protected anchors remain unchanged.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require active camera movement, navigation, or a viewpoint trajectory; it asks for a fixed-world object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The target is a directly specified semantic/object-state edit, not a causal physical response to an external force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of the gate swing."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon multi-turn rollout targeting resistance to progressive visual or semantic degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a previous view after a non-static loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified or expected to continue evolving outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

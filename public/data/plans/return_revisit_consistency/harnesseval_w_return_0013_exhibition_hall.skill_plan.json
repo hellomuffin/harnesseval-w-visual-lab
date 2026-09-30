@@ -1,0 +1,195 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0013_exhibition_hall",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout must preserve a cinematic realistic exhibition-hall image with clean geometry, no artifacts, no text/UI/watermarks, and readable doorway, aisle, bench, display cases, wall wear, and lighting details.",
+      "parameters": {
+        "check_for": [
+          "technical artifacts",
+          "warping or melting architecture",
+          "unwanted readable text or overlays",
+          "loss of cinematic realistic appearance",
+          "clear visibility of doorway, aisle, bench, red accent, display cases, wall surface wear, and directional light patch"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The result is a multi-chunk navigation rollout, so motion should be present, smooth, and temporally coherent across forward movement, sidestep, turn, and inverse return.",
+      "parameters": {
+        "expected_motion": [
+          "forward movement through doorway",
+          "right sidestep toward the bench with red accent",
+          "brief left turn",
+          "matching right turn",
+          "left sidestep",
+          "backward return to the original doorway view"
+        ],
+        "check_for": [
+          "jitter",
+          "teleportation",
+          "frozen frames",
+          "inconsistent speed",
+          "abrupt discontinuities between chunks"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same exhibition hall must persist through the closed loop, including stable materials, lighting, object identities, and restrained color grading.",
+      "parameters": {
+        "anchors": [
+          "cracked concrete doorway wall",
+          "localized directional light patch on the left wall",
+          "wood-floored aisle",
+          "bench on the right",
+          "red cloth or accent on the bench",
+          "glass display cases",
+          "framed artwork at the far end",
+          "long lateral layout across the frame"
+        ],
+        "check_for": [
+          "object identity drift",
+          "material or lighting changes",
+          "layout reshuffling",
+          "style changes",
+          "appearance degradation during return"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The first-person navigation through an indoor hall must obey plausible camera movement, scale, occlusion, support, and spatial relationships.",
+      "parameters": {
+        "check_for": [
+          "plausible parallax during translation",
+          "plausible rotation around viewer position",
+          "consistent floor plane and doorway scale",
+          "stable object support on floor or walls",
+          "correct occlusions near doorway, bench, and display cases",
+          "no impossible collisions or clipping through architecture"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly specifies a first-person navigation path with ordered forward, sidestep, turn, and inverse return chunks; evaluation must verify that the camera follows this trajectory rather than merely changing scene content.",
+      "parameters": {
+        "trajectory_chunks": [
+          {
+            "chunk_id": "c01",
+            "expected": "move forward along the wood-floored aisle through the doorway"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "continue forward deeper into the exhibition aisle"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "sidestep right toward the bench with the red accent"
+          },
+          {
+            "chunk_id": "c04",
+            "expected": "turn left briefly"
+          },
+          {
+            "chunk_id": "c05",
+            "expected": "turn right to undo the left turn"
+          },
+          {
+            "chunk_id": "c06",
+            "expected": "sidestep left to undo the right sidestep"
+          },
+          {
+            "chunk_id": "c07",
+            "expected": "move backward toward the doorway"
+          },
+          {
+            "chunk_id": "c08",
+            "expected": "continue backward to the original doorway viewpoint"
+          }
+        ],
+        "check_for": [
+          "correct action order",
+          "balanced inverse movements",
+          "viewpoint motion rather than object teleportation",
+          "consistent perspective changes from first-person camera movement"
+        ]
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return_revisit_consistency: after a non-static closed navigation loop, the final view should match the original doorway view and preserve the same world anchors.",
+      "parameters": {
+        "initial_view_anchors": [
+          "foreground concrete doorway frame",
+          "cracks and surface imperfections in the foreground wall",
+          "localized triangular directional light patch on the left wall",
+          "wood-floored aisle receding through the doorway",
+          "bench with restrained red accent on the right",
+          "glass display cases along the aisle",
+          "framed artwork at the far end"
+        ],
+        "closure_expectation": "Final frame should return to substantially the same first-person doorway composition, with only minor tolerance for rendering noise or small camera alignment differences.",
+        "check_for": [
+          "final view mismatch",
+          "missing or transformed anchors",
+          "changed room layout",
+          "changed bench or red accent placement",
+          "changed wall cracks or light patch",
+          "incorrect residual offset after inverse navigation"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state transition; it tests closed-loop navigation and world persistence."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the only specified action is first-person navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of camera motion, scale, support, and occlusion."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight short navigation chunks and is not framed as a long-horizon drift-resistance test."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify an offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

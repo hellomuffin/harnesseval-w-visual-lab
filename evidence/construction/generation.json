@@ -1,0 +1,88 @@
+{
+  "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+  "revision": "b8fff7315c768468a5333511427288870b2e9635",
+  "seed": 42,
+  "prompt": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page. Fixed camera, one continuous shot, natural realistic motion.",
+  "negative_prompt": "blurry, distorted, subtitles, camera movement, low quality",
+  "settings": {
+    "height": 768,
+    "width": 1152,
+    "num_frames": 97,
+    "num_inference_steps": 50,
+    "guidance_scale": 5.0
+  },
+  "fps": 24,
+  "diffusers": "0.37.1",
+  "scope": "New locally generated example; separate from the six author-provided Seedance videos. Not a reproduction of the complete model leaderboard.",
+  "generation_seconds": 373.25793957710266,
+  "evaluation": {
+    "cache_hit": false,
+    "cache_path": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/results/artifacts/harness_video/construction.json",
+    "analyze_agent_cache_path": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/analyze_agent/local_constructed_red_book.json",
+    "verify_agent_cache_path": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/verify_agent/artifacts/harness_video/local_constructed_red_book.json",
+    "result": {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok_case_audit_warning",
+      "score": 1.0,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.185848
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "warning",
+          "warning": true,
+          "expected_spec_alignment": 0.185848,
+          "target_alignment": 0.043478,
+          "change_alignment": 0.043478,
+          "anchor_alignment": 0.470588
+        },
+        "analyze_agent_cache": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/analyze_agent/local_constructed_red_book.json",
+        "analyze_agent_evidence_digest": "394008941a2a1f2eb733254f16952f54d5069e526d2410ef4392fea77e35d20e",
+        "verify_agent_cache": "[workspace]/artifacts/construction/evaluation/skills/intentional_change/verify_agent/artifacts/harness_video/local_constructed_red_book.json",
+        "verify_agent_evidence_digest": "327eec0369583a78633c25c1da884a0d59b2f591d467cbe9dc58a1457b2d256b"
+      },
+      "notes": []
+    },
+    "provenance": {
+      "backend": {
+        "backend_id": "openai_compatible.intentional_change_vlm",
+        "backend_version": "local-judge",
+        "config_digest": "59a8444136b34b75c6dc28b19b38cc55faf238a1ebee6ef4dff92f3fcc87ade8"
+      },
+      "video": {
+        "path": "[workspace]/artifacts/construction/output.mp4",
+        "size_bytes": 708109,
+        "mtime_ns": 1790805804394128445,
+        "sha256": "e2041a985204066e2dd6f7e5fdc89996add8158183c865767a74be476a7cb917"
+      },
+      "initial_observation": {
+        "path": "[workspace]/artifacts/construction/initial.png",
+        "size_bytes": 2292845,
+        "mtime_ns": 1790803075898934223,
+        "sha256": "686e269ad279e86120595f73478fdd6d6fbd3bc0835b0d46bc61ddc694a6d6cc"
+      },
+      "analyze_agent_cache_hit": false,
+      "verify_agent_cache_hit": false
+    }
+  },
+  "video": "evidence/construction/output.mp4"
+}

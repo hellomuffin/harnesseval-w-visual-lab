@@ -1,0 +1,143 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0028_cave",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain a clean photorealistic first-person cave scene with sparse composition, readable cave geometry, water surface, dry path, sloped bank, rail, rock walls, and no UI/text/watermarks or obvious generation artifacts.",
+      "parameters": {
+        "check_for": [
+          "photorealistic cave lighting and textures",
+          "clean 16:9 frames without borders, captions, readable text, or watermarks",
+          "stable depiction of foreground water, dry navigation path, slope, cave walls, and tunnel opening",
+          "no smeared rocks, malformed railings, duplicated landmarks, or incoherent cave openings"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence is a short navigation rollout, so generated frames should show present, smooth forward-left then forward camera motion without jitter, stalls, teleporting, or abrupt cuts.",
+      "parameters": {
+        "expected_motion": "c01 moves forward-left with W+A, followed by forward motion in c02 and c03",
+        "check_for": [
+          "continuous optical flow through the cave threshold",
+          "smooth parallax between foreground pool edge, dry path, sloped bank, rail, and cave walls",
+          "no frozen frames, frame jumps, sudden viewpoint resets, or excessive shake"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same compact cave world must persist across the transition, preserving the foreground pool/wear patterns, dry path boundary, sloped bank, cave walls, rail, and dark tunnel as the camera advances.",
+      "parameters": {
+        "anchors": [
+          "foreground water body and rippled/reflected surface",
+          "dry traversable path beside the pool",
+          "clear boundary between water/non-navigation space and dry navigation surface",
+          "sloped bank on the right/midground",
+          "cave walls and ceiling",
+          "dark tunnel opening ahead",
+          "railing or use-sign details without readable text"
+        ],
+        "check_for": [
+          "no semantic drift into a different cave, corridor, beach, or indoor room",
+          "consistent material colors and lighting",
+          "landmarks transform by camera motion rather than changing identity"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The navigation should obey plausible first-person movement through a cave passage, with collision-free travel along the dry route and physically coherent water, rock, slope, and perspective behavior.",
+      "parameters": {
+        "check_for": [
+          "camera does not pass through water, rock walls, railings, or the sloped bank",
+          "height and perspective remain human first-person plausible",
+          "pool edge and path geometry remain spatially coherent",
+          "water reflections/ripples remain plausible and do not behave like solid terrain",
+          "movement follows available navigable space rather than crossing non-navigation water"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory_transition case explicitly requires first-person navigation using W+A then W then W, moving from the initial cave threshold along the visible dry path beside the foreground pool toward the darker cave passage.",
+      "parameters": {
+        "action_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W+A",
+            "expected_effect": "advance while veering left/keeping to the safer dry line away from the foreground water"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W",
+            "expected_effect": "continue forward along the traversable dry path between pool edge and cave interior"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W",
+            "expected_effect": "continue deeper toward the cave/tunnel area with landmarks growing nearer"
+          }
+        ],
+        "trajectory_constraints": [
+          "first-person viewpoint remains active and navigational",
+          "forward progress is visible across chunks",
+          "leftward component appears in the first chunk",
+          "camera stays on navigable dry ground and respects the water boundary",
+          "path, pool edge, slope, cave walls, and tunnel exhibit correct parallax and scale changes"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case is navigation-based exploratory transition, not an explicitly specified semantic or object-state change with protected anchors."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target; the action is camera navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of first-person movement, collision avoidance, and water/rock behavior."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previously viewed location."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while the camera moves."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

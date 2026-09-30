@@ -1,0 +1,20 @@
+{
+  "schema_version": "harnesseval.drift_stage_cache",
+  "stage": "physical",
+  "input_digest": "50db46dcbacd6ea0a742c18e1d652afb02956aebe618844746c8c1186acecd07",
+  "backend": {
+    "backend_id": "harnesseval.physical_plausibility.pavrm",
+    "version": "harnesseval.pavrm_qwen3vl_a3b",
+    "config_digest": "28fb755b9922a36fabd9b7359618b3f43d7f2d443f370ff7cc8b6d13fe62d6c0"
+  },
+  "evidence": {
+    "schema_version": "harnesseval.physical_plausibility.backend_output",
+    "metrics": {
+      "pavrm": {
+        "raw_score": 3.1958,
+        "reported_score": 0.6392,
+        "error": null
+      }
+    }
+  }
+}

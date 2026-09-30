@@ -1,0 +1,84 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0008_community_center",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the community center corridor, robotic gripper, entrance/exit, and high-contrast accent remain technically clean without artifacts, unreadable distortions, UI, borders, or watermark-like elements.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The generated result should show the gripper fingers actually closing from the open pose with smooth temporal motion rather than a jump cut, frozen rollout, or flicker.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The robotic arm, corridor geometry, doorways, floor markings, materials, lighting, and third-person framing should remain consistent while only the gripper fingers change state.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The finger closure must look mechanically plausible for an articulated robotic gripper, with rigid parts, stable supports, and no impossible bending, stretching, clipping, or arm-base motion.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The case is a physical_transition requiring the visible robotic gripper fingers to close in response to the specified physical parameter condition while the arm base and camera remain fixed.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "A case-specific physical-law check is useful because the fingers should rotate around their articulated joints with consistent link lengths, contact-free motion, and a fixed arm base rather than deforming or translating unnaturally.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The action explicitly requires the camera to remain fixed and does not involve navigation or an active viewpoint trajectory."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "Although the target state is specified, the case is categorized as a physical_transition focused on mechanical response of the gripper rather than an intentional semantic edit."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is a short physical transition, not a long-horizon rollout testing progressive degradation over many turns or chunks."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return to a prior viewpoint to verify."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The target action occurs on the visible gripper and does not require an offscreen process to continue evolving."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

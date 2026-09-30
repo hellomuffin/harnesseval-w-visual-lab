@@ -1,0 +1,108 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "planner_version": "harnesseval.planner.v1",
+  "created_at": "2026-09-30T21:08:51.975550+00:00",
+  "routing_mode": "llm_case",
+  "input_digest": "bdcbd01a30e140983c08f913c6a8482809048ae6d7cb1c5289a58f28dfa1af0e",
+  "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "offscreen_evolution"
+  },
+  "planner": {
+    "type": "openai_compatible",
+    "version": "harnesseval.planner.v1",
+    "prompt_version": "worlddojo.v2_planner.prompt.v8",
+    "model": "local-judge",
+    "wire_api": "chat_completions",
+    "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "response_id": "chatcmpl-881df6d889333aa0",
+    "response_model": "local-judge",
+    "usage": {
+      "prompt_tokens": 2829,
+      "total_tokens": 3435,
+      "completion_tokens": 606,
+      "prompt_tokens_details": null
+    },
+    "elapsed_seconds": 15.804787,
+    "attempt_count": 1
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Initial observation must be free of severe artifacts, watermarks, or ambiguity as per validation questions.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The case requires evaluating motion during offscreen evolution, necessitating smooth temporal rendering.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable anchors must remain visually consistent throughout the rollout, and the torch flame must evolve without reset.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The torch flame's evolution must be physically plausible (e.g., flickering, not frozen or reset).",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires a look-away-and-return sequence with camera movement (c02, c03, c04, c05, c06), which constitutes active viewpoint navigation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The case targets the intentional evolution of torch flame silhouettes and brightness during offscreen intervals, while protected anchors remain intact.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires the torch flame to continue evolving during offscreen chunks (c03-c05) and return with non-frozen state, matching the offscreen_evolution_spec.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "intentional_change_verifier_vlm",
+    "offscreen_evolution_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "No explicit physical intervention or force is applied; the evolution is passive and driven by time."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required; plausibility is assessed via physical_plausibility_inspector."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is short (8 chunks) and not long-horizon; drift resistance is not the target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "While return is evaluated, the case does not require a non-static loop; it’s a single offscreen evolution with return."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

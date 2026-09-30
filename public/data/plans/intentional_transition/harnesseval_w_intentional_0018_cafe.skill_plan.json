@@ -1,0 +1,129 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0018_cafe",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result should remain a clean cinematic-realistic cafe frame with no artifacts, distortions, unreadable collage elements, borders, UI, or watermark.",
+      "parameters": {
+        "check_for": [
+          "technical cleanliness across frames",
+          "realistic lighting and materials",
+          "no visual corruption around the mug, tabletop, door, counter, floor, or metal dispenser"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The mug is expected to transition from upright to lying on its side, so the rollout should show present, smooth, temporally coherent motion rather than popping or flickering.",
+      "parameters": {
+        "target_motion": "large speckled ceramic mug tips from upright to side on tabletop",
+        "check_for": [
+          "continuous mug rotation",
+          "stable frame-to-frame geometry",
+          "no sudden teleportation or disappearance"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The cafe setting and protected anchors must remain visually consistent while only the foreground mug state changes.",
+      "parameters": {
+        "protected_anchors": [
+          "wooden door",
+          "counter",
+          "tile and wood floor boundary",
+          "metal dispenser",
+          "tabletop",
+          "overall cafe layout"
+        ],
+        "allowed_change": "foreground mug orientation changes to lying on its side"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Although the requested change is intentional, the tipped mug should still obey basic physical plausibility: it should rest on the tabletop, keep plausible scale, and not float, melt, pass through the table, or violate support/contact geometry.",
+      "parameters": {
+        "object": "large speckled ceramic mug",
+        "surface": "foreground tabletop",
+        "check_for": [
+          "plausible contact with tabletop",
+          "stable final side-resting pose",
+          "handle and rim geometry remain coherent",
+          "no interpenetration with table or nearby objects"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary task is an explicitly specified object-state transition: tip the large speckled ceramic mug in the foreground onto its side while keeping the door, counter, floor, and metal dispenser unchanged.",
+      "parameters": {
+        "target_object": "large speckled ceramic mug in the foreground",
+        "required_final_state": "mug lies on its side on the tabletop",
+        "must_remain_unchanged": [
+          "door",
+          "counter",
+          "floor",
+          "metal dispenser"
+        ],
+        "failure_modes": [
+          "wrong object changes",
+          "mug remains upright",
+          "mug leaves the tabletop",
+          "protected anchors change substantially",
+          "scene identity changes"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require active camera movement, navigation, or a viewpoint path; the key requirement is a foreground object-state edit in a stable cafe view."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The primary target is a directly specified intentional edit to the mug state, not evaluation of a causal response to an explicit physical force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general plausibility of the mug resting on the tabletop after the intentional state change."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is not a long-horizon rollout with many turns or chunks where progressive degradation resistance is the explicit target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or returned view to verify for revisit consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The task does not involve an offscreen process continuing to evolve while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

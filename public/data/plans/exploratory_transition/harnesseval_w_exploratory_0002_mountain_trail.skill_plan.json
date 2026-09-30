@@ -1,0 +1,150 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0002_mountain_trail",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated mountain-trail frames should remain technically clean, artifact-free, and visually judgeable with the trail fork, pine trees, stone marker, and distant ridge visible when expected.",
+      "parameters": {
+        "check_for": [
+          "blur",
+          "watermarks",
+          "text artifacts",
+          "broken geometry",
+          "severe distortions",
+          "collage_or_split_screen"
+        ],
+        "scene": "natural mountain trail"
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is driven by navigation controls, so motion must be present, temporally smooth, and free of jitter or frame-to-frame popping across W, W+right, and S chunks.",
+      "parameters": {
+        "action_chunks": [
+          "c01: W",
+          "c02: W+right",
+          "c03: S"
+        ],
+        "expected_motion": "continuous ego-navigation"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable anchors must retain coherent identity and layout during exploration: trail fork, pine trees, stone marker, and distant ridge should not drift, duplicate, disappear implausibly, or change appearance without viewpoint justification.",
+      "parameters": {
+        "stable_anchors": [
+          "trail fork",
+          "pine trees",
+          "stone marker",
+          "distant ridge"
+        ],
+        "consistency_focus": [
+          "object_identity",
+          "spatial_relationships",
+          "lighting",
+          "terrain_continuity"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement along a mountain trail should be physically plausible, with grounded parallax, stable terrain, believable scale, and no impossible camera jumps through trees, rocks, or the stone marker.",
+      "parameters": {
+        "environment": "outdoor mountain trail",
+        "plausibility_focus": [
+          "ego-motion",
+          "parallax",
+          "collision_avoidance",
+          "terrain_scale",
+          "camera_height"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active navigation through a visible path: move forward, then forward while turning right, then move backward, making trajectory correctness the primary evaluation target.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "trajectory_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expected": "forward movement along the visible trail with increasing proximity to near-mid anchors"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+right",
+            "expected": "continued forward movement while viewpoint yaws or steers right toward the right-hand path/scene side"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "S",
+            "expected": "backward movement relative to the current orientation, reversing distance cues without an unrelated teleport or semantic scene reset"
+          }
+        ],
+        "navigation_affordances": [
+          "visible path",
+          "stable near-mid-far anchors",
+          "camera motion judgeable"
+        ],
+        "stable_anchors": [
+          "trail fork",
+          "pine trees",
+          "stone marker",
+          "distant ridge"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint transition, not an explicitly specified semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing object dynamics; only camera/navigation controls are specified."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general plausibility of ego-motion through the trail."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short action chunks and is not a long-horizon drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "Although the final action is S, the case does not specify a non-static loop or require returning to a previously seen exact view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process or independently evolving object is specified."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

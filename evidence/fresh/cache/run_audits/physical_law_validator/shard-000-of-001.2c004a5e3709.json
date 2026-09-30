@@ -1,0 +1,77 @@
+{
+  "schema_version": "harnesseval.skill_run_audit",
+  "created_at": "2026-09-30T21:05:58.105654+00:00",
+  "runner_id": "harnesseval.runner",
+  "run_context": {
+    "shard": {
+      "count": 1,
+      "index": 0,
+      "key": "round_robin(skill_id, probe_family, sorted case_id)"
+    },
+    "filters": {
+      "skills": [
+        "physical_law_validator"
+      ],
+      "models": [],
+      "case_ids": [],
+      "limit": 0
+    },
+    "backend_config": "[workspace]/artifacts/backend.json",
+    "drift_stage": null
+  },
+  "plan": {
+    "schema_version": "harnesseval.skill_run_plan",
+    "task_count": 1,
+    "rollout_count": 1,
+    "case_count": 1,
+    "skill_counts": {
+      "physical_law_validator": 1
+    },
+    "family_counts": {
+      "physical_transition": 1
+    },
+    "shared_analyze_task_count": 0
+  },
+  "status": "passed",
+  "status_counts": {
+    "ok": 1
+  },
+  "skill_status_counts": {
+    "physical_law_validator/ok": 1
+  },
+  "backends": {
+    "physical_law_validator": {
+      "backend_id": "opencv_farneback.physical_law_signals",
+      "backend_version": "harnesseval.physical_law_signals",
+      "config_digest": "a1b42d4bfca8f7b5ff97a7387f449c9e565176834031393fc286c132d374176f",
+      "execution_mode": "local",
+      "resource_mode": null,
+      "model_load_count": null
+    }
+  },
+  "cache_hits": 0,
+  "cache_misses": 1,
+  "score_min": null,
+  "score_max": null,
+  "outcomes": [
+    {
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "model_id": "seedance-2.0-standard",
+      "primary_axis": "transition_correctness",
+      "probe_family": "physical_transition",
+      "skill_id": "physical_law_validator",
+      "plan_role": "diagnostic",
+      "video": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/physical_transition/seedance-2.0-standard/harnesseval_w_physical_0001_wind_flag_deformation_v02/output.mp4",
+      "metadata": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/physical_transition/seedance-2.0-standard/harnesseval_w_physical_0001_wind_flag_deformation_v02/metadata.json",
+      "initial_observation": "[workspace]/upstream/benchmark/initial_observations/harnesseval_w_physical_0001_wind_flag_deformation_v02.png",
+      "plan": "[workspace]/upstream/benchmark/plans/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.skill_plan.json",
+      "bundle": "[workspace]/artifacts/fresh/cache/bundles/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.metrics.json",
+      "status": "ok",
+      "cache_hit": false,
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_law/results/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+      "skill_status": "not_applicable",
+      "score": null
+    }
+  ],
+  "audit_path": "[workspace]/artifacts/fresh/cache/run_audits/physical_law_validator/shard-000-of-001.2c004a5e3709.json"
+}

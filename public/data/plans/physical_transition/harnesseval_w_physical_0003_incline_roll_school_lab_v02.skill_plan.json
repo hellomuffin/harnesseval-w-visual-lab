@@ -1,0 +1,103 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0003_incline_roll_school_lab_v02",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames should remain technically clean in the school lab setup, with the red ball, ramp, ruler, catcher, floor, and neutral classroom context clearly rendered without artifacts.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is a 49-frame physical transition at 12 fps, so the ball's downhill motion should be present, temporally smooth, and free of jitter or frame-to-frame discontinuities.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The fixed ramp, floor, ruler, catcher, and red ball should keep stable shape, color, scale, and identity throughout the rollout while only the ball moves.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The generated motion should look causally plausible: the ball starts from rest, remains supported by the 20 degree ramp, rolls downhill under gravity, and does not float, tunnel, bounce unnaturally, or detach from the ramp.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The primary case requirement is the causal physical response to releasing the red ball from rest on an instrumented ramp set to 20.0 degrees.",
+      "parameters": {
+        "target_object": "target_red_ball",
+        "intervention": "release_from_rest",
+        "incline_angle_degrees": 20,
+        "protected_anchors": [
+          "fixed_floor",
+          "fixed_instrumented_ramp",
+          "fixed_ramp_catcher",
+          "fixed_metric_ruler"
+        ],
+        "expected_behavior": "ball rolls downhill along the ramp and makes progress toward the measurement line within the fixed rollout"
+      }
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "The incline-acceleration phenomenon requires checking case-specific physical behavior: downhill acceleration on a 20 degree ramp, continuous ramp contact, and consistency with the counterfactual relation that steeper inclines reduce time to the measurement line.",
+      "parameters": {
+        "phenomenon": "incline_acceleration",
+        "gravity_m_s2": 9.81,
+        "ball_mass_kg": 0.45,
+        "ball_radius_m": 0.18,
+        "rolling_friction": 0.32,
+        "incline_angle_degrees": 20,
+        "expected_relation": "time_to_measurement_line_decreases_as_incline_angle_increases"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The camera is a fixed measurement camera; the case requires stable framing and visibility, not active camera or navigation movement."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic or object-state edit; it is a physical response to releasing the ball on an incline."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short single physical rollout from frame 1 to 49, not a long-horizon multi-turn or chunked sequence testing progressive drift."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a prior view after a non-static loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The red ball is expected to remain inside the frame for the full rollout, so no offscreen evolution needs to be verified."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

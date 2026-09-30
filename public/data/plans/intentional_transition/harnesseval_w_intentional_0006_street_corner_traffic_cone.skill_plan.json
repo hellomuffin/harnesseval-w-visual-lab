@@ -1,0 +1,92 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0006_street_corner_traffic_cone",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the generated street-corner frames are technically clean, realistic, free of severe artifacts or watermarks, and keep the cone, curb, crosswalk, shopfront, and sign judgeable.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested result should show the cone being knocked over; evaluation should check that motion is present, temporally coherent, and not jumpy or flickering.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The target cone should remain identifiable as the same orange cone, while the shopfront, crosswalk, street sign, other cone, lighting, and scene layout remain visually consistent.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "A cone being knocked over should rotate or fall in a physically plausible way near the curb without impossible deformation, floating, teleporting, or unrelated object motion.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary requirement is an intentional object-state transition: exactly one orange traffic cone near the curb is knocked over, while protected anchors remain unchanged and no unrelated events are added.",
+      "parameters": {
+        "target_entity": "traffic cone near the curb",
+        "required_change": "knocked over",
+        "quantity_constraint": "exactly one orange cone",
+        "protected_anchors": [
+          "other cone",
+          "crosswalk",
+          "shopfront",
+          "street sign"
+        ],
+        "camera_constraint": "fixed viewpoint"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case requires a fixed camera and stable framing, not active navigation or a viewpoint trajectory."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "Although the requested edit has physical implications, the primary target is a directly specified intentional object-state change rather than evaluating a causal response to an explicit force sequence."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law calculation is required beyond general plausibility of the cone falling."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon rollout designed to test progressive drift or degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a previous view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

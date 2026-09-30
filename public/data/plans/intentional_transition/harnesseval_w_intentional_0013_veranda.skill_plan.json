@@ -1,0 +1,92 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0013_veranda",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the veranda, doorway, soldiers, railing, red overhead beam, courtyard, and door geometry remain visually clean without artifacts, warping, unreadable overlays, or degraded game-engine realism.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "If the result is a rollout, verify that the left door leaf closes with present, temporally smooth motion and without flicker or sudden jumps in the scene.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The action explicitly requires soldiers, veranda, railing, red overhead beam, and courtyard to remain unchanged while only the left open door leaf changes state.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The door leaf should rotate plausibly around its hinge within the doorway, remain attached, respect scale and occlusion, and not pass through the wall, floor, people, or opposite door leaf.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "Primary target is an explicit intentional object-state transition: close the left open door leaf of the central doorway while preserving named anchors.",
+      "parameters": {
+        "target_object": "left open door leaf of the central doorway",
+        "required_final_state": "closed",
+        "protected_anchors": [
+          "soldiers",
+          "veranda",
+          "railing",
+          "red overhead beam",
+          "courtyard"
+        ],
+        "view_context": "first-person veranda view with central doorway"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require active camera movement, navigation, or a path; the transition is a fixed-scene door state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The target is a directly specified semantic object-state edit, not the causal response to an applied physical force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome needs validation beyond general plausibility of a hinged door closing."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon multi-turn rollout where progressive degradation resistance is the explicit target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or revisited viewpoint to compare against an earlier view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The requested change occurs onscreen at the central doorway, with no offscreen process that must continue evolving."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

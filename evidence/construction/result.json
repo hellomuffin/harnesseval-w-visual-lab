@@ -1,0 +1,236 @@
+{
+  "attempts": [
+    {
+      "plan": {
+        "title": "Red Book Opens on Kitchen Counter",
+        "action_text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.",
+        "target_entity": "closed red book",
+        "initial_state": "The red book is closed and lying flat on the wooden countertop.",
+        "expected_outcome": [
+          "The book's front cover is lifted, revealing the inner pages.",
+          "The book is now in an open state, with the first page visible."
+        ],
+        "protected_anchors": [
+          "The red book remains on the same wooden countertop.",
+          "The blue mug and basil plant remain in their original positions.",
+          "The white tiled wall background remains unchanged."
+        ],
+        "negative_constraints": [
+          "The book does not move from its position on the countertop.",
+          "No new objects are introduced into the scene.",
+          "The book does not become damaged or torn during the transition."
+        ],
+        "validation_questions": [
+          "Is the book still on the countertop after the action?",
+          "Are the blue mug and basil plant in the same positions?",
+          "Is the book visibly open with pages exposed?"
+        ]
+      },
+      "validation": {
+        "valid": true,
+        "reason": "The action is physically feasible and aligns with the initial state. The target (closed red book) is clearly visible. The action of lifting the cover to open the book is plausible and results in the expected outcome without violating any constraints. All protected anchors are preserved, and the scenario is judgeable based on visual evidence.",
+        "checks": {
+          "target_visible": true,
+          "action_feasible": true,
+          "specific_outcome": true,
+          "judgeable": true
+        },
+        "issues": []
+      }
+    }
+  ],
+  "title": "Red Book Opens on Kitchen Counter",
+  "image": "evidence/construction/initial.png",
+  "taxonomy": {
+    "environment": "indoor kitchen",
+    "foreground": "closed red book",
+    "midground": "countertop",
+    "density": "low",
+    "appearance": "photorealistic",
+    "perspective": "fixed third person",
+    "probe_family": "intentional_transition"
+  },
+  "action": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.",
+  "plan": {
+    "title": "Red Book Opens on Kitchen Counter",
+    "action_text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.",
+    "target_entity": "closed red book",
+    "initial_state": "The red book is closed and lying flat on the wooden countertop.",
+    "expected_outcome": [
+      "The book's front cover is lifted, revealing the inner pages.",
+      "The book is now in an open state, with the first page visible."
+    ],
+    "protected_anchors": [
+      "The red book remains on the same wooden countertop.",
+      "The blue mug and basil plant remain in their original positions.",
+      "The white tiled wall background remains unchanged."
+    ],
+    "negative_constraints": [
+      "The book does not move from its position on the countertop.",
+      "No new objects are introduced into the scene.",
+      "The book does not become damaged or torn during the transition."
+    ],
+    "validation_questions": [
+      "Is the book still on the countertop after the action?",
+      "Are the blue mug and basil plant in the same positions?",
+      "Is the book visibly open with pages exposed?"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "reason": "The action is physically feasible and aligns with the initial state. The target (closed red book) is clearly visible. The action of lifting the cover to open the book is plausible and results in the expected outcome without violating any constraints. All protected anchors are preserved, and the scenario is judgeable based on visual evidence.",
+    "checks": {
+      "target_visible": true,
+      "action_feasible": true,
+      "specific_outcome": true,
+      "judgeable": true
+    },
+    "issues": []
+  },
+  "provenance": {
+    "method": "reconstruction of paper \u00a74, not author code",
+    "image_model": "built-in image_gen",
+    "planner_and_validator": "Qwen3-VL-8B-Instruct",
+    "image_prompt": "Indoor kitchen; closed red hardcover book fully visible on pale wooden counter; blue mug, potted herb, white tile anchors; low clutter; photorealistic; fixed three-quarter view; no people or writing."
+  },
+  "previous_attempt": {
+    "plan": {
+      "title": "Red Book Opens to Reveal Recipe",
+      "action_text": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to a page with a recipe.",
+      "target_entity": "closed red book",
+      "initial_state": "The red book is closed and lying flat on the wooden countertop.",
+      "expected_outcome": [
+        "The book is now open, revealing its interior pages.",
+        "The visible page contains text or an image consistent with a recipe.",
+        "The book remains on the countertop, no longer closed."
+      ],
+      "protected_anchors": [
+        "The blue mug remains in its position on the left side of the countertop.",
+        "The basil plant in its pot remains on the right side of the countertop.",
+        "The white tiled wall and wooden countertop texture remain unchanged."
+      ],
+      "negative_constraints": [
+        "The book does not float or move to a different location.",
+        "No new objects are introduced into the scene.",
+        "The book does not open to a page that is not visible in the original image (e.g., a page with no text or an unrelated image)."
+      ],
+      "validation_questions": [
+        "Is the book still on the countertop?",
+        "Is the book open to a visible page?",
+        "Are the surrounding objects (mug, plant, tiles) in their original positions?",
+        "Is the book's cover fully lifted, not just slightly ajar?"
+      ]
+    },
+    "validation": {
+      "valid": false,
+      "reason": "The action is not feasible because the book is closed and lying flat on the countertop, and there is no visible page with a recipe inside. The action requires the book to open to a visible recipe page, which cannot be validated from the initial image. The 'expected_outcome' cannot be met as the interior of the book is not visible and no recipe can be confirmed.",
+      "checks": {
+        "target_visible": true,
+        "action_feasible": false,
+        "specific_outcome": false,
+        "judgeable": false
+      },
+      "issues": [
+        "The book's interior is not visible, so it cannot be confirmed to open to a recipe page.",
+        "The action requires the book to be opened, but the initial state does not provide evidence of any page content.",
+        "The 'expected_outcome' is unverifiable from the initial image, making the action non-judgeable."
+      ]
+    },
+    "note": "First separate execution rejected; subsequent execution produced an accepted case."
+  },
+  "routing": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-09-30T21:20:51.705562+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "a6ef80ea8619bdb546d6367d4f813acc525891424becfa52a31243816a62c6c1",
+    "case_id": "local_constructed_red_book",
+    "taxonomy": {
+      "primary_axis": "transition_correctness",
+      "probe_family": "intentional_transition"
+    },
+    "planner": {
+      "type": "openai_compatible",
+      "version": "harnesseval.planner.v1",
+      "prompt_version": "worlddojo.v2_planner.prompt.v8",
+      "model": "local-judge",
+      "wire_api": "chat_completions",
+      "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+      "response_id": "chatcmpl-bfe289e25ee2b8be",
+      "response_model": "local-judge",
+      "usage": {
+        "prompt_tokens": 2825,
+        "total_tokens": 3320,
+        "completion_tokens": 495,
+        "prompt_tokens_details": null
+      },
+      "elapsed_seconds": 11.817803,
+      "attempt_count": 1
+    },
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "The case requires assessing the aesthetic and technical quality of the generated frames, including photorealistic rendering of the book, countertop, and background.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "The case requires verifying that visual appearance remains consistent throughout the transition, including the book's texture, lighting, and the unchanged background elements.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "The case requires evaluating if the book's opening motion is physically plausible (e.g., realistic hinge movement, no tearing) under the specified constraints.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "role": "core",
+        "reason": "The case explicitly targets an intentional semantic transition: opening the red book, while protected anchors (mug, plant, wall) must remain unchanged.",
+        "parameters": {}
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "intentional_change_verifier_vlm"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "reason": "The case does not require camera movement or navigation; the viewpoint is fixed."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "The case targets an intentional semantic transition (book opening), not a causal physical response to an external force."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "No case-specific physical-law check is required; the motion is a simple, controlled object state change."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "The case is a short, single-action transition, not a long-horizon rollout."
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "reason": "The case does not involve a non-static loop or revisit."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "The case does not involve offscreen processes or their evolution."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 4,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  }
+}

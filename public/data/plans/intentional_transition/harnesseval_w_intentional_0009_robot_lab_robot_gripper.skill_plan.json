@@ -1,0 +1,96 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0009_robot_lab_robot_gripper",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated frames must remain technically clean and realistic in a robot lab scene with clearly visible grippers, tray, cube, calibration board, and workbench.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested result involves visible motion of the right gripper lifting the cube, so the rollout should show present, smooth, temporally coherent movement.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The robot gripper must remain identifiable as the same entity, and protected anchors such as the left gripper, tray, calibration board, and workbench must not drift or change appearance.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The cube should be plausibly grasped and lifted above the tray by the right gripper without impossible contact, floating before grasp, interpenetration, or implausible robot motion.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The case is an intentional transition: the right gripper must lift the cube above the tray while the camera stays fixed and unrelated scene anchors remain unchanged.",
+      "parameters": {
+        "target_entity": "robot gripper",
+        "required_change": "right gripper lifts the cube above the tray",
+        "protected_anchors": [
+          "left gripper",
+          "tray",
+          "calibration board",
+          "workbench"
+        ],
+        "fixed_camera_required": true,
+        "negative_constraints": [
+          "Do not replace the whole scene.",
+          "Do not add unrelated extra events.",
+          "Do not change camera viewpoint."
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly requires a fixed camera, not active navigation or a camera trajectory."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The primary target is a directly specified intentional object-state change, not a causal response to an external physical intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law calculation is required beyond general plausibility of grasping and lifting."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon drift-resistance rollout with many turns or chunks."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a prior view after a loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The requested action is visible in the fixed scene and does not require verifying offscreen evolution."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

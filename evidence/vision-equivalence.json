@@ -1,0 +1,9 @@
+{
+  "max_absolute_differences": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "allclose": true,
+  "test": "FP32 two-layer Qwen3 vision model, same weights and input, 4 temporal groups vs 2+2, including deepstack outputs"
+}

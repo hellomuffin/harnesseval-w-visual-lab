@@ -1,0 +1,141 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0009_mountain_trail",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve cinematic realistic visual quality for the mountain trail, human subject, rocks, stream, cliff, shrine, flags, and distant landscape without artifacts or degraded frames.",
+      "parameters": {
+        "check_for": [
+          "clean frame synthesis",
+          "realistic lighting and materials",
+          "no warping, melting, duplication, or severe blur",
+          "recognizable trail, cliff, bridge, cairn, signpost, flags, and shrine"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action consists of two forward navigation steps, so the output must show present, smooth forward motion rather than a static image, jump cut, or unstable temporal flicker.",
+      "parameters": {
+        "expected_motion": "continuous forward movement over two W chunks",
+        "check_for": [
+          "smooth camera/subject advance",
+          "temporal coherence",
+          "no abrupt teleportation",
+          "no excessive jitter or frame-to-frame popping"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Protected anchors and scene identity must remain stable as the subject moves forward along the trail.",
+      "parameters": {
+        "protected_anchors": [
+          "dirt-and-stone trail geometry with left-bending switchback",
+          "granite cliff wall on the left",
+          "three-rock cairn at the foreground junction",
+          "weathered wooden signpost beside the cairn",
+          "right-side plank footbridge over the stream",
+          "red prayer-flag line near the bend"
+        ],
+        "identity_constraints": [
+          "same mountain trail scene",
+          "same cinematic realistic style",
+          "same third-person human subject"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward navigation uphill between cliff and boulders should remain physically plausible, with coherent scale, terrain contact, occlusion, and camera following behavior.",
+      "parameters": {
+        "check_for": [
+          "human remains grounded on the trail",
+          "camera follows at plausible third-person distance",
+          "terrain, rocks, stream, bridge, and cliff maintain coherent spatial relationships",
+          "no impossible pass-throughs, floating, or scale changes"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory transition explicitly requires active navigation: two W controls should move the subject forward along the primary uphill trail corridor toward the left bend, prayer flags, and shrine ledge while maintaining third-person framing.",
+      "parameters": {
+        "control_sequence": [
+          "W",
+          "W"
+        ],
+        "expected_trajectory": [
+          "advance from the foreground trail junction",
+          "pass the cairn and weathered wooden signpost",
+          "continue uphill between the left cliff wall and right-side boulders/stream area",
+          "curve or orient toward the left-bending trail near the red prayer flags and shrine ledge"
+        ],
+        "success_criteria": [
+          "red prayer flags become closer or more central",
+          "trail corridor advances consistently rather than teleporting",
+          "stable landmarks remain spatially consistent",
+          "third-person subject framing is maintained"
+        ],
+        "failure_modes": [
+          "static camera",
+          "backward or lateral-only movement",
+          "teleportation to shrine or another destination",
+          "switching to unrelated viewpoint or scene",
+          "semantic edit instead of navigation"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint movement, not an intentional semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law validation beyond general plausibility of walking/camera motion."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short two-chunk navigation rollout, not a long-horizon drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action does not leave and return to a previously viewed location."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving during the rollout."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

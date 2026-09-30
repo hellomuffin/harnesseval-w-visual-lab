@@ -1,0 +1,87 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_offscreen_0005_plaza",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "offscreen_evolution"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess cinematic-realistic plaza frames for technical cleanliness, artifacts, water rendering quality, and readable urban/natural scene structure.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout requires smooth camera turns away and back plus temporally coherent ripple motion without jitter, freezing, or abrupt resets.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same plaza, lighting, materials, buildings, planters, grass strip, rocks, stone wall, glass tower, and pool appearance must persist through the sequence.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The water disturbance should spread and weaken plausibly while reflections, pool boundaries, scale, and camera motion remain physically believable.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly specifies a first-person trajectory: turn smoothly right until the pool is fully offscreen, hold, then turn left back to the original composition.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The camera must return to the original plaza view after a non-static look-away loop with the same landmarks aligned and unchanged.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "role": "core",
+      "reason": "The central target is that the circular pool ripples continue evolving while offscreen and reappear as wider, softer rings rather than resetting.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier",
+    "offscreen_evolution_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "There is no intentional semantic or object-state edit; the target is offscreen continuation of an existing water disturbance."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The case does not include an explicit physical intervention or force causing a new response during the rollout."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "Ripple plausibility is relevant, but the case does not require a specialized case-specific physical-law validation of an explicit causal intervention."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short eight-chunk look-away-and-return sequence, not a long-horizon rollout targeting progressive drift resistance."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

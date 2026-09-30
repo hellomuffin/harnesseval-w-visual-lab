@@ -1,0 +1,102 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0024_atrium",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve cinematic-realistic image quality in a sparse semi-outdoor atrium, with clean geometry, lighting, materials, and no artifacts, text, UI, borders, or watermark.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a three-chunk navigation sequence, so frames should show present, continuous, temporally smooth first-person movement rather than flicker, jumps, frozen views, or unstable interpolation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same atrium world should remain visually consistent during forward and forward-right movement, including the long lateral layout, courtyard, covered ceiling, columns, balconies, foreground switch/device, red accent, and secondary objects.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera path through the covered atrium/courtyard must respect plausible walking-scale motion, stable horizon, collision-free navigation, realistic depth changes, and coherent support/occlusion relationships.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition correctness for an exploratory navigation rollout: W, then W+D, then W from a first-person view, requiring forward movement, a rightward component in the middle chunk, and continued forward progress through navigable space.",
+      "parameters": {
+        "action_sequence": [
+          "W",
+          "W+D",
+          "W"
+        ],
+        "expected_trajectory": "first-person forward movement, then forward-right drift/turn or strafe, then continued forward movement",
+        "navigation_constraints": [
+          "remain in navigable atrium/courtyard space",
+          "do not pass through the foreground switch/device, column, railings, walls, or non-navigation boundaries",
+          "maintain coherent first-person height and orientation",
+          "show parallax and scale changes consistent with approaching the open activity zone"
+        ],
+        "protected_scene_anchors": [
+          "covered semi-outdoor atrium",
+          "long lateral building layout across the frame",
+          "open courtyard/activity zone in the midground",
+          "clear boundary between navigation and non-navigation space",
+          "restrained high-contrast red accent attached to a real object",
+          "small cluster of context-appropriate secondary objects"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for an intentional semantic or object-state transition; it asks for viewpoint/navigation movement."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force requiring a causal object response; the switch/device is present as foreground context, not an operated object."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is being tested beyond general plausibility of camera navigation."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short three-chunk exploratory transition, not a long-horizon drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not leave and return to a prior viewpoint or require loop/revisit consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

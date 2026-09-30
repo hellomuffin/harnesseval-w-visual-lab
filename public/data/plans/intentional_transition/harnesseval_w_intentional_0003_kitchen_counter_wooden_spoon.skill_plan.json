@@ -1,0 +1,111 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0003_kitchen_counter_wooden_spoon",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain technically clean and realistic in a kitchen counter scene with transparent glass, countertop, sink, stove, towel, cutting board, and spoon visible without artifacts, blur, watermarks, or scene replacement.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested edit is a visible transition moving the wooden spoon from the counter into the bowl, so generated motion should be present, temporally coherent, and not flicker or jump unnaturally.",
+      "parameters": {
+        "target_entity": "wooden spoon",
+        "expected_motion": "counter to clear glass bowl"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The wooden spoon must remain identifiable as the same entity while the kitchen anchors and overall visual appearance stay consistent across frames.",
+      "parameters": {
+        "target_entity": "wooden spoon",
+        "stable_anchors": [
+          "sink",
+          "stove",
+          "towel",
+          "cutting board",
+          "clear glass bowl"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Although the primary requirement is an intentional object-state change, the spoon should move and settle into the clear glass bowl in a physically plausible way without clipping through the bowl, floating, deforming, or intersecting protected objects.",
+      "parameters": {
+        "target_entity": "wooden spoon",
+        "container": "clear glass bowl"
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The case is an intentional_transition requiring the wooden spoon to be moved from the counter into the clear glass bowl while protected anchors remain unchanged and the camera stays fixed.",
+      "parameters": {
+        "target_entity": "wooden spoon",
+        "initial_state": "on the counter",
+        "expected_final_state": "inside the clear glass bowl",
+        "protected_anchors": [
+          "sink",
+          "stove",
+          "towel",
+          "cutting board"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly requires a fixed camera, not active navigation or a viewpoint trajectory."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The primary target is a directly specified intentional object-state edit, not a causal response to an explicit force or physical intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general plausibility of the spoon being placed into the bowl."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon multi-turn rollout targeting resistance to progressive degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve leaving and returning to a view after a non-static loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process or hidden ongoing evolution is part of the requested transition."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

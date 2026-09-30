@@ -1,0 +1,157 @@
+{
+  "schema_version": "harnesseval.metric_bundle",
+  "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+  "model_id": "seedance-2.0-standard",
+  "probe_family": "intentional_transition",
+  "video": {
+    "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/intentional_transition/seedance-2.0-standard/harnesseval_w_intentional_0001_living_room_table_ceramic_mug/output.mp4",
+    "size_bytes": 439558,
+    "mtime_ns": 1790802127077440522
+  },
+  "skill_results": [
+    {
+      "skill_id": "render_quality_inspector",
+      "status": "ok",
+      "score": 0.721097,
+      "metrics": {
+        "aesthetic": 0.558087,
+        "imaging": 0.675299,
+        "hpsv3": 0.653062,
+        "flickering": 0.997939
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.render_quality",
+        "cache_contract_version": "harnesseval.render_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "status": "ok",
+      "score": 0.498649,
+      "metrics": {
+        "dynamic": 0.0,
+        "smoothness": 0.997298
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.motion_quality",
+        "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "status": "ok",
+      "score": 0.979323,
+      "metrics": {
+        "background": 0.979323
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.appearance_consistency",
+        "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+        "aggregation": "single_required_component",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "status": "ok",
+      "score": 0.63494,
+      "metrics": {
+        "visual_plausibility": 0.63494
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_plausibility.pavrm",
+        "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+        "aggregation": "pavrm_raw_score_divided_by_5",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok_case_audit_warning",
+      "score": 1.0,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.326984
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "warning",
+          "warning": true,
+          "expected_spec_alignment": 0.326984,
+          "target_alignment": 0.095238,
+          "change_alignment": 0.285714,
+          "anchor_alignment": 0.6
+        },
+        "analyze_agent_cache": "[workspace]/artifacts/fresh/cache/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+        "analyze_agent_evidence_digest": "41f26b8bbb87256dedb94823b8ccb0336e8c91434928f4aed10929b620ad7312",
+        "verify_agent_cache": "[workspace]/artifacts/fresh/cache/skills/intentional_change/verify_agent/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+        "verify_agent_evidence_digest": "357aa02966c57c47a704a455ae9716ac6deec0f5b25121e31fdb3561b81573a7"
+      },
+      "notes": []
+    }
+  ],
+  "skill_runs": {
+    "appearance_consistency_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:06:22.167675+00:00"
+    },
+    "intentional_change_verifier_vlm": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/intentional_change/results/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:08:12.743028+00:00"
+    },
+    "motion_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:14:01.285706+00:00"
+    },
+    "physical_plausibility_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "cache_hit": true,
+      "updated_at": "2026-09-30T21:37:05.133535+00:00"
+    },
+    "render_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:30:00.879441+00:00"
+    }
+  },
+  "provenance": {
+    "runner_id": "harnesseval.runner"
+  },
+  "plan": {
+    "path": "[workspace]/upstream/benchmark/plans/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.skill_plan.json",
+    "input_digest": "d7fde1d68f53dc1b6999c62cfee1fe4adca0daf4f3a52ff90e1ee1417310bf1d"
+  }
+}

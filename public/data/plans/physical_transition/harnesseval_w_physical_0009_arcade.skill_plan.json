@@ -1,0 +1,84 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0009_arcade",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the photorealistic arcade frames remain technically clean, with no artifacts, unreadable distortions, borders, or watermarking while showing the drawer, cabinet, gate, and arcade layout.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout must show the drawer moving inward, so motion should be present, temporally smooth, and free of jitter or frame-to-frame popping.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The wooden cabinet, metal drawer slides, arcade machines, gate landmark, sparse layout, lighting, and first-person framing should remain visually consistent as the drawer closes.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The drawer-closing action must look causally plausible, with the drawer staying supported by its rails and sliding into the cabinet without impossible deformation or penetration.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The primary target is the causal response to a physical intervention: pushing the open wooden drawer straight inward until it slides closed into the cabinet.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "This case benefits from a case-specific physical-law check that the drawer translates along its metal slides, remains aligned with the cabinet, stops when closed, and does not clip through surrounding structure.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The action concerns a fixed first-person view of a drawer being pushed closed, not active navigation or a required camera path."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "Although the drawer state changes, the case is framed as a physical response to a push rather than an intentional semantic edit with protected anchors."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "There is no long-horizon multi-turn rollout requirement targeting resistance to progressive degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not require leaving and returning to a prior viewpoint after a loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the relevant drawer motion is visible and directly caused by the push."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

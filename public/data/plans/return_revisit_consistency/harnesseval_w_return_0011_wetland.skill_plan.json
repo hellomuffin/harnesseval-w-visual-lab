@@ -1,0 +1,159 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0011_wetland",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess overall technical cleanliness of the wetland rollout, including realistic game-engine rendering, coherent geometry, readable bridge route, water/reed detail, lighting, and absence of artifacts, text, borders, or collage-like composition.",
+      "parameters": {
+        "check_for": [
+          "clean 16:9 realistic game-engine frames",
+          "coherent wetland materials: wet wood, mossy stone, reeds, shallow water",
+          "stable depth composition with foreground stone edges, midground bridge, and distant structures",
+          "no UI, captions, watermarks, split-screen, or severe rendering artifacts"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The result should show present, smooth navigation motion through the forward, rightward viewpoint, and reverse chunks without jitter, frame jumps, or temporal smearing.",
+      "parameters": {
+        "expected_motion": "closed-loop camera/navigation movement along the wooden bridge with a small rightward viewpoint change and reverse return",
+        "check_for": [
+          "continuous forward movement",
+          "smooth rightward viewpoint change",
+          "smooth reverse movement",
+          "no abrupt cuts or frozen frames unless explicitly part of generation format"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "World persistence requires the bridge, stone entrance edges, reeds, water, distant wetland structures, localized light patch, and material finishes to remain visually consistent throughout the loop.",
+      "parameters": {
+        "anchors": [
+          "uneven wooden bridge planks and rail posts",
+          "mossy stone edges framing the entrance",
+          "wetland water and reeds",
+          "distant structures and ruins",
+          "localized directional light patch",
+          "different nearby material finishes"
+        ],
+        "check_for": [
+          "no object identity drift",
+          "no material swaps",
+          "no disappearing or duplicated anchor structures",
+          "consistent lighting direction and wetland atmosphere"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The navigation should obey plausible camera movement and spatial relationships across an uneven wooden bridge over shallow wetland water, with stable support, scale, reflections, and occlusions.",
+      "parameters": {
+        "check_for": [
+          "plausible camera travel along walkable bridge surface",
+          "no clipping through bridge planks, stone edges, posts, water, or structures",
+          "consistent parallax between foreground stone, midground bridge, and distant structures",
+          "physically plausible water reflections and support geometry"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly specifies active third-person navigation: move forward twice, shift viewpoint right, move forward again, then reverse with backward and left actions to retrace the path.",
+      "parameters": {
+        "reference_chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04"
+        ],
+        "return_chunks": [
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "expected_sequence": [
+          "forward along uneven wooden bridge",
+          "continued forward progress toward wetland structures",
+          "small rightward viewpoint change",
+          "additional forward progress",
+          "reverse backward movement",
+          "leftward viewpoint correction",
+          "continued backward return",
+          "final backward return to initial framing"
+        ]
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The probe family and primary axis require checking whether the final returned view matches the initial wetland view after a non-static closed navigation loop.",
+      "parameters": {
+        "closure_type": "inverse_balanced_navigation_tokens",
+        "initial_view_anchors": [
+          "stone edges and bridge entrance framing",
+          "wooden bridge alignment into wetland",
+          "nearby water and reeds",
+          "distant structures at different elevations",
+          "asymmetric edge detail",
+          "localized light patch"
+        ],
+        "success_criteria": [
+          "final frame returns to substantially the same camera position and orientation",
+          "initial composition is recovered rather than replaced by a new similar wetland",
+          "major anchors preserve identity, placement, scale, and material appearance"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state transition; it requests navigation out and back while preserving the world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome needs validation beyond general navigation plausibility and scene consistency."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight short navigation chunks and targets return consistency, not long-horizon progressive degradation resistance."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify an offscreen process that must continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

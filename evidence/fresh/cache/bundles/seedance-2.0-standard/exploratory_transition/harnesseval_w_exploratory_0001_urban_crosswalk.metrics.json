@@ -1,0 +1,140 @@
+{
+  "schema_version": "harnesseval.metric_bundle",
+  "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+  "model_id": "seedance-2.0-standard",
+  "probe_family": "exploratory_transition",
+  "video": {
+    "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/exploratory_transition/seedance-2.0-standard/harnesseval_w_exploratory_0001_urban_crosswalk/output.mp4",
+    "size_bytes": 871937,
+    "mtime_ns": 1790802127017175262
+  },
+  "skill_results": [
+    {
+      "skill_id": "render_quality_inspector",
+      "status": "ok",
+      "score": 0.692416,
+      "metrics": {
+        "aesthetic": 0.52336,
+        "imaging": 0.58378,
+        "hpsv3": 0.708287,
+        "flickering": 0.954239
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.render_quality",
+        "cache_contract_version": "harnesseval.render_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "status": "ok",
+      "score": 0.995718,
+      "metrics": {
+        "dynamic": 1.0,
+        "smoothness": 0.991436
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.motion_quality",
+        "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "status": "ok",
+      "score": 0.916741,
+      "metrics": {
+        "background": 0.916741
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.appearance_consistency",
+        "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+        "aggregation": "single_required_component",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "status": "ok",
+      "score": 0.61816,
+      "metrics": {
+        "visual_plausibility": 0.61816
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_plausibility.pavrm",
+        "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+        "aggregation": "pavrm_raw_score_divided_by_5",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": []
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "status": "ok",
+      "score": 0.926951,
+      "metrics": {
+        "NavScore": 0.926951,
+        "Accuracy": 0.853901,
+        "Consistency": 1.0,
+        "nATE_t": 0.132301,
+        "nATE_r": 0.159897,
+        "cnATE_t": 0.0,
+        "cnATE_r": 0.0,
+        "consistency_pairs": 0,
+        "ATE_t": 0.298,
+        "ATE_r": 7.898568,
+        "total_path_length": 2.252446,
+        "total_rotation_deg": 49.39772
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+        "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+        "aggregation": "harnesseval_navigation_trajectory_navscore"
+      },
+      "notes": []
+    }
+  ],
+  "skill_runs": {
+    "appearance_consistency_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:06:21.982642+00:00"
+    },
+    "motion_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:13:58.790571+00:00"
+    },
+    "physical_plausibility_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.json",
+      "cache_hit": true,
+      "updated_at": "2026-09-30T21:37:05.126834+00:00"
+    },
+    "render_quality_inspector": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:29:57.329355+00:00"
+    },
+    "viewpoint_trajectory_verifier": {
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/viewpoint_trajectory/seedance-2.0-standard/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.json",
+      "cache_hit": false,
+      "updated_at": "2026-09-30T21:53:00.806892+00:00"
+    }
+  },
+  "provenance": {
+    "runner_id": "harnesseval.runner"
+  },
+  "plan": {
+    "path": "[workspace]/upstream/benchmark/plans/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.skill_plan.json",
+    "input_digest": "32db4bcf2d5304ebc4ba22ab9d5bebba522aee0e86dd3babd47d0bb468086528"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0007_hallway",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated frames must remain technically clean and game-engine realistic in a dense indoor residential hallway with many landmarks, surfaces, doors, scattered books, and lighting details.",
+      "parameters": {
+        "check_for": [
+          "clean geometry and materials",
+          "no UI, text, watermark, borders, or collage artifacts",
+          "readable dense hallway layout",
+          "stable image quality during the full rollout"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a continuous 10-chunk forward navigation sequence, so motion should be present, smooth, and free of temporal jumps or strobing.",
+      "parameters": {
+        "expected_motion": "continuous forward hallway traversal with small steering adjustments",
+        "chunk_count": 10
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The hallway's residential/game-engine-realistic appearance, lighting, materials, and landmark identities should remain consistent while moving toward the raised stair area.",
+      "parameters": {
+        "protected_appearance": [
+          "wood foreground floor",
+          "plaster walls and blue-gray wainscoting",
+          "right wooden door",
+          "left open room",
+          "coat stand",
+          "small side table",
+          "stair rail",
+          "far silhouette"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation should respect plausible camera movement through an indoor hallway, avoiding interpenetration with the right door, side table, coat stand, books, walls, and stair edges.",
+      "parameters": {
+        "collision_obstacles": [
+          "right door",
+          "side table",
+          "coat stand",
+          "scattered books",
+          "stair edges",
+          "walls"
+        ],
+        "expected_support": "camera/viewpoint remains above floor and changes elevation plausibly near raised stair area"
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active third-person navigation down the hallway from the foreground wood floor toward the distant raised stair area, with W, W+D, W+A, and W+right steering chunks.",
+      "parameters": {
+        "trajectory_goal": "move continuously forward along the open hallway toward the raised stairs and distant silhouette",
+        "required_adjustments": [
+          "stay centered",
+          "steer right in c03 and c07",
+          "steer left in c05 and c09",
+          "avoid hallway obstacles and stair edges"
+        ],
+        "start_region": "foreground wood floor",
+        "target_region": "distant raised stair area and far silhouette"
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "The primary axis is world persistence and the probe family is drift resistance; the long 10-chunk navigation rollout is intended to test whether visual, geometric, and semantic structure degrades over time.",
+      "parameters": {
+        "drift_sensitive_anchors": [
+          "long lateral hallway layout",
+          "visible elevation change",
+          "clearly identifiable entrance or exit",
+          "distant silhouette",
+          "right wooden door",
+          "left open room",
+          "coat stand",
+          "small side table",
+          "stair rail",
+          "scattered books"
+        ],
+        "failure_modes": [
+          "layout warping",
+          "landmarks disappearing or changing identity",
+          "hallway turning into a different environment",
+          "scale drift",
+          "stair/elevation inconsistency",
+          "semantic degradation of the far silhouette or exit"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation and drift resistance, not an intentional semantic or object-state transition."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the case only asks for viewpoint movement through the hallway."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general navigation plausibility and collision avoidance."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The sequence does not include a loop or returned view to compare against an earlier viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify any offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

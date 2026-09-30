@@ -1,0 +1,69 @@
+{
+  "schema_version": "harnesseval.intentional_change.result",
+  "skill_id": "intentional_change_verifier_vlm",
+  "definition_version": "harnesseval.intentional_change_vlm",
+  "input_digest": "833a229a7607e6c73ce413e891d2f252a4af949c9843e92ac18751c1359cc059",
+  "result": {
+    "skill_id": "intentional_change_verifier_vlm",
+    "status": "ok_case_audit_warning",
+    "score": 1.0,
+    "metrics": {
+      "Q1_target_visible": 1.0,
+      "Q2_transition_visible": 1.0,
+      "Q3_intended_change": 1.0,
+      "Q4_target_specificity": 1.0,
+      "Q5_final_state": 1.0,
+      "Q6_anchor_preservation": 1.0,
+      "Q7_no_extra_event": 1.0,
+      "Q8_judgeable": 1.0,
+      "target_visibility": 1.0,
+      "change_execution": 1.0,
+      "target_specificity": 1.0,
+      "final_state": 1.0,
+      "preservation": 1.0,
+      "validity_gate": 1.0,
+      "core_score": 1.0,
+      "final_score": 1.0,
+      "expected_spec_alignment": 0.193651
+    },
+    "diagnostics": {
+      "definition_version": "harnesseval.intentional_change_vlm",
+      "prompt_version": "harnesseval.intentional_change.prompt",
+      "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+      "case_audit": {
+        "status": "warning",
+        "warning": true,
+        "expected_spec_alignment": 0.193651,
+        "target_alignment": 0.095238,
+        "change_alignment": 0.285714,
+        "anchor_alignment": 0.2
+      },
+      "analyze_agent_cache": "[workspace]/artifacts/repeats/20260930T213845/2/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "analyze_agent_evidence_digest": "00594574ce1aee6e5566fa3444554960bfebe203809ea35f310f9d51855fa11c",
+      "verify_agent_cache": "[workspace]/artifacts/repeats/20260930T213845/2/skills/intentional_change/verify_agent/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+      "verify_agent_evidence_digest": "46677a1ec328fb94dcdd908d95cb9f2957640452f463ffecd4d7229523098ddf"
+    },
+    "notes": []
+  },
+  "provenance": {
+    "backend": {
+      "backend_id": "openai_compatible.intentional_change_vlm",
+      "backend_version": "local-judge",
+      "config_digest": "59a8444136b34b75c6dc28b19b38cc55faf238a1ebee6ef4dff92f3fcc87ade8"
+    },
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/intentional_transition/seedance-2.0-standard/harnesseval_w_intentional_0001_living_room_table_ceramic_mug/output.mp4",
+      "size_bytes": 439558,
+      "mtime_ns": 1790802127077440522,
+      "sha256": "b9c1b5ae017623d7d6b7b9e314ca3c605c7a9ef5439e8fd764680461e6bb0714"
+    },
+    "initial_observation": {
+      "path": "[workspace]/upstream/benchmark/initial_observations/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.png",
+      "size_bytes": 293142,
+      "mtime_ns": 1790802126976099690,
+      "sha256": "83e591995e7fd4e71e40137395dfc46daf250038f91c044794d969421b966382"
+    },
+    "analyze_agent_cache_hit": false,
+    "verify_agent_cache_hit": false
+  }
+}

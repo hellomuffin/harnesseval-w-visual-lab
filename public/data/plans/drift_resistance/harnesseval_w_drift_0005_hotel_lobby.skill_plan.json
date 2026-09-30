@@ -1,0 +1,185 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0005_hotel_lobby",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The generated hotel lobby rollout must remain technically clean across frames, with no severe artifacts, blur, watermarks, broken geometry, or ambiguous visual corruption.",
+      "parameters": {
+        "domain": "realistic",
+        "scene": "hotel_lobby",
+        "check_for": [
+          "watermarks",
+          "text artifacts",
+          "split-screen or collage artifacts",
+          "broken geometry",
+          "extreme blur",
+          "duplicated objects",
+          "lighting and material quality"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a long continuous navigation sequence, so the result should show present, smooth temporal motion rather than static frames, jumps, or cuts.",
+      "parameters": {
+        "sequence_type": "long_navigation_sequence",
+        "minimum_chunks": 8,
+        "check_for": [
+          "continuous motion",
+          "temporal smoothness",
+          "absence of cuts or resets",
+          "no frozen frames"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same hotel lobby world should preserve visual identity, materials, lighting, and anchor appearances throughout the long route.",
+      "parameters": {
+        "stable_anchors": [
+          "reception desk",
+          "chandelier",
+          "marble columns",
+          "elevator doors"
+        ],
+        "check_for": [
+          "consistent anchor appearance",
+          "consistent hotel lobby style",
+          "consistent materials and lighting",
+          "no semantic replacement of anchors"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person lobby navigation should obey plausible camera motion and spatial relationships, with solid objects, floors, columns, desk, and elevator doors behaving as fixed architectural elements.",
+      "parameters": {
+        "perspective": "first_person",
+        "check_for": [
+          "plausible walking/turning motion",
+          "no passing through solid architecture",
+          "stable floor and wall geometry",
+          "reasonable occlusion and parallax"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active first-person navigation through a specified eight-chunk path using W, A, D, left, and right controls.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_chunks": [
+          {
+            "chunk_id": "c01",
+            "action": "W+left"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "right"
+          },
+          {
+            "chunk_id": "c04",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c05",
+            "action": "A"
+          },
+          {
+            "chunk_id": "c06",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c07",
+            "action": "D"
+          },
+          {
+            "chunk_id": "c08",
+            "action": "left"
+          }
+        ],
+        "requirements": [
+          "continuous route",
+          "no cuts",
+          "no reset",
+          "camera changes match commanded navigation direction"
+        ]
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "This is a drift_resistance case with a long-horizon eight-chunk rollout, and the reception desk, chandelier, marble columns, and elevator doors must remain part of one coherent world state.",
+      "parameters": {
+        "minimum_chunks": 8,
+        "drift_targets": [
+          "reception desk",
+          "chandelier",
+          "marble columns",
+          "elevator doors"
+        ],
+        "check_for": [
+          "progressive visual degradation",
+          "geometric drift",
+          "semantic drift",
+          "anchor disappearance",
+          "anchor duplication",
+          "world reset",
+          "layout incoherence over time"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state transition; it requests continuous navigation while preserving the same world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is required beyond general navigation plausibility."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The route does not specify returning to a previously seen viewpoint for revisit comparison."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not involve an offscreen process that must continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

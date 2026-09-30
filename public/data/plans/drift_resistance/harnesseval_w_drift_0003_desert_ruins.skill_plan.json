@@ -1,0 +1,205 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0003_desert_ruins",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated frames must remain technically clean and realistic for a desert ruins scene, without severe artifacts, blur, watermarks, split-screen, or ambiguous geometry.",
+      "parameters": {
+        "domain": "realistic",
+        "scene": "desert_ruins",
+        "check_for": [
+          "watermarks",
+          "text artifacts",
+          "split-screen or collage artifacts",
+          "severe blur",
+          "broken geometry",
+          "duplicated or malformed ruins"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The task is a long continuous navigation rollout, so motion should be present, smooth, and free of temporal jitter, cuts, freezes, or sudden resets.",
+      "parameters": {
+        "sequence_type": "long_navigation_sequence",
+        "minimum_chunks": 10,
+        "expected_continuity": "continuous first-person movement"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same desert ruins world should retain coherent materials, lighting, object identities, scale, and style across all navigation chunks.",
+      "parameters": {
+        "stable_anchors": [
+          "stone arch",
+          "sand path",
+          "fallen columns",
+          "distant pyramid"
+        ],
+        "check_consistency_of": [
+          "stone texture",
+          "sand path layout",
+          "column shapes and positions",
+          "pyramid identity",
+          "lighting direction",
+          "first-person perspective"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through stone ruins should obey plausible camera movement, collision behavior, parallax, scale, and static object stability.",
+      "parameters": {
+        "environment": "desert ruins",
+        "check_for": [
+          "plausible forward and lateral camera motion",
+          "stable ground contact",
+          "reasonable parallax",
+          "no camera passing through walls, arch stones, columns, or pyramid",
+          "no impossible object deformation"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly specifies a first-person long navigation route with W, W+left, right, A, D, and left actions that should produce corresponding viewpoint changes.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c02",
+            "actions": [
+              "W+left"
+            ]
+          },
+          {
+            "chunk_id": "c03",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c04",
+            "actions": [
+              "right"
+            ]
+          },
+          {
+            "chunk_id": "c05",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c06",
+            "actions": [
+              "A"
+            ]
+          },
+          {
+            "chunk_id": "c07",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c08",
+            "actions": [
+              "D"
+            ]
+          },
+          {
+            "chunk_id": "c09",
+            "actions": [
+              "left"
+            ]
+          },
+          {
+            "chunk_id": "c10",
+            "actions": [
+              "W"
+            ]
+          }
+        ],
+        "expected_behavior": "continuous route through the same world without cuts or reset"
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "This is a drift_resistance case with 10 navigation chunks, requiring stable anchors to remain part of one coherent world state over a long-horizon rollout.",
+      "parameters": {
+        "probe_family": "drift_resistance",
+        "minimum_chunks": 10,
+        "drift_targets": [
+          "stone arch",
+          "sand path",
+          "fallen columns",
+          "distant pyramid"
+        ],
+        "check_for": [
+          "anchor disappearance",
+          "semantic replacement",
+          "geometric drift",
+          "layout inconsistency",
+          "world reset",
+          "progressive degradation"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The task does not ask for an intentional semantic or object-state transition; it asks for continuous navigation while preserving the world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome is required beyond general plausibility of navigation and static ruins."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The route does not specify returning to a prior viewpoint or revisiting the same view after a loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the stable anchors should persist rather than evolve independently offscreen."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

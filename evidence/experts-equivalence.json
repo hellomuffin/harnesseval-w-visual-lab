@@ -1,0 +1,15 @@
+{
+  "tests": [
+    {
+      "dtype": "torch.float32",
+      "max_absolute_difference": 9.313225746154785e-10,
+      "allclose": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "max_absolute_difference": 0.0,
+      "allclose": true
+    }
+  ],
+  "scope": "Same toy MoE parameters, inputs and routing. No-dropout expert container only; not whole-model equivalence."
+}

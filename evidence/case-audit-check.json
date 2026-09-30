@@ -1,0 +1,152 @@
+{
+  "method": "Actual released case_audit function; only intended_change description changes; all anchors and eight video judgments stay fixed. No VLM calls or fabricated judgments.",
+  "finding": "This diagnostic is word-overlap based and sensitive to wording; its warning is not an independent visual failure judgment. It does not alter the numeric grade.",
+  "rows": [
+    {
+      "label": "Concise intended change: open (actual Analyze output)",
+      "expected_spec": {
+        "target": "red book",
+        "initial_state": "closed",
+        "intended_change": "open",
+        "change_type": "object_state",
+        "completion_criteria": "book cover is fully lifted and pages are visible",
+        "protected_anchors": [
+          "blue mug",
+          "potted basil plant",
+          "wooden countertop",
+          "white tiled wall"
+        ],
+        "negative_constraints": [
+          "book should not be moved from its position",
+          "book should not be rotated",
+          "book should not be damaged"
+        ],
+        "failure_modes": [
+          "book remains closed",
+          "book is partially opened",
+          "book is moved or rotated",
+          "book cover is torn or damaged"
+        ]
+      },
+      "audit": {
+        "status": "warning",
+        "warning": true,
+        "expected_spec_alignment": 0.185848,
+        "target_alignment": 0.043478,
+        "change_alignment": 0.043478,
+        "anchor_alignment": 0.470588
+      },
+      "recomputed_result": {
+        "skill_id": "intentional_change_verifier_vlm",
+        "status": "ok_case_audit_warning",
+        "score": 1.0,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.185848
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.intentional_change_vlm",
+          "prompt_version": "harnesseval.intentional_change.prompt",
+          "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+          "case_audit": {
+            "status": "warning",
+            "warning": true,
+            "expected_spec_alignment": 0.185848,
+            "target_alignment": 0.043478,
+            "change_alignment": 0.043478,
+            "anchor_alignment": 0.470588
+          }
+        },
+        "notes": []
+      }
+    },
+    {
+      "label": "Full authored intended-change instruction",
+      "expected_spec": {
+        "target": "red book",
+        "initial_state": "closed",
+        "intended_change": "A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page. The book's front cover is lifted, revealing the inner pages. The book is now in an open state, with the first page visible.",
+        "change_type": "object_state",
+        "completion_criteria": "book cover is fully lifted and pages are visible",
+        "protected_anchors": [
+          "blue mug",
+          "potted basil plant",
+          "wooden countertop",
+          "white tiled wall"
+        ],
+        "negative_constraints": [
+          "book should not be moved from its position",
+          "book should not be rotated",
+          "book should not be damaged"
+        ],
+        "failure_modes": [
+          "book remains closed",
+          "book is partially opened",
+          "book is moved or rotated",
+          "book cover is torn or damaged"
+        ]
+      },
+      "audit": {
+        "status": "ok",
+        "warning": false,
+        "expected_spec_alignment": 0.504689,
+        "target_alignment": 0.043478,
+        "change_alignment": 1.0,
+        "anchor_alignment": 0.470588
+      },
+      "recomputed_result": {
+        "skill_id": "intentional_change_verifier_vlm",
+        "status": "ok",
+        "score": 1.0,
+        "metrics": {
+          "Q1_target_visible": 1.0,
+          "Q2_transition_visible": 1.0,
+          "Q3_intended_change": 1.0,
+          "Q4_target_specificity": 1.0,
+          "Q5_final_state": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_extra_event": 1.0,
+          "Q8_judgeable": 1.0,
+          "target_visibility": 1.0,
+          "change_execution": 1.0,
+          "target_specificity": 1.0,
+          "final_state": 1.0,
+          "preservation": 1.0,
+          "validity_gate": 1.0,
+          "core_score": 1.0,
+          "final_score": 1.0,
+          "expected_spec_alignment": 0.504689
+        },
+        "diagnostics": {
+          "definition_version": "harnesseval.intentional_change_vlm",
+          "prompt_version": "harnesseval.intentional_change.prompt",
+          "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+          "case_audit": {
+            "status": "ok",
+            "warning": false,
+            "expected_spec_alignment": 0.504689,
+            "target_alignment": 0.043478,
+            "change_alignment": 1.0,
+            "anchor_alignment": 0.470588
+          }
+        },
+        "notes": []
+      }
+    }
+  ]
+}

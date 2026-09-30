@@ -1,0 +1,51 @@
+{
+  "schema_version": "harnesseval.viewpoint_trajectory.cache",
+  "skill_id": "viewpoint_trajectory_verifier",
+  "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+  "pose_path": "[workspace]/artifacts/fresh/cache/skills/viewpoint_trajectory/seedance-2.0-standard/exploratory_transition/harnesseval_w_exploratory_0001_urban_crosswalk.pose.npz",
+  "metrics": {
+    "NavScore": 0.926951,
+    "Accuracy": 0.853901,
+    "Consistency": 1.0,
+    "nATE_t": 0.132301,
+    "nATE_r": 0.159897,
+    "cnATE_t": 0.0,
+    "cnATE_r": 0.0,
+    "consistency_pairs": 0,
+    "ATE_t": 0.298,
+    "ATE_r": 7.898568,
+    "total_path_length": 2.252446,
+    "total_rotation_deg": 49.39772
+  },
+  "provenance": {
+    "input_digest": "ae4a9f4df5062c1423930c812c25d4f7ef983b217d2e54fc6f05afe732f74052",
+    "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/exploratory_transition/seedance-2.0-standard/harnesseval_w_exploratory_0001_urban_crosswalk/output.mp4",
+      "size_bytes": 871937,
+      "mtime_ns": 1790802127017175262
+    },
+    "case_navigation_input": {
+      "interactions": [
+        {
+          "type": "navigation",
+          "action": "W"
+        },
+        {
+          "type": "navigation",
+          "action": "left"
+        }
+      ],
+      "settings": {
+        "perspective": "first_person"
+      }
+    },
+    "pose_sha256": "00e120864b724d962c2ca9a01b5e00147289340d034af950706a28f0d79f5202",
+    "backend": {
+      "backend_id": "harnesseval.viewpoint_trajectory.megasam",
+      "backend_version": "harnesseval.megasam_cam_c2w",
+      "config_digest": "577fa086d0f97c536916bc1eee281225d10af2b44a3f11a515210ec778c5415b"
+    },
+    "execution_mode": "local"
+  }
+}

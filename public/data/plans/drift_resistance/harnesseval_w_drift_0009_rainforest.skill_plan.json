@@ -1,0 +1,141 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0009_rainforest",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the rainforest bridge rollout remains technically clean and game-engine realistic, without artifacts, unreadable geometry, UI, borders, or degraded dense vegetation/bridge rendering.",
+      "parameters": {
+        "quality_targets": [
+          "realistic game-engine appearance",
+          "dense but readable rainforest scene",
+          "clean first-person frames",
+          "no text, labels, UI, borders, or watermark"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a 10-chunk steady forward navigation sequence with steering corrections, so motion should be present, continuous, and temporally smooth.",
+      "parameters": {
+        "expected_motion": "steady forward movement with small left/right steering corrections",
+        "action_chunks": 10
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same wooden bridge, mossy railing, right-side posts, worn planks, puddle/logs, and dense rainforest should retain consistent materials, lighting, scale, and identity throughout the rollout.",
+      "parameters": {
+        "tracked_anchors": [
+          "worn cracked wooden bridge planks",
+          "mossy left railing",
+          "right-side posts",
+          "fallen logs",
+          "puddle beside the path",
+          "far tree-lined rainforest path",
+          "visible elevation or ground-level change"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward travel along an aged wooden bridge in a rainforest should preserve plausible camera height, parallax, support relationships, occlusion by railing/posts, terrain contact, and non-floating objects.",
+      "parameters": {
+        "plausibility_checks": [
+          "first-person camera height remains plausible",
+          "near objects move faster than far trees",
+          "bridge planks, posts, logs, puddle, and vegetation stay grounded",
+          "railing and posts create consistent partial occlusion",
+          "route and elevation changes are spatially coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active first-person navigation forward along the bridge with W, W+D, W+A, W+right, and W+left corrections while staying centered on the planks.",
+      "parameters": {
+        "required_trajectory": "near-to-far progression along the worn wooden bridge toward the tree-lined path",
+        "controls": [
+          "W",
+          "W+D",
+          "W",
+          "W+A",
+          "W",
+          "W+right",
+          "W",
+          "W+left",
+          "W",
+          "W+D"
+        ],
+        "visibility_requirements": [
+          "mossy left railing remains in view when plausible",
+          "right-side posts remain in view when plausible",
+          "camera stays centered on bridge planks with small steering corrections"
+        ]
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "The primary axis is world_persistence and probe family is drift_resistance, with a long navigation rollout intended to test resistance to progressive visual, geometric, and semantic drift.",
+      "parameters": {
+        "drift_targets": [
+          "bridge identity persists",
+          "rainforest setting persists",
+          "landmark layout remains coherent",
+          "foreground wear pattern persists or changes only by viewpoint",
+          "structural occluders remain stable",
+          "route perspective advances without scene replacement"
+        ],
+        "long_horizon_chunks": 10
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation persistence, not an intentional semantic or object-state transition."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a target object response."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law validation beyond general navigation plausibility."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action does not include a loop or returned view to compare against an earlier viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving during the navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

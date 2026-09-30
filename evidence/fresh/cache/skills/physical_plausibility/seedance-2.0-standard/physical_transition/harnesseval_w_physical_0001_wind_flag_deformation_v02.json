@@ -1,0 +1,33 @@
+{
+  "schema_version": "harnesseval.physical_plausibility.cache",
+  "skill_id": "physical_plausibility_inspector",
+  "definition_version": "harnesseval.physical_plausibility.pavrm",
+  "metrics": {
+    "visual_plausibility": 0.7231
+  },
+  "details": {
+    "pavrm": {
+      "raw_score": 3.6155,
+      "score": 0.7231,
+      "sampling": {
+        "fps": 2.0,
+        "max_pixels": 602112
+      }
+    }
+  },
+  "provenance": {
+    "input_digest": "842e944a9c38d2fc8470c84e33c5f1b504dcc7c6a395a7e4e37582fdea58c05f",
+    "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/physical_transition/seedance-2.0-standard/harnesseval_w_physical_0001_wind_flag_deformation_v02/output.mp4",
+      "size_bytes": 694141,
+      "mtime_ns": 1790802127085868734
+    },
+    "backend": {
+      "backend_id": "harnesseval.physical_plausibility.pavrm",
+      "backend_version": "harnesseval.pavrm_qwen3vl_a3b",
+      "config_digest": "28fb755b9922a36fabd9b7359618b3f43d7f2d443f370ff7cc8b6d13fe62d6c0"
+    },
+    "execution_mode": "local"
+  }
+}

@@ -1,0 +1,540 @@
+{
+  "schema_version": "harnesseval.skill_eval",
+  "scorer_id": "harnesseval.score",
+  "created_at": "2026-09-30T21:53:45.649298+00:00",
+  "case_id": "harnesseval_w_drift_0001_old_town_lane",
+  "action_id": "drift_0001",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "model": "ep-20260816184220-sdqt8",
+  "model_id": "seedance-2.0-standard",
+  "paths": {
+    "metadata": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/drift_resistance/seedance-2.0-standard/harnesseval_w_drift_0001_old_town_lane/metadata.json",
+    "output_video": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/drift_resistance/seedance-2.0-standard/harnesseval_w_drift_0001_old_town_lane/output.mp4",
+    "skill_plan": "[workspace]/upstream/benchmark/plans/drift_resistance/harnesseval_w_drift_0001_old_town_lane.skill_plan.json",
+    "metric_bundle": "[workspace]/artifacts/fresh/cache/bundles/seedance-2.0-standard/drift_resistance/harnesseval_w_drift_0001_old_town_lane.metrics.json"
+  },
+  "video_validity": {
+    "status": "ok",
+    "score": 1.0,
+    "score_type": "cache_fingerprint_verified"
+  },
+  "skill_plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "routing_mode": "shipped_case_plan",
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "viewpoint_trajectory_verifier",
+      "drift_degradation_analyzer"
+    ],
+    "observation_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector"
+    ],
+    "core_skill_ids": [
+      "viewpoint_trajectory_verifier",
+      "drift_degradation_analyzer"
+    ],
+    "diagnostic_skill_ids": [],
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "Assess whether the old town lane frames remain technically clean, realistic, artifact-free, and free of watermarks or severe ambiguity across the rollout.",
+        "parameters": {
+          "domain": "realistic",
+          "initial_observation_path": "benchmark/initial_observations/harnesseval_w_drift_0001_old_town_lane.png",
+          "quality_checks": [
+            "blur",
+            "broken_geometry",
+            "duplicate_objects",
+            "watermarks",
+            "text_artifacts",
+            "collage_or_split_screen"
+          ]
+        }
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "The requested result is a long continuous navigation sequence, so motion should be present, temporally smooth, and without cuts, jumps, or resets.",
+        "parameters": {
+          "sequence_type": "long_navigation_sequence",
+          "chunks": [
+            "c01",
+            "c02",
+            "c03",
+            "c04",
+            "c05",
+            "c06",
+            "c07",
+            "c08"
+          ],
+          "expected_continuity": "continuous_route_without_cuts_or_reset"
+        }
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "The same old town world should persist visually while the camera moves; materials, lighting, architecture, and anchor appearances should not arbitrarily change.",
+        "parameters": {
+          "stable_anchors": [
+            "clock tower",
+            "cobblestone lane",
+            "bakery awning",
+            "lamp posts"
+          ],
+          "scene": "old_town_lane",
+          "style": "realistic"
+        }
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "Navigation through a cobblestone lane should obey plausible camera movement, scale, parallax, occlusion, and spatial relationships between buildings, lane, posts, awning, and tower.",
+        "parameters": {
+          "movement_context": "first_person_navigation",
+          "checks": [
+            "plausible_parallax",
+            "consistent_scale",
+            "stable_occlusion",
+            "no_object_warping",
+            "no_impossible_camera_motion"
+          ]
+        }
+      },
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "role": "core",
+        "reason": "The case explicitly requires active first-person navigation through a specified action sequence: W, W+left, W, right, W, A, W, D.",
+        "parameters": {
+          "control_scheme": "harnesseval_navigation_v1",
+          "actions": [
+            {
+              "chunk_id": "c01",
+              "action": "W"
+            },
+            {
+              "chunk_id": "c02",
+              "action": "W+left"
+            },
+            {
+              "chunk_id": "c03",
+              "action": "W"
+            },
+            {
+              "chunk_id": "c04",
+              "action": "right"
+            },
+            {
+              "chunk_id": "c05",
+              "action": "W"
+            },
+            {
+              "chunk_id": "c06",
+              "action": "A"
+            },
+            {
+              "chunk_id": "c07",
+              "action": "W"
+            },
+            {
+              "chunk_id": "c08",
+              "action": "D"
+            }
+          ],
+          "expected_behavior": "camera follows the commanded route through one coherent world"
+        }
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "role": "core",
+        "reason": "The primary probe is drift resistance: over at least 8 chunks, the clock tower, cobblestone lane, bakery awning, and lamp posts should remain part of one coherent world state without progressive visual, geometric, or semantic degradation.",
+        "parameters": {
+          "minimum_chunks": 8,
+          "drift_targets": [
+            "clock tower",
+            "cobblestone lane",
+            "bakery awning",
+            "lamp posts"
+          ],
+          "failure_modes": [
+            "anchor_disappearance",
+            "anchor_identity_change",
+            "layout_drift",
+            "semantic_substitution",
+            "geometry_degradation",
+            "world_reset",
+            "scene_cut"
+          ]
+        }
+      }
+    ]
+  },
+  "skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "status": "ok",
+      "score": 0.696093,
+      "metrics": {
+        "aesthetic": 0.509749,
+        "imaging": 0.665042,
+        "hpsv3": 0.655078,
+        "flickering": 0.954504
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.render_quality",
+        "cache_contract_version": "harnesseval.render_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "Assess whether the old town lane frames remain technically clean, realistic, artifact-free, and free of watermarks or severe ambiguity across the rollout.",
+      "plan_parameters": {
+        "domain": "realistic",
+        "initial_observation_path": "benchmark/initial_observations/harnesseval_w_drift_0001_old_town_lane.png",
+        "quality_checks": [
+          "blur",
+          "broken_geometry",
+          "duplicate_objects",
+          "watermarks",
+          "text_artifacts",
+          "collage_or_split_screen"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "status": "ok",
+      "score": 0.996071,
+      "metrics": {
+        "dynamic": 1.0,
+        "smoothness": 0.992142
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.motion_quality",
+        "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+        "aggregation": "equal_mean_required_components",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "The requested result is a long continuous navigation sequence, so motion should be present, temporally smooth, and without cuts, jumps, or resets.",
+      "plan_parameters": {
+        "sequence_type": "long_navigation_sequence",
+        "chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "expected_continuity": "continuous_route_without_cuts_or_reset"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "status": "ok",
+      "score": 0.918201,
+      "metrics": {
+        "background": 0.918201
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.appearance_consistency",
+        "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+        "aggregation": "single_required_component",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "The same old town world should persist visually while the camera moves; materials, lighting, architecture, and anchor appearances should not arbitrarily change.",
+      "plan_parameters": {
+        "stable_anchors": [
+          "clock tower",
+          "cobblestone lane",
+          "bakery awning",
+          "lamp posts"
+        ],
+        "scene": "old_town_lane",
+        "style": "realistic"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "status": "ok",
+      "score": 0.63452,
+      "metrics": {
+        "visual_plausibility": 0.63452
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_plausibility.pavrm",
+        "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+        "aggregation": "pavrm_raw_score_divided_by_5",
+        "missing_components": [],
+        "invalid_components": []
+      },
+      "notes": [],
+      "plan_role": "observation",
+      "plan_reason": "Navigation through a cobblestone lane should obey plausible camera movement, scale, parallax, occlusion, and spatial relationships between buildings, lane, posts, awning, and tower.",
+      "plan_parameters": {
+        "movement_context": "first_person_navigation",
+        "checks": [
+          "plausible_parallax",
+          "consistent_scale",
+          "stable_occlusion",
+          "no_object_warping",
+          "no_impossible_camera_motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "status": "ok",
+      "score": 0.685421,
+      "metrics": {
+        "NavScore": 0.685421,
+        "Accuracy": 0.724922,
+        "Consistency": 0.645921,
+        "nATE_t": 0.175508,
+        "nATE_r": 0.374649,
+        "cnATE_t": 0.365418,
+        "cnATE_r": 0.34274,
+        "consistency_pairs": 7,
+        "ATE_t": 1.006504,
+        "ATE_r": 17.891829,
+        "total_path_length": 5.734804,
+        "total_rotation_deg": 47.756286
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+        "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+        "aggregation": "harnesseval_navigation_trajectory_navscore"
+      },
+      "notes": [],
+      "plan_role": "core",
+      "plan_reason": "The case explicitly requires active first-person navigation through a specified action sequence: W, W+left, W, right, W, A, W, D.",
+      "plan_parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "actions": [
+          {
+            "chunk_id": "c01",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+left"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c04",
+            "action": "right"
+          },
+          {
+            "chunk_id": "c05",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c06",
+            "action": "A"
+          },
+          {
+            "chunk_id": "c07",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c08",
+            "action": "D"
+          }
+        ],
+        "expected_behavior": "camera follows the commanded route through one coherent world"
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "status": "ok",
+      "score": 0.912167,
+      "metrics": {
+        "cross_chunk_consistency": 0.911971,
+        "quality_trend": 1.0,
+        "quality_retention": 0.978917,
+        "worst_chunk_quality": 0.716853,
+        "chunk_quality_stability": 0.924076,
+        "quality_slope": 0.030151,
+        "chunk_quality": [
+          0.840296,
+          0.716853,
+          0.832518,
+          0.836425,
+          0.825677,
+          0.807293,
+          0.831302,
+          0.82258
+        ],
+        "chunk_appearance_similarity": [
+          0.970325,
+          0.961551,
+          0.947385,
+          0.934025,
+          0.920326,
+          0.892538,
+          0.893672
+        ],
+        "score_weights": {
+          "cross_chunk_consistency": 0.35,
+          "quality_trend": 0.2,
+          "quality_retention": 0.15,
+          "worst_chunk_quality": 0.15,
+          "chunk_quality_stability": 0.15
+        }
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.drift_degradation",
+        "cache_contract_version": "harnesseval.drift_degradation.cache_contract",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "render_quality": 0.748837,
+            "motion_quality": 0.994611,
+            "appearance_quality": 0.982277,
+            "physical_quality": 0.63546,
+            "chunk_quality": 0.840296
+          },
+          {
+            "chunk_id": "c02",
+            "render_quality": 0.7273,
+            "motion_quality": 0.496314,
+            "appearance_quality": 0.975638,
+            "physical_quality": 0.66816,
+            "chunk_quality": 0.716853
+          },
+          {
+            "chunk_id": "c03",
+            "render_quality": 0.703244,
+            "motion_quality": 0.995091,
+            "appearance_quality": 0.975478,
+            "physical_quality": 0.65626,
+            "chunk_quality": 0.832518
+          },
+          {
+            "chunk_id": "c04",
+            "render_quality": 0.711527,
+            "motion_quality": 0.996088,
+            "appearance_quality": 0.973444,
+            "physical_quality": 0.66464,
+            "chunk_quality": 0.836425
+          },
+          {
+            "chunk_id": "c05",
+            "render_quality": 0.692158,
+            "motion_quality": 0.9959,
+            "appearance_quality": 0.97189,
+            "physical_quality": 0.64276,
+            "chunk_quality": 0.825677
+          },
+          {
+            "chunk_id": "c06",
+            "render_quality": 0.656659,
+            "motion_quality": 0.99631,
+            "appearance_quality": 0.937043,
+            "physical_quality": 0.63916,
+            "chunk_quality": 0.807293
+          },
+          {
+            "chunk_id": "c07",
+            "render_quality": 0.702324,
+            "motion_quality": 0.996552,
+            "appearance_quality": 0.977351,
+            "physical_quality": 0.64898,
+            "chunk_quality": 0.831302
+          },
+          {
+            "chunk_id": "c08",
+            "render_quality": 0.668975,
+            "motion_quality": 0.997178,
+            "appearance_quality": 0.960348,
+            "physical_quality": 0.66382,
+            "chunk_quality": 0.82258
+          }
+        ],
+        "segmentation": "case_defined_chunks"
+      },
+      "notes": [],
+      "plan_role": "core",
+      "plan_reason": "The primary probe is drift resistance: over at least 8 chunks, the clock tower, cobblestone lane, bakery awning, and lamp posts should remain part of one coherent world state without progressive visual, geometric, or semantic degradation.",
+      "plan_parameters": {
+        "minimum_chunks": 8,
+        "drift_targets": [
+          "clock tower",
+          "cobblestone lane",
+          "bakery awning",
+          "lamp posts"
+        ],
+        "failure_modes": [
+          "anchor_disappearance",
+          "anchor_identity_change",
+          "layout_drift",
+          "semantic_substitution",
+          "geometry_degradation",
+          "world_reset",
+          "scene_cut"
+        ]
+      }
+    }
+  ],
+  "case_score": {
+    "score": 0.798794,
+    "status": "ok",
+    "score_type": "selected_core_mean",
+    "core_skill_ids": [
+      "viewpoint_trajectory_verifier",
+      "drift_degradation_analyzer"
+    ],
+    "weights": {
+      "viewpoint_trajectory_verifier": 0.5,
+      "drift_degradation_analyzer": 0.5
+    },
+    "routing_mode": "shipped_case_plan"
+  },
+  "observation_quality": {
+    "status": "ok",
+    "dimensions": {
+      "render_quality_inspector": 0.696093,
+      "motion_quality_inspector": 0.996071,
+      "appearance_consistency_inspector": 0.918201,
+      "physical_plausibility_inspector": 0.63452
+    },
+    "evidence_score": 0.811221,
+    "score_type": "selected_observation_mean"
+  },
+  "final_score": {
+    "score": 0.805007,
+    "status": "ok",
+    "score_type": "core_others_50_50",
+    "core_score": 0.798794,
+    "others_score": 0.811221,
+    "core_weight": 0.5,
+    "others_weight": 0.5
+  },
+  "provenance": {
+    "scorer_id": "harnesseval.score",
+    "input_digest": "c187c49b0d9b1855a6873da48f715db6d2f0a8837c36a1a1de058ea0a9841f48",
+    "cache_only": true
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0026_warehouse",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain a polished stylized 3D warehouse view with clean geometry, readable sparse objects, no text/UI/watermark artifacts, and no image corruption across frames.",
+      "parameters": {
+        "check_for": [
+          "clean industrial warehouse rendering",
+          "readable rope-and-pulley foreground structure",
+          "stable open concrete floor and distant wall",
+          "no borders, captions, labels, or watermark",
+          "no severe blur, tearing, duplication, or frame artifacts"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested W, W+D, W navigation sequence requires visible forward movement with smooth temporal progression rather than static frames, jumps, or jitter.",
+      "parameters": {
+        "expected_motion": "continuous first-person translation through the warehouse",
+        "failure_modes": [
+          "no camera movement",
+          "teleporting between unrelated views",
+          "strobing or jitter",
+          "inconsistent speed spikes",
+          "motion that reverses or ignores the controls"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same warehouse world must persist while navigating, preserving materials and landmarks such as the left rope/cloth system, floor wear, irregular material boundary, far wall, and small center-right object cluster.",
+      "parameters": {
+        "anchors": [
+          "left foreground rope-and-pulley or rope-cloth physical system",
+          "broad open concrete floor",
+          "foreground worn surface patch and irregular material boundary",
+          "distant warehouse wall and roof trusses",
+          "small secondary object cluster near the open floor"
+        ],
+        "check_for": [
+          "no semantic morphing of warehouse into another place",
+          "no sudden object identity changes",
+          "consistent lighting and material style",
+          "consistent spatial relationships under viewpoint motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through a sparse industrial interior should respect plausible scale, support, occlusion, parallax, collision-free movement, and stable static objects.",
+      "parameters": {
+        "check_for": [
+          "plausible first-person eye height",
+          "objects remain grounded and supported",
+          "foreground and midground parallax match forward/rightward movement",
+          "no camera passing through ropes, machinery, walls, or floor",
+          "static warehouse fixtures do not slide or deform"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary requirement is an exploratory transition driven by explicit first-person navigation controls: W, then W+D, then W, entering deeper into the warehouse with a rightward component during the middle chunk.",
+      "parameters": {
+        "control_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expected_effect": "move forward from the initial first-person position into the open warehouse route"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+D",
+            "expected_effect": "continue forward while drifting or strafing to the right"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W",
+            "expected_effect": "continue forward deeper into the scene from the shifted trajectory"
+          }
+        ],
+        "trajectory_constraints": [
+          "overall path should progress deeper into the warehouse",
+          "middle segment should show a rightward component relative to the initial view",
+          "camera remains first-person with no visible operator",
+          "scene landmarks should change position through coherent parallax"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state edit; it requests navigation through the existing warehouse."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the action is camera/navigation control."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome such as falling, swinging, collision response, or deformation is required beyond general plausibility."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short three-chunk exploratory transition, not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The control sequence does not leave and return to a prior viewpoint or require loop closure consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

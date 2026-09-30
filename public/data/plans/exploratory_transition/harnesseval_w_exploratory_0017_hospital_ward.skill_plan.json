@@ -1,0 +1,151 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0017_hospital_ward",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames should remain technically clean and readable as a polished stylized 3D hospital ward, preserving clear shapes, plausible lighting, materials, and moderate scene density without artifacts, text overlays, borders, or watermarking.",
+      "parameters": {
+        "appearance": "stylized_3d",
+        "environment": "indoor hospital ward",
+        "quality_checks": [
+          "clean geometry and readable object silhouettes",
+          "consistent hospital-ward lighting and material response",
+          "no collage, split-screen, UI, captions, borders, or watermark",
+          "foreground cabinet wear and surface imperfections remain visually coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout contains multiple navigation chunks, so generated motion should be present, continuous, and temporally smooth during forward movement, diagonal movement, and right turn.",
+      "parameters": {
+        "action_sequence": [
+          "W",
+          "W+D",
+          "right"
+        ],
+        "motion_expectations": [
+          "visible forward translation in c01",
+          "forward-right translation in c02",
+          "rightward yaw/turn in c03",
+          "no abrupt teleportation, stutter, or unexplained frame jumps"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same ward should persist through the exploratory transition, with stable landmarks such as the worn wooden cabinet, metal cart, tiled floor, walls, sign board, doorway/trim, and right-side table retaining identity and material finishes.",
+      "parameters": {
+        "protected_anchors": [
+          "worn wooden cabinet in the left foreground",
+          "scratched/worn cabinet surface",
+          "metal rolling cart ahead",
+          "hospital wall sign board",
+          "right-side table/cart",
+          "glossy tiled floor",
+          "wall trim, doorway, and damaged plaster"
+        ],
+        "consistency_checks": [
+          "objects do not morph into unrelated items",
+          "materials remain distinct across wood, metal, tile, plaster, and trim",
+          "scene layout remains a natural irregular hospital ward rather than becoming mirrored or stock-symmetric"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through the ward must respect plausible first-person movement, object support, scale, floor contact, occlusion, and collision constraints, especially near the cart that narrows the forward path.",
+      "parameters": {
+        "plausibility_checks": [
+          "camera moves through traversable floor space without passing through cabinet, cart, walls, or tables",
+          "rolling carts remain supported by wheels on the floor",
+          "cabinet remains grounded and correctly scaled relative to doors, floor tiles, and carts",
+          "floor elevation/material changes remain geometrically plausible",
+          "occlusion and parallax change consistently with movement"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case's primary axis is transition correctness for an exploratory navigation sequence: move forward, then forward-right, then turn right from a first-person viewpoint in the hospital ward.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "expected_action": "W",
+            "expected_viewpoint_change": "forward translation along the visible floor route deeper into the ward"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_action": "W+D",
+            "expected_viewpoint_change": "continued movement with a rightward component, adjusting position toward the right side of the route while avoiding the cart"
+          },
+          {
+            "chunk_id": "c03",
+            "expected_action": "right",
+            "expected_viewpoint_change": "rightward camera yaw/turn from the new position"
+          }
+        ],
+        "trajectory_constraints": [
+          "first-person camera with no visible operator",
+          "progressive viewpoint change rather than static image animation",
+          "route remains coherent with the initial hospital-ward layout",
+          "foreground cabinet should shift out of view or change parallax naturally as the camera advances",
+          "nearby cart and wall features should show correct relative parallax during movement and turn"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state edit; it requests viewpoint/navigation transition correctness."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the action is camera navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific causal physical-law response is being evaluated beyond general plausibility of navigation and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short three-chunk exploratory transition, not a long-horizon sequence explicitly targeting resistance to progressive drift."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while the camera moves."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

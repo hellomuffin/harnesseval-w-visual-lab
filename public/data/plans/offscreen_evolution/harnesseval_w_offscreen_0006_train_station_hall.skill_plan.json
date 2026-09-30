@@ -1,0 +1,87 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_offscreen_0006_train_station_hall",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "offscreen_evolution"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result must remain photorealistic and technically clean in a dense indoor train station hall with crowds, trains, shopfronts, clock, roof structure, benches, and planters.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The sequence requires steady camera turns and visible passenger traffic evolution, so temporal smoothness, absence of jitter, and coherent motion are necessary.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Station anchors such as the arched roof, large clock, platform trains, benches, planters, shopfronts, and platform edges must keep a consistent visual identity across the rollout.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Passenger walking, group separation and joining, camera movement, train/platform geometry, and support relationships must remain physically plausible in the station concourse.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly requires a camera trajectory: start on the central concourse, turn right until the crowd is offscreen, hold, then turn back left to the same concourse.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "After looking away and returning, the final view must match the original station layout and spatial relationships while allowing the crowd state to have changed.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "role": "core",
+      "reason": "The primary requirement is that the passenger crowd continues evolving while fully offscreen, then reappears redistributed in the same world rather than frozen or regenerated inconsistently.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier",
+    "offscreen_evolution_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic or object-state edit; it is offscreen evolution of ongoing passenger traffic during a camera look-away and return."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a response; the case concerns navigation/viewpoint movement and natural crowd evolution."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of walking passengers and station geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The sequence has eight chunks and is not framed as a long-horizon drift-resistance rollout with many action turns."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "harnesseval.offscreen_evolution.result",
+  "skill_id": "offscreen_evolution_verifier",
+  "definition_version": "harnesseval.offscreen_evolution",
+  "prompt_version": "harnesseval.offscreen_evolution.prompt",
+  "input_digest": "380ca123f01db16000857e0a2d8796a7f147fc46bd2b4eb2e9a3085282ecd871",
+  "result": {
+    "skill_id": "offscreen_evolution_verifier",
+    "status": "ok",
+    "score": 0.0,
+    "metrics": {
+      "Q1_pre_visible": 1.0,
+      "Q2_offscreen_absent": 1.0,
+      "Q3_return_visible": 0.0,
+      "Q4_anchor_preservation": 0.0,
+      "Q5_no_reset": 0.0,
+      "Q6_state_change_visible": 0.0,
+      "Q7_evolution_plausible": 0.0,
+      "Q8_judgeable": 1.0,
+      "visibility_score": 0.666667,
+      "validity_gate": 0.5,
+      "anchor_score": 0.0,
+      "evolution_score": 0.0,
+      "core_score": 0.0,
+      "final_score": 0.0,
+      "expected_spec_alignment": 0.442761
+    },
+    "diagnostics": {
+      "definition_version": "harnesseval.offscreen_evolution",
+      "prompt_version": "harnesseval.offscreen_evolution.prompt",
+      "cache_contract_version": "harnesseval.offscreen_evolution.cache_contract",
+      "case_audit": {
+        "status": "ok",
+        "warning": false,
+        "expected_spec_alignment": 0.442761,
+        "target_alignment": 0.333333,
+        "anchor_alignment": 0.272727,
+        "visibility_alignment": 0.722222
+      },
+      "analyze_agent_cache": "[workspace]/artifacts/fresh/cache/skills/offscreen_evolution/analyze_agent/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "analyze_agent_evidence_digest": "76c79724a861c4641d23b8b85cbc954ebf87d693658cea0cc03e97e65645c6c5",
+      "verify_agent_cache": "[workspace]/artifacts/fresh/cache/skills/offscreen_evolution/verify_agent/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "verify_agent_evidence_digest": "3a0b74819b1826833e2cc4fbdb15cd2ccba877947f8852a72260fd97fbe395f1"
+    },
+    "notes": [
+      "analyze_agent alignment is a case-audit warning only; scoring uses the canonical offscreen-evolution specification and generated video"
+    ]
+  },
+  "provenance": {
+    "backend": {
+      "backend_id": "openai_compatible.offscreen_evolution_vlm",
+      "backend_version": "local-judge",
+      "config_digest": "3391ccadee893c8e37f1f2e07877acca1cb94276f5bbef8160b46020bd24a359"
+    },
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/offscreen_evolution/seedance-2.0-standard/harnesseval_w_offscreen_0002_torch_gateway/output.mp4",
+      "size_bytes": 4400447,
+      "mtime_ns": 1790802127201079853,
+      "sha256": "e36facea499a0d8ef5a8f7d78a5e695a634d8b4af67b71956665ce1d661bdd44"
+    },
+    "initial_observation": {
+      "path": "[workspace]/upstream/benchmark/initial_observations/harnesseval_w_offscreen_0002_torch_gateway.png",
+      "size_bytes": 433490,
+      "mtime_ns": 1790802126977635273,
+      "sha256": "a26c020a4ae643fbb940ea665fddc785796d31f18f01cb15bd3b6ce39e9bcbf9"
+    },
+    "analyze_agent_cache_hit": false,
+    "verify_agent_cache_hit": false
+  }
+}

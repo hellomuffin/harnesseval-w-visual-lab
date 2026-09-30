@@ -1,0 +1,151 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0023_parking_garage",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames must remain technically clean in an anime-style indoor parking garage with sparse open space, coherent perspective, readable geometry, stable lighting, and no UI/text/watermark artifacts.",
+      "parameters": {
+        "check_for": [
+          "clean 16:9 anime rendering",
+          "coherent parking-garage perspective",
+          "stable indoor lighting and shadows",
+          "no malformed pillars, pipes, railings, windows, car, or elevator-like landmark",
+          "no readable text, labels, borders, or watermarks"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is a short navigation sequence, so generated frames should show present, smooth first-person motion across W, W, then W+D without jitter, stutter, warping, or abrupt jumps.",
+      "parameters": {
+        "expected_motion": "continuous forward movement followed by forward-right movement",
+        "check_for": [
+          "temporal smoothness",
+          "consistent apparent velocity",
+          "no frame-to-frame flicker",
+          "no sudden cuts or teleportation",
+          "no excessive blur or unstable shake"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same parking garage world should persist during navigation, preserving the anime appearance, material finishes, asymmetric wall/edge details, parked car, pillars, railings, windows, pipes, and distant landmark as viewpoint-relative anchors.",
+      "parameters": {
+        "anchors": [
+          "open driving lane",
+          "floor markings",
+          "large angled concrete support on the left",
+          "cracked wall and curb on the right",
+          "rusty parked car on the right",
+          "railings and window band",
+          "small booth-like structure",
+          "distant elevator-like landmark",
+          "ceiling beams, lights, and pipes"
+        ],
+        "check_for": [
+          "consistent anime style",
+          "consistent material finishes",
+          "no identity drift of landmarks",
+          "no objects appearing or disappearing without viewpoint cause",
+          "no change from sparse parking garage into another environment"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement through an indoor garage must obey plausible spatial relationships: floor plane, ceiling height, pillars, walls, railings, car, and distant structures should keep believable scale, support, occlusion, and parallax.",
+      "parameters": {
+        "check_for": [
+          "plausible first-person camera height",
+          "correct parallax during forward and forward-right movement",
+          "stable floor and ceiling planes",
+          "objects remain supported and fixed in the world",
+          "no clipping through walls, pillars, car, railings, or curb",
+          "consistent occlusion and scale changes"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition correctness for an exploratory navigation action sequence: W, W, then W+D from a first-person viewpoint through an open parking-garage path.",
+      "parameters": {
+        "control_sequence": [
+          {
+            "chunk_id": "c01",
+            "expected_action": "W",
+            "expected_effect": "move forward along the open driving lane"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_action": "W",
+            "expected_effect": "continue forward deeper into the garage with landmarks growing closer and side elements showing parallax"
+          },
+          {
+            "chunk_id": "c03",
+            "expected_action": "W+D",
+            "expected_effect": "move forward while shifting/turning right relative to the lane and right-side parked car/wall area"
+          }
+        ],
+        "trajectory_constraints": [
+          "first-person camera with no visible operator",
+          "movement remains inside the parking garage",
+          "open path remains navigable",
+          "distant landmark and nearby structures update according to forward/right parallax",
+          "no static-camera output"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for an intentional semantic or object-state edit; it asks for viewpoint navigation through the existing garage."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit force or physical intervention whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome is required beyond general plausibility of camera motion and spatial layout."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks, not a long-horizon sequence targeting progressive drift resistance."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not leave and return to a previously seen viewpoint."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

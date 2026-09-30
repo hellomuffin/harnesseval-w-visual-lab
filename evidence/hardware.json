@@ -1,0 +1,11 @@
+{
+  "python": "3.12.12 | packaged by conda-forge | (main, Jan 26 2026, 23:51:32) [GCC 14.3.0]",
+  "platform": "Linux-5.15.0-136-generic-x86_64-with-glibc2.39",
+  "torch": "2.9.1+cu128",
+  "torch_cuda": "12.8",
+  "gpus": [
+    "NVIDIA L40S, 570.124.06, 46068 MiB",
+    "NVIDIA L40S, 570.124.06, 46068 MiB"
+  ],
+  "note": "Two local L40S GPUs; inference, metrics and generation run on this host. Initial construction image used imagegen."
+}

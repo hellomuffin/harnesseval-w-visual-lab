@@ -1,0 +1,163 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0042_lakeside",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve clean anime-style lakeside rendering without artifacts, unreadable geometry, borders, UI, text, or watermark across sparse shoreline, water, buoy post, logs, person, bird, and lighthouse landmark.",
+      "parameters": {
+        "check_style": "anime outdoor lakeside/coastal water",
+        "watch_for": [
+          "frame artifacts",
+          "warping",
+          "flicker",
+          "blur or over-smearing",
+          "unwanted text/UI/watermark",
+          "loss of sparse scene readability"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains three navigation chunks, so generated frames need visible, temporally smooth motion for forward movement, forward-right movement, and right turn rather than static or jumpy changes.",
+      "parameters": {
+        "action_chunks": [
+          "W",
+          "W+D",
+          "right"
+        ],
+        "watch_for": [
+          "missing motion",
+          "abrupt jumps",
+          "temporal jitter",
+          "inconsistent motion speed",
+          "strobing water or object flicker"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same lakeside world must remain consistent while navigating: the red buoy on the wooden post, shoreline pebbles, driftwood/logs, water, distant lighthouse island, distant silhouettes, single person, and restrained sparse composition should not morph or disappear without viewpoint cause.",
+      "parameters": {
+        "anchors": [
+          "red buoy attached to post",
+          "wooden post in shallow water",
+          "shoreline pebble threshold",
+          "driftwood/log cluster",
+          "distant lighthouse island",
+          "distant land silhouettes",
+          "single person near shore",
+          "open lake water"
+        ],
+        "watch_for": [
+          "semantic drift",
+          "object identity changes",
+          "style changes",
+          "scale changes",
+          "landmark disappearance"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through a shallow lakeside shoreline must remain physically plausible: camera translation and rotation should respect ground/water boundaries, object support, occlusion, scale, reflections, and stable horizon behavior.",
+      "parameters": {
+        "environment": "lakeside shoreline with shallow water and logs",
+        "watch_for": [
+          "camera clipping through logs/post/person",
+          "implausible floating shoreline objects",
+          "unstable horizon",
+          "water/shore scale errors",
+          "incorrect occlusion or parallax",
+          "impossible viewpoint height"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition_correctness for an exploratory_transition using explicit first-person navigation controls W, W+D, then right; evaluation must verify the camera moves forward, then forward-right, then yaws right through the same scene.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_trajectory": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expected": "forward movement from the initial shoreline viewpoint toward the middle zone/waterline, with appropriate forward parallax and landmarks growing slightly or shifting consistently"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+D",
+            "expected": "continued forward movement with rightward lateral component, changing relative alignment of shoreline, logs, buoy post, and lighthouse consistently"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "right",
+            "expected": "rightward camera rotation/yaw from the current location, revealing/centering more right-side lakeside content while preserving world anchors"
+          }
+        ],
+        "initial_layout_requirements": [
+          "near threshold",
+          "readable middle zone",
+          "distinct far landmark"
+        ],
+        "key_anchors": [
+          "shoreline threshold",
+          "logs in shallow water",
+          "red buoy on post",
+          "lighthouse island",
+          "distant land silhouette"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state edit; it is a navigation/viewpoint transition through an existing lakeside world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response is the target; movement is controlled camera/navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response such as collision, gravity, fluid dynamics, or object impact is being tested beyond general physical plausibility."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks, not a long-horizon many-turn drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require revisiting a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

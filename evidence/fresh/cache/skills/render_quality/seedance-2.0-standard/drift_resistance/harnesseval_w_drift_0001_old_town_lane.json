@@ -1,0 +1,65 @@
+{
+  "schema_version": "harnesseval.render_quality.cache",
+  "skill_id": "render_quality_inspector",
+  "definition_version": "harnesseval.render_quality",
+  "metrics": {
+    "aesthetic": 0.5097492809479053,
+    "imaging": 0.6650416630965013,
+    "hpsv3": 0.6550779122114181,
+    "flickering": 0.9545041589175953
+  },
+  "details": {
+    "aesthetic_quality": {
+      "component": "aesthetic",
+      "raw_score": 0.5097492809479053,
+      "score": 0.5097492809479053,
+      "sampling": {
+        "fps": 2.0
+      },
+      "sampled_frames": 65
+    },
+    "imaging_quality": {
+      "component": "imaging",
+      "raw_score": 0.6650416630965013,
+      "score": 0.6650416630965013,
+      "sampling": {
+        "fps": 2.0
+      },
+      "sampled_frames": 65
+    },
+    "hpsv3_quality": {
+      "component": "hpsv3",
+      "raw_score": 5.101558244228363,
+      "score": 0.6550779122114181,
+      "sampling": {
+        "max_frames": 20,
+        "method": "linspace_floor"
+      },
+      "sampled_frames": 20
+    },
+    "temporal_flickering": {
+      "component": "flickering",
+      "raw_score": 0.9545041589175953,
+      "score": 0.9545041589175953,
+      "sampling": {
+        "fps": 10.0
+      },
+      "sampled_frames": 385
+    }
+  },
+  "provenance": {
+    "input_digest": "138e996d185737bdd35833ae5504da8074bd0ef5dcccc0ddae0c3ef095b1d258",
+    "cache_contract_version": "harnesseval.render_quality.cache_contract",
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/drift_resistance/seedance-2.0-standard/harnesseval_w_drift_0001_old_town_lane/output.mp4",
+      "size_bytes": 3591180,
+      "mtime_ns": 1790802127097082191
+    },
+    "backend": {
+      "backend_id": "harnesseval.render_quality",
+      "backend_version": "harnesseval.render_quality.four_metrics",
+      "config_digest": "defec4b60939d2dab0b70132cf4e650d0ec441890b563456c641dfac3dfa0e06"
+    },
+    "execution_mode": "local"
+  }
+}

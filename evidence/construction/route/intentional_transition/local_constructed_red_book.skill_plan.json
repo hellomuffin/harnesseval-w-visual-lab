@@ -1,0 +1,95 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "planner_version": "harnesseval.planner.v1",
+  "created_at": "2026-09-30T21:20:51.705562+00:00",
+  "routing_mode": "llm_case",
+  "input_digest": "a6ef80ea8619bdb546d6367d4f813acc525891424becfa52a31243816a62c6c1",
+  "case_id": "local_constructed_red_book",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "planner": {
+    "type": "openai_compatible",
+    "version": "harnesseval.planner.v1",
+    "prompt_version": "worlddojo.v2_planner.prompt.v8",
+    "model": "local-judge",
+    "wire_api": "chat_completions",
+    "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "response_id": "chatcmpl-bfe289e25ee2b8be",
+    "response_model": "local-judge",
+    "usage": {
+      "prompt_tokens": 2825,
+      "total_tokens": 3320,
+      "completion_tokens": 495,
+      "prompt_tokens_details": null
+    },
+    "elapsed_seconds": 11.817803,
+    "attempt_count": 1
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The case requires assessing the aesthetic and technical quality of the generated frames, including photorealistic rendering of the book, countertop, and background.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The case requires verifying that visual appearance remains consistent throughout the transition, including the book's texture, lighting, and the unchanged background elements.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The case requires evaluating if the book's opening motion is physically plausible (e.g., realistic hinge movement, no tearing) under the specified constraints.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The case explicitly targets an intentional semantic transition: opening the red book, while protected anchors (mug, plant, wall) must remain unchanged.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require camera movement or navigation; the viewpoint is fixed."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The case targets an intentional semantic transition (book opening), not a causal physical response to an external force."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required; the motion is a simple, controlled object state change."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is a short, single-action transition, not a long-horizon rollout."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve a non-static loop or revisit."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not involve offscreen processes or their evolution."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 4,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

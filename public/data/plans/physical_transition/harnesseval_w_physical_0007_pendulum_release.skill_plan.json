@@ -1,0 +1,105 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0007_pendulum_release",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated frames must remain technically clean enough to judge the pendulum apparatus, protractor markings, rest marker, string, bob, and fixed measurement setup.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should show present, temporally smooth pendulum motion after release from the marked angle, without jitter, teleporting, or discontinuous bob/string movement.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The pivot, string, protractor, rest marker, bob, and surrounding apparatus should keep stable identity, geometry, scale, and material appearance across frames.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The bob should respond plausibly to release with gravity-driven swinging and damping, while the apparatus and camera remain fixed.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The primary target is the causal physical response to setting the pendulum_release condition to medium level 3 and releasing the bob from the marked angle with no push.",
+      "parameters": {
+        "expected_intervention": "release_from_marked_angle_no_push",
+        "condition_level": "medium",
+        "template_parameter_index": 3,
+        "protected_anchors": [
+          "pivot",
+          "string",
+          "protractor",
+          "rest marker"
+        ],
+        "fixed_camera_required": true
+      }
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "Pendulum release requires a case-specific oscillation check: cause precedes effect, the bob follows an arc about the pivot, amplitude is consistent with a medium release, and motion remains within the visible apparatus.",
+      "parameters": {
+        "law_family": "oscillation",
+        "checks": [
+          "bob follows circular arc constrained by string length",
+          "motion begins only after release with no added push impulse",
+          "swing amplitude matches marked medium level 3 release",
+          "string remains taut and attached to pivot and bob",
+          "apparatus scale cues and camera stay fixed",
+          "motion damps or remains physically plausible over time"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly requires the measurement camera to remain fixed; there is no active camera, navigation path, or viewpoint trajectory to verify."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not a semantic/object-state edit; it is a causal physical response to releasing a pendulum."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is an ordinary physical rollout, not a long-horizon multi-turn/chunk test where progressive degradation is the explicit target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return to a prior view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The pendulum response should remain visible in the apparatus; no offscreen process is specified."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

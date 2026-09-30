@@ -1,0 +1,96 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0008_classroom_whiteboard_marker",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The generated frames should remain realistic and technically clean in a classroom scene, with no severe artifacts, watermarks, blur, broken geometry, or ambiguity that would obscure the marker, tray, desk, whiteboard, clock, poster, or desk rows.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout must show the red marker being moved from the tray to the desk, so motion should be present, judgeable, and temporally smooth rather than popping or teleporting incoherently.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same red whiteboard marker must remain identifiable across frames, and protected classroom anchors including the whiteboard, desk rows, clock, and poster should keep consistent appearance and layout.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The marker relocation should look physically plausible: the marker should move as a solid object from the tray onto the desk without impossible deformation, clipping, scale changes, or unsupported floating.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "This is an intentional transition: the explicitly requested semantic state change is moving the red marker from the tray to the desk while keeping unrelated scene anchors unchanged.",
+      "parameters": {
+        "target_entity": "red whiteboard marker",
+        "initial_location": "tray",
+        "expected_final_location": "desk",
+        "protected_anchors": [
+          "whiteboard",
+          "desk rows",
+          "clock",
+          "poster"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case requires a fixed camera, not active navigation or a viewpoint trajectory; stable framing can be assessed through consistency and intentional-change checks."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The primary target is a directly specified intentional object relocation, not a causal physical response to an explicit force or intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of moving a marker from a tray to a desk."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is a short intentional transition, not a long-horizon rollout targeting resistance to progressive drift or degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return-to-view requirement."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "There is no offscreen process that must continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

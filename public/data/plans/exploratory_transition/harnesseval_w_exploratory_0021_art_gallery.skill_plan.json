@@ -1,0 +1,137 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0021_art_gallery",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain cinematic-realistic and technically clean in a sparse indoor art gallery with walls, polished floor, wooden floor, door frame, sign, and display stand rendered without artifacts, warping, unreadable overlays, borders, or watermarks.",
+      "parameters": {
+        "check_for": [
+          "clean realistic gallery rendering",
+          "stable lighting and restrained color grading",
+          "no collage, split-screen, UI, labels, captions, or watermark",
+          "plausible geometry for walls, floor boundary, doorway, sign, and display stand"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a three-chunk navigation sequence, so generated frames must show present, smooth first-person motion rather than static images, jumps, flicker, or temporally unstable movement.",
+      "parameters": {
+        "expected_motion": "continuous forward motion with a slight rightward component during the W+D chunk",
+        "chunks": [
+          "c01: W",
+          "c02: W+D",
+          "c03: W"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same gallery world must persist through the transition, preserving the wooden display stand, slim sign, irregular gray-to-wood floor boundary, central doorway, wall layout, and distant silhouette as viewpoint changes.",
+      "parameters": {
+        "anchors": [
+          "wooden foreground display stand offset left of the doorway",
+          "slim sign near the stand",
+          "irregular boundary between polished gray floor and wood floor",
+          "central stone-framed doorway with open doors",
+          "distant human silhouette beyond the doorway",
+          "sparse art gallery walls and open floor"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The navigation should respect physical scale and causality in an indoor gallery: the camera should move through open floor space, not pass through the stand, sign, doorway frame, walls, or floor surfaces, and perspective/parallax should match first-person locomotion.",
+      "parameters": {
+        "constraints": [
+          "no clipping through foreground display stand or sign",
+          "no passing through walls or doorway frame",
+          "floor remains level and traversable",
+          "objects keep plausible support and scale",
+          "parallax increases naturally as the camera approaches the doorway"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition correctness for an exploratory_transition, and the explicit control sequence W, W+D, W requires verifying a first-person path that advances through the gallery toward the doorway with a rightward drift during the middle chunk.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_trajectory": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expectation": "camera moves forward from the initial view toward the central doorway and midground landmarks"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+D",
+            "expectation": "camera continues forward while shifting/turning right, changing relative alignment with the floor boundary, display stand, and doorway"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W",
+            "expectation": "camera continues forward along the new heading, maintaining coherent first-person navigation in the same gallery"
+          }
+        ],
+        "landmarks_for_path_validation": [
+          "foreground display stand should grow larger or move out of frame according to approach and rightward drift",
+          "doorway should generally become closer across the sequence",
+          "irregular floor-material boundary should show consistent parallax",
+          "distant silhouette should remain part of the same room beyond the doorway unless occluded by viewpoint"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state edit; it requests navigation through the existing gallery."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing an object response; the only specified action is first-person movement."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general navigation plausibility and collision avoidance."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short three-chunk exploratory transition, not a long-horizon drift-resistance case with many action turns."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not form a loop or require returning to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while the camera moves."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

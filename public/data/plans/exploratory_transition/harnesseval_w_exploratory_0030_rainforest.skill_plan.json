@@ -1,0 +1,160 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0030_rainforest",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated frames must remain photorealistic and technically clean for a rainforest path with bridge, rocks, ferns, vines, shaded entrance, and natural lighting; artifacts, unreadable geometry, borders, UI, or stock-like/collage composition would violate the case.",
+      "parameters": {
+        "check_photorealism": true,
+        "check_environment": "outdoor natural rainforest",
+        "check_scene_elements": [
+          "open dirt path",
+          "wooden bridge/overpass landmark",
+          "mossy rocks",
+          "ferns and dense vegetation",
+          "partial occlusion from structural/foliage elements",
+          "clear entrance or exit under/near the bridge"
+        ],
+        "reject_conditions": [
+          "visible UI, labels, captions, watermark, split screen, or border",
+          "major blur, warping, melting, duplication, or texture corruption",
+          "implausible scale or geometry for bridge, path, rocks, or vegetation"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is driven by three navigation chunks, so motion should be present, continuous, and smooth rather than static, jumpy, flickering, or temporally incoherent.",
+      "parameters": {
+        "expected_motion": "first-person forward movement with a rightward turn during the middle chunk",
+        "action_chunks": [
+          "W",
+          "W+right",
+          "W"
+        ],
+        "check_temporal_smoothness": true,
+        "reject_conditions": [
+          "static frames despite navigation input",
+          "abrupt teleportation or cuts between chunks",
+          "excessive jitter, frame-to-frame flicker, or unstable exposure"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The rainforest world must remain the same coherent place as the viewpoint moves: the bridge landmark, open path, rocks, vegetation, lighting, and entrance/exit should persist with consistent identity and layout.",
+      "parameters": {
+        "anchors": [
+          "wooden bridge landmark",
+          "dirt path",
+          "large moss-covered rocks",
+          "ferns and rainforest foliage",
+          "shaded passage/entrance beneath or beyond the bridge"
+        ],
+        "check_identity_consistency": true,
+        "check_material_consistency": true,
+        "reject_conditions": [
+          "scene changes into a different biome or built environment",
+          "bridge, path, rocks, or entrance disappear without viewpoint justification",
+          "large semantic swaps, duplicated landmarks, or inconsistent lighting direction"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person navigation through a natural path under/around a bridge must obey plausible camera height, collision avoidance, depth ordering, occlusion, support, and parallax.",
+      "parameters": {
+        "expected_camera": "human-height first-person walking/navigation viewpoint",
+        "check_spatial_plausibility": true,
+        "check_occlusion_and_parallax": true,
+        "reject_conditions": [
+          "camera passes through bridge supports, rocks, ground, or vegetation in an impossible way",
+          "floating or unsupported bridge/rocks/trees",
+          "incorrect depth ordering or parallax during forward/right motion",
+          "implausible acceleration, rolling, flying, or non-human camera height"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This is an exploratory_transition case with explicit navigation controls W, W+right, W from a first-person viewpoint along an open rainforest path toward/under the bridge and entrance.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "required_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expected_effect": "advance forward along the visible dirt path toward the bridge/entrance"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W+right",
+            "expected_effect": "continue forward while rotating or veering right, changing the view consistently relative to bridge, rocks, and path"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "W",
+            "expected_effect": "advance in the new facing direction without losing continuity of the rainforest layout"
+          }
+        ],
+        "trajectory_requirements": [
+          "clear first-person viewpoint change across chunks",
+          "landmarks shift by plausible parallax",
+          "path/entrance remains navigationally coherent",
+          "no teleportation, reverse motion, or unrelated scene transition"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint transition, not an explicitly specified semantic or object-state edit with protected anchors."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal object dynamics must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is requested beyond general navigation plausibility, which is covered by physical plausibility inspection."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not loop back or request revisiting a prior view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "harnesseval.viewpoint_trajectory.cache",
+  "skill_id": "viewpoint_trajectory_verifier",
+  "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+  "pose_path": "[workspace]/artifacts/fresh/cache/skills/viewpoint_trajectory/seedance-2.0-standard/return_revisit_consistency/harnesseval_w_return_0001_city_intersection.pose.npz",
+  "metrics": {
+    "NavScore": 0.754596,
+    "Accuracy": 0.78607,
+    "Consistency": 0.723123,
+    "nATE_t": 0.157712,
+    "nATE_r": 0.270148,
+    "cnATE_t": 0.292887,
+    "cnATE_r": 0.260868,
+    "consistency_pairs": 8,
+    "ATE_t": 1.594614,
+    "ATE_r": 53.875269,
+    "total_path_length": 10.110929,
+    "total_rotation_deg": 199.428476
+  },
+  "provenance": {
+    "input_digest": "59b882f3b9b407d1b5a910d50ef163cda6f00444498d3e5e503d4854998b6484",
+    "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+    "video": {
+      "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/return_revisit_consistency/seedance-2.0-standard/harnesseval_w_return_0001_city_intersection/output.mp4",
+      "size_bytes": 5072612,
+      "mtime_ns": 1790802127429078144
+    },
+    "case_navigation_input": {
+      "interactions": [
+        {
+          "type": "navigation",
+          "action": "W"
+        },
+        {
+          "type": "navigation",
+          "action": "W"
+        },
+        {
+          "type": "navigation",
+          "action": "S"
+        },
+        {
+          "type": "navigation",
+          "action": "S"
+        },
+        {
+          "type": "navigation",
+          "action": "left"
+        },
+        {
+          "type": "navigation",
+          "action": "right"
+        },
+        {
+          "type": "navigation",
+          "action": "A"
+        },
+        {
+          "type": "navigation",
+          "action": "D"
+        }
+      ],
+      "settings": {
+        "perspective": "first_person"
+      }
+    },
+    "pose_sha256": "9f809e6598007beec67aff9691d53a9f866340a7471810c4e442b05f0607bc23",
+    "backend": {
+      "backend_id": "harnesseval.viewpoint_trajectory.megasam",
+      "backend_version": "harnesseval.megasam_cam_c2w",
+      "config_digest": "577fa086d0f97c536916bc1eee281225d10af2b44a3f11a515210ec778c5415b"
+    },
+    "execution_mode": "local"
+  }
+}

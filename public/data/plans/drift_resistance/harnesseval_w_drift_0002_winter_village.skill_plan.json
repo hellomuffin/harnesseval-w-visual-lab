@@ -1,0 +1,155 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0002_winter_village",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated winter village frames must remain technically clean, realistic, and free of severe artifacts, blur, watermarks, text artifacts, split-screen, or broken geometry across the rollout.",
+      "parameters": {
+        "domain": "realistic",
+        "scene": "winter_village",
+        "artifact_checks": [
+          "watermark",
+          "illegible text",
+          "split-screen",
+          "collage",
+          "extreme blur",
+          "duplicated objects",
+          "broken geometry"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is an eight-chunk continuous navigation sequence, so frames should show present, smooth temporal motion without cuts, freezes, jumps, or reset-like discontinuities.",
+      "parameters": {
+        "minimum_chunks": 8,
+        "expected_motion": "continuous first-person navigation"
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same realistic winter village should retain consistent materials, lighting, snow coverage, cabins, stalls, road, and church appearance through the long route.",
+      "parameters": {
+        "stable_anchors": [
+          "church steeple",
+          "snow road",
+          "wood cabins",
+          "market stalls"
+        ],
+        "consistency_targets": [
+          "architecture",
+          "snow and road surface",
+          "market stall layout",
+          "lighting and weather",
+          "first-person perspective"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through a snowy village should obey plausible camera motion, spatial depth, object solidity, occlusion, and scale without impossible collisions or geometry morphing.",
+      "parameters": {
+        "scene_constraints": [
+          "snow road remains traversable",
+          "cabins and stalls stay fixed in the environment",
+          "church steeple remains spatially plausible",
+          "camera movement respects ground-level navigation"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires active first-person navigation using A, W, D, left, W, up, down, W along one continuous route without cuts or resets.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "actions": [
+          "A",
+          "W",
+          "D",
+          "left",
+          "W",
+          "up",
+          "down",
+          "W"
+        ],
+        "requirements": [
+          "continuous route",
+          "no cuts",
+          "no reset",
+          "viewpoint changes match commanded navigation"
+        ]
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "This is a drift_resistance case with a long-horizon eight-chunk rollout where the church steeple, snow road, wood cabins, and market stalls must remain part of one coherent world state.",
+      "parameters": {
+        "minimum_chunks": 8,
+        "drift_targets": [
+          "church steeple",
+          "snow road",
+          "wood cabins",
+          "market stalls"
+        ],
+        "degradation_modes": [
+          "semantic drift",
+          "geometric drift",
+          "anchor disappearance",
+          "anchor duplication",
+          "layout inconsistency",
+          "style drift",
+          "world reset"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not ask for an intentional semantic or object-state transition; it asks for continuous navigation while preserving the same world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is required beyond general plausibility of first-person navigation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The route is not specified as a loop or revisit where a returned view must match an earlier view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify an offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

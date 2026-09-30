@@ -1,0 +1,74 @@
+{
+  "skills": {
+    "render_quality_inspector": {
+      "mode": "local",
+      "weights_root": "[workspace]/weights",
+      "device": "cuda",
+      "cpu_workers": 8
+    },
+    "motion_quality_inspector": {
+      "mode": "local",
+      "weights_root": "[workspace]/weights",
+      "device": "cuda",
+      "cpu_workers": 8
+    },
+    "appearance_consistency_inspector": {
+      "mode": "local",
+      "weights_root": "[workspace]/weights",
+      "device": "cuda"
+    },
+    "physical_plausibility_inspector": {
+      "mode": "local",
+      "weights_root": "[workspace]/weights",
+      "model_path": "[workspace]/weights/qwen3vl-a3b-visual-plausibility",
+      "device": "cuda"
+    },
+    "viewpoint_trajectory_verifier": {
+      "mode": "local",
+      "weights_root": "[workspace]/weights/megasam",
+      "device": "cuda",
+      "frame_batch_size": 1
+    },
+    "physical_law_validator": {
+      "mode": "local"
+    },
+    "drift_degradation_analyzer": {
+      "mode": "staged_local"
+    },
+    "return_consistency_verifier": {
+      "mode": "local"
+    },
+    "intentional_change_verifier_vlm": {
+      "mode": "api",
+      "base_url": "http://127.0.0.1:8000/v1",
+      "model": "local-judge",
+      "wire_api": "chat_completions",
+      "api_key_env": "HARNESSEVAL_VLM_API_KEY",
+      "timeout": 600,
+      "retries": 1
+    },
+    "physical_response_verifier_vlm": {
+      "mode": "api",
+      "base_url": "http://127.0.0.1:8000/v1",
+      "model": "local-judge",
+      "wire_api": "chat_completions",
+      "api_key_env": "HARNESSEVAL_VLM_API_KEY",
+      "timeout": 600,
+      "retries": 1
+    },
+    "offscreen_evolution_verifier": {
+      "mode": "api",
+      "base_url": "http://127.0.0.1:8000/v1",
+      "model": "local-judge",
+      "wire_api": "chat_completions",
+      "api_key_env": "HARNESSEVAL_VLM_API_KEY",
+      "timeout": 600,
+      "retries": 1
+    }
+  },
+  "clip": {
+    "mode": "local",
+    "device": "cuda",
+    "download_root": "[workspace]/weights/clip"
+  }
+}

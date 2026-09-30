@@ -1,0 +1,137 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0015_underpass",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the stylized 3D underpass frames remain technically clean, with readable sparse scene structure, plausible materials, no artifacts, no UI/text/watermarks, and the foreground person visible.",
+      "parameters": {
+        "check_scene_elements": [
+          "underpass structure",
+          "curving partially occluded route",
+          "foreground lone person",
+          "clearing beyond passage"
+        ],
+        "watch_for": [
+          "distorted anatomy",
+          "melted bridge geometry",
+          "unreadable or generated text",
+          "flicker artifacts",
+          "watermark or borders"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The result should show the right arm raising upward as an actual temporal change, with smooth motion rather than a sudden pop or missing movement.",
+      "parameters": {
+        "target_motion": "foreground person's right arm raises straight upward",
+        "watch_for": [
+          "frozen rollout",
+          "single-frame jump",
+          "jittering limb",
+          "unintended whole-body teleportation"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Protected world anchors should remain consistent while only the requested pose changes: rusted side walls, concrete overpass, road markings, road curvature, lighting, and third-person framing should not drift.",
+      "parameters": {
+        "protected_anchors": [
+          "large structural element causing occlusion",
+          "rusted side walls",
+          "concrete bridge supports",
+          "curving roadway",
+          "road markings",
+          "clearing and distant vegetation",
+          "third-person camera composition"
+        ],
+        "allowed_change": "right arm pose of the foreground person"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The arm raise must be anatomically and causally plausible for a person standing in place, with stable feet, body support, and no implausible stretching or object intersections.",
+      "parameters": {
+        "checks": [
+          "right shoulder/elbow/wrist articulation",
+          "arm verticality",
+          "feet remain planted",
+          "body balance remains plausible",
+          "no clipping through torso or bridge elements"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary case target is an intentional semantic state edit: make the lone foreground person raise their right arm straight upward while staying in the same spot, with the underpass scene anchors intact.",
+      "parameters": {
+        "instruction": "Make the lone person in the foreground raise their right arm straight upward while staying in the same spot.",
+        "success_criteria": [
+          "same foreground person remains in same location",
+          "their right arm is raised straight upward",
+          "left arm and rest of body are not the main changed state",
+          "underpass, road, structural occlusion, and material finishes remain intact"
+        ],
+        "failure_modes": [
+          "wrong arm raised",
+          "person moves position",
+          "person disappears or duplicates",
+          "camera/navigation transition instead of pose edit",
+          "environment changes dominate the result"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require active camera movement, path following, or navigation; third-person framing should remain stable while the person changes pose."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The requested change is a direct intentional pose edit, not a causal response to an external force or physical intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law outcome is being tested beyond general anatomical plausibility of the arm raise."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is not a long-horizon multi-turn rollout targeting resistance to progressive drift."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or returned viewpoint to compare for revisit consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the target action occurs on the visible foreground person."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

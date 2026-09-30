@@ -1,0 +1,147 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0004_canyon_overlook",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout must remain technically clean for a natural canyon overlook scene with no severe artifacts, watermarks, ambiguity, split-screen, broken geometry, or extreme blur.",
+      "parameters": {
+        "check_for": [
+          "image clarity",
+          "natural lighting",
+          "clean canyon geometry",
+          "no watermark or text artifacts",
+          "no collage or split-screen artifacts"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains navigation controls, so generated frames should show present, smooth temporal motion rather than jitter, freezing, or abrupt discontinuities.",
+      "parameters": {
+        "expected_motion": "forward movement followed by rightward turn",
+        "action_chunks": [
+          {
+            "chunk_id": "c01",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "right"
+          }
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Stable anchors such as the guard rail, red rocks, trail sign, and distant arch should remain visually consistent and spatially coherent across the exploratory transition.",
+      "parameters": {
+        "stable_anchors": [
+          "guard rail",
+          "red rocks",
+          "trail sign",
+          "distant arch"
+        ],
+        "check_consistency_of": [
+          "object identity",
+          "scene layout",
+          "material appearance",
+          "lighting continuity"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera navigation through a canyon overlook should preserve plausible perspective, parallax, scale, occlusion, and terrain geometry while moving along the visible path.",
+      "parameters": {
+        "scene_type": "natural canyon overlook",
+        "check_for": [
+          "plausible camera parallax",
+          "stable horizon and terrain geometry",
+          "reasonable path traversal",
+          "no impossible object deformation"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This is an exploratory_transition case with explicit navigation controls: move forward along the visible path, then turn right, while preserving near-mid-far anchors for judgeable camera motion.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W",
+            "expected_view_change": "camera advances forward along the trail/path"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "right",
+            "expected_view_change": "camera rotates or steers right after the forward movement"
+          }
+        ],
+        "navigation_affordances": [
+          "visible path",
+          "stable near-mid-far anchors",
+          "camera motion judgeable"
+        ],
+        "stable_anchors": [
+          "guard rail",
+          "red rocks",
+          "trail sign",
+          "distant arch"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request an intentional semantic or object-state change; it requests viewpoint navigation through the same canyon scene."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response needs to be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law check beyond general plausibility of camera motion and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only two short navigation chunks, not a long-horizon sequence explicitly testing progressive degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include returning to a prior viewpoint after a loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while outside the camera view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

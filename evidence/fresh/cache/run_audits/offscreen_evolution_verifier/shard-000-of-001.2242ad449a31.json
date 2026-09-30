@@ -1,0 +1,77 @@
+{
+  "schema_version": "harnesseval.skill_run_audit",
+  "created_at": "2026-09-30T21:08:50.806275+00:00",
+  "runner_id": "harnesseval.runner",
+  "run_context": {
+    "shard": {
+      "count": 1,
+      "index": 0,
+      "key": "round_robin(skill_id, probe_family, sorted case_id)"
+    },
+    "filters": {
+      "skills": [
+        "offscreen_evolution_verifier"
+      ],
+      "models": [],
+      "case_ids": [],
+      "limit": 0
+    },
+    "backend_config": "[workspace]/artifacts/backend.json",
+    "drift_stage": null
+  },
+  "plan": {
+    "schema_version": "harnesseval.skill_run_plan",
+    "task_count": 1,
+    "rollout_count": 1,
+    "case_count": 1,
+    "skill_counts": {
+      "offscreen_evolution_verifier": 1
+    },
+    "family_counts": {
+      "offscreen_evolution": 1
+    },
+    "shared_analyze_task_count": 1
+  },
+  "status": "passed",
+  "status_counts": {
+    "ok": 1
+  },
+  "skill_status_counts": {
+    "offscreen_evolution_verifier/ok": 1
+  },
+  "backends": {
+    "offscreen_evolution_verifier": {
+      "backend_id": "openai_compatible.offscreen_evolution_vlm",
+      "backend_version": "local-judge",
+      "config_digest": "3391ccadee893c8e37f1f2e07877acca1cb94276f5bbef8160b46020bd24a359",
+      "execution_mode": "api",
+      "resource_mode": null,
+      "model_load_count": null
+    }
+  },
+  "cache_hits": 0,
+  "cache_misses": 1,
+  "score_min": 0.0,
+  "score_max": 0.0,
+  "outcomes": [
+    {
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "model_id": "seedance-2.0-standard",
+      "primary_axis": "world_persistence",
+      "probe_family": "offscreen_evolution",
+      "skill_id": "offscreen_evolution_verifier",
+      "plan_role": "core",
+      "video": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/offscreen_evolution/seedance-2.0-standard/harnesseval_w_offscreen_0002_torch_gateway/output.mp4",
+      "metadata": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/offscreen_evolution/seedance-2.0-standard/harnesseval_w_offscreen_0002_torch_gateway/metadata.json",
+      "initial_observation": "[workspace]/upstream/benchmark/initial_observations/harnesseval_w_offscreen_0002_torch_gateway.png",
+      "plan": "[workspace]/upstream/benchmark/plans/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.skill_plan.json",
+      "bundle": "[workspace]/artifacts/fresh/cache/bundles/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.metrics.json",
+      "status": "ok",
+      "cache_hit": false,
+      "cache_path": "[workspace]/artifacts/fresh/cache/skills/offscreen_evolution/results/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+      "skill_status": "ok",
+      "score": 0.0
+    }
+  ],
+  "audit_path": "[workspace]/artifacts/fresh/cache/run_audits/offscreen_evolution_verifier/shard-000-of-001.2242ad449a31.json"
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0003_living_room_loop",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated living-room frames must be technically clean enough to judge the sofa, coffee table, door, and window curtains without blur, artifacts, watermarks, or ambiguous geometry.",
+      "parameters": {
+        "scene_domain": "realistic living room",
+        "check_artifacts": true,
+        "required_visible_anchors": [
+          "L-shaped sofa",
+          "coffee table",
+          "door",
+          "window curtains"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout is driven by multiple navigation chunks, so camera motion should be present, temporally smooth, and free of jitter or abrupt discontinuities.",
+      "parameters": {
+        "action_chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "control_sequence": [
+          "W",
+          "W",
+          "S",
+          "S",
+          "left",
+          "right",
+          "A",
+          "D"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same realistic room should persist across the full loop, with stable materials, lighting, object identity, and layout for the protected anchors.",
+      "parameters": {
+        "protected_anchors": [
+          "L-shaped sofa",
+          "coffee table",
+          "door",
+          "window curtains"
+        ],
+        "check_lighting_consistency": true,
+        "check_object_identity_consistency": true
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person navigation through an indoor room should preserve plausible spatial scale, occlusion, perspective changes, and static furniture placement.",
+      "parameters": {
+        "scene_type": "indoor living room",
+        "expected_static_objects": [
+          "L-shaped sofa",
+          "coffee table",
+          "door",
+          "window curtains"
+        ],
+        "check_camera_spatial_plausibility": true
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "diagnostic",
+      "reason": "The action explicitly specifies active first-person navigation with W/W/S/S/left/right/A/D, so the evaluation should verify that the viewpoint follows the intended away-and-return path rather than remaining static or moving inconsistently.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_sequence": [
+          {
+            "chunk_id": "c01",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c02",
+            "action": "W"
+          },
+          {
+            "chunk_id": "c03",
+            "action": "S"
+          },
+          {
+            "chunk_id": "c04",
+            "action": "S"
+          },
+          {
+            "chunk_id": "c05",
+            "action": "left"
+          },
+          {
+            "chunk_id": "c06",
+            "action": "right"
+          },
+          {
+            "chunk_id": "c07",
+            "action": "A"
+          },
+          {
+            "chunk_id": "c08",
+            "action": "D"
+          }
+        ],
+        "closed_loop": true
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "This is a return_revisit_consistency case requiring the generated view at c08 to return to a compatible view of the same world as c01 after a non-static navigation loop.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "closed_loop_pairs": [
+          {
+            "reference_chunk": "c01",
+            "return_chunk": "c08"
+          }
+        ],
+        "protected_anchors": [
+          "L-shaped sofa",
+          "coffee table",
+          "door",
+          "window curtains"
+        ],
+        "require_same_world_no_reset": true
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The primary target is navigation-based return consistency, not an explicitly requested semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case does not require a case-specific physical-law check beyond general plausibility of indoor camera movement."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight navigation chunks and targets loop return consistency, not long-horizon resistance to progressive degradation."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified; the anchors are expected to remain stable while the camera leaves and returns."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

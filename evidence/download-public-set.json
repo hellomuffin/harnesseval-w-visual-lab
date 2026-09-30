@@ -1,0 +1,9 @@
+{
+  "repo": "MirroS-Lab/HarnessEval-W",
+  "revision": "f1ce86417bb86955ecccf3f1f4a26adaa0456efa",
+  "path": "public-set",
+  "patterns": [
+    "data/*",
+    "README.md"
+  ]
+}

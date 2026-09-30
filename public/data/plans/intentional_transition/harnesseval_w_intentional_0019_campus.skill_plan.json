@@ -1,0 +1,125 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0019_campus",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result must remain photorealistic and technically clean in a sparse outdoor campus scene with the bus, archway, brick building, and pavement clearly rendered.",
+      "parameters": {
+        "check_for": [
+          "photorealistic image/video quality",
+          "no warping, ghosting, duplicated bus parts, unreadable artifacts, borders, captions, UI, or watermark",
+          "clean depiction of the left-edge white bus and the campus entrance area"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested transition is opening the bus door, so any generated rollout should show present, smooth temporal change rather than a static frame or flickering edit.",
+      "parameters": {
+        "target_motion": "front passenger door on the white bus opens",
+        "check_for": [
+          "visible door-opening motion",
+          "temporal smoothness",
+          "no frame-to-frame flicker or sudden geometry jumps"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The prompt explicitly requires the archway, brick building, pavement, and bus position to remain unchanged while only the bus door state changes.",
+      "parameters": {
+        "protected_anchors": [
+          "stone archway in the midground",
+          "brick building",
+          "irregular pavement/material boundary",
+          "bus position at the left edge",
+          "overall third-person camera framing"
+        ],
+        "allowed_change": "front passenger door changes from closed to open"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The bus door should open in a mechanically plausible way with coherent hinges/panels, scale, support, and no impossible deformation of the vehicle.",
+      "parameters": {
+        "check_for": [
+          "door panels remain attached to the bus",
+          "opening direction and rotation/slide are plausible for a bus front passenger door",
+          "no penetration through the bus body, pavement, or nearby objects",
+          "bus remains stationary"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary case objective is an explicit intentional object-state transition: open the closed front passenger door on the white bus while keeping specified scene anchors intact.",
+      "parameters": {
+        "target_object": "closed front passenger door on the white bus at the left edge of the scene",
+        "required_final_state": "door is visibly open",
+        "must_remain_unchanged": [
+          "archway",
+          "brick building",
+          "pavement",
+          "bus position"
+        ],
+        "failure_modes": [
+          "wrong bus part opens",
+          "door remains closed",
+          "bus moves or changes identity",
+          "background anchors are altered or removed"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require camera navigation or an active viewpoint trajectory; it asks for a fixed-scene object-state edit with stable framing."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The target is a directly specified intentional semantic state change, not a causal response to an external physical intervention or force."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law calculation is required beyond general plausibility of the bus door opening."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is not a long-horizon multi-turn rollout testing progressive drift resistance."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or returned viewpoint to compare for revisit consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The requested change occurs on a visible bus door and does not involve an offscreen process continuing over time."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

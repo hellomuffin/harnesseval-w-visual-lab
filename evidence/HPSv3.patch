@@ -1,0 +1,29 @@
+diff --git a/hpsv3/inference.py b/hpsv3/inference.py
+index d00169f..b5248da 100755
+--- a/hpsv3/inference.py
++++ b/hpsv3/inference.py
+@@ -94,7 +94,7 @@ class HPSv3RewardInferencer():
+             raise ValueError
+         return inputs
+     
+-    def prepare_batch(self, image_paths, prompts):
++    def prepare_batch(self, image_paths, prompts, move_to_device=True):
+         max_pixels = 256 * 28 * 28
+         min_pixels = 256 * 28 * 28
+         message_list = []
+@@ -133,9 +133,14 @@ class HPSv3RewardInferencer():
+             return_tensors="pt",
+             videos_kwargs={"do_rescale": True},
+         )
+-        batch = self._prepare_inputs(batch)
++        if move_to_device:
++            batch = self._prepare_inputs(batch)
+         return batch
+ 
++    @torch.inference_mode()
++    def reward_prepared(self, batch):
++        return self.model(return_dict=True, **self._prepare_inputs(batch))["logits"]
++
+     @torch.inference_mode()
+     def reward(self, prompts, image_paths):
+         batch = self.prepare_batch(image_paths, prompts)

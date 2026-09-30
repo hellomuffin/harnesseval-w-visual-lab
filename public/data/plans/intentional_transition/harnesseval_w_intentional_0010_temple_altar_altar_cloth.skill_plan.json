@@ -1,0 +1,133 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0010_temple_altar_altar_cloth",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should remain realistic and technically clean, with no severe artifacts, watermarks, broken geometry, blur, or ambiguity that would prevent judging the altar cloth edit.",
+      "parameters": {
+        "check_for": [
+          "clean realistic temple altar rendering",
+          "no watermark or text artifacts",
+          "no split-screen or collage",
+          "altar cloth, candles, vase, wood altar, and stone wall remain clearly visible"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "If the result is a temporal rollout, the visual transition from white cloth to deep blue cloth should occur smoothly without flicker, popping, or unstable frame-to-frame artifacts.",
+      "parameters": {
+        "expected_motion": "minimal fixed-camera state-change transition",
+        "check_for": [
+          "temporal smoothness",
+          "absence of flicker",
+          "no distracting unrelated motion"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same temple altar scene must persist while only the altar cloth appearance changes; candles, vase, wood altar, stone wall, lighting, layout, and object identities should remain consistent.",
+      "parameters": {
+        "target_entity": "altar cloth",
+        "protected_anchors": [
+          "candles",
+          "vase",
+          "wood altar",
+          "stone wall"
+        ],
+        "check_for": [
+          "same altar cloth identity and placement",
+          "unchanged protected anchors",
+          "stable lighting and material identity except requested cloth color and border"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Although the requested change is semantic, the cloth should remain physically plausible as fabric draped over the altar, without impossible deformation, melting, object penetration, or inconsistent occlusion.",
+      "parameters": {
+        "check_for": [
+          "cloth remains draped on altar",
+          "no implausible geometry changes",
+          "no object intersections or occlusion errors",
+          "candles and vase remain supported and spatially coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The primary requirement is an intentional object-state edit: change the existing altar cloth from white to deep blue with a thin gold border while keeping protected anchors intact and the camera fixed.",
+      "parameters": {
+        "target_entity": "altar cloth",
+        "required_change": {
+          "from": "white altar cloth",
+          "to": "deep blue altar cloth with a thin gold border"
+        },
+        "must_remain_same_entity": true,
+        "protected_anchors": [
+          "candles",
+          "vase",
+          "wood altar",
+          "stone wall"
+        ],
+        "negative_constraints": [
+          "do not replace the whole scene",
+          "do not add unrelated extra events",
+          "do not change camera viewpoint"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case explicitly requires a fixed camera, not active navigation or a viewpoint trajectory."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The target is a direct intentional appearance edit to the altar cloth, not a causal response to a physical intervention or force."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation; only general plausibility of the static scene and cloth geometry is relevant."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is not a long-horizon rollout designed to test progressive visual or semantic degradation."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or return to a previous view to verify."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving in the same world."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

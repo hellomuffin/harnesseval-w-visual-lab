@@ -1,0 +1,138 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0035_bridge_deck",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve the cinematic realistic bridge-deck scene without artifacts, warped structures, unreadable geometry, borders, labels, or watermark-like elements.",
+      "parameters": {
+        "check_for": [
+          "technical cleanliness across all frames",
+          "realistic lighting and restrained color grading",
+          "clean road, railing, column, overpass, curb, and ground-material rendering",
+          "no collage, split-screen, UI, captions, or watermarks"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action sequence contains three navigation chunks, so generated motion should be present, smooth, and free of temporal jitter or abrupt jumps.",
+      "parameters": {
+        "expected_motion": "continuous forward travel for W, W, then forward-left travel for W+left",
+        "check_for": [
+          "visible viewpoint displacement",
+          "smooth inter-frame motion",
+          "no strobing, freezing, teleporting, or sudden unrelated cuts"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same sparse semi-outdoor bridge threshold world should remain coherent while moving along the open road/deck.",
+      "parameters": {
+        "anchors": [
+          "long lateral bridge or elevated deck structure",
+          "road/navigation surface",
+          "railings and curb barriers",
+          "overhead structural span",
+          "vertical columns creating partial occlusion",
+          "irregular boundary between floor or ground materials",
+          "visible elevation or level change"
+        ],
+        "check_for": [
+          "stable identity of structures and materials",
+          "consistent scale and perspective",
+          "no semantic drift into a different location"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through the bridge-deck passage must respect plausible camera movement, solid surfaces, elevation changes, occlusion, and support geometry.",
+      "parameters": {
+        "check_for": [
+          "camera stays on traversable road/deck or plausible path",
+          "no passing through railings, barriers, columns, or elevated structure",
+          "columns, deck, curbs, and railings remain structurally supported",
+          "ground-level changes and material boundaries remain physically coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case is an exploratory_transition driven by explicit navigation controls W, W, and W+left along an open bridge-deck route, making active viewpoint trajectory the primary target.",
+      "parameters": {
+        "action_sequence": [
+          {
+            "chunk_id": "c01",
+            "expected": "move forward along the open navigation surface"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "continue forward with accumulating progress down the road/deck"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "continue forward while veering or turning left"
+          }
+        ],
+        "trajectory_constraints": [
+          "third-person observer viewpoint remains natural and navigational",
+          "movement follows the road/deck rather than cutting through obstacles",
+          "lateral layout and bridge structures shift consistently with parallax",
+          "foreground threshold should recede as the camera advances"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state edit; the target is navigation through the existing world."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force requiring evaluation of a causal object response."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is being tested beyond general plausibility of navigation and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include a loop or return to a previously viewed location."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process or continuing world evolution is specified."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

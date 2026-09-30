@@ -1,0 +1,176 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_offscreen_0001_train_platform",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "offscreen_evolution"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Frames must be technically clean and realistic enough to judge the train platform, anchors, steam plume, and visibility changes without severe artifacts, watermarks, blur, or ambiguity.",
+      "parameters": {
+        "domain": "realistic",
+        "scene": "train_platform",
+        "check_for": [
+          "watermarks",
+          "text artifacts",
+          "split-screen or collage artifacts",
+          "broken geometry",
+          "severe blur",
+          "duplicated or ambiguous anchors"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout requires visible camera turning, forward/back movement, and temporal evolution of the steam plume; motion should be present, smooth, and judgeable across chunks.",
+      "parameters": {
+        "chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "motion_targets": [
+          "camera look-away-and-return trajectory",
+          "steam plume deformation and drift"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same realistic station world should persist across the sequence, with platform clock, rail tracks, signal post, station canopy, locomotive, and general scene appearance remaining consistent rather than resetting or swapping identity.",
+      "parameters": {
+        "protected_anchors": [
+          "platform clock",
+          "rail tracks",
+          "signal post",
+          "station canopy"
+        ],
+        "target_process": "steam plume from locomotive"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Steam should behave like a plausible plume from a locomotive, evolving continuously with diffuse turbulent motion while camera movement through the platform remains spatially coherent.",
+      "parameters": {
+        "physical_process": "steam plume from locomotive",
+        "plausibility_checks": [
+          "steam expands, curls, drifts, and diffuses",
+          "plume remains connected to the locomotive/source when visible",
+          "camera movement preserves train-platform geometry"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The action explicitly requires an active look-away-and-return camera sequence: turn away, keep the plume offscreen while moving, then turn back to the same area.",
+      "parameters": {
+        "trajectory_chunks": {
+          "initial_visible": "c01",
+          "leave_view": "c02",
+          "offscreen": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "turn_back": "c06",
+          "return_visible": [
+            "c07",
+            "c08"
+          ]
+        },
+        "target": "steam plume from locomotive"
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The final returned view must be compatible with the original world after a non-static loop, preserving the same station layout and protected anchors while returning to the same steam plume process.",
+      "parameters": {
+        "reference_chunk": "c01",
+        "return_chunk": "c08",
+        "protected_anchors": [
+          "platform clock",
+          "rail tracks",
+          "signal post",
+          "station canopy"
+        ],
+        "target": "steam plume from locomotive"
+      }
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "role": "core",
+      "reason": "This is the primary probe: the steam plume must leave view, continue evolving while offscreen, and return as the same process changed over time rather than a frozen copy, reset, or identity swap.",
+      "parameters": {
+        "target_process": "steam plume from locomotive",
+        "pre_visible_chunks": [
+          "c01"
+        ],
+        "leave_chunk": "c02",
+        "offscreen_chunks": [
+          "c03",
+          "c04",
+          "c05"
+        ],
+        "return_chunks": [
+          "c07",
+          "c08"
+        ],
+        "failure_modes": [
+          "target never leaves view",
+          "target never returns",
+          "frozen copy",
+          "world reset",
+          "identity swap"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier",
+    "offscreen_evolution_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic or object-state edit; it is an offscreen physical process that should keep evolving."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or applied force whose causal response is the primary target."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "The case needs general plausibility for steam motion, but not a case-specific physical-law validation of an intervention response."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has eight chunks and targets offscreen evolution/return consistency, not long-horizon resistance to progressive degradation over many turns."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 7,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

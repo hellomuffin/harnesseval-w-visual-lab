@@ -1,0 +1,109 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0020_temple_courtyard",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should preserve a polished stylized 3D temple courtyard with readable shapes, clean surfaces, no UI/text/watermark artifacts, and moderate scene density across the open courtyard, portal, walls, benches, lanterns, pillars, and distant temple structures.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The interaction is a three-chunk navigation sequence, so generated frames must show present, smooth forward and rightward camera motion without jitter, freezing, abrupt cuts, or temporal stutter.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Landmarks and materials should remain consistent during movement: the shaded entrance beams and pillars, hanging lanterns, stone lanterns, benches, perimeter walls, central gate, distant pagoda/temple forms, paving, plaster, stone, wood, and vegetation should not morph or swap identities.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person movement through the courtyard should maintain plausible scale, occlusion, support, collision avoidance, perspective change, and grounded relationships among pillars, benches, lanterns, walls, paving, and the portal.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case is an exploratory transition with explicit navigation controls W, W, then W+right from a first-person viewpoint, requiring verification that the camera advances through the open center route and then veers right while preserving the temple courtyard layout.",
+      "parameters": {
+        "expected_actions": [
+          {
+            "chunk_id": "c01",
+            "navigation": "W",
+            "expected_view_change": "forward movement from the shaded entrance toward the open courtyard and central gate"
+          },
+          {
+            "chunk_id": "c02",
+            "navigation": "W",
+            "expected_view_change": "continued forward progress deeper into the courtyard with nearer landmarks expanding and distant portal/temple features approaching"
+          },
+          {
+            "chunk_id": "c03",
+            "navigation": "W+right",
+            "expected_view_change": "forward-right trajectory or slight rightward turn/strafe, revealing more of the right-side courtyard perimeter while maintaining spatial continuity"
+          }
+        ],
+        "key_landmarks": [
+          "foreground roof beams and vertical pillars",
+          "hanging lanterns",
+          "stone lanterns",
+          "benches",
+          "perimeter walls",
+          "central boundary portal/gate",
+          "distant temple and pagoda structures",
+          "open central paving/navigation zone"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation through an existing courtyard, not an explicit semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "No physical intervention or force-driven object response is specified; the action is camera navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "There is no case-specific physical-law outcome to validate beyond general plausibility of camera motion and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not loop back or require revisiting a previous view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving independently during the navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

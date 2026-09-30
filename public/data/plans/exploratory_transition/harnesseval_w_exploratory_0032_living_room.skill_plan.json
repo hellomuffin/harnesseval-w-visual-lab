@@ -1,0 +1,139 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0032_living_room",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess anime-style indoor living-room frames for technical cleanliness, coherent perspective, readable doorway/open-floor layout, and absence of artifacts, text, UI, borders, or watermark.",
+      "parameters": {
+        "checkpoints": [
+          "clean anime rendering",
+          "coherent room geometry and depth",
+          "moderate scene density remains legible",
+          "doorway, sofa/TV/window/rug landmarks recognizable",
+          "foreground wear pattern/surface imperfection preserved without artifacting"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout has three navigation chunks, so generated motion should be present, continuous, and smooth across W, W, then W+right inputs.",
+      "parameters": {
+        "expected_motion": "forward movement for c01 and c02, then forward movement with rightward turn/strafe component for c03",
+        "checkpoints": [
+          "no frozen frames",
+          "no abrupt jumps between chunks",
+          "no jitter, warping, or flicker inconsistent with first-person navigation"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same living room world should persist while moving: landmarks such as the doorway, TV area, sofa, window, plants, rugs, and floor wear should remain visually consistent under viewpoint change.",
+      "parameters": {
+        "anchors": [
+          "central doorway/door frame",
+          "left TV/media area",
+          "right sofa/window/dining area",
+          "wood floor",
+          "foreground worn edge or surface imperfection"
+        ],
+        "checkpoints": [
+          "stable anime style",
+          "consistent object identity and placement",
+          "no semantic drift into a different room",
+          "lighting and colors remain compatible with the initial observation"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "First-person navigation through an indoor residential space must respect plausible camera height, collision-free movement, room scale, support relationships, and perspective changes.",
+      "parameters": {
+        "checkpoints": [
+          "camera remains at human eye height",
+          "movement follows open floor toward doorway",
+          "objects do not slide, stretch, or pass through camera",
+          "walls, door frames, furniture, and floor retain plausible geometry",
+          "no impossible occlusions or object interpenetrations"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "Primary axis is transition_correctness for an exploratory_transition with explicit navigation controls W, W, W+right in a first-person living-room scene; evaluation must verify the camera advances along the open floor toward the doorway and then turns or veers right.",
+      "parameters": {
+        "action_sequence": [
+          {
+            "chunk_id": "c01",
+            "expected": "move forward from initial living-room viewpoint along the open floor toward the central doorway"
+          },
+          {
+            "chunk_id": "c02",
+            "expected": "continue forward, making the doorway/threshold larger and nearer while maintaining spatial continuity"
+          },
+          {
+            "chunk_id": "c03",
+            "expected": "continue forward with a rightward camera rotation or rightward movement component, shifting view toward the right-side living/dining/window area or right side of the doorway as appropriate"
+          }
+        ],
+        "success_criteria": [
+          "clear forward translation over the rollout",
+          "rightward component appears only after the W+right chunk",
+          "trajectory remains inside the coherent living-room layout",
+          "landmark parallax supports actual viewpoint movement rather than a semantic scene edit"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint transition, not an explicitly specified semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing object dynamics; the action is camera/navigation control."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response needs validation beyond general navigation plausibility."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short three-chunk exploratory transition, not a long-horizon drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not leave and return to a prior view or require loop consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving during the navigation."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

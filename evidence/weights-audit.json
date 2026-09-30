@@ -1,0 +1,772 @@
+{
+  "status": "passed",
+  "files": [
+    {
+      "repository": "WBench-weights",
+      "path": "weights/HPSv3/.gitkeep",
+      "bytes": 0,
+      "expected_bytes": 0,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/HPSv3/HPSv3.safetensors",
+      "bytes": 16584387300,
+      "expected_bytes": 16584387300,
+      "sha256": "a13d7ff5a07b7ffa0f7824e60d62e6ae144541ceefd5224b4c08fda7ab39f353",
+      "expected_sha256": "a13d7ff5a07b7ffa0f7824e60d62e6ae144541ceefd5224b4c08fda7ab39f353",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/HPSv3/HPSv3_7B_local.yaml",
+      "bytes": 1313,
+      "expected_bytes": 1313,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/HPSv3/LICENSE",
+      "bytes": 11357,
+      "expected_bytes": 11357,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/chat_template.json",
+      "bytes": 1050,
+      "expected_bytes": 1050,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/config.json",
+      "bytes": 1197,
+      "expected_bytes": 1197,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/generation_config.json",
+      "bytes": 244,
+      "expected_bytes": 244,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/merges.txt",
+      "bytes": 1671839,
+      "expected_bytes": 1671839,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/model-00001-of-00005.safetensors",
+      "bytes": 3898649896,
+      "expected_bytes": 3898649896,
+      "sha256": "eab4f4dc1abf860794c98ce3759b4ace1059fc0fc041ede76b88988b3557c132",
+      "expected_sha256": "eab4f4dc1abf860794c98ce3759b4ace1059fc0fc041ede76b88988b3557c132",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/model-00002-of-00005.safetensors",
+      "bytes": 3864726320,
+      "expected_bytes": 3864726320,
+      "sha256": "0546b7cd070ff239de0f61a28770de6a0ac517ad313071e151653e38911ffb25",
+      "expected_sha256": "0546b7cd070ff239de0f61a28770de6a0ac517ad313071e151653e38911ffb25",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/model-00003-of-00005.safetensors",
+      "bytes": 3864726424,
+      "expected_bytes": 3864726424,
+      "sha256": "11368ea1e9c0039ca54012a74ac32d543a9e9d980b2d0ad7e93af0341ace1fe6",
+      "expected_sha256": "11368ea1e9c0039ca54012a74ac32d543a9e9d980b2d0ad7e93af0341ace1fe6",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/model-00004-of-00005.safetensors",
+      "bytes": 3864733680,
+      "expected_bytes": 3864733680,
+      "sha256": "381e110d74db594cc24956af0e74a01ae02104497113a78926990c5bd1f395f6",
+      "expected_sha256": "381e110d74db594cc24956af0e74a01ae02104497113a78926990c5bd1f395f6",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/model-00005-of-00005.safetensors",
+      "bytes": 1089994880,
+      "expected_bytes": 1089994880,
+      "sha256": "e76ec4dc2e7c0dcbe3432e58fae08e62204a2ef2323069d85c8fa0affb87332a",
+      "expected_sha256": "e76ec4dc2e7c0dcbe3432e58fae08e62204a2ef2323069d85c8fa0affb87332a",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/model.safetensors.index.json",
+      "bytes": 56470,
+      "expected_bytes": 56470,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/preprocessor_config.json",
+      "bytes": 347,
+      "expected_bytes": 347,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/tokenizer.json",
+      "bytes": 7029741,
+      "expected_bytes": 7029741,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/tokenizer_config.json",
+      "bytes": 4190,
+      "expected_bytes": 4190,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/Qwen2-VL-7B-Instruct/vocab.json",
+      "bytes": 2776833,
+      "expected_bytes": 2776833,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/aesthetic/.gitkeep",
+      "bytes": 0,
+      "expected_bytes": 0,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/aesthetic/LICENSE",
+      "bytes": 1065,
+      "expected_bytes": 1065,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/aesthetic/sa_0_4_vit_l_14_linear.pth",
+      "bytes": 4071,
+      "expected_bytes": 4071,
+      "sha256": "2cd4e60f4f24ae3bcd57b847b13c1f3ba27edc28cc1a7f9ce74ee9f421243cba",
+      "expected_sha256": "2cd4e60f4f24ae3bcd57b847b13c1f3ba27edc28cc1a7f9ce74ee9f421243cba",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/amt/.gitkeep",
+      "bytes": 0,
+      "expected_bytes": 0,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/amt/LICENSE",
+      "bytes": 18208,
+      "expected_bytes": 18208,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/amt/amt-s.pth",
+      "bytes": 12038359,
+      "expected_bytes": 12038359,
+      "sha256": "07e7e03405c213fe4405678db9b42d05671e48c56faf6a441b99bb0047d3cf77",
+      "expected_sha256": "07e7e03405c213fe4405678db9b42d05671e48c56faf6a441b99bb0047d3cf77",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/clip/.gitkeep",
+      "bytes": 0,
+      "expected_bytes": 0,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/clip/LICENSE",
+      "bytes": 1064,
+      "expected_bytes": 1064,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/clip/ViT-B-32.pt",
+      "bytes": 353976522,
+      "expected_bytes": 353976522,
+      "sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af",
+      "expected_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/clip/ViT-L-14.pt",
+      "bytes": 932768134,
+      "expected_bytes": 932768134,
+      "sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+      "expected_sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/LICENSE",
+      "bytes": 11358,
+      "expected_bytes": 11358,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/depth_anything_vitl14.pth",
+      "bytes": 1341401882,
+      "expected_bytes": 1341401882,
+      "sha256": "6c6a383e33e51c5fdfbf31e7ebcda943973a9e6a1cbef1564afe58d7f2e8fe63",
+      "expected_sha256": "6c6a383e33e51c5fdfbf31e7ebcda943973a9e6a1cbef1564afe58d7f2e8fe63",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/blobs/13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+      "bytes": 1452916608,
+      "expected_bytes": 1452916608,
+      "sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+      "expected_sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/blobs/9161783235097a46641d2770ff857db20f9016fe",
+      "bytes": 1329,
+      "expected_bytes": 1329,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/snapshots/1d0d3c52f60b5164629d279bb9a7546458e6dcc4/config.json",
+      "bytes": 1329,
+      "expected_bytes": 1329,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/huggingface/hub/models--lpiccinelli--unidepth-v2-vitl14/snapshots/1d0d3c52f60b5164629d279bb9a7546458e6dcc4/model.safetensors",
+      "bytes": 1452916608,
+      "expected_bytes": 1452916608,
+      "sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+      "expected_sha256": "13952af59d28d21d4de5873f8b8bf6d679c5dd031dbf7f9e5818cbeca579f6af",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/megasam_final.pth",
+      "bytes": 20812149,
+      "expected_bytes": 20812149,
+      "sha256": "f386b79d7cf41ac3c339ec4364a40378a1529a9cee74271bedf5eb10e43e748a",
+      "expected_sha256": "f386b79d7cf41ac3c339ec4364a40378a1529a9cee74271bedf5eb10e43e748a",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/torch_hub_checkpoints/dinov2_vitl14_pretrain.pth",
+      "bytes": 1217586395,
+      "expected_bytes": 1217586395,
+      "sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+      "expected_sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/megasam/torch_hub_checkpoints/metric_depth_vit_large_800k.pth",
+      "bytes": 1647972663,
+      "expected_bytes": 1647972663,
+      "sha256": "15328ffc42b528b95f188687418f6f03b3f123eb34ccdbd686c112abbea6d972",
+      "expected_sha256": "15328ffc42b528b95f188687418f6f03b3f123eb34ccdbd686c112abbea6d972",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/pyiqa/.gitkeep",
+      "bytes": 0,
+      "expected_bytes": 0,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/pyiqa/LICENSE",
+      "bytes": 11358,
+      "expected_bytes": 11358,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/pyiqa/musiq_koniq_ckpt-e95806b9.pth",
+      "bytes": 108610983,
+      "expected_bytes": 108610983,
+      "sha256": "e95806b9eae5f3814c410f574ba8e552362bd5bc63d758ed5b97860f5d6185aa",
+      "expected_sha256": "e95806b9eae5f3814c410f574ba8e552362bd5bc63d758ed5b97860f5d6185aa",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/added_tokens.json",
+      "bytes": 707,
+      "expected_bytes": 707,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/args.json",
+      "bytes": 19033,
+      "expected_bytes": 19033,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/chat_template.jinja",
+      "bytes": 5292,
+      "expected_bytes": 5292,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/config.json",
+      "bytes": 1844,
+      "expected_bytes": 1844,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/generation_config.json",
+      "bytes": 213,
+      "expected_bytes": 213,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/merges.txt",
+      "bytes": 1671853,
+      "expected_bytes": 1671853,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00001-of-00013.safetensors",
+      "bytes": 4230392720,
+      "expected_bytes": 4230392720,
+      "sha256": "2bef361db50ec3ced88d80c969fd90f807c95a7470e1f83c7e8d7b513b6acf80",
+      "expected_sha256": "2bef361db50ec3ced88d80c969fd90f807c95a7470e1f83c7e8d7b513b6acf80",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00002-of-00013.safetensors",
+      "bytes": 4984970872,
+      "expected_bytes": 4984970872,
+      "sha256": "678b024b308476928bfd255d506a2bd9404c063a6e18614e0eef493512e1ef18",
+      "expected_sha256": "678b024b308476928bfd255d506a2bd9404c063a6e18614e0eef493512e1ef18",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00003-of-00013.safetensors",
+      "bytes": 4984970848,
+      "expected_bytes": 4984970848,
+      "sha256": "5a433a54d3b65d2afdd31d5541b7a29d4c6e650dac75607d7d6cf5ee711d8e53",
+      "expected_sha256": "5a433a54d3b65d2afdd31d5541b7a29d4c6e650dac75607d7d6cf5ee711d8e53",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00004-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "e5fdbe4569bf979646044f351080143194da8b904bd4f9c687150118031c4b5d",
+      "expected_sha256": "e5fdbe4569bf979646044f351080143194da8b904bd4f9c687150118031c4b5d",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00005-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "3f957ee830a192f2f6bf69ff588e3bd09f14907e0cb2f0c683ce95cef88c3860",
+      "expected_sha256": "3f957ee830a192f2f6bf69ff588e3bd09f14907e0cb2f0c683ce95cef88c3860",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00006-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "83e5cbcc7b769d4791ff9edd58f06987f6bee9f9bfbc5bc763bec4b7856bf960",
+      "expected_sha256": "83e5cbcc7b769d4791ff9edd58f06987f6bee9f9bfbc5bc763bec4b7856bf960",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00007-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "a50123dd33973944bb2f5099b64bc847766a14c75ba3f1b3257ca8e1215a3d65",
+      "expected_sha256": "a50123dd33973944bb2f5099b64bc847766a14c75ba3f1b3257ca8e1215a3d65",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00008-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "1e4f53ac4119617191dafef2e1e75306a64372c9e179f8c535d76db6f8b8617d",
+      "expected_sha256": "1e4f53ac4119617191dafef2e1e75306a64372c9e179f8c535d76db6f8b8617d",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00009-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "5f445dbc7f87f2b90e4dbb9f382464041643ebd02f3ec3ebb0c3bad65010b49f",
+      "expected_sha256": "5f445dbc7f87f2b90e4dbb9f382464041643ebd02f3ec3ebb0c3bad65010b49f",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00010-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "2ba25ef86f9af899b510d99696c1694da45b8590e23d265d7408ff056346b98d",
+      "expected_sha256": "2ba25ef86f9af899b510d99696c1694da45b8590e23d265d7408ff056346b98d",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00011-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "cb70e7fa8766c05bcc1fd52dbdd1c929fb5dd139ac0ead1a08157d7495cc8ae1",
+      "expected_sha256": "cb70e7fa8766c05bcc1fd52dbdd1c929fb5dd139ac0ead1a08157d7495cc8ae1",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00012-of-00013.safetensors",
+      "bytes": 4984970912,
+      "expected_bytes": 4984970912,
+      "sha256": "00b1ae304b4a5174e60d6d3f649d6784a9f41dc2313d836d0871eda645d6ba33",
+      "expected_sha256": "00b1ae304b4a5174e60d6d3f649d6784a9f41dc2313d836d0871eda645d6ba33",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model-00013-of-00013.safetensors",
+      "bytes": 3076545184,
+      "expected_bytes": 3076545184,
+      "sha256": "c2316931134a3a4124c6c6e0f35ed968759d612f2234276383cee481035ebcdd",
+      "expected_sha256": "c2316931134a3a4124c6c6e0f35ed968759d612f2234276383cee481035ebcdd",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/model.safetensors.index.json",
+      "bytes": 80780,
+      "expected_bytes": 80780,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/preprocessor_config.json",
+      "bytes": 390,
+      "expected_bytes": 390,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/special_tokens_map.json",
+      "bytes": 613,
+      "expected_bytes": 613,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/tokenizer.json",
+      "bytes": 11422654,
+      "expected_bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "expected_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/tokenizer_config.json",
+      "bytes": 5445,
+      "expected_bytes": 5445,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/video_preprocessor_config.json",
+      "bytes": 817,
+      "expected_bytes": 817,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/qwen3vl-a3b-visual-plausibility/vocab.json",
+      "bytes": 2776833,
+      "expected_bytes": 2776833,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/raft/.gitkeep",
+      "bytes": 0,
+      "expected_bytes": 0,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/raft/LICENSE",
+      "bytes": 1512,
+      "expected_bytes": 1512,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "WBench-weights",
+      "path": "weights/raft/raft-things.pth",
+      "bytes": 21108000,
+      "expected_bytes": 21108000,
+      "sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+      "expected_sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/.gitattributes",
+      "bytes": 1519,
+      "expected_bytes": 1519,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/README.md",
+      "bytes": 7133,
+      "expected_bytes": 7133,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/chat_template.json",
+      "bytes": 5499,
+      "expected_bytes": 5499,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/config.json",
+      "bytes": 1474,
+      "expected_bytes": 1474,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/generation_config.json",
+      "bytes": 269,
+      "expected_bytes": 269,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/merges.txt",
+      "bytes": 1671839,
+      "expected_bytes": 1671839,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/model-00001-of-00004.safetensors",
+      "bytes": 4902275944,
+      "expected_bytes": 4902275944,
+      "sha256": "d5d0aef0eb170fc7453a296c43c0849a56f510555d3588e4fd662bb35490aefa",
+      "expected_sha256": "d5d0aef0eb170fc7453a296c43c0849a56f510555d3588e4fd662bb35490aefa",
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/model-00002-of-00004.safetensors",
+      "bytes": 4915962496,
+      "expected_bytes": 4915962496,
+      "sha256": "8be88fb5501e4d5719a6d4cc212e6a13480330e74f3e8c77daa1a68f199106b5",
+      "expected_sha256": "8be88fb5501e4d5719a6d4cc212e6a13480330e74f3e8c77daa1a68f199106b5",
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/model-00003-of-00004.safetensors",
+      "bytes": 4999831048,
+      "expected_bytes": 4999831048,
+      "sha256": "83de00eafe6e0d57ccd009dbcf71c9974d74df2f016c27afb7e95aafd16b2192",
+      "expected_sha256": "83de00eafe6e0d57ccd009dbcf71c9974d74df2f016c27afb7e95aafd16b2192",
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/model-00004-of-00004.safetensors",
+      "bytes": 2716270024,
+      "expected_bytes": 2716270024,
+      "sha256": "0a88b98e9f96270973f567e6a2c103ede6ccdf915ca3075e21c755604d0377a5",
+      "expected_sha256": "0a88b98e9f96270973f567e6a2c103ede6ccdf915ca3075e21c755604d0377a5",
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/model.safetensors.index.json",
+      "bytes": 67759,
+      "expected_bytes": 67759,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/preprocessor_config.json",
+      "bytes": 390,
+      "expected_bytes": 390,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/tokenizer.json",
+      "bytes": 7032403,
+      "expected_bytes": 7032403,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/tokenizer_config.json",
+      "bytes": 10868,
+      "expected_bytes": 10868,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/video_preprocessor_config.json",
+      "bytes": 385,
+      "expected_bytes": 385,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    },
+    {
+      "repository": "Qwen3-VL-8B-Instruct",
+      "path": "weights/judge/vocab.json",
+      "bytes": 2776833,
+      "expected_bytes": 2776833,
+      "sha256": null,
+      "expected_sha256": null,
+      "valid": true
+    }
+  ],
+  "file_count": 85,
+  "excluded_runtime_config": "_HPSv3_7B_resolved.yaml is rewritten by upstream to resolve local paths; it is not a model checkpoint."
+}

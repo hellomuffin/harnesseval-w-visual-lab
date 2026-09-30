@@ -1,0 +1,59 @@
+{
+  "desktop": "1440x1000",
+  "mobile": "390x844",
+  "case_count": 6,
+  "skills": 11,
+  "tab_interactions": "passed",
+  "aggregation_gate": "passed",
+  "image_dialog": "passed",
+  "public_filter": "passed",
+  "horizontal_overflow": false,
+  "browser_errors": [],
+  "skill_source_links": [
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_render_quality.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_motion_quality.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_appearance_consistency.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_physical_plausibility.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_viewpoint_trajectory.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_intentional_change_vlm.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_physical_response_vlm.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_physical_law.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_drift_degradation.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_return_consistency.py",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8080/upstream/src/harnesseval/skills/skill_offscreen_evolution.py",
+      "status": 200
+    }
+  ],
+  "live_validator_form": "passed"
+}

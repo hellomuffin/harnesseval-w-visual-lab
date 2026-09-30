@@ -1,0 +1,25 @@
+{
+  "schema_version": "harnesseval.plan_run_audit",
+  "created_at": "2026-09-30T21:20:51.711636+00:00",
+  "plan": {
+    "schema_version": "harnesseval.plan_tasks",
+    "task_count": 1,
+    "status_counts": {
+      "pending": 1
+    },
+    "family_counts": {
+      "intentional_transition": 1
+    }
+  },
+  "execution": {
+    "schema_version": "harnesseval.plan_execution",
+    "created_at": "2026-09-30T21:20:51.711261+00:00",
+    "requested": 1,
+    "eligible": 1,
+    "written": 1,
+    "cached": 0,
+    "stale_not_refreshed": 0,
+    "failed": 0,
+    "failures": []
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_physical_0010_robotics_lab",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "physical_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout must remain technically clean in a realistic game-engine robotics lab with sparse industrial geometry, barriers, portals, floor elevation changes, and foreground blocks without artifacts, warping, unreadable geometry, or frame corruption.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The requested result is a temporal physical transition: the leftmost upright block is pushed and should tip into the next block, so motion must be present, continuous, and temporally smooth.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The domino chain, conveyor-like foreground surface, robotic lab equipment, barrier line, raised platform, and glowing entrance portals should retain stable identity, materials, scale, and placement throughout the rollout.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The interaction depends on believable contact, gravity, tipping, and collision behavior among upright blocks on a supported foreground track, with no floating, interpenetration, or implausible deformation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "role": "core",
+      "reason": "The primary case target is the causal physical response to an explicit force: pushing the leftmost visible upright block forward so that it tips into the next block in the domino chain.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "role": "diagnostic",
+      "reason": "The domino-chain response requires case-specific physical-law checks for direction of fall, contact timing, sequential momentum transfer, gravity-driven rotation about the base, and plausible interaction with the support surface.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "physical_response_verifier_vlm",
+    "physical_law_validator"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case uses a first-person view but does not require active camera movement, navigation, or a path-following viewpoint trajectory."
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is not an intentional semantic edit or object-state rewrite; it is a causal physical response to a push."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is a short physical transition, not a long-horizon rollout explicitly testing progressive visual or semantic drift."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or requirement to return to a prior viewpoint and verify consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The requested domino interaction occurs in the visible foreground and does not require an offscreen process to continue evolving."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

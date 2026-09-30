@@ -1,0 +1,130 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_intentional_0020_coworking_space",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "intentional_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "The result must remain aesthetically and technically clean in an anime-style indoor coworking space with sparse open areas, clear geometry, no readable text, borders, UI, or watermark artifacts.",
+      "parameters": {
+        "check_for": [
+          "clean anime rendering",
+          "coherent perspective and object geometry",
+          "no visual artifacts around the drawer front, handle, counter edges, tables, chairs, and plaza",
+          "no added text, labels, captions, UI, borders, or watermark"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The generated rollout should show the foreground drawer closing with visible, temporally smooth motion rather than popping, flickering, or skipping directly to the final state.",
+      "parameters": {
+        "target_motion": "large scuffed foreground drawer slides shut completely",
+        "check_for": [
+          "continuous drawer movement",
+          "stable handle motion",
+          "no temporal jitter or frame-to-frame warping",
+          "no sudden disappearance of the open gap"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The coworking space, foreground scuffed drawer, silver handle, surrounding tables, cafe counter, circular plaza, material finishes, and asymmetric details should remain visually consistent while only the drawer state changes.",
+      "parameters": {
+        "protected_anchors": [
+          "large scuffed foreground drawer exterior and wear pattern",
+          "silver handle",
+          "cream counter surface",
+          "adjacent wood tabletops",
+          "surrounding seating booths, tables, and chairs",
+          "midground circular open activity zone",
+          "background cafe counter and enclosed coworking layout"
+        ],
+        "allowed_change": "drawer open gap closes"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Closing the drawer must be physically plausible for an articulated drawer: the front panel should translate inward along its rails, remain rigid, keep the handle attached, and end flush with the cabinet face.",
+      "parameters": {
+        "check_for": [
+          "drawer front moves along a straight sliding path",
+          "drawer remains aligned with the cabinet opening",
+          "handle stays fixed to the drawer front",
+          "final closed position is flush or fully seated",
+          "no impossible deformation, rotation, collision, or scale change"
+        ]
+      }
+    },
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "role": "core",
+      "reason": "The case is an intentional transition requesting a specific object-state edit: close the large scuffed foreground drawer with the silver handle completely while preserving the rest of the scene.",
+      "parameters": {
+        "intentional_change": "large scuffed foreground drawer with silver handle becomes completely closed",
+        "success_criteria": [
+          "the previously visible dark open gap above the drawer front is gone or sealed",
+          "the drawer front is fully closed and visually seated in the cabinet",
+          "the target remains identifiable as the same scuffed foreground drawer",
+          "nearby scene anchors remain intact and are not semantically changed"
+        ],
+        "failure_modes": [
+          "drawer remains partially open",
+          "wrong drawer or object is changed",
+          "drawer disappears or is replaced",
+          "major camera/viewpoint change hides the target",
+          "coworking space layout or foreground furniture is substantially altered"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "intentional_change_verifier_vlm"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "reason": "The case does not require active camera movement, navigation, or a path; it requires a fixed-scene object-state transition."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The drawer closure is directly specified as an intentional semantic/object-state edit, not a causal response to an explicit force or physical intervention."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of a drawer sliding closed."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The case is not a long-horizon rollout with many turns or chunks where progressive degradation is the primary target."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "There is no non-static loop or returned viewpoint to compare against an earlier view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The requested change occurs on the visible foreground drawer, not through an offscreen process that must continue evolving."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

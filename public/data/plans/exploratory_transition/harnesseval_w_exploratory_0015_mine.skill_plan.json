@@ -1,0 +1,98 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0015_mine",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the stylized 3D mine rollout remains technically clean, with readable bridge, concrete walls, window portals, rocky slopes, rusted panels, floor wear, and no artifacts, UI, text, borders, or watermark.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The result is a short navigation rollout, so frames should show present, smooth temporal motion without jitter, strobing, sudden jumps, or frozen segments during W, W+D, and right-turn actions.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same sparse outdoor industrial mine environment must persist across the transition, preserving stylized 3D appearance, material finishes, the bridge structure, concrete portal walls, rock faces, rusted surfaces, floor wear, lighting, and distant silhouette as coherent landmarks.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Camera movement through the first-person mine space should remain physically plausible, with stable scale, support, collision-free traversal on the concrete floor, plausible parallax under the bridge and around portals, and no impossible geometry changes.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case primary axis is transition correctness for an exploratory first-person navigation sequence: move forward, then forward-right, then rotate right while staying within the same connected mine environment.",
+      "parameters": {
+        "control_sequence": [
+          "W",
+          "W+D",
+          "right"
+        ],
+        "expected_behavior": "forward movement toward the open concrete area and portals, diagonal drift to the right, then rightward viewpoint rotation",
+        "must_preserve_landmarks": [
+          "overhead bridge",
+          "concrete wall frames and window-like portals",
+          "rocky mine sides",
+          "rusted right-side panels",
+          "foreground worn concrete surface",
+          "distant silhouette visible through portal when in view"
+        ],
+        "camera_context": "first_person",
+        "scene_density": "sparse"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state edit; the target is navigation through an existing environment."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit force or physical intervention whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law phenomenon is required beyond general plausibility of first-person movement and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "This is a short three-chunk exploratory transition, not a long-horizon rollout targeting progressive drift resistance."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not include returning to a previous view or closing a navigation loop."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is specified to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

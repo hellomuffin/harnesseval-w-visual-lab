@@ -1,0 +1,168 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_drift_0004_old_town_lane",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Generated old-town-lane frames must remain technically clean, realistic, artifact-free, and free of watermarks or severe ambiguity across the rollout.",
+      "parameters": {
+        "domain": "realistic",
+        "initial_observation_path": "data/initial_observations/harnesseval_w_drift_0004_old_town_lane.jpg"
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is a long continuous navigation sequence, so evaluation must check that movement is present, temporally smooth, and does not introduce cuts, jumps, or resets.",
+      "parameters": {
+        "expected_sequence_length_chunks": 9,
+        "continuous_route_required": true
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same realistic town world should persist visually while the camera moves; materials, lighting, scale, and object identities should not fluctuate between chunks.",
+      "parameters": {
+        "stable_anchors": [
+          "clock tower",
+          "cobblestone lane",
+          "bakery awning",
+          "lamp posts"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through a street scene should obey plausible camera motion, perspective change, occlusion, depth, and static-world geometry.",
+      "parameters": {
+        "scene_type": "first_person_old_town_lane",
+        "expected_static_environment": true
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly specifies first-person navigation controls over nine chunks: W, A, W, D, left, W, up, down, W. The generated result must follow an active viewpoint path through the same world.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "chunks": [
+          {
+            "chunk_id": "c01",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c02",
+            "actions": [
+              "A"
+            ]
+          },
+          {
+            "chunk_id": "c03",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c04",
+            "actions": [
+              "D"
+            ]
+          },
+          {
+            "chunk_id": "c05",
+            "actions": [
+              "left"
+            ]
+          },
+          {
+            "chunk_id": "c06",
+            "actions": [
+              "W"
+            ]
+          },
+          {
+            "chunk_id": "c07",
+            "actions": [
+              "up"
+            ]
+          },
+          {
+            "chunk_id": "c08",
+            "actions": [
+              "down"
+            ]
+          },
+          {
+            "chunk_id": "c09",
+            "actions": [
+              "W"
+            ]
+          }
+        ],
+        "no_cuts_or_reset": true
+      }
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "This is a drift_resistance world-persistence case with a long-horizon rollout; the clock tower, cobblestone lane, bakery awning, and lamp posts should remain coherent stable anchors rather than degrading, mutating, duplicating, or disappearing implausibly.",
+      "parameters": {
+        "minimum_chunks": 9,
+        "drift_targets": [
+          "clock tower",
+          "cobblestone lane",
+          "bakery awning",
+          "lamp posts"
+        ],
+        "world_id": "wdw_harnesseval_w_drift_0004_old_town_lane"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not request a semantic or object-state edit; it requires continuous navigation and resistance to drift."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be verified."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general plausibility of camera motion and static scene geometry."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The route does not specify returning to a previously seen viewpoint for a revisit consistency check."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not include an offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

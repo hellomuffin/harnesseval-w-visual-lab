@@ -1,0 +1,136 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0019_archaeological_site",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the anime archaeological-site rollout remains technically clean: no warping, broken textures, unreadable artifacts, UI, borders, or implausible image corruption across the stone floor, arch, walls, light patch, and distant column.",
+      "parameters": {
+        "checkpoints": [
+          "frames are sharp enough to read cracked paving, stone blocks, moss, arch opening, and distant column",
+          "no flicker, smearing, hallucinated text, watermark, split-screen, or border artifacts",
+          "sparse composition remains visually coherent and not cluttered by new unrelated entities"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The result should show three navigation chunks with visible forward movement and a rightward turn component; evaluate whether motion is present, smooth, and free of temporal jitter or abrupt frame discontinuities.",
+      "parameters": {
+        "expected_motion": "first-person forward-forward-forward-plus-right exploratory movement",
+        "checkpoints": [
+          "consistent apparent optic flow over the floor and side ruins",
+          "no frozen rollout or single-frame jump between chunks",
+          "rightward component appears during the final chunk without sudden teleportation"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The archaeological ruin must remain the same anime-style world as the camera moves, preserving the material finishes, localized directional light, arched opening, cracked paving, wall geometry, distant silhouette/person, and distant column without identity drift.",
+      "parameters": {
+        "anchors": [
+          "arched doorway in rear wall",
+          "cracked stone-and-dirt floor",
+          "different nearby stone/material finishes",
+          "localized warm directional light from the upper left",
+          "distant column visible through the opening",
+          "small distant human silhouette at right side of the courtyard"
+        ],
+        "failure_modes": [
+          "style shifts away from anime background rendering",
+          "ruins transform into a different site",
+          "anchor objects disappear or duplicate without viewpoint justification",
+          "lighting direction changes arbitrarily"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward navigation through an ancient stone courtyard should obey plausible first-person scale, ground contact, collision avoidance, perspective change, and stable support relationships for walls, blocks, arch, floor slabs, and column.",
+      "parameters": {
+        "checkpoints": [
+          "camera height and speed feel human-scale",
+          "motion follows the traversable cracked floor toward the arch/opening",
+          "no passing through walls, rubble, raised stones, or solid ruins",
+          "perspective and parallax are consistent with forward movement and slight right turn",
+          "structural elements remain supported and geometrically plausible"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory_transition case explicitly requires active first-person navigation using W, W, then W+right along a visible route/opening in the archaeological site.",
+      "parameters": {
+        "control_sequence": [
+          "c01: W",
+          "c02: W",
+          "c03: W+right"
+        ],
+        "expected_trajectory": "advance from the initial courtyard over the cracked stone floor toward the arched opening, then continue advancing while yawing or drifting right in the final chunk",
+        "spatial_requirements": [
+          "movement uses the visible traversable route rather than inventing an unrelated path",
+          "the arched opening and/or exterior beyond it should become closer or more prominent after forward movement",
+          "rightward final input should shift view/framing toward the right side of the route while retaining coherent spatial continuity"
+        ],
+        "primary_failure_modes": [
+          "static camera despite navigation inputs",
+          "backward/leftward movement contradicting controls",
+          "teleporting to a different location",
+          "losing the arch route or replacing the archaeological site",
+          "colliding through wall geometry or floor obstacles"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case target is navigation/viewpoint transition, not an explicitly specified semantic or object-state change with protected anchors."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force requiring evaluation of a causal object response."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is requested beyond general physical plausibility of first-person movement through the ruin."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short three-chunk exploratory transition, not a long-horizon many-turn drift-resistance case."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action does not include a loop or return to a previously seen view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify any offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

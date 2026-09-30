@@ -1,0 +1,107 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0011_medieval_courtyard",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Evaluate whether the photorealistic medieval courtyard frames remain technically clean, with coherent stone geometry, lighting, banners, columns, fountain, gatehouse, and no visual artifacts.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout should contain a visible left camera turn followed by forward movement, so motion must be present, temporally smooth, and free of jitter or abrupt jumps.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "Protected anchors such as the courtyard walls, fountain basin, gatehouse, raised portcullis, rows of columns, banners, watchtowers, and crenellated silhouette must remain visually consistent across the transition.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The camera/view movement through the courtyard should obey plausible first-person navigation, with stable landmarks changing by perspective rather than warping, teleporting, or rearranging.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "This exploratory transition explicitly requires a navigation sequence: turn view left before the fountain toward the raised portcullis and gate arch, then move forward along the visible route.",
+      "parameters": {
+        "expected_actions": [
+          {
+            "step": 1,
+            "control": "left",
+            "expected_effect": "camera/view pans left toward the raised portcullis and gate arch"
+          },
+          {
+            "step": 2,
+            "control": "W",
+            "expected_effect": "camera pushes forward along the newly oriented route"
+          }
+        ],
+        "protected_anchors": [
+          "rectangular stone courtyard boundary walls",
+          "circular stone fountain position and basin shape",
+          "large arched gatehouse and raised portcullis",
+          "symmetric rows of stone columns along both sides",
+          "fixed red and blue banner locations",
+          "corner watchtowers and crenellated wall silhouette"
+        ],
+        "negative_constraints": [
+          "no jump to an unrelated location",
+          "no new characters or events as the main outcome",
+          "no destruction or rearrangement of stable landmarks"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation/viewpoint change, not an intentional semantic or object-state edit."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force causing a dynamic physical response."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law validation is required beyond general plausibility of first-person movement."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout is a short two-chunk navigation sequence, not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action does not require leaving and returning to a previous view."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "No offscreen process is expected to continue evolving during the transition."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

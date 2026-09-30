@@ -1,0 +1,147 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_exploratory_0041_clinic",
+  "taxonomy": {
+    "primary_axis": "transition_correctness",
+    "probe_family": "exploratory_transition"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess overall anime-frame cleanliness for the clinic interior: coherent 16:9 composition, sparse scene readability, no UI/watermark/readable text artifacts, and technically clean people, walls, signs, window, and exterior landmark.",
+      "parameters": {
+        "check_for": [
+          "anime visual coherence",
+          "clean geometry and lighting",
+          "absence of borders, watermarks, captions, or readable text",
+          "sparse wide environmental composition preserved"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The rollout contains three navigation chunks, so generated motion should be present, smooth, and free of jitter, frame popping, or strobing during forward and forward-right movement.",
+      "parameters": {
+        "action_sequence": [
+          "W",
+          "W+D",
+          "W"
+        ],
+        "check_for": [
+          "continuous motion",
+          "smooth temporal transitions",
+          "no abrupt frame jumps",
+          "no frozen rollout"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The clinic identity, anime style, sparse crowd, wall wear, signage, structural occluder, window/portal, and exterior landmark should remain visually consistent while the viewpoint moves.",
+      "parameters": {
+        "anchors": [
+          "clinic interior",
+          "large portal/window opening",
+          "high window",
+          "exterior circular building landmark",
+          "sparse pedestrians",
+          "worn wall surfaces",
+          "sign boards without readable text",
+          "structural partial occlusion element"
+        ],
+        "check_for": [
+          "style consistency",
+          "object persistence",
+          "no landmark morphing",
+          "no crowd or signage identity drift"
+        ]
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Forward navigation through an indoor clinic lobby must preserve plausible scale, floor contact, parallax, occlusion, support, and collision-free movement around pedestrians and boundaries between walkable and non-walkable space.",
+      "parameters": {
+        "check_for": [
+          "plausible first-person parallax",
+          "stable horizon and scale",
+          "no clipping through people, counters, walls, portal frames, or railings",
+          "pedestrians remain grounded",
+          "walkable floor remains distinct from non-navigation areas"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The primary axis is transition_correctness for an exploratory_transition with explicit first-person navigation controls W, W+D, W; evaluation must verify the camera advances forward, veers right during the middle chunk, then continues forward through the clinic space.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "expected_chunks": [
+          {
+            "chunk_id": "c01",
+            "expected_motion": "move forward from the initial first-person position across the open clinic floor"
+          },
+          {
+            "chunk_id": "c02",
+            "expected_motion": "continue forward while shifting/turning right relative to the initial path"
+          },
+          {
+            "chunk_id": "c03",
+            "expected_motion": "continue forward after the rightward adjustment"
+          }
+        ],
+        "spatial_expectations": [
+          "foreground pedestrians and floor markings show increasing parallax",
+          "large portal/window and exterior landmark grow closer or shift consistently with forward motion",
+          "right-side clinic features become more prominent during W+D",
+          "navigation respects the clear boundary between walkable lobby floor and non-navigation areas"
+        ]
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case asks for navigation-based exploratory transition, not an explicit semantic or object-state change with protected anchors."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law response is targeted beyond general plausibility of camera movement and scene geometry."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "The rollout has only three short navigation chunks and is not a long-horizon drift-resistance probe."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The action sequence does not loop back to a previous viewpoint or require revisiting consistency."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not specify an offscreen process that should continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 5,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tests": [
+    {
+      "dtype": "torch.float32",
+      "max_absolute_difference": 3.5762786865234375e-07,
+      "allclose": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "max_absolute_difference": 0.0,
+      "allclose": true
+    }
+  ],
+  "scope": "Single-patch Conv3d vs linear, toy random weights and inputs; not whole-checkpoint bitwise equivalence."
+}

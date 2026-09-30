@@ -1,0 +1,170 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "routing_mode": "shipped_case_plan",
+  "case_id": "harnesseval_w_return_0009_atrium",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "return_revisit_consistency"
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Assess whether the stylized 3D atrium rollout remains technically clean, with readable people, staircase, columns, floor materials, red bollards, lighting, and no artifacts, UI, text, borders, or watermarks.",
+      "parameters": {
+        "checkpoints": [
+          "all frames"
+        ],
+        "scene_expectations": [
+          "sparse covered atrium",
+          "third-person foreground group",
+          "central staircase",
+          "red bollards",
+          "columns",
+          "irregular floor-material boundary",
+          "visible elevation change"
+        ]
+      }
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The action is an 8-chunk closed-loop navigation sequence, so motion should be present, smooth, and free of temporal jitter, strobing, or abrupt unintended jumps.",
+      "parameters": {
+        "chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "expected_motion": [
+          "forward",
+          "right strafe",
+          "forward",
+          "right turn",
+          "left turn",
+          "backward",
+          "left strafe",
+          "backward"
+        ]
+      }
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The same atrium world must persist during departure and return, including consistent materials, stylized rendering, people, columns, staircase geometry, red accent bollards, and floor boundary appearance.",
+      "parameters": {
+        "anchors": [
+          "foreground person group",
+          "central staircase",
+          "red bollards",
+          "columns",
+          "irregular floor-material boundary",
+          "open atrium floor",
+          "upper level/opening"
+        ],
+        "style": "polished stylized 3D"
+      }
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "Navigation through the atrium should preserve plausible scale, support, occlusion, ground contact, elevation relationships, and camera movement over the floor without passing through objects or geometry.",
+      "parameters": {
+        "physical_checks": [
+          "camera remains on navigable floor",
+          "people remain grounded",
+          "columns and staircase remain structurally supported",
+          "red bollards stay fixed to scene objects",
+          "floor elevation and material boundary remain spatially coherent"
+        ]
+      }
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly specifies active third-person navigation: move forward from the foreground group toward the staircase and red bollards, shift right, turn right, then reverse the same controls.",
+      "parameters": {
+        "control_scheme": "harnesseval_navigation_v1",
+        "reference_chunks": [
+          "c01",
+          "c02",
+          "c03",
+          "c04"
+        ],
+        "return_chunks": [
+          "c05",
+          "c06",
+          "c07",
+          "c08"
+        ],
+        "expected_path": [
+          "approach central staircase/red bollards",
+          "slight right lateral shift",
+          "changed right-facing view",
+          "inverse-balanced return"
+        ]
+      }
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "role": "core",
+      "reason": "The primary probe is return_revisit_consistency: after a non-static loop, the final view should be compatible with the original group, irregular floor boundary, columns, staircase, and red bollards rather than a regenerated or drifted world.",
+      "parameters": {
+        "closure_type": "inverse_balanced_navigation_tokens",
+        "initial_reference": "data/initial_observations/harnesseval_w_return_0009_atrium.jpg",
+        "must_recover_anchors": [
+          "foreground group on left",
+          "open atrium floor",
+          "irregular boundary between light floor and dark ground",
+          "central staircase with elevation change",
+          "red bollards",
+          "concrete columns",
+          "covered atrium ceiling/open skylight"
+        ],
+        "tolerance": "compatible viewpoint, not pixel-identical"
+      }
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "return_consistency_verifier"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The target is navigation and return consistency, not an explicitly requested semantic or object-state change."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "No physical intervention or force-driven causal response is specified; the only action is camera/navigation control."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "There is no case-specific physical-law outcome to validate beyond general plausibility of navigation and scene support."
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "reason": "Although persistence matters, this is a short 8-chunk closed loop rather than a long-horizon many-turn drift-resistance rollout."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not require an offscreen process to continue evolving while out of view."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}

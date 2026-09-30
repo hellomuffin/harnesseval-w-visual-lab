@@ -1,0 +1,105 @@
+{
+  "schema_version": "harnesseval.skill_plan",
+  "planner_version": "harnesseval.planner.v1",
+  "created_at": "2026-09-30T21:08:10.806476+00:00",
+  "routing_mode": "llm_case",
+  "input_digest": "aa6bd448fcca8325ecb0114e72768c3f66c6c82729861cf6c564990f2c8756df",
+  "case_id": "harnesseval_w_drift_0001_old_town_lane",
+  "taxonomy": {
+    "primary_axis": "world_persistence",
+    "probe_family": "drift_resistance"
+  },
+  "planner": {
+    "type": "openai_compatible",
+    "version": "harnesseval.planner.v1",
+    "prompt_version": "worlddojo.v2_planner.prompt.v8",
+    "model": "local-judge",
+    "wire_api": "chat_completions",
+    "request_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "response_id": "chatcmpl-88b8d13ddb47990f",
+    "response_model": "local-judge",
+    "usage": {
+      "prompt_tokens": 2579,
+      "total_tokens": 3104,
+      "completion_tokens": 525,
+      "prompt_tokens_details": null
+    },
+    "elapsed_seconds": 17.185364,
+    "attempt_count": 1
+  },
+  "selected_skills": [
+    {
+      "skill_id": "render_quality_inspector",
+      "role": "observation",
+      "reason": "Initial observation must be free of severe artifacts or watermarks as per validation questions.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "motion_quality_inspector",
+      "role": "observation",
+      "reason": "The case requires a long navigation sequence with continuous motion, necessitating evaluation of temporal smoothness.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "appearance_consistency_inspector",
+      "role": "observation",
+      "reason": "The case requires stable anchors to remain visually consistent across a long rollout, requiring appearance consistency evaluation.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "physical_plausibility_inspector",
+      "role": "observation",
+      "reason": "The navigation actions imply physical movement through a realistic world, requiring evaluation of physical plausibility.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "viewpoint_trajectory_verifier",
+      "role": "core",
+      "reason": "The case explicitly requires a long continuous navigation sequence with viewpoint movement along a path, matching the skill's definition.",
+      "parameters": {}
+    },
+    {
+      "skill_id": "drift_degradation_analyzer",
+      "role": "core",
+      "reason": "The case explicitly targets drift resistance via a long-horizon rollout with 8+ chunks, matching the skill's definition.",
+      "parameters": {}
+    }
+  ],
+  "selected_skill_ids": [
+    "render_quality_inspector",
+    "motion_quality_inspector",
+    "appearance_consistency_inspector",
+    "physical_plausibility_inspector",
+    "viewpoint_trajectory_verifier",
+    "drift_degradation_analyzer"
+  ],
+  "skipped_skills": [
+    {
+      "skill_id": "intentional_change_verifier_vlm",
+      "reason": "The case does not require an intentional semantic or object-state transition; it requires continuous navigation."
+    },
+    {
+      "skill_id": "physical_response_verifier_vlm",
+      "reason": "The case does not involve a causal physical intervention or force; it involves navigation."
+    },
+    {
+      "skill_id": "physical_law_validator",
+      "reason": "No case-specific physical-law check is required beyond general plausibility."
+    },
+    {
+      "skill_id": "return_consistency_verifier",
+      "reason": "The case does not involve a non-static loop or return to a previous state."
+    },
+    {
+      "skill_id": "offscreen_evolution_verifier",
+      "reason": "The case does not involve offscreen processes evolving in the same world."
+    }
+  ],
+  "validation": {
+    "status": "ok",
+    "registered_skill_count": 11,
+    "selected_skill_count": 6,
+    "selection_source": "planner",
+    "selection_modified": false
+  }
+}
