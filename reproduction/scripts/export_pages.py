@@ -19,7 +19,8 @@ for c in D['cases']:
   src=R/c[key];copy(src,P/c[key])
 # Replace the local API dependency with a numerically checked browser port.
 p=P/'app.js';s=p.read_text();a=s.index('let scoreRequest=');b=s.index('function renderConstruction()',a)
-s=s[:a]+'''function hostedScore(q){const round=x=>Math.round((x+Number.EPSILON)*1e6)/1e6;const change=round(.4*q[1]+.6*q[2]),preservation=round(.6*q[5]+.4*q[6]);const core=round(.30*change+.25*q[4]+.20*q[3]+.25*preservation);return round(q[0]*q[7]*core)}
+s=s[:a]+'''function pyRound6(x){if(x===0)return 0;const view=new DataView(new ArrayBuffer(8));view.setFloat64(0,x);const bits=view.getBigUint64(0),exp=Number((bits>>52n)&2047n);const mantissa=(bits&((1n<<52n)-1n))+(exp?1n<<52n:0n);const power=(exp||1)-1023-52;let n=mantissa*1000000n,d=1n;if(power<0)d<<=BigInt(-power);else n<<=BigInt(power);let q=n/d;const rem=n%d;if(2n*rem>d||(2n*rem===d&&(q&1n)))q++;return Number(q)/1e6}
+function hostedScore(q){const round=pyRound6;const change=round(.4*q[1]+.6*q[2]),preservation=round(.6*q[5]+.4*q[6]);const core=round(.30*change+.25*q[4]+.20*q[3]+.25*preservation);return round(q[0]*q[7]*core)}
 function recompute(){const q=$$('#sliders input').map(x=>Number(x.value));$$('#sliders output').forEach((o,i)=>o.textContent=q[i].toFixed(2));$('#whatif-score').textContent=num(hostedScore(q))}
 '''+s[b:]
 a=s.index("$('#case-form').onsubmit=");b=s.index('\n',a)
@@ -39,7 +40,7 @@ shutil.copytree(R/'scripts',P/'reproduction/scripts',dirs_exist_ok=True,ignore=s
 # Public copies redact machine-specific workspace prefixes only; numerical results stay unchanged.
 for p in P.rglob('*'):
  if '.git' in p.parts or not p.is_file() or p.suffix not in ['.json','.patch','.md','.txt','.py']:continue
- t=p.read_text();t=t.replace(str(R),'[workspace]').replace('[home]','[home]');p.write_text(t)
+ t=p.read_text();t=t.replace(str(R),'[workspace]').replace('/weka/oe-training-default/jasonr/chenhao_prior/home','[home]');p.write_text(t)
 (P/'.nojekyll').write_text('')
 (P/'README.md').write_text('''# HarnessEval-W visual reproduction lab
 
