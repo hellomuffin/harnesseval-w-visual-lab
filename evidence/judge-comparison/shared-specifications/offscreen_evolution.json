@@ -1,0 +1,33 @@
+{
+  "expected_spec": {
+    "target_process": "torch flame silhouettes and brightness evolution",
+    "stable_anchors": [
+      "stone archway",
+      "obelisk",
+      "silhouetted figures",
+      "torch holder"
+    ],
+    "visibility_timeline": {
+      "pre_visible": [
+        "c01"
+      ],
+      "offscreen": [
+        "c03",
+        "c04"
+      ],
+      "return_visible": [
+        "c06",
+        "c07"
+      ]
+    },
+    "expected_evolution": "The torch flame silhouettes and brightness should continue evolving (changing shape, intensity, or flicker) while offscreen, without resetting or freezing.",
+    "failure_modes": [
+      "torch flame appears frozen or unchanged while offscreen",
+      "torch flame reappears without visible evolution",
+      "torch flame returns before the look-away sequence completes"
+    ]
+  },
+  "source": "artifacts/fresh/cache/skills/offscreen_evolution/analyze_agent/harnesseval_w_offscreen_0002_torch_gateway.json",
+  "source_judge": "existing Qwen baseline",
+  "case_id": "harnesseval_w_offscreen_0002_torch_gateway"
+}

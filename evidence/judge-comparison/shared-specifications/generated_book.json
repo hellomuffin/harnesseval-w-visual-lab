@@ -1,0 +1,29 @@
+{
+  "expected_spec": {
+    "target": "red book",
+    "initial_state": "closed",
+    "intended_change": "open",
+    "change_type": "object_state",
+    "completion_criteria": "book cover is fully lifted and pages are visible",
+    "protected_anchors": [
+      "blue mug",
+      "potted basil plant",
+      "wooden countertop",
+      "white tiled wall"
+    ],
+    "negative_constraints": [
+      "book should not be moved from its position",
+      "book should not be rotated",
+      "book should not be damaged"
+    ],
+    "failure_modes": [
+      "book remains closed",
+      "book is partially opened",
+      "book is moved or rotated",
+      "book cover is torn or damaged"
+    ]
+  },
+  "source": "artifacts/construction/evaluation/skills/intentional_change/analyze_agent/local_constructed_red_book.json",
+  "source_judge": "existing Qwen baseline",
+  "case_id": "local_constructed_red_book"
+}

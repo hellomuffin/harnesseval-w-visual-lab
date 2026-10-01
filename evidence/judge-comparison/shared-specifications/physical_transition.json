@@ -1,0 +1,29 @@
+{
+  "expected_spec": {
+    "target_system": "red flag mounted on yellow base",
+    "intervention": "Continue the calibrated fan airflow at 5.0 m/s.",
+    "controlled_variables": [
+      "airflow_velocity_mps",
+      "airflow_direction_degrees"
+    ],
+    "expected_response": "The red flag will maintain a consistent, steady deformation pattern, fluttering or waving in a regular manner due to the constant 5.0 m/s wind.",
+    "causal_checks": [
+      "Flag fabric moves due to air pressure differential from airflow.",
+      "Flag orientation changes as airflow direction changes.",
+      "Flag deformation amplitude correlates with airflow velocity."
+    ],
+    "protected_anchors": [
+      "Flag remains attached to pole",
+      "Flag does not tear or detach",
+      "Flag does not become entangled"
+    ],
+    "failure_modes": [
+      "Flag becomes limp or collapses if airflow is insufficient",
+      "Flag flutters erratically if airflow is unstable",
+      "Flag detaches from pole if mounting is compromised"
+    ]
+  },
+  "source": "artifacts/fresh/cache/skills/physical_response/analyze_agent/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+  "source_judge": "existing Qwen baseline",
+  "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02"
+}

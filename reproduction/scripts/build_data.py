@@ -3,7 +3,7 @@ import json,sys,subprocess,hashlib,datetime,cv2
 R=Path(__file__).resolve().parents[1];U=R/'upstream';A=R/'artifacts';S=R/'site';sys.path.insert(0,str(U/'src'))
 from harnesseval.protocols import SKILLS,SKILL_SPECS,CORE_SKILLS,FAMILIES
 import numpy as np
-from harnesseval.pipeline.planner import build_plan
+from harnesseval.pipeline.planner import build_plan, planner_messages, PROMPT_VERSION
 read=lambda p:json.loads(p.read_text())
 def dump(p,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,indent=2,ensure_ascii=False))
 names={'exploratory_transition':'Explore a city','intentional_transition':'Tip the mug','physical_transition':'Turn up the wind','drift_resistance':'Walk through an old town','return_revisit_consistency':'Leave, then return','offscreen_evolution':'Look away from a flame'}
@@ -62,8 +62,10 @@ for case in sorted(manifest['cases'],key=lambda c:FAMILIES.index(c['taxonomy']['
      for key in ['expected_spec','judgment','sampling']:
       if key in d:traces[label][key]=d[key]
      traces[label]['judge']=d.get('response_metadata',{}).get('model','unknown')
- localp=A/f'fresh/plans/{f}/{cid}.skill_plan.json'
- case.update(title=names[f],family_label=short[f],video='upstream/'+str(video.relative_to(U)),image='upstream/'+str(initial.relative_to(U)),frames=frames,duration=round(n/fps,2),plan=plan,fresh_plan=read(localp) if localp.exists() else None,bundles=bundles,traces=traces,tool_evidence=tool_evidence)
+ # Reconstruct text directly from the pinned release and unmodified manifest case.
+ routing_prompt={'prompt_version':PROMPT_VERSION,'source':'Reconstructed from the released planner and original manifest; historical raw routing requests were not retained.','messages':planner_messages(case),'initial_observation':'upstream/'+str(initial.relative_to(U)),'initial_observation_sha256':hashlib.sha256(initial.read_bytes()).hexdigest(),'generated_rollout_included':False}
+ localp=A/f'fresh/plans/{f}/{cid}.skill_plan.json' 
+ case.update(generation_prompt=read(gen/'metadata.json').get('prompt'),routing_prompt=routing_prompt,title=names[f],family_label=short[f],video='upstream/'+str(video.relative_to(U)),image='upstream/'+str(initial.relative_to(U)),frames=frames,duration=round(n/fps,2),plan=plan,fresh_plan=read(localp) if localp.exists() else None,bundles=bundles,traces=traces,tool_evidence=tool_evidence)
  cases.append(case)
  try:
   rebuilt=build_plan(plan,case,'replay-validation');replays.append({'case':cid,'valid':rebuilt['selected_skill_ids']==plan['selected_skill_ids']})

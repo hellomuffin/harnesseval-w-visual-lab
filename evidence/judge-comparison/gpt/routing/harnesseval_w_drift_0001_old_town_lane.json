@@ -1,0 +1,447 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:16:51.631571+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "41145092666214bfde9bb1dc865f0ab3ebd1ad4ec1a5035d9c81cbf4f744b8f0",
+    "case_id": "harnesseval_w_drift_0001_old_town_lane",
+    "taxonomy": {
+      "primary_axis": "world_persistence",
+      "probe_family": "drift_resistance"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "The rollout should remain technically clean and realistic in an old-town lane, with no severe artifacts, watermarks, or ambiguity that would undermine judging the long navigation sequence.",
+        "parameters": {
+          "scene": "realistic old town lane",
+          "check_for": [
+            "frame cleanliness",
+            "artifacting",
+            "watermarks",
+            "distortions",
+            "readability of stable anchors"
+          ]
+        }
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "The case requires a long continuous route without cuts or reset, so generated motion must be present, smooth, and temporally continuous across all eight chunks.",
+        "parameters": {
+          "minimum_chunks": 8,
+          "expected_continuity": "no cuts, no resets, smooth first-person navigation"
+        }
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "The same world state must persist while navigating; buildings, cobblestones, lighting, materials, and anchor appearances should not arbitrarily change between chunks.",
+        "parameters": {
+          "stable_anchors": [
+            "clock tower",
+            "cobblestone lane",
+            "bakery awning",
+            "lamp posts"
+          ],
+          "check_consistency_of": [
+            "anchor identity",
+            "architectural style",
+            "textures and materials",
+            "lighting and weather",
+            "scale and layout"
+          ]
+        }
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "First-person navigation through a cobblestone lane should obey plausible camera translation, rotation, occlusion, parallax, and collision constraints.",
+        "parameters": {
+          "navigation_surface": "cobblestone lane",
+          "check_for": [
+            "plausible parallax",
+            "no clipping through buildings or lamp posts",
+            "reasonable turning and strafing motion",
+            "consistent ground contact/view height"
+          ]
+        }
+      },
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "role": "core",
+        "reason": "The action is explicitly a long navigation sequence with ordered controls W, W+left, W, right, W, A, W, D, requiring verification that the camera follows the intended path continuously.",
+        "parameters": {
+          "control_scheme": "harnesseval_navigation_v1",
+          "chunks": [
+            {
+              "chunk_id": "c01",
+              "expected_action": "W"
+            },
+            {
+              "chunk_id": "c02",
+              "expected_action": "W+left"
+            },
+            {
+              "chunk_id": "c03",
+              "expected_action": "W"
+            },
+            {
+              "chunk_id": "c04",
+              "expected_action": "right"
+            },
+            {
+              "chunk_id": "c05",
+              "expected_action": "W"
+            },
+            {
+              "chunk_id": "c06",
+              "expected_action": "A"
+            },
+            {
+              "chunk_id": "c07",
+              "expected_action": "W"
+            },
+            {
+              "chunk_id": "c08",
+              "expected_action": "D"
+            }
+          ],
+          "requirements": [
+            "continuous route",
+            "no cut or reset",
+            "directional motion matches commands"
+          ]
+        }
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "role": "core",
+        "reason": "This is a drift-resistance probe with a long-horizon eight-chunk rollout; the clock tower, cobblestone lane, bakery awning, and lamp posts must remain part of one coherent world without progressive visual, geometric, or semantic degradation.",
+        "parameters": {
+          "probe_family": "drift_resistance",
+          "minimum_chunks": 8,
+          "drift_targets": [
+            "clock tower",
+            "cobblestone lane",
+            "bakery awning",
+            "lamp posts"
+          ],
+          "check_for": [
+            "anchor disappearance without navigational cause",
+            "identity morphing",
+            "layout drift",
+            "scale drift",
+            "texture/semantic degradation",
+            "world reset or scene replacement"
+          ]
+        }
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "viewpoint_trajectory_verifier",
+      "drift_degradation_analyzer"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "reason": "The case does not ask for an intentional semantic or object-state transition; it asks for persistent navigation through the same world."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "No case-specific physical-law outcome is required beyond general plausibility of first-person navigation."
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "reason": "The route does not specify returning to a previously seen view or completing a loop for revisit comparison."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "No offscreen process is expected to continue evolving while out of view."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 6,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_drift_0001_old_town_lane\",\n    \"taxonomy\": {\n      \"primary_axis\": \"world_persistence\",\n      \"probe_family\": \"drift_resistance\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_drift_0001_old_town_lane\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_drift_0001_old_town_lane.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"old_town_lane\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"clock tower\",\n        \"cobblestone lane\",\n        \"bakery awning\",\n        \"lamp posts\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"drift_targets\": [\n        \"clock tower\",\n        \"cobblestone lane\",\n        \"bakery awning\",\n        \"lamp posts\"\n      ],\n      \"minimum_chunks\": 8,\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"long_navigation_sequence\",\n        \"action_id\": \"drift_0001\",\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"text\": \"Follow a long continuous route through the same world without cuts or reset. The stable anchors should remain part of one coherent world state.\",\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W+left\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"right\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"A\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"D\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "16937a3ea5490de8732235e9642013eb3e85f973065558fd1f11656ba60d81fc",
+            "bytes": 514466
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "The rollout should remain technically clean and realistic in an old-town lane, with no severe artifacts, watermarks, or ambiguity that would undermine judging the long navigation sequence.",
+          "parameters": {
+            "scene": "realistic old town lane",
+            "check_for": [
+              "frame cleanliness",
+              "artifacting",
+              "watermarks",
+              "distortions",
+              "readability of stable anchors"
+            ]
+          }
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "The case requires a long continuous route without cuts or reset, so generated motion must be present, smooth, and temporally continuous across all eight chunks.",
+          "parameters": {
+            "minimum_chunks": 8,
+            "expected_continuity": "no cuts, no resets, smooth first-person navigation"
+          }
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "The same world state must persist while navigating; buildings, cobblestones, lighting, materials, and anchor appearances should not arbitrarily change between chunks.",
+          "parameters": {
+            "stable_anchors": [
+              "clock tower",
+              "cobblestone lane",
+              "bakery awning",
+              "lamp posts"
+            ],
+            "check_consistency_of": [
+              "anchor identity",
+              "architectural style",
+              "textures and materials",
+              "lighting and weather",
+              "scale and layout"
+            ]
+          }
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "First-person navigation through a cobblestone lane should obey plausible camera translation, rotation, occlusion, parallax, and collision constraints.",
+          "parameters": {
+            "navigation_surface": "cobblestone lane",
+            "check_for": [
+              "plausible parallax",
+              "no clipping through buildings or lamp posts",
+              "reasonable turning and strafing motion",
+              "consistent ground contact/view height"
+            ]
+          }
+        },
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "role": "core",
+          "reason": "The action is explicitly a long navigation sequence with ordered controls W, W+left, W, right, W, A, W, D, requiring verification that the camera follows the intended path continuously.",
+          "parameters": {
+            "control_scheme": "harnesseval_navigation_v1",
+            "chunks": [
+              {
+                "chunk_id": "c01",
+                "expected_action": "W"
+              },
+              {
+                "chunk_id": "c02",
+                "expected_action": "W+left"
+              },
+              {
+                "chunk_id": "c03",
+                "expected_action": "W"
+              },
+              {
+                "chunk_id": "c04",
+                "expected_action": "right"
+              },
+              {
+                "chunk_id": "c05",
+                "expected_action": "W"
+              },
+              {
+                "chunk_id": "c06",
+                "expected_action": "A"
+              },
+              {
+                "chunk_id": "c07",
+                "expected_action": "W"
+              },
+              {
+                "chunk_id": "c08",
+                "expected_action": "D"
+              }
+            ],
+            "requirements": [
+              "continuous route",
+              "no cut or reset",
+              "directional motion matches commands"
+            ]
+          }
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "role": "core",
+          "reason": "This is a drift-resistance probe with a long-horizon eight-chunk rollout; the clock tower, cobblestone lane, bakery awning, and lamp posts must remain part of one coherent world without progressive visual, geometric, or semantic degradation.",
+          "parameters": {
+            "probe_family": "drift_resistance",
+            "minimum_chunks": 8,
+            "drift_targets": [
+              "clock tower",
+              "cobblestone lane",
+              "bakery awning",
+              "lamp posts"
+            ],
+            "check_for": [
+              "anchor disappearance without navigational cause",
+              "identity morphing",
+              "layout drift",
+              "scale drift",
+              "texture/semantic degradation",
+              "world reset or scene replacement"
+            ]
+          }
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "reason": "The case does not ask for an intentional semantic or object-state transition; it asks for persistent navigation through the same world."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "No case-specific physical-law outcome is required beyond general plausibility of first-person navigation."
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "reason": "The route does not specify returning to a previously seen view or completing a loop for revisit comparison."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "No offscreen process is expected to continue evolving while out of view."
+        }
+      ]
+    },
+    "raw_output_text": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The rollout should remain technically clean and realistic in an old-town lane, with no severe artifacts, watermarks, or ambiguity that would undermine judging the long navigation sequence.\",\n      \"parameters\": {\n        \"scene\": \"realistic old town lane\",\n        \"check_for\": [\n          \"frame cleanliness\",\n          \"artifacting\",\n          \"watermarks\",\n          \"distortions\",\n          \"readability of stable anchors\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The case requires a long continuous route without cuts or reset, so generated motion must be present, smooth, and temporally continuous across all eight chunks.\",\n      \"parameters\": {\n        \"minimum_chunks\": 8,\n        \"expected_continuity\": \"no cuts, no resets, smooth first-person navigation\"\n      }\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The same world state must persist while navigating; buildings, cobblestones, lighting, materials, and anchor appearances should not arbitrarily change between chunks.\",\n      \"parameters\": {\n        \"stable_anchors\": [\n          \"clock tower\",\n          \"cobblestone lane\",\n          \"bakery awning\",\n          \"lamp posts\"\n        ],\n        \"check_consistency_of\": [\n          \"anchor identity\",\n          \"architectural style\",\n          \"textures and materials\",\n          \"lighting and weather\",\n          \"scale and layout\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"First-person navigation through a cobblestone lane should obey plausible camera translation, rotation, occlusion, parallax, and collision constraints.\",\n      \"parameters\": {\n        \"navigation_surface\": \"cobblestone lane\",\n        \"check_for\": [\n          \"plausible parallax\",\n          \"no clipping through buildings or lamp posts\",\n          \"reasonable turning and strafing motion\",\n          \"consistent ground contact/view height\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"The action is explicitly a long navigation sequence with ordered controls W, W+left, W, right, W, A, W, D, requiring verification that the camera follows the intended path continuously.\",\n      \"parameters\": {\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"expected_action\": \"W+left\"\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"expected_action\": \"right\"\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"expected_action\": \"A\"\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"expected_action\": \"D\"\n          }\n        ],\n        \"requirements\": [\n          \"continuous route\",\n          \"no cut or reset\",\n          \"directional motion matches commands\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"role\": \"core\",\n      \"reason\": \"This is a drift-resistance probe with a long-horizon eight-chunk rollout; the clock tower, cobblestone lane, bakery awning, and lamp posts must remain part of one coherent world without progressive visual, geometric, or semantic degradation.\",\n      \"parameters\": {\n        \"probe_family\": \"drift_resistance\",\n        \"minimum_chunks\": 8,\n        \"drift_targets\": [\n          \"clock tower\",\n          \"cobblestone lane\",\n          \"bakery awning\",\n          \"lamp posts\"\n        ],\n        \"check_for\": [\n          \"anchor disappearance without navigational cause\",\n          \"identity morphing\",\n          \"layout drift\",\n          \"scale drift\",\n          \"texture/semantic degradation\",\n          \"world reset or scene replacement\"\n        ]\n      }\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"The case does not ask for an intentional semantic or object-state transition; it asks for persistent navigation through the same world.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"There is no explicit physical intervention or force whose causal response must be evaluated.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"No case-specific physical-law outcome is required beyond general plausibility of first-person navigation.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"The route does not specify returning to a previously seen view or completing a loop for revisit comparison.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process is expected to continue evolving while out of view.\"\n    }\n  ]\n}",
+    "raw_response": {
+      "id": "chatcmpl-EU7C3V4kKw5EOJCJVZ2eR7GvRBnEH",
+      "object": "chat.completion",
+      "created": 1790846199,
+      "model": "gpt-5.5-2026-04-23",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The rollout should remain technically clean and realistic in an old-town lane, with no severe artifacts, watermarks, or ambiguity that would undermine judging the long navigation sequence.\",\n      \"parameters\": {\n        \"scene\": \"realistic old town lane\",\n        \"check_for\": [\n          \"frame cleanliness\",\n          \"artifacting\",\n          \"watermarks\",\n          \"distortions\",\n          \"readability of stable anchors\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The case requires a long continuous route without cuts or reset, so generated motion must be present, smooth, and temporally continuous across all eight chunks.\",\n      \"parameters\": {\n        \"minimum_chunks\": 8,\n        \"expected_continuity\": \"no cuts, no resets, smooth first-person navigation\"\n      }\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The same world state must persist while navigating; buildings, cobblestones, lighting, materials, and anchor appearances should not arbitrarily change between chunks.\",\n      \"parameters\": {\n        \"stable_anchors\": [\n          \"clock tower\",\n          \"cobblestone lane\",\n          \"bakery awning\",\n          \"lamp posts\"\n        ],\n        \"check_consistency_of\": [\n          \"anchor identity\",\n          \"architectural style\",\n          \"textures and materials\",\n          \"lighting and weather\",\n          \"scale and layout\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"First-person navigation through a cobblestone lane should obey plausible camera translation, rotation, occlusion, parallax, and collision constraints.\",\n      \"parameters\": {\n        \"navigation_surface\": \"cobblestone lane\",\n        \"check_for\": [\n          \"plausible parallax\",\n          \"no clipping through buildings or lamp posts\",\n          \"reasonable turning and strafing motion\",\n          \"consistent ground contact/view height\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"The action is explicitly a long navigation sequence with ordered controls W, W+left, W, right, W, A, W, D, requiring verification that the camera follows the intended path continuously.\",\n      \"parameters\": {\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"expected_action\": \"W+left\"\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"expected_action\": \"right\"\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"expected_action\": \"A\"\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"expected_action\": \"W\"\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"expected_action\": \"D\"\n          }\n        ],\n        \"requirements\": [\n          \"continuous route\",\n          \"no cut or reset\",\n          \"directional motion matches commands\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"role\": \"core\",\n      \"reason\": \"This is a drift-resistance probe with a long-horizon eight-chunk rollout; the clock tower, cobblestone lane, bakery awning, and lamp posts must remain part of one coherent world without progressive visual, geometric, or semantic degradation.\",\n      \"parameters\": {\n        \"probe_family\": \"drift_resistance\",\n        \"minimum_chunks\": 8,\n        \"drift_targets\": [\n          \"clock tower\",\n          \"cobblestone lane\",\n          \"bakery awning\",\n          \"lamp posts\"\n        ],\n        \"check_for\": [\n          \"anchor disappearance without navigational cause\",\n          \"identity morphing\",\n          \"layout drift\",\n          \"scale drift\",\n          \"texture/semantic degradation\",\n          \"world reset or scene replacement\"\n        ]\n      }\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"The case does not ask for an intentional semantic or object-state transition; it asks for persistent navigation through the same world.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"There is no explicit physical intervention or force whose causal response must be evaluated.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"No case-specific physical-law outcome is required beyond general plausibility of first-person navigation.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"The route does not specify returning to a previously seen view or completing a loop for revisit comparison.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process is expected to continue evolving while out of view.\"\n    }\n  ]\n}",
+            "refusal": null,
+            "annotations": []
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2782,
+        "completion_tokens": 1320,
+        "total_tokens": 4102,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 143,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "service_tier": "default",
+      "system_fingerprint": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-EU7C3V4kKw5EOJCJVZ2eR7GvRBnEH",
+      "model": "gpt-5.5-2026-04-23",
+      "created": 1790846199,
+      "usage": {
+        "prompt_tokens": 2782,
+        "completion_tokens": 1320,
+        "total_tokens": 4102,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 143,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "request_url": "https://api.openai.com/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:16:39.206280+00:00",
+      "response_received_at": "2026-10-01T09:16:51.624703+00:00",
+      "elapsed_seconds": 12.418439,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "https://api.openai.com/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 12.418338
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "reasoning_effort": "medium",
+        "temperature": "API default (temperature=0 unsupported)",
+        "max_completion_tokens": 16384
+      },
+      "request_sha256": "41145092666214bfde9bb1dc865f0ab3ebd1ad4ec1a5035d9c81cbf4f744b8f0"
+    }
+  }
+}

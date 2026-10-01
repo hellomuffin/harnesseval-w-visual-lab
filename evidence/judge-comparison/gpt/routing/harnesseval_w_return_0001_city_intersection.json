@@ -1,0 +1,477 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:18:07.612507+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "6e4495b8cf1a27e390058b007cab2afd989c6d8ddded5f51ed5f237cb6587f36",
+    "case_id": "harnesseval_w_return_0001_city_intersection",
+    "taxonomy": {
+      "primary_axis": "world_persistence",
+      "probe_family": "return_revisit_consistency"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "Needed to check that the realistic city-intersection rollout remains technically clean, free of severe artifacts, watermarks, distortions, or ambiguity that would make the return-navigation task unjudgeable.",
+        "parameters": {
+          "scene_type": "realistic first-person city intersection",
+          "quality_checks": [
+            "sharpness and exposure remain acceptable",
+            "no severe warping, melting, duplicated objects, or texture corruption",
+            "no watermarks or non-scene text artifacts",
+            "stable anchors remain visually legible when in view"
+          ],
+          "key_anchors": [
+            "station arch",
+            "traffic gantry",
+            "zebra crossing",
+            "bus shelter"
+          ]
+        }
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "The case is a multi-chunk navigation rollout, so generated frames should show present, smooth first-person motion rather than static frames, jumps, or temporal flicker.",
+        "parameters": {
+          "action_chunks": [
+            "c01",
+            "c02",
+            "c03",
+            "c04",
+            "c05",
+            "c06",
+            "c07",
+            "c08"
+          ],
+          "motion_expectations": [
+            "visible camera translation/rotation corresponding to navigation inputs",
+            "smooth temporal continuity between chunks",
+            "no abrupt teleportation unless implied by the controls, which it is not",
+            "no excessive jitter, frame stutter, or unstable zooming"
+          ]
+        }
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "World persistence requires the city intersection, station arch, traffic gantry, zebra crossing, and bus shelter to keep consistent appearance and layout through departure and return.",
+        "parameters": {
+          "protected_anchors": [
+            "station arch",
+            "traffic gantry",
+            "zebra crossing",
+            "bus shelter"
+          ],
+          "consistency_checks": [
+            "anchor shapes, materials, colors, signage placement, and relative positions remain stable",
+            "road markings and sidewalks do not drift or reconfigure arbitrarily",
+            "buildings, poles, rails, traffic lights, and bus shelter do not change identity between views",
+            "lighting and weather remain compatible with the same scene"
+          ]
+        }
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "The first-person navigation through a street scene should obey plausible camera movement and static-world geometry, with no impossible object motion or scene restructuring.",
+        "parameters": {
+          "plausibility_checks": [
+            "camera stays at plausible pedestrian or vehicle viewpoint height",
+            "translations and rotations are physically continuous",
+            "street fixtures remain fixed to the ground",
+            "occlusion and perspective changes are consistent with movement",
+            "traffic lights, gantry, shelter, arch, crosswalk, and road surfaces do not float, bend, or slide"
+          ]
+        }
+      },
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "role": "core",
+        "reason": "The interaction explicitly specifies active closed-loop navigation actions W, W, S, S, left, right, A, D; evaluation must verify that the generated viewpoint follows this move-away-and-return trajectory rather than remaining static or resetting.",
+        "parameters": {
+          "control_scheme": "harnesseval_navigation_v1",
+          "expected_actions_by_chunk": {
+            "c01": [
+              "W"
+            ],
+            "c02": [
+              "W"
+            ],
+            "c03": [
+              "S"
+            ],
+            "c04": [
+              "S"
+            ],
+            "c05": [
+              "left"
+            ],
+            "c06": [
+              "right"
+            ],
+            "c07": [
+              "A"
+            ],
+            "c08": [
+              "D"
+            ]
+          },
+          "trajectory_expectations": [
+            "early W chunks move away from the initial viewpoint",
+            "S chunks reverse the forward motion",
+            "left/right rotation pair approximately cancels",
+            "A/D lateral pair approximately cancels",
+            "no hard scene reset or cut to a newly generated intersection",
+            "camera path should form a non-static loop with compatible final viewpoint"
+          ]
+        }
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "role": "core",
+        "reason": "This is a return/revisit consistency case: after leaving the initial area, chunk c08 must revisit a compatible view of the same world seen at reference chunk c01, preserving protected anchors.",
+        "parameters": {
+          "reference_chunk": "c01",
+          "return_chunk": "c08",
+          "closed_loop_pair": {
+            "reference_chunk": "c01",
+            "return_chunk": "c08"
+          },
+          "protected_anchors": [
+            "station arch",
+            "traffic gantry",
+            "zebra crossing",
+            "bus shelter"
+          ],
+          "return_expectations": [
+            "c08 should be spatially compatible with c01 rather than a different city intersection",
+            "station arch, traffic gantry, zebra crossing, and bus shelter should retain identity, geometry, and relative layout",
+            "viewpoint may differ slightly but should be reconcilable as the same location after inverse-balanced navigation",
+            "return must occur without resetting the scene or regenerating inconsistent details"
+          ]
+        }
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "viewpoint_trajectory_verifier",
+      "return_consistency_verifier"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "reason": "The case does not ask for a semantic or object-state edit; it asks for navigation away from and back to the same world."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "No case-specific physical-law outcome is required beyond general plausibility of camera navigation and static scene geometry."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "Although consistency matters, this is an 8-chunk closed-loop return task rather than an explicit long-horizon drift-resistance probe."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "The task does not require an offscreen process to continue evolving; the target is revisiting the same static world after navigation."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 6,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_return_0001_city_intersection\",\n    \"taxonomy\": {\n      \"primary_axis\": \"world_persistence\",\n      \"probe_family\": \"return_revisit_consistency\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_return_0001_city_intersection\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_return_0001_city_intersection.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"city_intersection\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"station arch\",\n        \"traffic gantry\",\n        \"zebra crossing\",\n        \"bus shelter\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"return_window\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\"\n      },\n      \"closed_loop_pairs\": [\n        {\n          \"reference_chunk\": \"c01\",\n          \"return_chunk\": \"c08\"\n        }\n      ],\n      \"protected_anchors\": [\n        \"station arch\",\n        \"traffic gantry\",\n        \"zebra crossing\",\n        \"bus shelter\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"closed_loop_navigation\",\n        \"action_id\": \"return_0001\",\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"text\": \"Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.\",\n        \"closed_loop\": {\n          \"intended\": true,\n          \"closure_type\": \"inverse_balanced_navigation_tokens\"\n        },\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"S\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"S\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"left\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"right\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"A\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"D\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "8297becf993b43947767bb733ee48b4761e9371fc1bfb96b6f14bf715dee8683",
+            "bytes": 507297
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "Needed to check that the realistic city-intersection rollout remains technically clean, free of severe artifacts, watermarks, distortions, or ambiguity that would make the return-navigation task unjudgeable.",
+          "parameters": {
+            "scene_type": "realistic first-person city intersection",
+            "quality_checks": [
+              "sharpness and exposure remain acceptable",
+              "no severe warping, melting, duplicated objects, or texture corruption",
+              "no watermarks or non-scene text artifacts",
+              "stable anchors remain visually legible when in view"
+            ],
+            "key_anchors": [
+              "station arch",
+              "traffic gantry",
+              "zebra crossing",
+              "bus shelter"
+            ]
+          }
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "The case is a multi-chunk navigation rollout, so generated frames should show present, smooth first-person motion rather than static frames, jumps, or temporal flicker.",
+          "parameters": {
+            "action_chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04",
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ],
+            "motion_expectations": [
+              "visible camera translation/rotation corresponding to navigation inputs",
+              "smooth temporal continuity between chunks",
+              "no abrupt teleportation unless implied by the controls, which it is not",
+              "no excessive jitter, frame stutter, or unstable zooming"
+            ]
+          }
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "World persistence requires the city intersection, station arch, traffic gantry, zebra crossing, and bus shelter to keep consistent appearance and layout through departure and return.",
+          "parameters": {
+            "protected_anchors": [
+              "station arch",
+              "traffic gantry",
+              "zebra crossing",
+              "bus shelter"
+            ],
+            "consistency_checks": [
+              "anchor shapes, materials, colors, signage placement, and relative positions remain stable",
+              "road markings and sidewalks do not drift or reconfigure arbitrarily",
+              "buildings, poles, rails, traffic lights, and bus shelter do not change identity between views",
+              "lighting and weather remain compatible with the same scene"
+            ]
+          }
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "The first-person navigation through a street scene should obey plausible camera movement and static-world geometry, with no impossible object motion or scene restructuring.",
+          "parameters": {
+            "plausibility_checks": [
+              "camera stays at plausible pedestrian or vehicle viewpoint height",
+              "translations and rotations are physically continuous",
+              "street fixtures remain fixed to the ground",
+              "occlusion and perspective changes are consistent with movement",
+              "traffic lights, gantry, shelter, arch, crosswalk, and road surfaces do not float, bend, or slide"
+            ]
+          }
+        },
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "role": "core",
+          "reason": "The interaction explicitly specifies active closed-loop navigation actions W, W, S, S, left, right, A, D; evaluation must verify that the generated viewpoint follows this move-away-and-return trajectory rather than remaining static or resetting.",
+          "parameters": {
+            "control_scheme": "harnesseval_navigation_v1",
+            "expected_actions_by_chunk": {
+              "c01": [
+                "W"
+              ],
+              "c02": [
+                "W"
+              ],
+              "c03": [
+                "S"
+              ],
+              "c04": [
+                "S"
+              ],
+              "c05": [
+                "left"
+              ],
+              "c06": [
+                "right"
+              ],
+              "c07": [
+                "A"
+              ],
+              "c08": [
+                "D"
+              ]
+            },
+            "trajectory_expectations": [
+              "early W chunks move away from the initial viewpoint",
+              "S chunks reverse the forward motion",
+              "left/right rotation pair approximately cancels",
+              "A/D lateral pair approximately cancels",
+              "no hard scene reset or cut to a newly generated intersection",
+              "camera path should form a non-static loop with compatible final viewpoint"
+            ]
+          }
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "role": "core",
+          "reason": "This is a return/revisit consistency case: after leaving the initial area, chunk c08 must revisit a compatible view of the same world seen at reference chunk c01, preserving protected anchors.",
+          "parameters": {
+            "reference_chunk": "c01",
+            "return_chunk": "c08",
+            "closed_loop_pair": {
+              "reference_chunk": "c01",
+              "return_chunk": "c08"
+            },
+            "protected_anchors": [
+              "station arch",
+              "traffic gantry",
+              "zebra crossing",
+              "bus shelter"
+            ],
+            "return_expectations": [
+              "c08 should be spatially compatible with c01 rather than a different city intersection",
+              "station arch, traffic gantry, zebra crossing, and bus shelter should retain identity, geometry, and relative layout",
+              "viewpoint may differ slightly but should be reconcilable as the same location after inverse-balanced navigation",
+              "return must occur without resetting the scene or regenerating inconsistent details"
+            ]
+          }
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "reason": "The case does not ask for a semantic or object-state edit; it asks for navigation away from and back to the same world."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "There is no explicit physical intervention or force whose causal response must be evaluated."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "No case-specific physical-law outcome is required beyond general plausibility of camera navigation and static scene geometry."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "Although consistency matters, this is an 8-chunk closed-loop return task rather than an explicit long-horizon drift-resistance probe."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "The task does not require an offscreen process to continue evolving; the target is revisiting the same static world after navigation."
+        }
+      ]
+    },
+    "raw_output_text": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Needed to check that the realistic city-intersection rollout remains technically clean, free of severe artifacts, watermarks, distortions, or ambiguity that would make the return-navigation task unjudgeable.\",\n      \"parameters\": {\n        \"scene_type\": \"realistic first-person city intersection\",\n        \"quality_checks\": [\n          \"sharpness and exposure remain acceptable\",\n          \"no severe warping, melting, duplicated objects, or texture corruption\",\n          \"no watermarks or non-scene text artifacts\",\n          \"stable anchors remain visually legible when in view\"\n        ],\n        \"key_anchors\": [\n          \"station arch\",\n          \"traffic gantry\",\n          \"zebra crossing\",\n          \"bus shelter\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The case is a multi-chunk navigation rollout, so generated frames should show present, smooth first-person motion rather than static frames, jumps, or temporal flicker.\",\n      \"parameters\": {\n        \"action_chunks\": [\n          \"c01\",\n          \"c02\",\n          \"c03\",\n          \"c04\",\n          \"c05\",\n          \"c06\",\n          \"c07\",\n          \"c08\"\n        ],\n        \"motion_expectations\": [\n          \"visible camera translation/rotation corresponding to navigation inputs\",\n          \"smooth temporal continuity between chunks\",\n          \"no abrupt teleportation unless implied by the controls, which it is not\",\n          \"no excessive jitter, frame stutter, or unstable zooming\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"World persistence requires the city intersection, station arch, traffic gantry, zebra crossing, and bus shelter to keep consistent appearance and layout through departure and return.\",\n      \"parameters\": {\n        \"protected_anchors\": [\n          \"station arch\",\n          \"traffic gantry\",\n          \"zebra crossing\",\n          \"bus shelter\"\n        ],\n        \"consistency_checks\": [\n          \"anchor shapes, materials, colors, signage placement, and relative positions remain stable\",\n          \"road markings and sidewalks do not drift or reconfigure arbitrarily\",\n          \"buildings, poles, rails, traffic lights, and bus shelter do not change identity between views\",\n          \"lighting and weather remain compatible with the same scene\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The first-person navigation through a street scene should obey plausible camera movement and static-world geometry, with no impossible object motion or scene restructuring.\",\n      \"parameters\": {\n        \"plausibility_checks\": [\n          \"camera stays at plausible pedestrian or vehicle viewpoint height\",\n          \"translations and rotations are physically continuous\",\n          \"street fixtures remain fixed to the ground\",\n          \"occlusion and perspective changes are consistent with movement\",\n          \"traffic lights, gantry, shelter, arch, crosswalk, and road surfaces do not float, bend, or slide\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"The interaction explicitly specifies active closed-loop navigation actions W, W, S, S, left, right, A, D; evaluation must verify that the generated viewpoint follows this move-away-and-return trajectory rather than remaining static or resetting.\",\n      \"parameters\": {\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"expected_actions_by_chunk\": {\n          \"c01\": [\n            \"W\"\n          ],\n          \"c02\": [\n            \"W\"\n          ],\n          \"c03\": [\n            \"S\"\n          ],\n          \"c04\": [\n            \"S\"\n          ],\n          \"c05\": [\n            \"left\"\n          ],\n          \"c06\": [\n            \"right\"\n          ],\n          \"c07\": [\n            \"A\"\n          ],\n          \"c08\": [\n            \"D\"\n          ]\n        },\n        \"trajectory_expectations\": [\n          \"early W chunks move away from the initial viewpoint\",\n          \"S chunks reverse the forward motion\",\n          \"left/right rotation pair approximately cancels\",\n          \"A/D lateral pair approximately cancels\",\n          \"no hard scene reset or cut to a newly generated intersection\",\n          \"camera path should form a non-static loop with compatible final viewpoint\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"This is a return/revisit consistency case: after leaving the initial area, chunk c08 must revisit a compatible view of the same world seen at reference chunk c01, preserving protected anchors.\",\n      \"parameters\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\",\n        \"closed_loop_pair\": {\n          \"reference_chunk\": \"c01\",\n          \"return_chunk\": \"c08\"\n        },\n        \"protected_anchors\": [\n          \"station arch\",\n          \"traffic gantry\",\n          \"zebra crossing\",\n          \"bus shelter\"\n        ],\n        \"return_expectations\": [\n          \"c08 should be spatially compatible with c01 rather than a different city intersection\",\n          \"station arch, traffic gantry, zebra crossing, and bus shelter should retain identity, geometry, and relative layout\",\n          \"viewpoint may differ slightly but should be reconcilable as the same location after inverse-balanced navigation\",\n          \"return must occur without resetting the scene or regenerating inconsistent details\"\n        ]\n      }\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"The case does not ask for a semantic or object-state edit; it asks for navigation away from and back to the same world.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"There is no explicit physical intervention or force whose causal response must be evaluated.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"No case-specific physical-law outcome is required beyond general plausibility of camera navigation and static scene geometry.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Although consistency matters, this is an 8-chunk closed-loop return task rather than an explicit long-horizon drift-resistance probe.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"The task does not require an offscreen process to continue evolving; the target is revisiting the same static world after navigation.\"\n    }\n  ]\n}",
+    "raw_response": {
+      "id": "chatcmpl-EU7DA9O5T1Qecy4oZADft8liSUFKq",
+      "object": "chat.completion",
+      "created": 1790846268,
+      "model": "gpt-5.5-2026-04-23",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Needed to check that the realistic city-intersection rollout remains technically clean, free of severe artifacts, watermarks, distortions, or ambiguity that would make the return-navigation task unjudgeable.\",\n      \"parameters\": {\n        \"scene_type\": \"realistic first-person city intersection\",\n        \"quality_checks\": [\n          \"sharpness and exposure remain acceptable\",\n          \"no severe warping, melting, duplicated objects, or texture corruption\",\n          \"no watermarks or non-scene text artifacts\",\n          \"stable anchors remain visually legible when in view\"\n        ],\n        \"key_anchors\": [\n          \"station arch\",\n          \"traffic gantry\",\n          \"zebra crossing\",\n          \"bus shelter\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The case is a multi-chunk navigation rollout, so generated frames should show present, smooth first-person motion rather than static frames, jumps, or temporal flicker.\",\n      \"parameters\": {\n        \"action_chunks\": [\n          \"c01\",\n          \"c02\",\n          \"c03\",\n          \"c04\",\n          \"c05\",\n          \"c06\",\n          \"c07\",\n          \"c08\"\n        ],\n        \"motion_expectations\": [\n          \"visible camera translation/rotation corresponding to navigation inputs\",\n          \"smooth temporal continuity between chunks\",\n          \"no abrupt teleportation unless implied by the controls, which it is not\",\n          \"no excessive jitter, frame stutter, or unstable zooming\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"World persistence requires the city intersection, station arch, traffic gantry, zebra crossing, and bus shelter to keep consistent appearance and layout through departure and return.\",\n      \"parameters\": {\n        \"protected_anchors\": [\n          \"station arch\",\n          \"traffic gantry\",\n          \"zebra crossing\",\n          \"bus shelter\"\n        ],\n        \"consistency_checks\": [\n          \"anchor shapes, materials, colors, signage placement, and relative positions remain stable\",\n          \"road markings and sidewalks do not drift or reconfigure arbitrarily\",\n          \"buildings, poles, rails, traffic lights, and bus shelter do not change identity between views\",\n          \"lighting and weather remain compatible with the same scene\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"The first-person navigation through a street scene should obey plausible camera movement and static-world geometry, with no impossible object motion or scene restructuring.\",\n      \"parameters\": {\n        \"plausibility_checks\": [\n          \"camera stays at plausible pedestrian or vehicle viewpoint height\",\n          \"translations and rotations are physically continuous\",\n          \"street fixtures remain fixed to the ground\",\n          \"occlusion and perspective changes are consistent with movement\",\n          \"traffic lights, gantry, shelter, arch, crosswalk, and road surfaces do not float, bend, or slide\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"The interaction explicitly specifies active closed-loop navigation actions W, W, S, S, left, right, A, D; evaluation must verify that the generated viewpoint follows this move-away-and-return trajectory rather than remaining static or resetting.\",\n      \"parameters\": {\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"expected_actions_by_chunk\": {\n          \"c01\": [\n            \"W\"\n          ],\n          \"c02\": [\n            \"W\"\n          ],\n          \"c03\": [\n            \"S\"\n          ],\n          \"c04\": [\n            \"S\"\n          ],\n          \"c05\": [\n            \"left\"\n          ],\n          \"c06\": [\n            \"right\"\n          ],\n          \"c07\": [\n            \"A\"\n          ],\n          \"c08\": [\n            \"D\"\n          ]\n        },\n        \"trajectory_expectations\": [\n          \"early W chunks move away from the initial viewpoint\",\n          \"S chunks reverse the forward motion\",\n          \"left/right rotation pair approximately cancels\",\n          \"A/D lateral pair approximately cancels\",\n          \"no hard scene reset or cut to a newly generated intersection\",\n          \"camera path should form a non-static loop with compatible final viewpoint\"\n        ]\n      }\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"This is a return/revisit consistency case: after leaving the initial area, chunk c08 must revisit a compatible view of the same world seen at reference chunk c01, preserving protected anchors.\",\n      \"parameters\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\",\n        \"closed_loop_pair\": {\n          \"reference_chunk\": \"c01\",\n          \"return_chunk\": \"c08\"\n        },\n        \"protected_anchors\": [\n          \"station arch\",\n          \"traffic gantry\",\n          \"zebra crossing\",\n          \"bus shelter\"\n        ],\n        \"return_expectations\": [\n          \"c08 should be spatially compatible with c01 rather than a different city intersection\",\n          \"station arch, traffic gantry, zebra crossing, and bus shelter should retain identity, geometry, and relative layout\",\n          \"viewpoint may differ slightly but should be reconcilable as the same location after inverse-balanced navigation\",\n          \"return must occur without resetting the scene or regenerating inconsistent details\"\n        ]\n      }\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"The case does not ask for a semantic or object-state edit; it asks for navigation away from and back to the same world.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"There is no explicit physical intervention or force whose causal response must be evaluated.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"No case-specific physical-law outcome is required beyond general plausibility of camera navigation and static scene geometry.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Although consistency matters, this is an 8-chunk closed-loop return task rather than an explicit long-horizon drift-resistance probe.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"The task does not require an offscreen process to continue evolving; the target is revisiting the same static world after navigation.\"\n    }\n  ]\n}",
+            "refusal": null,
+            "annotations": []
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2839,
+        "completion_tokens": 1803,
+        "total_tokens": 4642,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 359,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "service_tier": "default",
+      "system_fingerprint": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-EU7DA9O5T1Qecy4oZADft8liSUFKq",
+      "model": "gpt-5.5-2026-04-23",
+      "created": 1790846268,
+      "usage": {
+        "prompt_tokens": 2839,
+        "completion_tokens": 1803,
+        "total_tokens": 4642,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 359,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "request_url": "https://api.openai.com/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:17:48.092410+00:00",
+      "response_received_at": "2026-10-01T09:18:07.604681+00:00",
+      "elapsed_seconds": 19.512279,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "https://api.openai.com/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 19.512183
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "reasoning_effort": "medium",
+        "temperature": "API default (temperature=0 unsupported)",
+        "max_completion_tokens": 16384
+      },
+      "request_sha256": "6e4495b8cf1a27e390058b007cab2afd989c6d8ddded5f51ed5f237cb6587f36"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "model": "gpt-5.5",
+  "settings": {
+    "reasoning_effort": "medium",
+    "temperature": "API default (temperature=0 unsupported)",
+    "max_completion_tokens": 16384
+  },
+  "muse_revision": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+  "protocol": "Independent Analyze–Verify plus fixed expected-specification Verify; identical video and frame sampling; released prompts and formulas; six semantic examples, not a population study."
+}

@@ -1,0 +1,934 @@
+{
+  "status": "complete",
+  "example": "physical_transition",
+  "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+  "model": "gpt-5.5",
+  "video_sha256": "e43dfa80dae8fb8972b0e4fd9003db0110e73340f606a4e96cb2e126ebd77f09",
+  "independent": {
+    "result": {
+      "skill_id": "physical_response_verifier_vlm",
+      "status": "ok",
+      "score": 0.808281,
+      "metrics": {
+        "Q1_setup_visible": 1.0,
+        "Q2_intervention_visible": 0.75,
+        "Q3_response_presence": 1.0,
+        "Q4_condition_following": 0.75,
+        "Q5_causal_order": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_physical_artifacts": 0.75,
+        "Q8_judgeable": 1.0,
+        "intervention_grounding": 0.875,
+        "response_execution": 0.9125,
+        "causal_order": 1.0,
+        "preservation": 0.8875,
+        "validity_gate": 1.0,
+        "core_score": 0.92375,
+        "final_score": 0.808281,
+        "expected_spec_alignment": 0.833333
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_response_vlm",
+        "prompt_version": "harnesseval.physical_response.prompt",
+        "cache_contract_version": "harnesseval.physical_response.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.833333,
+          "target_alignment": 1.0,
+          "response_alignment": 0.666667,
+          "anchor_alignment": null
+        },
+        "analyze_agent_cache": "[workspace]/.private/judge-cache/gpt/physical_transition/skills/physical_response/analyze_agent/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+        "analyze_agent_evidence_digest": "1c7b4a29d0cc51a80c6c1a253268bc76d5645f879348a0ca20dcec90eb404895",
+        "verify_agent_cache": "[workspace]/.private/judge-cache/gpt/physical_transition/skills/physical_response/verify_agent/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+        "verify_agent_evidence_digest": "8f874717914ca8ee54ed0da25dfa95880c821d1fb072a2e9e028b69da5f75db5"
+      },
+      "notes": [
+        "analyze_agent expected_spec_alignment is a case-audit warning only; the score uses the canonical physical spec and generated video"
+      ]
+    },
+    "analyze": {
+      "schema_version": "harnesseval.physical_response.analyze_agent",
+      "skill_id": "physical_response_verifier_vlm",
+      "definition_version": "harnesseval.physical_response_vlm",
+      "prompt_version": "harnesseval.physical_response.prompt",
+      "agent": "analyze_agent",
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "input_digest": "ee5d0a1b4d8a74d6d2985b948902b69043384669b3fdea8a7c72e9174fb192d5",
+      "expected_spec": {
+        "target_system": "Red fabric flag mounted on a vertical black pole at a coastal weather-station platform, with a blue calibrated blower positioned to the left directing airflow toward the flag.",
+        "intervention": "Continue steady calibrated fan airflow at 5.0 m/s from the blower toward the flag.",
+        "controlled_variables": [
+          "Fan position and orientation remain fixed relative to the flag.",
+          "Airflow speed remains approximately 5.0 m/s.",
+          "Flagpole, base, blower frame, and platform remain stationary.",
+          "Flag remains attached along its hoist edge to the pole.",
+          "Camera viewpoint and scene geometry remain unchanged.",
+          "No new external objects or people enter the scene."
+        ],
+        "expected_response": {
+          "flag_motion": "The flag stays blown outward away from the pole in the airflow direction, maintaining a generally extended shape with moderate flutter.",
+          "deformation": "The cloth forms traveling ripples and folds from the hoist edge toward the free edge, with the free edge oscillating more than the attached edge.",
+          "amplitude": "Flutter is noticeable but not violent; the flag should not snap fully rigid or collapse limp against the pole.",
+          "frequency": "Ripples and edge motion continue repeatedly over time under steady wind.",
+          "spatial_gradient": "Motion is smallest near the pole attachment and largest near the free trailing edge.",
+          "environment": "Rigid objects such as the pole, base, blower, and platform do not move in response to the airflow."
+        },
+        "causal_checks": [
+          "Steady airflow keeps the flag extended away from the pole.",
+          "Wind pressure creates waves that travel from the pole side toward the free edge.",
+          "The attached hoist edge remains constrained while the free edge flutters.",
+          "At 5.0 m/s the flag shows moderate deformation rather than hanging limp.",
+          "Rigid supports remain fixed while only the fabric visibly deforms."
+        ],
+        "protected_anchors": [
+          "Blue blower on the left side of the scene.",
+          "Black vertical flagpole on a yellow square base.",
+          "Red rectangular flag attached to the pole along its left edge.",
+          "Concrete coastal platform with ocean background.",
+          "Overall camera framing and object layout."
+        ],
+        "failure_modes": [
+          "Flag hangs limp with little or no response to the continued airflow.",
+          "Flag blows in the wrong direction relative to the blower.",
+          "Flag detaches from the pole or changes size, color, or topology.",
+          "Pole, base, blower, or platform slide, bend, or move unrealistically.",
+          "Flutter is excessively violent for 5.0 m/s airflow.",
+          "Cloth behaves like a rigid board with no ripples or fabric deformation.",
+          "Scene viewpoint or major background elements change unexpectedly."
+        ]
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a careful benchmark case-specification assistant. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Infer the expected physical-response specification for this world-model case.\nUse only the initial observation and the selected model-facing physical action. Do not score any generated video.\nReturn JSON only with keys: target_system, intervention, controlled_variables, expected_response, causal_checks, protected_anchors, failure_modes.\ncausal_checks should be short physical cause-effect statements that can be judged from generated video frames.\n\n{\n  \"selected_variant_text\": \"Continue the calibrated fan airflow at 5.0 m/s.\",\n  \"source_tags\": {\n    \"scene\": \"wind_flag_deformation\",\n    \"realization\": \"grounded_blower_flag_test\",\n    \"domain\": \"coastal_weather_station\",\n    \"generator\": \"seedream_image_first_then_simulator_v1\",\n    \"image_backend\": \"doubao_seedream_4_0\",\n    \"physics_backend\": \"image_calibrated_reduced_order_flag_v1\",\n    \"render_backend\": \"blender_eevee_next\",\n    \"construction_order\": \"real_image_then_image_calibrated_simulator\"\n  },\n  \"rollout_horizon\": null\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "6b64c35927f2945499758095c9a8d3cc63ebc15dc16a091de48c3d92c7f6c166",
+                "bytes": 15131
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\n  \"target_system\": \"Red fabric flag mounted on a vertical black pole at a coastal weather-station platform, with a blue calibrated blower positioned to the left directing airflow toward the flag.\",\n  \"intervention\": \"Continue steady calibrated fan airflow at 5.0 m/s from the blower toward the flag.\",\n  \"controlled_variables\": [\n    \"Fan position and orientation remain fixed relative to the flag.\",\n    \"Airflow speed remains approximately 5.0 m/s.\",\n    \"Flagpole, base, blower frame, and platform remain stationary.\",\n    \"Flag remains attached along its hoist edge to the pole.\",\n    \"Camera viewpoint and scene geometry remain unchanged.\",\n    \"No new external objects or people enter the scene.\"\n  ],\n  \"expected_response\": {\n    \"flag_motion\": \"The flag stays blown outward away from the pole in the airflow direction, maintaining a generally extended shape with moderate flutter.\",\n    \"deformation\": \"The cloth forms traveling ripples and folds from the hoist edge toward the free edge, with the free edge oscillating more than the attached edge.\",\n    \"amplitude\": \"Flutter is noticeable but not violent; the flag should not snap fully rigid or collapse limp against the pole.\",\n    \"frequency\": \"Ripples and edge motion continue repeatedly over time under steady wind.\",\n    \"spatial_gradient\": \"Motion is smallest near the pole attachment and largest near the free trailing edge.\",\n    \"environment\": \"Rigid objects such as the pole, base, blower, and platform do not move in response to the airflow.\"\n  },\n  \"causal_checks\": [\n    \"Steady airflow keeps the flag extended away from the pole.\",\n    \"Wind pressure creates waves that travel from the pole side toward the free edge.\",\n    \"The attached hoist edge remains constrained while the free edge flutters.\",\n    \"At 5.0 m/s the flag shows moderate deformation rather than hanging limp.\",\n    \"Rigid supports remain fixed while only the fabric visibly deforms.\"\n  ],\n  \"protected_anchors\": [\n    \"Blue blower on the left side of the scene.\",\n    \"Black vertical flagpole on a yellow square base.\",\n    \"Red rectangular flag attached to the pole along its left edge.\",\n    \"Concrete coastal platform with ocean background.\",\n    \"Overall camera framing and object layout.\"\n  ],\n  \"failure_modes\": [\n    \"Flag hangs limp with little or no response to the continued airflow.\",\n    \"Flag blows in the wrong direction relative to the blower.\",\n    \"Flag detaches from the pole or changes size, color, or topology.\",\n    \"Pole, base, blower, or platform slide, bend, or move unrealistically.\",\n    \"Flutter is excessively violent for 5.0 m/s airflow.\",\n    \"Cloth behaves like a rigid board with no ripples or fabric deformation.\",\n    \"Scene viewpoint or major background elements change unexpectedly.\"\n  ]\n}",
+      "raw_response": {
+        "id": "chatcmpl-EU7A78DbN3poIAKvUg7r9BkDrJ392",
+        "object": "chat.completion",
+        "created": 1790846079,
+        "model": "gpt-5.5-2026-04-23",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"target_system\": \"Red fabric flag mounted on a vertical black pole at a coastal weather-station platform, with a blue calibrated blower positioned to the left directing airflow toward the flag.\",\n  \"intervention\": \"Continue steady calibrated fan airflow at 5.0 m/s from the blower toward the flag.\",\n  \"controlled_variables\": [\n    \"Fan position and orientation remain fixed relative to the flag.\",\n    \"Airflow speed remains approximately 5.0 m/s.\",\n    \"Flagpole, base, blower frame, and platform remain stationary.\",\n    \"Flag remains attached along its hoist edge to the pole.\",\n    \"Camera viewpoint and scene geometry remain unchanged.\",\n    \"No new external objects or people enter the scene.\"\n  ],\n  \"expected_response\": {\n    \"flag_motion\": \"The flag stays blown outward away from the pole in the airflow direction, maintaining a generally extended shape with moderate flutter.\",\n    \"deformation\": \"The cloth forms traveling ripples and folds from the hoist edge toward the free edge, with the free edge oscillating more than the attached edge.\",\n    \"amplitude\": \"Flutter is noticeable but not violent; the flag should not snap fully rigid or collapse limp against the pole.\",\n    \"frequency\": \"Ripples and edge motion continue repeatedly over time under steady wind.\",\n    \"spatial_gradient\": \"Motion is smallest near the pole attachment and largest near the free trailing edge.\",\n    \"environment\": \"Rigid objects such as the pole, base, blower, and platform do not move in response to the airflow.\"\n  },\n  \"causal_checks\": [\n    \"Steady airflow keeps the flag extended away from the pole.\",\n    \"Wind pressure creates waves that travel from the pole side toward the free edge.\",\n    \"The attached hoist edge remains constrained while the free edge flutters.\",\n    \"At 5.0 m/s the flag shows moderate deformation rather than hanging limp.\",\n    \"Rigid supports remain fixed while only the fabric visibly deforms.\"\n  ],\n  \"protected_anchors\": [\n    \"Blue blower on the left side of the scene.\",\n    \"Black vertical flagpole on a yellow square base.\",\n    \"Red rectangular flag attached to the pole along its left edge.\",\n    \"Concrete coastal platform with ocean background.\",\n    \"Overall camera framing and object layout.\"\n  ],\n  \"failure_modes\": [\n    \"Flag hangs limp with little or no response to the continued airflow.\",\n    \"Flag blows in the wrong direction relative to the blower.\",\n    \"Flag detaches from the pole or changes size, color, or topology.\",\n    \"Pole, base, blower, or platform slide, bend, or move unrealistically.\",\n    \"Flutter is excessively violent for 5.0 m/s airflow.\",\n    \"Cloth behaves like a rigid board with no ripples or fabric deformation.\",\n    \"Scene viewpoint or major background elements change unexpectedly.\"\n  ]\n}",
+              "refusal": null,
+              "annotations": []
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 355,
+          "completion_tokens": 652,
+          "total_tokens": 1007,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 53,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "service_tier": "default",
+        "system_fingerprint": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-EU7A78DbN3poIAKvUg7r9BkDrJ392",
+        "model": "gpt-5.5-2026-04-23",
+        "created": 1790846079,
+        "usage": {
+          "prompt_tokens": 355,
+          "completion_tokens": 652,
+          "total_tokens": 1007,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 53,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "request_url": "https://api.openai.com/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:14:39.431759+00:00",
+        "response_received_at": "2026-10-01T09:14:49.228084+00:00",
+        "elapsed_seconds": 9.796337,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "https://api.openai.com/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 9.796217
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "gpt-5.5",
+          "config_digest": "6c68392f845139c5b33e548de23af0158fa55f284231db89a28f9d425833a4be"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "reasoning_effort": "medium",
+            "temperature": "API default (temperature=0 unsupported)",
+            "max_completion_tokens": 16384
+          },
+          "request_sha256": "01e61fdadd563995a2dd5af167aa4b9206d0b5221f326eaac6b25703ad1d29eb"
+        }
+      },
+      "evidence_digest": "1c7b4a29d0cc51a80c6c1a253268bc76d5645f879348a0ca20dcec90eb404895"
+    },
+    "verify": {
+      "schema_version": "harnesseval.physical_response.verify_agent",
+      "skill_id": "physical_response_verifier_vlm",
+      "definition_version": "harnesseval.physical_response_vlm",
+      "prompt_version": "harnesseval.physical_response.prompt",
+      "agent": "verify_agent",
+      "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+      "input_digest": "db28e4b7e76ba1ab70534e529e809359817cfba2a62343bef94b2f630f1da290",
+      "judgment": {
+        "q_scores": {
+          "Q1_setup_visible": 1,
+          "Q2_intervention_visible": 0.75,
+          "Q3_response_presence": 1,
+          "Q4_condition_following": 0.75,
+          "Q5_causal_order": 1,
+          "Q6_anchor_preservation": 1,
+          "Q7_no_physical_artifacts": 0.75,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_setup_visible": "The blue blower, red flag on a black pole, yellow base, platform, and ocean background are clearly visible throughout.",
+          "Q2_intervention_visible": "The blower is visibly positioned to the left and aimed toward the flag, and the flag is extended as if under airflow; however, the airflow itself and exact 5.0 m/s calibration are not directly visible.",
+          "Q3_response_presence": "The flag shows clear physical state changes with changing folds, ripples, and free-edge motion across the rollout.",
+          "Q4_condition_following": "The flag remains blown away from the blower/pole with moderate flutter and deformation, broadly matching steady 5.0 m/s airflow. The motion is somewhat generic and the traveling wave pattern is not strongly demonstrated, so not full credit.",
+          "Q5_causal_order": "The case is a continued airflow condition, and the flag response is present during the maintained intervention with no visible effect occurring before the setup/condition.",
+          "Q6_anchor_preservation": "The pole, yellow base, blower, platform, camera framing, and overall layout remain fixed while only the fabric changes shape.",
+          "Q7_no_physical_artifacts": "No major teleporting, hard cuts, pass-through, or extra forces are apparent. Minor generative inconsistencies in the flag shape/deformation prevent perfect confidence.",
+          "Q8_judgeable": "The scene is clear, continuous enough from the samples, and the flag and apparatus remain sufficiently observable to judge the physical response."
+        },
+        "warnings": [],
+        "summary": "The rollout largely satisfies the canonical transition: a fixed blower continues to drive a red flag outward with moderate flutter while rigid anchors remain stationary. Main limitations are that the airflow speed is not directly measurable and the cloth dynamics are somewhat generic rather than clearly showing calibrated traveling ripples."
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a strict VLM evaluator for physical cause-effect response in generated worlds. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate this generated rollout against the canonical physical-transition case spec.\nUse the canonical spec as authoritative. The expected spec is provided only as a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nReward motion only when it is causally tied to the selected physical intervention and expected response.\n\nQuestions:\nQ1_setup_visible: the physical setup and target system are clearly visible.\nQ2_intervention_visible: the specified physical intervention or condition is visibly instantiated.\nQ3_response_presence: the target system responds with real physical motion or a state change.\nQ4_condition_following: the response is consistent with the selected physical parameter or action.\nQ5_causal_order: cause and effect occur in the correct order, with no effect before cause.\nQ6_anchor_preservation: apparatus, camera, scale markers, and protected anchors remain fixed unless specified.\nQ7_no_physical_artifacts: the video avoids teleporting, pass-through, hard cuts, replacement worlds, or extra forces.\nQ8_judgeable: the video is clear, continuous, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_setup_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_setup_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case spec:\n{\n  \"action_type\": \"apply_physical_control\",\n  \"action_id\": null,\n  \"selected_variant_text\": \"Continue the calibrated fan airflow at 5.0 m/s.\",\n  \"expected_outcome\": [],\n  \"protected_anchors\": [],\n  \"negative_constraints\": [],\n  \"source_tags\": {\n    \"scene\": \"wind_flag_deformation\",\n    \"realization\": \"grounded_blower_flag_test\",\n    \"domain\": \"coastal_weather_station\",\n    \"generator\": \"seedream_image_first_then_simulator_v1\",\n    \"image_backend\": \"doubao_seedream_4_0\",\n    \"physics_backend\": \"image_calibrated_reduced_order_flag_v1\",\n    \"render_backend\": \"blender_eevee_next\",\n    \"construction_order\": \"real_image_then_image_calibrated_simulator\"\n  },\n  \"rollout_horizon\": null\n}\n\nExpected spec inferred before seeing the video, for audit only:\n{\n  \"target_system\": \"Red fabric flag mounted on a vertical black pole at a coastal weather-station platform, with a blue calibrated blower positioned to the left directing airflow toward the flag.\",\n  \"intervention\": \"Continue steady calibrated fan airflow at 5.0 m/s from the blower toward the flag.\",\n  \"controlled_variables\": [\n    \"Fan position and orientation remain fixed relative to the flag.\",\n    \"Airflow speed remains approximately 5.0 m/s.\",\n    \"Flagpole, base, blower frame, and platform remain stationary.\",\n    \"Flag remains attached along its hoist edge to the pole.\",\n    \"Camera viewpoint and scene geometry remain unchanged.\",\n    \"No new external objects or people enter the scene.\"\n  ],\n  \"expected_response\": {\n    \"flag_motion\": \"The flag stays blown outward away from the pole in the airflow direction, maintaining a generally extended shape with moderate flutter.\",\n    \"deformation\": \"The cloth forms traveling ripples and folds from the hoist edge toward the free edge, with the free edge oscillating more than the attached edge.\",\n    \"amplitude\": \"Flutter is noticeable but not violent; the flag should not snap fully rigid or collapse limp against the pole.\",\n    \"frequency\": \"Ripples and edge motion continue repeatedly over time under steady wind.\",\n    \"spatial_gradient\": \"Motion is smallest near the pole attachment and largest near the free trailing edge.\",\n    \"environment\": \"Rigid objects such as the pole, base, blower, and platform do not move in response to the airflow.\"\n  },\n  \"causal_checks\": [\n    \"Steady airflow keeps the flag extended away from the pole.\",\n    \"Wind pressure creates waves that travel from the pole side toward the free edge.\",\n    \"The attached hoist edge remains constrained while the free edge flutters.\",\n    \"At 5.0 m/s the flag shows moderate deformation rather than hanging limp.\",\n    \"Rigid supports remain fixed while only the fabric visibly deforms.\"\n  ],\n  \"protected_anchors\": [\n    \"Blue blower on the left side of the scene.\",\n    \"Black vertical flagpole on a yellow square base.\",\n    \"Red rectangular flag attached to the pole along its left edge.\",\n    \"Concrete coastal platform with ocean background.\",\n    \"Overall camera framing and object layout.\"\n  ],\n  \"failure_modes\": [\n    \"Flag hangs limp with little or no response to the continued airflow.\",\n    \"Flag blows in the wrong direction relative to the blower.\",\n    \"Flag detaches from the pole or changes size, color, or topology.\",\n    \"Pole, base, blower, or platform slide, bend, or move unrealistically.\",\n    \"Flutter is excessively violent for 5.0 m/s airflow.\",\n    \"Cloth behaves like a rigid board with no ripples or fabric deformation.\",\n    \"Scene viewpoint or major background elements change unexpectedly.\"\n  ]\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "6b64c35927f2945499758095c9a8d3cc63ebc15dc16a091de48c3d92c7f6c166",
+                "bytes": 15131
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 00:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "4099b34fc401249aeb27b98afe922f3276f132e31c332c2ee3d532667ade08ea",
+                "bytes": 22600
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 01:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "5639e9eb0a1c3f51106af9db3e9e962f78ba1a07b5761fad66026db15934985b",
+                "bytes": 22122
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 02:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "1cb81bee0a8fd8c2098a3bcc7fda79326b4ac92bd9d21a8639ec5e9d6e8066ee",
+                "bytes": 21933
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 03:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "3029e2ae8770f34373ab52b9342681f6d2f85e5628200d5762b7d7cbead0cee9",
+                "bytes": 21804
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 04:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "876b6fe5f68618b0c09f1897013226879e995bd6bcc6abd05978e931c2e68f52",
+                "bytes": 21770
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 05:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "f8dc01cfcd5da9050612d51d5a02ed6c48eabcae2b7a4d5fac3a81ca0dbdb844",
+                "bytes": 21837
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 06:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "f723baaf7cf2e44fab282469a0fc33a47a8f13e14498e9f99df72326cde3b0c4",
+                "bytes": 22017
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 07:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "1bd534afedc79be47a924b008708cae991b11a9bd6060fc56b41d9910686cc32",
+                "bytes": 21836
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 08:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "264db1781a6b837b6b261e31245ab122f5e81641c6a3f322106f4e6097d607bc",
+                "bytes": 21803
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 09:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "957a61fc4f9c167214ee05393aa30a528ed2784b51412188cdc81c289f469cc3",
+                "bytes": 21761
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 10:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "f00b8b07eb008b6716a38abedbda0aafd76051991b6c2767f7ccc9aceeac7b49",
+                "bytes": 21905
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 11:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "7abaeb29c890755fada5e75a8b4d1a51756ba43b7e9e795c99492d8d08e98116",
+                "bytes": 21914
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\"q_scores\":{\"Q1_setup_visible\":1,\"Q2_intervention_visible\":0.75,\"Q3_response_presence\":1,\"Q4_condition_following\":0.75,\"Q5_causal_order\":1,\"Q6_anchor_preservation\":1,\"Q7_no_physical_artifacts\":0.75,\"Q8_judgeable\":1},\"reasons\":{\"Q1_setup_visible\":\"The blue blower, red flag on a black pole, yellow base, platform, and ocean background are clearly visible throughout.\",\"Q2_intervention_visible\":\"The blower is visibly positioned to the left and aimed toward the flag, and the flag is extended as if under airflow; however, the airflow itself and exact 5.0 m/s calibration are not directly visible.\",\"Q3_response_presence\":\"The flag shows clear physical state changes with changing folds, ripples, and free-edge motion across the rollout.\",\"Q4_condition_following\":\"The flag remains blown away from the blower/pole with moderate flutter and deformation, broadly matching steady 5.0 m/s airflow. The motion is somewhat generic and the traveling wave pattern is not strongly demonstrated, so not full credit.\",\"Q5_causal_order\":\"The case is a continued airflow condition, and the flag response is present during the maintained intervention with no visible effect occurring before the setup/condition.\",\"Q6_anchor_preservation\":\"The pole, yellow base, blower, platform, camera framing, and overall layout remain fixed while only the fabric changes shape.\",\"Q7_no_physical_artifacts\":\"No major teleporting, hard cuts, pass-through, or extra forces are apparent. Minor generative inconsistencies in the flag shape/deformation prevent perfect confidence.\",\"Q8_judgeable\":\"The scene is clear, continuous enough from the samples, and the flag and apparatus remain sufficiently observable to judge the physical response.\"},\"warnings\":[],\"summary\":\"The rollout largely satisfies the canonical transition: a fixed blower continues to drive a red flag outward with moderate flutter while rigid anchors remain stationary. Main limitations are that the airflow speed is not directly measurable and the cloth dynamics are somewhat generic rather than clearly showing calibrated traveling ripples.\"}",
+      "raw_response": {
+        "id": "chatcmpl-EU7AHd23DKtIkN3Z4HN4WVzA1g6dJ",
+        "object": "chat.completion",
+        "created": 1790846089,
+        "model": "gpt-5.5-2026-04-23",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_setup_visible\":1,\"Q2_intervention_visible\":0.75,\"Q3_response_presence\":1,\"Q4_condition_following\":0.75,\"Q5_causal_order\":1,\"Q6_anchor_preservation\":1,\"Q7_no_physical_artifacts\":0.75,\"Q8_judgeable\":1},\"reasons\":{\"Q1_setup_visible\":\"The blue blower, red flag on a black pole, yellow base, platform, and ocean background are clearly visible throughout.\",\"Q2_intervention_visible\":\"The blower is visibly positioned to the left and aimed toward the flag, and the flag is extended as if under airflow; however, the airflow itself and exact 5.0 m/s calibration are not directly visible.\",\"Q3_response_presence\":\"The flag shows clear physical state changes with changing folds, ripples, and free-edge motion across the rollout.\",\"Q4_condition_following\":\"The flag remains blown away from the blower/pole with moderate flutter and deformation, broadly matching steady 5.0 m/s airflow. The motion is somewhat generic and the traveling wave pattern is not strongly demonstrated, so not full credit.\",\"Q5_causal_order\":\"The case is a continued airflow condition, and the flag response is present during the maintained intervention with no visible effect occurring before the setup/condition.\",\"Q6_anchor_preservation\":\"The pole, yellow base, blower, platform, camera framing, and overall layout remain fixed while only the fabric changes shape.\",\"Q7_no_physical_artifacts\":\"No major teleporting, hard cuts, pass-through, or extra forces are apparent. Minor generative inconsistencies in the flag shape/deformation prevent perfect confidence.\",\"Q8_judgeable\":\"The scene is clear, continuous enough from the samples, and the flag and apparatus remain sufficiently observable to judge the physical response.\"},\"warnings\":[],\"summary\":\"The rollout largely satisfies the canonical transition: a fixed blower continues to drive a red flag outward with moderate flutter while rigid anchors remain stationary. Main limitations are that the airflow speed is not directly measurable and the cloth dynamics are somewhat generic rather than clearly showing calibrated traveling ripples.\"}",
+              "refusal": null,
+              "annotations": []
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 3585,
+          "completion_tokens": 838,
+          "total_tokens": 4423,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 393,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "service_tier": "default",
+        "system_fingerprint": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-EU7AHd23DKtIkN3Z4HN4WVzA1g6dJ",
+        "model": "gpt-5.5-2026-04-23",
+        "created": 1790846089,
+        "usage": {
+          "prompt_tokens": 3585,
+          "completion_tokens": 838,
+          "total_tokens": 4423,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 393,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "request_url": "https://api.openai.com/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:14:49.352521+00:00",
+        "response_received_at": "2026-10-01T09:15:00.700026+00:00",
+        "elapsed_seconds": 11.347496,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "https://api.openai.com/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 11.347413
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "gpt-5.5",
+          "config_digest": "6c68392f845139c5b33e548de23af0158fa55f284231db89a28f9d425833a4be"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "reasoning_effort": "medium",
+            "temperature": "API default (temperature=0 unsupported)",
+            "max_completion_tokens": 16384
+          },
+          "request_sha256": "6d4e7acecfa79c485a1d64467146a64265ab0fc2278da1f046b3c27653e99e28"
+        }
+      },
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "source_frame_count": 97,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          8,
+          17,
+          26,
+          34,
+          43,
+          52,
+          61,
+          69,
+          78,
+          87,
+          96
+        ]
+      },
+      "evidence_digest": "8f874717914ca8ee54ed0da25dfa95880c821d1fb072a2e9e028b69da5f75db5"
+    }
+  },
+  "fixed_specification": {
+    "result": {
+      "skill_id": "physical_response_verifier_vlm",
+      "status": "ok",
+      "score": 0.808281,
+      "metrics": {
+        "Q1_setup_visible": 1.0,
+        "Q2_intervention_visible": 0.75,
+        "Q3_response_presence": 1.0,
+        "Q4_condition_following": 0.75,
+        "Q5_causal_order": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_physical_artifacts": 0.75,
+        "Q8_judgeable": 1.0,
+        "intervention_grounding": 0.875,
+        "response_execution": 0.9125,
+        "causal_order": 1.0,
+        "preservation": 0.8875,
+        "validity_gate": 1.0,
+        "core_score": 0.92375,
+        "final_score": 0.808281,
+        "expected_spec_alignment": 0.666667
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.physical_response_vlm",
+        "prompt_version": "harnesseval.physical_response.prompt",
+        "cache_contract_version": "harnesseval.physical_response.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.666667,
+          "target_alignment": 1.0,
+          "response_alignment": 0.333333,
+          "anchor_alignment": null
+        }
+      },
+      "notes": [
+        "analyze_agent expected_spec_alignment is a case-audit warning only; the score uses the canonical physical spec and generated video"
+      ]
+    },
+    "expected_spec": {
+      "target_system": "red flag mounted on yellow base",
+      "intervention": "Continue the calibrated fan airflow at 5.0 m/s.",
+      "controlled_variables": [
+        "airflow_velocity_mps",
+        "airflow_direction_degrees"
+      ],
+      "expected_response": "The red flag will maintain a consistent, steady deformation pattern, fluttering or waving in a regular manner due to the constant 5.0 m/s wind.",
+      "causal_checks": [
+        "Flag fabric moves due to air pressure differential from airflow.",
+        "Flag orientation changes as airflow direction changes.",
+        "Flag deformation amplitude correlates with airflow velocity."
+      ],
+      "protected_anchors": [
+        "Flag remains attached to pole",
+        "Flag does not tear or detach",
+        "Flag does not become entangled"
+      ],
+      "failure_modes": [
+        "Flag becomes limp or collapses if airflow is insufficient",
+        "Flag flutters erratically if airflow is unstable",
+        "Flag detaches from pole if mounting is compromised"
+      ]
+    },
+    "conversation": [
+      {
+        "role": "system",
+        "content": [
+          {
+            "type": "text",
+            "text": "You are a strict VLM evaluator for physical cause-effect response in generated worlds. Return valid JSON only."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluate this generated rollout against the canonical physical-transition case spec.\nUse the canonical spec as authoritative. The expected spec is provided only as a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nReward motion only when it is causally tied to the selected physical intervention and expected response.\n\nQuestions:\nQ1_setup_visible: the physical setup and target system are clearly visible.\nQ2_intervention_visible: the specified physical intervention or condition is visibly instantiated.\nQ3_response_presence: the target system responds with real physical motion or a state change.\nQ4_condition_following: the response is consistent with the selected physical parameter or action.\nQ5_causal_order: cause and effect occur in the correct order, with no effect before cause.\nQ6_anchor_preservation: apparatus, camera, scale markers, and protected anchors remain fixed unless specified.\nQ7_no_physical_artifacts: the video avoids teleporting, pass-through, hard cuts, replacement worlds, or extra forces.\nQ8_judgeable: the video is clear, continuous, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_setup_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_setup_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case spec:\n{\n  \"action_type\": \"apply_physical_control\",\n  \"action_id\": null,\n  \"selected_variant_text\": \"Continue the calibrated fan airflow at 5.0 m/s.\",\n  \"expected_outcome\": [],\n  \"protected_anchors\": [],\n  \"negative_constraints\": [],\n  \"source_tags\": {\n    \"scene\": \"wind_flag_deformation\",\n    \"realization\": \"grounded_blower_flag_test\",\n    \"domain\": \"coastal_weather_station\",\n    \"generator\": \"seedream_image_first_then_simulator_v1\",\n    \"image_backend\": \"doubao_seedream_4_0\",\n    \"physics_backend\": \"image_calibrated_reduced_order_flag_v1\",\n    \"render_backend\": \"blender_eevee_next\",\n    \"construction_order\": \"real_image_then_image_calibrated_simulator\"\n  },\n  \"rollout_horizon\": null\n}\n\nExpected spec inferred before seeing the video, for audit only:\n{\n  \"target_system\": \"red flag mounted on yellow base\",\n  \"intervention\": \"Continue the calibrated fan airflow at 5.0 m/s.\",\n  \"controlled_variables\": [\n    \"airflow_velocity_mps\",\n    \"airflow_direction_degrees\"\n  ],\n  \"expected_response\": \"The red flag will maintain a consistent, steady deformation pattern, fluttering or waving in a regular manner due to the constant 5.0 m/s wind.\",\n  \"causal_checks\": [\n    \"Flag fabric moves due to air pressure differential from airflow.\",\n    \"Flag orientation changes as airflow direction changes.\",\n    \"Flag deformation amplitude correlates with airflow velocity.\"\n  ],\n  \"protected_anchors\": [\n    \"Flag remains attached to pole\",\n    \"Flag does not tear or detach\",\n    \"Flag does not become entangled\"\n  ],\n  \"failure_modes\": [\n    \"Flag becomes limp or collapses if airflow is insufficient\",\n    \"Flag flutters erratically if airflow is unstable\",\n    \"Flag detaches from pole if mounting is compromised\"\n  ]\n}"
+          },
+          {
+            "type": "text",
+            "text": "Initial observation image:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "6b64c35927f2945499758095c9a8d3cc63ebc15dc16a091de48c3d92c7f6c166",
+              "bytes": 15131
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 00:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "4099b34fc401249aeb27b98afe922f3276f132e31c332c2ee3d532667ade08ea",
+              "bytes": 22600
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 01:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "5639e9eb0a1c3f51106af9db3e9e962f78ba1a07b5761fad66026db15934985b",
+              "bytes": 22122
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 02:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "1cb81bee0a8fd8c2098a3bcc7fda79326b4ac92bd9d21a8639ec5e9d6e8066ee",
+              "bytes": 21933
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 03:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "3029e2ae8770f34373ab52b9342681f6d2f85e5628200d5762b7d7cbead0cee9",
+              "bytes": 21804
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 04:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "876b6fe5f68618b0c09f1897013226879e995bd6bcc6abd05978e931c2e68f52",
+              "bytes": 21770
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 05:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "f8dc01cfcd5da9050612d51d5a02ed6c48eabcae2b7a4d5fac3a81ca0dbdb844",
+              "bytes": 21837
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 06:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "f723baaf7cf2e44fab282469a0fc33a47a8f13e14498e9f99df72326cde3b0c4",
+              "bytes": 22017
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 07:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "1bd534afedc79be47a924b008708cae991b11a9bd6060fc56b41d9910686cc32",
+              "bytes": 21836
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 08:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "264db1781a6b837b6b261e31245ab122f5e81641c6a3f322106f4e6097d607bc",
+              "bytes": 21803
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 09:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "957a61fc4f9c167214ee05393aa30a528ed2784b51412188cdc81c289f469cc3",
+              "bytes": 21761
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 10:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "f00b8b07eb008b6716a38abedbda0aafd76051991b6c2767f7ccc9aceeac7b49",
+              "bytes": 21905
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 11:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "7abaeb29c890755fada5e75a8b4d1a51756ba43b7e9e795c99492d8d08e98116",
+              "bytes": 21914
+            }
+          }
+        ]
+      }
+    ],
+    "request_digest": "0a16d08cd25e352730f7abde725848e65abc80ec099edaeb9cb509800853b415",
+    "output": {
+      "schema_version": "harnesseval.physical_response.backend_output",
+      "parsed": {
+        "q_scores": {
+          "Q1_setup_visible": 1,
+          "Q2_intervention_visible": 0.75,
+          "Q3_response_presence": 1,
+          "Q4_condition_following": 0.75,
+          "Q5_causal_order": 1,
+          "Q6_anchor_preservation": 1,
+          "Q7_no_physical_artifacts": 0.75,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_setup_visible": "The blue blower/fan apparatus, red flag, pole, and yellow base are clearly visible in the coastal test setup.",
+          "Q2_intervention_visible": "The blower is visibly aimed toward the flag and the flag is extended as if under airflow, but the exact calibrated value of 5.0 m/s is not directly observable.",
+          "Q3_response_presence": "The flag fabric changes shape across frames with visible waving and deformation.",
+          "Q4_condition_following": "The flag remains generally extended downwind and shows steady flutter consistent with continued moderate airflow, though the precise 5.0 m/s condition cannot be verified visually.",
+          "Q5_causal_order": "The blower/airflow condition is present from the start and the flag response occurs under that continuing condition, with no response appearing before the visible cause.",
+          "Q6_anchor_preservation": "The blower, pole, yellow base, camera viewpoint, and flag attachment remain fixed; the flag does not detach or tear.",
+          "Q7_no_physical_artifacts": "No major teleporting, pass-through, hard cuts, or replacement of the world are evident, though the flag deformation has some mildly synthetic morphing quality.",
+          "Q8_judgeable": "The scene is continuous, unobstructed, and sufficiently clear to judge the setup, intervention, and flag response."
+        },
+        "warnings": [],
+        "summary": "The rollout shows a clear blower-and-flag setup with the flag steadily fluttering while remaining attached, consistent with continued airflow. The main limitation is that the specific calibrated 5.0 m/s speed is not directly visible."
+      },
+      "raw_output_text": "{\"q_scores\":{\"Q1_setup_visible\":1,\"Q2_intervention_visible\":0.75,\"Q3_response_presence\":1,\"Q4_condition_following\":0.75,\"Q5_causal_order\":1,\"Q6_anchor_preservation\":1,\"Q7_no_physical_artifacts\":0.75,\"Q8_judgeable\":1},\"reasons\":{\"Q1_setup_visible\":\"The blue blower/fan apparatus, red flag, pole, and yellow base are clearly visible in the coastal test setup.\",\"Q2_intervention_visible\":\"The blower is visibly aimed toward the flag and the flag is extended as if under airflow, but the exact calibrated value of 5.0 m/s is not directly observable.\",\"Q3_response_presence\":\"The flag fabric changes shape across frames with visible waving and deformation.\",\"Q4_condition_following\":\"The flag remains generally extended downwind and shows steady flutter consistent with continued moderate airflow, though the precise 5.0 m/s condition cannot be verified visually.\",\"Q5_causal_order\":\"The blower/airflow condition is present from the start and the flag response occurs under that continuing condition, with no response appearing before the visible cause.\",\"Q6_anchor_preservation\":\"The blower, pole, yellow base, camera viewpoint, and flag attachment remain fixed; the flag does not detach or tear.\",\"Q7_no_physical_artifacts\":\"No major teleporting, pass-through, hard cuts, or replacement of the world are evident, though the flag deformation has some mildly synthetic morphing quality.\",\"Q8_judgeable\":\"The scene is continuous, unobstructed, and sufficiently clear to judge the setup, intervention, and flag response.\"},\"warnings\":[],\"summary\":\"The rollout shows a clear blower-and-flag setup with the flag steadily fluttering while remaining attached, consistent with continued airflow. The main limitation is that the specific calibrated 5.0 m/s speed is not directly visible.\"}",
+      "raw_response": {
+        "id": "chatcmpl-EU7ATLTUlXfnUvL3EEFai9JmapJvw",
+        "object": "chat.completion",
+        "created": 1790846101,
+        "model": "gpt-5.5-2026-04-23",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_setup_visible\":1,\"Q2_intervention_visible\":0.75,\"Q3_response_presence\":1,\"Q4_condition_following\":0.75,\"Q5_causal_order\":1,\"Q6_anchor_preservation\":1,\"Q7_no_physical_artifacts\":0.75,\"Q8_judgeable\":1},\"reasons\":{\"Q1_setup_visible\":\"The blue blower/fan apparatus, red flag, pole, and yellow base are clearly visible in the coastal test setup.\",\"Q2_intervention_visible\":\"The blower is visibly aimed toward the flag and the flag is extended as if under airflow, but the exact calibrated value of 5.0 m/s is not directly observable.\",\"Q3_response_presence\":\"The flag fabric changes shape across frames with visible waving and deformation.\",\"Q4_condition_following\":\"The flag remains generally extended downwind and shows steady flutter consistent with continued moderate airflow, though the precise 5.0 m/s condition cannot be verified visually.\",\"Q5_causal_order\":\"The blower/airflow condition is present from the start and the flag response occurs under that continuing condition, with no response appearing before the visible cause.\",\"Q6_anchor_preservation\":\"The blower, pole, yellow base, camera viewpoint, and flag attachment remain fixed; the flag does not detach or tear.\",\"Q7_no_physical_artifacts\":\"No major teleporting, pass-through, hard cuts, or replacement of the world are evident, though the flag deformation has some mildly synthetic morphing quality.\",\"Q8_judgeable\":\"The scene is continuous, unobstructed, and sufficiently clear to judge the setup, intervention, and flag response.\"},\"warnings\":[],\"summary\":\"The rollout shows a clear blower-and-flag setup with the flag steadily fluttering while remaining attached, consistent with continued airflow. The main limitation is that the specific calibrated 5.0 m/s speed is not directly visible.\"}",
+              "refusal": null,
+              "annotations": []
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 3217,
+          "completion_tokens": 853,
+          "total_tokens": 4070,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 451,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "service_tier": "default",
+        "system_fingerprint": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-EU7ATLTUlXfnUvL3EEFai9JmapJvw",
+        "model": "gpt-5.5-2026-04-23",
+        "created": 1790846101,
+        "usage": {
+          "prompt_tokens": 3217,
+          "completion_tokens": 853,
+          "total_tokens": 4070,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 451,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "request_url": "https://api.openai.com/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:15:00.915176+00:00",
+        "response_received_at": "2026-10-01T09:15:11.573866+00:00",
+        "elapsed_seconds": 10.658684,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "https://api.openai.com/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 10.658618
+          }
+        ]
+      },
+      "provenance": {
+        "settings": {
+          "reasoning_effort": "medium",
+          "temperature": "API default (temperature=0 unsupported)",
+          "max_completion_tokens": 16384
+        },
+        "request_sha256": "0a16d08cd25e352730f7abde725848e65abc80ec099edaeb9cb509800853b415"
+      }
+    },
+    "sampling": {
+      "method": "uniform_full_video",
+      "max_frames": 12,
+      "source_frame_count": 97,
+      "source_fps": 24.0,
+      "sample_indices": [
+        0,
+        8,
+        17,
+        26,
+        34,
+        43,
+        52,
+        61,
+        69,
+        78,
+        87,
+        96
+      ]
+    }
+  },
+  "elapsed_seconds": 32.160200119018555
+}

@@ -1,0 +1,943 @@
+{
+  "status": "complete",
+  "example": "reversed",
+  "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+  "model": "gpt-5.5",
+  "video_sha256": "5afdd94671d75f578796c4ef7c2dcaf9f939bb56261ea84a4dd14af80dc0412a",
+  "independent": {
+    "result": {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok",
+      "score": 0.585,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 0.5,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 0.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 0.25,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 0.7,
+        "target_specificity": 1.0,
+        "final_state": 0.0,
+        "preservation": 0.7,
+        "validity_gate": 1.0,
+        "core_score": 0.585,
+        "final_score": 0.585,
+        "expected_spec_alignment": 0.457143
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.457143,
+          "target_alignment": 0.333333,
+          "change_alignment": 0.238095,
+          "anchor_alignment": 0.8
+        },
+        "analyze_agent_cache": "[workspace]/.private/judge-cache/gpt/reversed/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+        "analyze_agent_evidence_digest": "e8e099420475cfcd9c760e3206573ac98e4c02d6a2f46d7d288253a7e17f10e4",
+        "verify_agent_cache": "[workspace]/.private/judge-cache/gpt/reversed/skills/intentional_change/verify_agent/artifacts/harness_video/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+        "verify_agent_evidence_digest": "a2467771f4b0557976dbe1e2a59c2cd219191f0a32cab38a010dae8a78f4df18"
+      },
+      "notes": []
+    },
+    "analyze": {
+      "schema_version": "harnesseval.intentional_change.analyze_agent",
+      "skill_id": "intentional_change_verifier_vlm",
+      "definition_version": "harnesseval.intentional_change_vlm",
+      "prompt_version": "harnesseval.intentional_change.prompt",
+      "agent": "analyze_agent",
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "input_digest": "eaa395b4cdd617e00e1322bfd164b69876dfb594172778f97271ff3e8359752d",
+      "expected_spec": {
+        "target": "white ceramic mug on the coffee table and the small amount of liquid associated with it",
+        "initial_state": {
+          "mug": "upright white ceramic mug standing on the wooden coffee table near the center of the tabletop, handle visible on the left side",
+          "spill": "no visible liquid spill on the tabletop",
+          "scene": "fixed third-person view of a living room with a wooden coffee table, sofas, lamp, curtains, rug, and other background elements stable"
+        },
+        "intended_change": {
+          "mug": "rotate/tip the mug from upright to lying on its side on the same tabletop, remaining near its original location",
+          "spill": "create a small, localized liquid spill adjacent to or emerging from the tipped mug on the tabletop"
+        },
+        "change_type": "object_state",
+        "completion_criteria": [
+          "the white ceramic mug is visibly on its side rather than upright",
+          "the mug remains on the coffee table and close to its original position",
+          "a small local spill is visible on the tabletop near the mug",
+          "the spill is limited in size and does not spread broadly across the table or onto the floor",
+          "the camera viewpoint, framing, and perspective remain fixed",
+          "unrelated furniture and background scene elements remain unchanged"
+        ],
+        "protected_anchors": [
+          "camera position, framing, focal length, and viewpoint",
+          "wooden coffee table position, size, shape, and orientation",
+          "sofas in the background",
+          "floor lamp and its illumination",
+          "curtains and window area",
+          "rug and floor pattern",
+          "overall living room layout and lighting",
+          "all unrelated objects and surfaces not involved in the mug tipping or spill"
+        ],
+        "negative_constraints": [
+          "do not move, resize, replace, or recolor the coffee table",
+          "do not change the sofas, lamp, curtains, rug, or room layout",
+          "do not introduce hands, people, animals, or extra tools unless already present",
+          "do not change the camera angle or zoom",
+          "do not make the spill large, flooding, dripping off the table, or covering unrelated objects",
+          "do not break, shatter, deform, or disappear the mug",
+          "do not add unrelated new objects or visual effects"
+        ],
+        "failure_modes": [
+          "mug remains upright",
+          "mug disappears, changes identity, changes color/material, or becomes a different object",
+          "mug moves far from its original table location or falls off the table",
+          "no spill appears",
+          "spill is too large, nonlocal, or appears in an implausible location",
+          "camera moves, zooms, pans, or reframes the scene",
+          "background furniture, table, lighting, rug, or room layout changes",
+          "unrelated objects or agents are introduced",
+          "mug appears broken instead of simply tipped onto its side"
+        ]
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a careful benchmark case-specification assistant. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Infer the expected intentional-change specification for this world-model case.\nUse only the initial observation and the model-facing action. Do not score any generated video.\nThis is a target state-transition specification, not a generic video-edit or motion-quality task.\nIdentify the world entity/relation being intentionally changed, the pre-change state, the requested state delta, and the anchors that should remain stable.\nReturn JSON only with keys: target, initial_state, intended_change, change_type, completion_criteria, protected_anchors, negative_constraints, failure_modes.\nchange_type must be one of: attribute, pose, relation, object_state, agent_event, appearance, other.\n\n{\n  \"action_text\": \"tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.\",\n  \"chunks\": [],\n  \"source_tags\": {\n    \"scene\": \"living_room_table\",\n    \"domain\": \"realistic\",\n    \"style\": \"procedural_prompt_spec\",\n    \"perspective\": \"third_person\",\n    \"generator\": \"seedream_initial_materializer_v0\",\n    \"render_backend\": \"doubao_seedream_4_0\"\n  }\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "a38622b6fd16233af6ea73059afd24d684f823d076cf57bd8df9a7739b637c2d",
+                "bytes": 19373
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\n  \"target\": \"white ceramic mug on the coffee table and the small amount of liquid associated with it\",\n  \"initial_state\": {\n    \"mug\": \"upright white ceramic mug standing on the wooden coffee table near the center of the tabletop, handle visible on the left side\",\n    \"spill\": \"no visible liquid spill on the tabletop\",\n    \"scene\": \"fixed third-person view of a living room with a wooden coffee table, sofas, lamp, curtains, rug, and other background elements stable\"\n  },\n  \"intended_change\": {\n    \"mug\": \"rotate/tip the mug from upright to lying on its side on the same tabletop, remaining near its original location\",\n    \"spill\": \"create a small, localized liquid spill adjacent to or emerging from the tipped mug on the tabletop\"\n  },\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": [\n    \"the white ceramic mug is visibly on its side rather than upright\",\n    \"the mug remains on the coffee table and close to its original position\",\n    \"a small local spill is visible on the tabletop near the mug\",\n    \"the spill is limited in size and does not spread broadly across the table or onto the floor\",\n    \"the camera viewpoint, framing, and perspective remain fixed\",\n    \"unrelated furniture and background scene elements remain unchanged\"\n  ],\n  \"protected_anchors\": [\n    \"camera position, framing, focal length, and viewpoint\",\n    \"wooden coffee table position, size, shape, and orientation\",\n    \"sofas in the background\",\n    \"floor lamp and its illumination\",\n    \"curtains and window area\",\n    \"rug and floor pattern\",\n    \"overall living room layout and lighting\",\n    \"all unrelated objects and surfaces not involved in the mug tipping or spill\"\n  ],\n  \"negative_constraints\": [\n    \"do not move, resize, replace, or recolor the coffee table\",\n    \"do not change the sofas, lamp, curtains, rug, or room layout\",\n    \"do not introduce hands, people, animals, or extra tools unless already present\",\n    \"do not change the camera angle or zoom\",\n    \"do not make the spill large, flooding, dripping off the table, or covering unrelated objects\",\n    \"do not break, shatter, deform, or disappear the mug\",\n    \"do not add unrelated new objects or visual effects\"\n  ],\n  \"failure_modes\": [\n    \"mug remains upright\",\n    \"mug disappears, changes identity, changes color/material, or becomes a different object\",\n    \"mug moves far from its original table location or falls off the table\",\n    \"no spill appears\",\n    \"spill is too large, nonlocal, or appears in an implausible location\",\n    \"camera moves, zooms, pans, or reframes the scene\",\n    \"background furniture, table, lighting, rug, or room layout changes\",\n    \"unrelated objects or agents are introduced\",\n    \"mug appears broken instead of simply tipped onto its side\"\n  ]\n}",
+      "raw_response": {
+        "id": "chatcmpl-EU7AzxyWX6Hq9kiFoPOu4Kc6uITBW",
+        "object": "chat.completion",
+        "created": 1790846133,
+        "model": "gpt-5.5-2026-04-23",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"target\": \"white ceramic mug on the coffee table and the small amount of liquid associated with it\",\n  \"initial_state\": {\n    \"mug\": \"upright white ceramic mug standing on the wooden coffee table near the center of the tabletop, handle visible on the left side\",\n    \"spill\": \"no visible liquid spill on the tabletop\",\n    \"scene\": \"fixed third-person view of a living room with a wooden coffee table, sofas, lamp, curtains, rug, and other background elements stable\"\n  },\n  \"intended_change\": {\n    \"mug\": \"rotate/tip the mug from upright to lying on its side on the same tabletop, remaining near its original location\",\n    \"spill\": \"create a small, localized liquid spill adjacent to or emerging from the tipped mug on the tabletop\"\n  },\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": [\n    \"the white ceramic mug is visibly on its side rather than upright\",\n    \"the mug remains on the coffee table and close to its original position\",\n    \"a small local spill is visible on the tabletop near the mug\",\n    \"the spill is limited in size and does not spread broadly across the table or onto the floor\",\n    \"the camera viewpoint, framing, and perspective remain fixed\",\n    \"unrelated furniture and background scene elements remain unchanged\"\n  ],\n  \"protected_anchors\": [\n    \"camera position, framing, focal length, and viewpoint\",\n    \"wooden coffee table position, size, shape, and orientation\",\n    \"sofas in the background\",\n    \"floor lamp and its illumination\",\n    \"curtains and window area\",\n    \"rug and floor pattern\",\n    \"overall living room layout and lighting\",\n    \"all unrelated objects and surfaces not involved in the mug tipping or spill\"\n  ],\n  \"negative_constraints\": [\n    \"do not move, resize, replace, or recolor the coffee table\",\n    \"do not change the sofas, lamp, curtains, rug, or room layout\",\n    \"do not introduce hands, people, animals, or extra tools unless already present\",\n    \"do not change the camera angle or zoom\",\n    \"do not make the spill large, flooding, dripping off the table, or covering unrelated objects\",\n    \"do not break, shatter, deform, or disappear the mug\",\n    \"do not add unrelated new objects or visual effects\"\n  ],\n  \"failure_modes\": [\n    \"mug remains upright\",\n    \"mug disappears, changes identity, changes color/material, or becomes a different object\",\n    \"mug moves far from its original table location or falls off the table\",\n    \"no spill appears\",\n    \"spill is too large, nonlocal, or appears in an implausible location\",\n    \"camera moves, zooms, pans, or reframes the scene\",\n    \"background furniture, table, lighting, rug, or room layout changes\",\n    \"unrelated objects or agents are introduced\",\n    \"mug appears broken instead of simply tipped onto its side\"\n  ]\n}",
+              "refusal": null,
+              "annotations": []
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 443,
+          "completion_tokens": 783,
+          "total_tokens": 1226,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 143,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "service_tier": "default",
+        "system_fingerprint": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-EU7AzxyWX6Hq9kiFoPOu4Kc6uITBW",
+        "model": "gpt-5.5-2026-04-23",
+        "created": 1790846133,
+        "usage": {
+          "prompt_tokens": 443,
+          "completion_tokens": 783,
+          "total_tokens": 1226,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 143,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "request_url": "https://api.openai.com/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:15:32.866755+00:00",
+        "response_received_at": "2026-10-01T09:15:42.367342+00:00",
+        "elapsed_seconds": 9.500596,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "https://api.openai.com/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 9.500507
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "gpt-5.5",
+          "config_digest": "6c68392f845139c5b33e548de23af0158fa55f284231db89a28f9d425833a4be"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "reasoning_effort": "medium",
+            "temperature": "API default (temperature=0 unsupported)",
+            "max_completion_tokens": 16384
+          },
+          "request_sha256": "40268b0e4d73e1775d61ef571ae2fa7ee536ead9f2fac86f00101a573d35f6b3"
+        }
+      },
+      "evidence_digest": "e8e099420475cfcd9c760e3206573ac98e4c02d6a2f46d7d288253a7e17f10e4"
+    },
+    "verify": {
+      "schema_version": "harnesseval.intentional_change.verify_agent",
+      "skill_id": "intentional_change_verifier_vlm",
+      "definition_version": "harnesseval.intentional_change_vlm",
+      "prompt_version": "harnesseval.intentional_change.prompt",
+      "agent": "verify_agent",
+      "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+      "input_digest": "cd45c616c7e48dd44c696bd3b8f85042a4532ffa7f3cbbdab9b2888f4a54bbe8",
+      "judgment": {
+        "q_scores": {
+          "Q1_target_visible": 1,
+          "Q2_transition_visible": 1,
+          "Q3_intended_change": 0.5,
+          "Q4_target_specificity": 1,
+          "Q5_final_state": 0,
+          "Q6_anchor_preservation": 1,
+          "Q7_no_extra_event": 0.25,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_target_visible": "The white ceramic mug is clearly visible and localizable on the coffee table in the initial observation and throughout the evidence frames.",
+          "Q2_transition_visible": "A visible state transition occurs: the mug changes orientation over time, moving from a tipped/side position toward upright.",
+          "Q3_intended_change": "The requested state appears only partially and temporarily: early frames show the mug on its side with a small local spill, but the sequence then reverses and the mug returns upright, so the intended change is not completed as a stable rollout from the initial state.",
+          "Q4_target_specificity": "The visible change concerns the correct object, the white ceramic mug on the coffee table, and the spill is localized near it.",
+          "Q5_final_state": "The final frames show the mug upright again and the spill is no longer clearly present, which does not match the expected final state of a tipped mug on its side with a small local spill.",
+          "Q6_anchor_preservation": "The sofa, coffee table, rug, floor lamp, and living room layout remain essentially unchanged; unrelated protected anchors are preserved.",
+          "Q7_no_extra_event": "The rollout includes an unintended reversal/reset of the target state: the mug self-rights and the spill disappears. This violates the requirement to avoid resets or extra events, though the rest of the scene is not replaced.",
+          "Q8_judgeable": "The video frames are clear, continuous enough, and sufficiently observable to judge the mug state, spill, camera stability, and anchors."
+        },
+        "warnings": [
+          "The generated rollout starts with the mug already tipped rather than showing a clean upright-to-side transition from the initial observation.",
+          "The final state resets to an upright mug and does not retain the small spill."
+        ],
+        "summary": "The correct mug is visible and affected, and early frames briefly show the desired tipped mug with a small local spill. However, the rollout then reverses the action: the mug returns upright and the spill disappears, so the final state fails the canonical requested outcome."
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a strict VLM evaluator for intentional world-state changes. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate this generated rollout against the canonical intentional-transition case spec.\nUse the canonical spec as authoritative. The expected spec is provided only as a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nDo not reward generic visual motion, style change, or edit magnitude unless it realizes the requested target state change.\nDo not penalize natural secondary changes unless they violate the protected anchors, negative constraints, continuity, or target specificity.\n\nQuestions:\nQ1_target_visible: target is clearly visible and localizable in the initial/evidence frames.\nQ2_transition_visible: a visible transition occurs, not just a static image.\nQ3_intended_change: the requested intended change actually occurs.\nQ4_target_specificity: the change happens to the correct target, not a wrong or ambiguous object.\nQ5_final_state: the final visible state matches the action and expected outcome.\nQ6_anchor_preservation: protected anchors and unrelated objects remain in the same world state.\nQ7_no_extra_event: the rollout avoids extra events, reset, hard cut, world replacement, or unrelated edits.\nQ8_judgeable: the video is clear, continuous, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_target_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_target_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case spec:\n{\n  \"action_type\": \"text_based_state_change\",\n  \"action_id\": \"intentional_0001\",\n  \"action_text\": \"tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.\",\n  \"chunks\": [],\n  \"expected_outcome\": [\n    \"tip the white ceramic mug onto its side and create a small local spill\",\n    \"The ceramic mug remains identifiable as the same entity.\",\n    \"Protected anchors remain unchanged.\"\n  ],\n  \"protected_anchors\": [\n    \"sofa\",\n    \"coffee table\",\n    \"rug\",\n    \"floor lamp\"\n  ],\n  \"negative_constraints\": [\n    \"Do not replace the whole scene.\",\n    \"Do not add unrelated extra events.\",\n    \"Do not change camera viewpoint.\"\n  ],\n  \"source_tags\": {\n    \"scene\": \"living_room_table\",\n    \"domain\": \"realistic\",\n    \"style\": \"procedural_prompt_spec\",\n    \"perspective\": \"third_person\",\n    \"generator\": \"seedream_initial_materializer_v0\",\n    \"render_backend\": \"doubao_seedream_4_0\"\n  },\n  \"initial_observation_type\": \"image\"\n}\n\nExpected spec inferred before seeing the video, for audit only:\n{\n  \"target\": \"white ceramic mug on the coffee table and the small amount of liquid associated with it\",\n  \"initial_state\": {\n    \"mug\": \"upright white ceramic mug standing on the wooden coffee table near the center of the tabletop, handle visible on the left side\",\n    \"spill\": \"no visible liquid spill on the tabletop\",\n    \"scene\": \"fixed third-person view of a living room with a wooden coffee table, sofas, lamp, curtains, rug, and other background elements stable\"\n  },\n  \"intended_change\": {\n    \"mug\": \"rotate/tip the mug from upright to lying on its side on the same tabletop, remaining near its original location\",\n    \"spill\": \"create a small, localized liquid spill adjacent to or emerging from the tipped mug on the tabletop\"\n  },\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": [\n    \"the white ceramic mug is visibly on its side rather than upright\",\n    \"the mug remains on the coffee table and close to its original position\",\n    \"a small local spill is visible on the tabletop near the mug\",\n    \"the spill is limited in size and does not spread broadly across the table or onto the floor\",\n    \"the camera viewpoint, framing, and perspective remain fixed\",\n    \"unrelated furniture and background scene elements remain unchanged\"\n  ],\n  \"protected_anchors\": [\n    \"camera position, framing, focal length, and viewpoint\",\n    \"wooden coffee table position, size, shape, and orientation\",\n    \"sofas in the background\",\n    \"floor lamp and its illumination\",\n    \"curtains and window area\",\n    \"rug and floor pattern\",\n    \"overall living room layout and lighting\",\n    \"all unrelated objects and surfaces not involved in the mug tipping or spill\"\n  ],\n  \"negative_constraints\": [\n    \"do not move, resize, replace, or recolor the coffee table\",\n    \"do not change the sofas, lamp, curtains, rug, or room layout\",\n    \"do not introduce hands, people, animals, or extra tools unless already present\",\n    \"do not change the camera angle or zoom\",\n    \"do not make the spill large, flooding, dripping off the table, or covering unrelated objects\",\n    \"do not break, shatter, deform, or disappear the mug\",\n    \"do not add unrelated new objects or visual effects\"\n  ],\n  \"failure_modes\": [\n    \"mug remains upright\",\n    \"mug disappears, changes identity, changes color/material, or becomes a different object\",\n    \"mug moves far from its original table location or falls off the table\",\n    \"no spill appears\",\n    \"spill is too large, nonlocal, or appears in an implausible location\",\n    \"camera moves, zooms, pans, or reframes the scene\",\n    \"background furniture, table, lighting, rug, or room layout changes\",\n    \"unrelated objects or agents are introduced\",\n    \"mug appears broken instead of simply tipped onto its side\"\n  ]\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "a38622b6fd16233af6ea73059afd24d684f823d076cf57bd8df9a7739b637c2d",
+                "bytes": 19373
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 00:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "39079f95896f534c6026384d6b194d30f856cd7157a89702a5c035cff0b91eec",
+                "bytes": 21308
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 01:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "a1524c067ae4a8562b38820a78769f5a2edb5422ff7ca71145529c721f97b6ec",
+                "bytes": 21323
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 02:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "a0f93534afc2b9963e14b522562bf76900b10b8b2063ac71833084c1d15756e9",
+                "bytes": 21335
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 03:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "ebc97fef790f7b857c15939ef94d25a2bf43efd0b808fef17a86273ed4b5b184",
+                "bytes": 21347
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 04:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "c03bcb21063a3fd8e46c8e9aec595b38b95a439d4ed3232c18db5d677421ed61",
+                "bytes": 21254
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 05:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "fa87b6718869136e0a58bd150e803ef7f7bb57023d1fc2949cf602ce60bbfb4b",
+                "bytes": 21158
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 06:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "c8489652310dc5576fbd74131ecb7cddb1dfef49a2ba7ec5769f2fb9ab2cad7a",
+                "bytes": 21156
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 07:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "bb5185280cc1da6b5866806762d1a13fdea4dfb29d91fdbd497fb53fd9039a0d",
+                "bytes": 21204
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 08:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "a8bb14afc1a78bda5fcd03ad822be5b4d7f421fdddc7d67ad9b6af60ebfb1aa5",
+                "bytes": 21163
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 09:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "605957fc44c9103657b5dc4640f6fe9ef47d041db39a4776441b5be4ef8ec0a3",
+                "bytes": 21055
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 10:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "c635da86db2e053a8ebe86eccc3f19c962cf23c20d18ee1c1dc7247bcad86bab",
+                "bytes": 20977
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 11:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "2d6795e48b7234a610588ca8808f6336201eb5131a9d0718f7bd7825d4a30b1c",
+                "bytes": 20734
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":0.5,\"Q4_target_specificity\":1,\"Q5_final_state\":0,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":0.25,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The white ceramic mug is clearly visible and localizable on the coffee table in the initial observation and throughout the evidence frames.\",\"Q2_transition_visible\":\"A visible state transition occurs: the mug changes orientation over time, moving from a tipped/side position toward upright.\",\"Q3_intended_change\":\"The requested state appears only partially and temporarily: early frames show the mug on its side with a small local spill, but the sequence then reverses and the mug returns upright, so the intended change is not completed as a stable rollout from the initial state.\",\"Q4_target_specificity\":\"The visible change concerns the correct object, the white ceramic mug on the coffee table, and the spill is localized near it.\",\"Q5_final_state\":\"The final frames show the mug upright again and the spill is no longer clearly present, which does not match the expected final state of a tipped mug on its side with a small local spill.\",\"Q6_anchor_preservation\":\"The sofa, coffee table, rug, floor lamp, and living room layout remain essentially unchanged; unrelated protected anchors are preserved.\",\"Q7_no_extra_event\":\"The rollout includes an unintended reversal/reset of the target state: the mug self-rights and the spill disappears. This violates the requirement to avoid resets or extra events, though the rest of the scene is not replaced.\",\"Q8_judgeable\":\"The video frames are clear, continuous enough, and sufficiently observable to judge the mug state, spill, camera stability, and anchors.\"},\"warnings\":[\"The generated rollout starts with the mug already tipped rather than showing a clean upright-to-side transition from the initial observation.\",\"The final state resets to an upright mug and does not retain the small spill.\"],\"summary\":\"The correct mug is visible and affected, and early frames briefly show the desired tipped mug with a small local spill. However, the rollout then reverses the action: the mug returns upright and the spill disappears, so the final state fails the canonical requested outcome.\"}",
+      "raw_response": {
+        "id": "chatcmpl-EU7B8n4Y8Md6YOjj5rmZTgbJWOc34",
+        "object": "chat.completion",
+        "created": 1790846142,
+        "model": "gpt-5.5-2026-04-23",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":0.5,\"Q4_target_specificity\":1,\"Q5_final_state\":0,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":0.25,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The white ceramic mug is clearly visible and localizable on the coffee table in the initial observation and throughout the evidence frames.\",\"Q2_transition_visible\":\"A visible state transition occurs: the mug changes orientation over time, moving from a tipped/side position toward upright.\",\"Q3_intended_change\":\"The requested state appears only partially and temporarily: early frames show the mug on its side with a small local spill, but the sequence then reverses and the mug returns upright, so the intended change is not completed as a stable rollout from the initial state.\",\"Q4_target_specificity\":\"The visible change concerns the correct object, the white ceramic mug on the coffee table, and the spill is localized near it.\",\"Q5_final_state\":\"The final frames show the mug upright again and the spill is no longer clearly present, which does not match the expected final state of a tipped mug on its side with a small local spill.\",\"Q6_anchor_preservation\":\"The sofa, coffee table, rug, floor lamp, and living room layout remain essentially unchanged; unrelated protected anchors are preserved.\",\"Q7_no_extra_event\":\"The rollout includes an unintended reversal/reset of the target state: the mug self-rights and the spill disappears. This violates the requirement to avoid resets or extra events, though the rest of the scene is not replaced.\",\"Q8_judgeable\":\"The video frames are clear, continuous enough, and sufficiently observable to judge the mug state, spill, camera stability, and anchors.\"},\"warnings\":[\"The generated rollout starts with the mug already tipped rather than showing a clean upright-to-side transition from the initial observation.\",\"The final state resets to an upright mug and does not retain the small spill.\"],\"summary\":\"The correct mug is visible and affected, and early frames briefly show the desired tipped mug with a small local spill. However, the rollout then reverses the action: the mug returns upright and the spill disappears, so the final state fails the canonical requested outcome.\"}",
+              "refusal": null,
+              "annotations": []
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 3779,
+          "completion_tokens": 994,
+          "total_tokens": 4773,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 512,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "service_tier": "default",
+        "system_fingerprint": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-EU7B8n4Y8Md6YOjj5rmZTgbJWOc34",
+        "model": "gpt-5.5-2026-04-23",
+        "created": 1790846142,
+        "usage": {
+          "prompt_tokens": 3779,
+          "completion_tokens": 994,
+          "total_tokens": 4773,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 512,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "request_url": "https://api.openai.com/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:15:42.459460+00:00",
+        "response_received_at": "2026-10-01T09:15:55.637515+00:00",
+        "elapsed_seconds": 13.178052,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "https://api.openai.com/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 13.177967
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "gpt-5.5",
+          "config_digest": "6c68392f845139c5b33e548de23af0158fa55f284231db89a28f9d425833a4be"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "reasoning_effort": "medium",
+            "temperature": "API default (temperature=0 unsupported)",
+            "max_completion_tokens": 16384
+          },
+          "request_sha256": "36e4aee726a030bba1dde2c02827e74b14472ebbbf0601040ced743f7b87cea2"
+        }
+      },
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "source_frame_count": 97,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          8,
+          17,
+          26,
+          34,
+          43,
+          52,
+          61,
+          69,
+          78,
+          87,
+          96
+        ]
+      },
+      "evidence_digest": "a2467771f4b0557976dbe1e2a59c2cd219191f0a32cab38a010dae8a78f4df18"
+    }
+  },
+  "fixed_specification": {
+    "result": {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok_case_audit_warning",
+      "score": 0.54,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 0.25,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 0.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 0.25,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 0.55,
+        "target_specificity": 1.0,
+        "final_state": 0.0,
+        "preservation": 0.7,
+        "validity_gate": 1.0,
+        "core_score": 0.54,
+        "final_score": 0.54,
+        "expected_spec_alignment": 0.193651
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "warning",
+          "warning": true,
+          "expected_spec_alignment": 0.193651,
+          "target_alignment": 0.095238,
+          "change_alignment": 0.285714,
+          "anchor_alignment": 0.2
+        }
+      },
+      "notes": []
+    },
+    "expected_spec": {
+      "target": "white ceramic mug",
+      "initial_state": "standing upright on the wooden coffee table",
+      "intended_change": "tilted onto its side to create a small local spill",
+      "change_type": "pose",
+      "completion_criteria": "mug is visibly tilted with liquid spilled on the table surface",
+      "protected_anchors": [
+        "camera position and angle",
+        "background furniture (sofas, lamp)",
+        "rug pattern and position",
+        "overall lighting and ambiance"
+      ],
+      "negative_constraints": [
+        "do not spill liquid beyond the immediate vicinity of the mug",
+        "do not move or alter the mug's base position on the table",
+        "do not change the mug's material or color"
+      ],
+      "failure_modes": [
+        "mug remains upright with no spill",
+        "mug is moved off the table",
+        "spill is too large or affects unrelated scene elements",
+        "camera or background elements are altered"
+      ]
+    },
+    "conversation": [
+      {
+        "role": "system",
+        "content": [
+          {
+            "type": "text",
+            "text": "You are a strict VLM evaluator for intentional world-state changes. Return valid JSON only."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluate this generated rollout against the canonical intentional-transition case spec.\nUse the canonical spec as authoritative. The expected spec is provided only as a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nDo not reward generic visual motion, style change, or edit magnitude unless it realizes the requested target state change.\nDo not penalize natural secondary changes unless they violate the protected anchors, negative constraints, continuity, or target specificity.\n\nQuestions:\nQ1_target_visible: target is clearly visible and localizable in the initial/evidence frames.\nQ2_transition_visible: a visible transition occurs, not just a static image.\nQ3_intended_change: the requested intended change actually occurs.\nQ4_target_specificity: the change happens to the correct target, not a wrong or ambiguous object.\nQ5_final_state: the final visible state matches the action and expected outcome.\nQ6_anchor_preservation: protected anchors and unrelated objects remain in the same world state.\nQ7_no_extra_event: the rollout avoids extra events, reset, hard cut, world replacement, or unrelated edits.\nQ8_judgeable: the video is clear, continuous, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_target_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_target_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case spec:\n{\n  \"action_type\": \"text_based_state_change\",\n  \"action_id\": \"intentional_0001\",\n  \"action_text\": \"tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.\",\n  \"chunks\": [],\n  \"expected_outcome\": [\n    \"tip the white ceramic mug onto its side and create a small local spill\",\n    \"The ceramic mug remains identifiable as the same entity.\",\n    \"Protected anchors remain unchanged.\"\n  ],\n  \"protected_anchors\": [\n    \"sofa\",\n    \"coffee table\",\n    \"rug\",\n    \"floor lamp\"\n  ],\n  \"negative_constraints\": [\n    \"Do not replace the whole scene.\",\n    \"Do not add unrelated extra events.\",\n    \"Do not change camera viewpoint.\"\n  ],\n  \"source_tags\": {\n    \"scene\": \"living_room_table\",\n    \"domain\": \"realistic\",\n    \"style\": \"procedural_prompt_spec\",\n    \"perspective\": \"third_person\",\n    \"generator\": \"seedream_initial_materializer_v0\",\n    \"render_backend\": \"doubao_seedream_4_0\"\n  },\n  \"initial_observation_type\": \"image\"\n}\n\nExpected spec inferred before seeing the video, for audit only:\n{\n  \"target\": \"white ceramic mug\",\n  \"initial_state\": \"standing upright on the wooden coffee table\",\n  \"intended_change\": \"tilted onto its side to create a small local spill\",\n  \"change_type\": \"pose\",\n  \"completion_criteria\": \"mug is visibly tilted with liquid spilled on the table surface\",\n  \"protected_anchors\": [\n    \"camera position and angle\",\n    \"background furniture (sofas, lamp)\",\n    \"rug pattern and position\",\n    \"overall lighting and ambiance\"\n  ],\n  \"negative_constraints\": [\n    \"do not spill liquid beyond the immediate vicinity of the mug\",\n    \"do not move or alter the mug's base position on the table\",\n    \"do not change the mug's material or color\"\n  ],\n  \"failure_modes\": [\n    \"mug remains upright with no spill\",\n    \"mug is moved off the table\",\n    \"spill is too large or affects unrelated scene elements\",\n    \"camera or background elements are altered\"\n  ]\n}"
+          },
+          {
+            "type": "text",
+            "text": "Initial observation image:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "a38622b6fd16233af6ea73059afd24d684f823d076cf57bd8df9a7739b637c2d",
+              "bytes": 19373
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 00:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "39079f95896f534c6026384d6b194d30f856cd7157a89702a5c035cff0b91eec",
+              "bytes": 21308
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 01:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "a1524c067ae4a8562b38820a78769f5a2edb5422ff7ca71145529c721f97b6ec",
+              "bytes": 21323
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 02:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "a0f93534afc2b9963e14b522562bf76900b10b8b2063ac71833084c1d15756e9",
+              "bytes": 21335
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 03:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "ebc97fef790f7b857c15939ef94d25a2bf43efd0b808fef17a86273ed4b5b184",
+              "bytes": 21347
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 04:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "c03bcb21063a3fd8e46c8e9aec595b38b95a439d4ed3232c18db5d677421ed61",
+              "bytes": 21254
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 05:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "fa87b6718869136e0a58bd150e803ef7f7bb57023d1fc2949cf602ce60bbfb4b",
+              "bytes": 21158
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 06:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "c8489652310dc5576fbd74131ecb7cddb1dfef49a2ba7ec5769f2fb9ab2cad7a",
+              "bytes": 21156
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 07:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "bb5185280cc1da6b5866806762d1a13fdea4dfb29d91fdbd497fb53fd9039a0d",
+              "bytes": 21204
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 08:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "a8bb14afc1a78bda5fcd03ad822be5b4d7f421fdddc7d67ad9b6af60ebfb1aa5",
+              "bytes": 21163
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 09:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "605957fc44c9103657b5dc4640f6fe9ef47d041db39a4776441b5be4ef8ec0a3",
+              "bytes": 21055
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 10:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "c635da86db2e053a8ebe86eccc3f19c962cf23c20d18ee1c1dc7247bcad86bab",
+              "bytes": 20977
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 11:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "2d6795e48b7234a610588ca8808f6336201eb5131a9d0718f7bd7825d4a30b1c",
+              "bytes": 20734
+            }
+          }
+        ]
+      }
+    ],
+    "request_digest": "7052b0e7a832076fb2e50cdce1c46f2b4b05a5d85a36cb855a2d35b470cf5d20",
+    "output": {
+      "schema_version": "harnesseval.intentional_change.backend_output",
+      "parsed": {
+        "q_scores": {
+          "Q1_target_visible": 1,
+          "Q2_transition_visible": 1,
+          "Q3_intended_change": 0.25,
+          "Q4_target_specificity": 1,
+          "Q5_final_state": 0,
+          "Q6_anchor_preservation": 1,
+          "Q7_no_extra_event": 0.25,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_target_visible": "The white ceramic mug is clearly visible and localizable on the coffee table in the initial image and throughout the rollout.",
+          "Q2_transition_visible": "There is visible motion/change: the mug changes pose over time and the apparent spill changes/disappears, so this is not merely static.",
+          "Q3_intended_change": "The requested tipped mug with a small local spill is visible in early generated frames, but the rollout does not show the intended action from upright to tipped; instead it begins already tipped and then reverses toward upright.",
+          "Q4_target_specificity": "The change concerns the correct object, the white ceramic mug on the coffee table, rather than a wrong or ambiguous target.",
+          "Q5_final_state": "The final frames show the mug upright again with no clear remaining local spill, so the final state does not match the requested tipped-on-side mug with spill.",
+          "Q6_anchor_preservation": "The sofa, coffee table, rug, floor lamp, and overall living-room background remain substantially unchanged and the camera appears fixed.",
+          "Q7_no_extra_event": "The rollout includes an unwanted reversal/reset-like event where the mug rights itself and the spill disappears, contrary to the intended persistent state change.",
+          "Q8_judgeable": "The scene is clear, continuous enough, and the mug/table area is sufficiently observable to judge the requested transition."
+        },
+        "warnings": [],
+        "summary": "The rollout briefly contains the target state, but it starts after the intended tipping has already happened and then undoes it, ending with the mug upright and the spill gone. Anchors are preserved and the video is judgeable, but the intentional final state fails."
+      },
+      "raw_output_text": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":0.25,\"Q4_target_specificity\":1,\"Q5_final_state\":0,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":0.25,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The white ceramic mug is clearly visible and localizable on the coffee table in the initial image and throughout the rollout.\",\"Q2_transition_visible\":\"There is visible motion/change: the mug changes pose over time and the apparent spill changes/disappears, so this is not merely static.\",\"Q3_intended_change\":\"The requested tipped mug with a small local spill is visible in early generated frames, but the rollout does not show the intended action from upright to tipped; instead it begins already tipped and then reverses toward upright.\",\"Q4_target_specificity\":\"The change concerns the correct object, the white ceramic mug on the coffee table, rather than a wrong or ambiguous target.\",\"Q5_final_state\":\"The final frames show the mug upright again with no clear remaining local spill, so the final state does not match the requested tipped-on-side mug with spill.\",\"Q6_anchor_preservation\":\"The sofa, coffee table, rug, floor lamp, and overall living-room background remain substantially unchanged and the camera appears fixed.\",\"Q7_no_extra_event\":\"The rollout includes an unwanted reversal/reset-like event where the mug rights itself and the spill disappears, contrary to the intended persistent state change.\",\"Q8_judgeable\":\"The scene is clear, continuous enough, and the mug/table area is sufficiently observable to judge the requested transition.\"},\"warnings\":[],\"summary\":\"The rollout briefly contains the target state, but it starts after the intended tipping has already happened and then undoes it, ending with the mug upright and the spill gone. Anchors are preserved and the video is judgeable, but the intentional final state fails.\"}",
+      "raw_response": {
+        "id": "chatcmpl-EU7BM4D4aY7c5cOayFJnlLJ4k0SuP",
+        "object": "chat.completion",
+        "created": 1790846156,
+        "model": "gpt-5.5-2026-04-23",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":0.25,\"Q4_target_specificity\":1,\"Q5_final_state\":0,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":0.25,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The white ceramic mug is clearly visible and localizable on the coffee table in the initial image and throughout the rollout.\",\"Q2_transition_visible\":\"There is visible motion/change: the mug changes pose over time and the apparent spill changes/disappears, so this is not merely static.\",\"Q3_intended_change\":\"The requested tipped mug with a small local spill is visible in early generated frames, but the rollout does not show the intended action from upright to tipped; instead it begins already tipped and then reverses toward upright.\",\"Q4_target_specificity\":\"The change concerns the correct object, the white ceramic mug on the coffee table, rather than a wrong or ambiguous target.\",\"Q5_final_state\":\"The final frames show the mug upright again with no clear remaining local spill, so the final state does not match the requested tipped-on-side mug with spill.\",\"Q6_anchor_preservation\":\"The sofa, coffee table, rug, floor lamp, and overall living-room background remain substantially unchanged and the camera appears fixed.\",\"Q7_no_extra_event\":\"The rollout includes an unwanted reversal/reset-like event where the mug rights itself and the spill disappears, contrary to the intended persistent state change.\",\"Q8_judgeable\":\"The scene is clear, continuous enough, and the mug/table area is sufficiently observable to judge the requested transition.\"},\"warnings\":[],\"summary\":\"The rollout briefly contains the target state, but it starts after the intended tipping has already happened and then undoes it, ending with the mug upright and the spill gone. Anchors are preserved and the video is judgeable, but the intentional final state fails.\"}",
+              "refusal": null,
+              "annotations": []
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 3362,
+          "completion_tokens": 922,
+          "total_tokens": 4284,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 512,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "service_tier": "default",
+        "system_fingerprint": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-EU7BM4D4aY7c5cOayFJnlLJ4k0SuP",
+        "model": "gpt-5.5-2026-04-23",
+        "created": 1790846156,
+        "usage": {
+          "prompt_tokens": 3362,
+          "completion_tokens": 922,
+          "total_tokens": 4284,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 512,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "request_url": "https://api.openai.com/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:15:56.021292+00:00",
+        "response_received_at": "2026-10-01T09:16:08.075226+00:00",
+        "elapsed_seconds": 12.053932,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "https://api.openai.com/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 12.053853
+          }
+        ]
+      },
+      "provenance": {
+        "settings": {
+          "reasoning_effort": "medium",
+          "temperature": "API default (temperature=0 unsupported)",
+          "max_completion_tokens": 16384
+        },
+        "request_sha256": "7052b0e7a832076fb2e50cdce1c46f2b4b05a5d85a36cb855a2d35b470cf5d20"
+      }
+    },
+    "sampling": {
+      "method": "uniform_full_video",
+      "max_frames": 12,
+      "source_frame_count": 97,
+      "source_fps": 24.0,
+      "sample_indices": [
+        0,
+        8,
+        17,
+        26,
+        34,
+        43,
+        52,
+        61,
+        69,
+        78,
+        87,
+        96
+      ]
+    }
+  },
+  "elapsed_seconds": 35.22812557220459
+}

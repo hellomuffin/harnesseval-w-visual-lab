@@ -10,7 +10,7 @@ for name in ['media','data']:shutil.copytree(R/'site'/name,P/name,dirs_exist_ok=
 for src in (R/'artifacts').rglob('*'):
  rel=src.relative_to(R/'artifacts')
  if src.is_file() and 'logs' not in rel.parts and src.suffix in ['.json','.mp4','.png','.jpg','.npz','.patch','.py','.txt'] and src.name not in ['desktop.png','mobile.png','hero.png','generated-case.png']:
-  if '-raw.mp4' not in src.name and not src.name.endswith(('desktop.png','mobile.png')):copy(src,P/'evidence'/rel)
+  if '-raw.mp4' not in src.name and not src.name.startswith('academic-') and not src.name.endswith(('desktop.png','mobile.png')):copy(src,P/'evidence'/rel)
 for src in (R/'public-set/data').rglob('*'):
  if src.is_file() and src.suffix in ['.json','.png','.jpg','.jpeg']:copy(src,P/'public/data'/src.relative_to(R/'public-set/data'))
 D=json.loads((P/'data/demo.json').read_text())
@@ -50,8 +50,10 @@ A hosted visual introduction and independently executed reproduction study of [H
 
 - Six author-supplied videos, all 11 skills exercised on videos or controlled fixtures, and 100 public cases.
 - A new locally generated Wan 2.2 video, real Analyze/Verify traces, recorded case validation, and interactive grading.
-- Fresh six-case overall: 0.754987. Author-cache replay: 0.787629.
-- Local Qwen judge replaces the authors' judge. The full 330-case, 18-model leaderboard and human study are not reproduced.
+- Matched Muse-Glimmer-30B and GPT-5.5 semantic evaluation, including independent Analyze–Verify and a shared-specification condition.
+- Exact new routing requests, reconstructed historical routing prompts, and recorded generation prompts are visible.
+- Historical Qwen six-case overall: 0.754987. Author-cache replay: 0.787629.
+- Numerical evidence is held fixed across judges; new routing experiments are shown separately from the fixed scoring plan. The full 330-case, 18-model leaderboard and human study are not reproduced.
 
 This is a static website: videos, traces, plots, recorded validation and grading sliders work without a local server. New GPU inference is not available from the hosted UI. Browser scoring is independently checked against the released Python formula.
 

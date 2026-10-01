@@ -1,0 +1,29 @@
+{
+  "expected_spec": {
+    "target": "white ceramic mug",
+    "initial_state": "standing upright on the wooden coffee table",
+    "intended_change": "tilted onto its side to create a small local spill",
+    "change_type": "pose",
+    "completion_criteria": "mug is visibly tilted with liquid spilled on the table surface",
+    "protected_anchors": [
+      "camera position and angle",
+      "background furniture (sofas, lamp)",
+      "rug pattern and position",
+      "overall lighting and ambiance"
+    ],
+    "negative_constraints": [
+      "do not spill liquid beyond the immediate vicinity of the mug",
+      "do not move or alter the mug's base position on the table",
+      "do not change the mug's material or color"
+    ],
+    "failure_modes": [
+      "mug remains upright with no spill",
+      "mug is moved off the table",
+      "spill is too large or affects unrelated scene elements",
+      "camera or background elements are altered"
+    ]
+  },
+  "source": "artifacts/controls/cache/20260930T213845/frozen/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+  "source_judge": "existing Qwen baseline",
+  "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug"
+}

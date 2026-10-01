@@ -15,7 +15,7 @@ with sync_playwright() as p:
  for t in page.locator('#case-tabs button').all():
   t.click()
   for stage in page.locator('.stage-tabs button').all():stage.click()
- assert page.locator('#run-stats .stat strong').nth(1).inner_text()=='11 / 11'
+ assert page.locator('#skill-grid .skill-tile').count()==11
  page.locator('#q0').fill('0');page.locator('#q0').dispatch_event('input');assert page.locator('#whatif-score').inner_text()=='0.000'
  page.locator('#recorded-case').select_option('1');assert 'Rejected' in page.locator('#validation-output').inner_text()
  page.locator('#recorded-case').select_option('0');assert 'Accepted' in page.locator('#validation-output').inner_text()

@@ -1,0 +1,512 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:17:33.839354+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "975820a0e07faa8edb93a52a4e8e391923e2caa597652b9313c5c80c4d14e37c",
+    "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+    "taxonomy": {
+      "primary_axis": "world_persistence",
+      "probe_family": "offscreen_evolution"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "Assess overall technical and aesthetic quality of the generated realistic torch-gateway frames, including artifacts, blur, watermarks, lighting, and whether the scene remains judgeable.",
+        "parameters": {
+          "scene": "realistic first-person torch gateway",
+          "check_artifacts": true,
+          "check_judgeability": true
+        }
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "The rollout requires a look-away, movement, pause, and return sequence; generated motion should be present, smooth, and temporally coherent across chunks c01-c08.",
+        "parameters": {
+          "chunks": [
+            "c01",
+            "c02",
+            "c03",
+            "c04",
+            "c05",
+            "c06",
+            "c07",
+            "c08"
+          ],
+          "focus": "camera turn/move/pause/return and torch flame temporal motion"
+        }
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "The same world should persist across the sequence, with consistent stone gateway, obelisk, path fork, fallen column, terrain, lighting style, and torch identity when visible again.",
+        "parameters": {
+          "stable_anchors": [
+            "stone gateway",
+            "obelisk",
+            "path fork",
+            "fallen column",
+            "torch flame silhouettes and brightness"
+          ],
+          "protected_anchors": [
+            "stone gateway",
+            "obelisk",
+            "path fork",
+            "fallen column"
+          ]
+        }
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "Camera navigation, perspective changes, torch flame flicker, brightness variation, and scene lighting should remain physically and causally plausible.",
+        "parameters": {
+          "focus": [
+            "first-person camera movement",
+            "fire flicker and illumination",
+            "spatial perspective consistency"
+          ]
+        }
+      },
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "role": "core",
+        "reason": "The action explicitly requires an active first-person trajectory: turn away from the torch, keep it offscreen while moving and pausing, then turn back to the same area.",
+        "parameters": {
+          "required_sequence": [
+            {
+              "chunk": "c01",
+              "expectation": "torch flame still visible while beginning to turn away"
+            },
+            {
+              "chunk": "c02",
+              "expectation": "torch flame leaves camera view"
+            },
+            {
+              "chunks": [
+                "c03",
+                "c04",
+                "c05"
+              ],
+              "expectation": "torch remains offscreen during forward movement, pause, and movement back"
+            },
+            {
+              "chunk": "c06",
+              "expectation": "camera turns back toward original torch area"
+            },
+            {
+              "chunks": [
+                "c07",
+                "c08"
+              ],
+              "expectation": "torch returns to view and final view is compatible with original world"
+            }
+          ],
+          "offscreen_window": {
+            "leave_chunk": "c02",
+            "offscreen_chunks": [
+              "c03",
+              "c04",
+              "c05"
+            ],
+            "return_chunk": "c07"
+          }
+        }
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "role": "core",
+        "reason": "After a non-static look-away-and-return loop, the returned view must match the original world layout and protected anchors rather than reset, swap identity, or drift spatially.",
+        "parameters": {
+          "reference_chunk": "c01",
+          "return_chunks": [
+            "c07",
+            "c08"
+          ],
+          "protected_anchors": [
+            "stone gateway",
+            "obelisk",
+            "path fork",
+            "fallen column"
+          ],
+          "failure_modes": [
+            "world reset",
+            "identity swap",
+            "anchor relocation",
+            "incompatible final view"
+          ]
+        }
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "role": "core",
+        "reason": "The central requirement is that the torch flame silhouettes and brightness continue evolving while offscreen and reappear as the same ongoing process, not a frozen copy.",
+        "parameters": {
+          "target_process": "torch flame silhouettes and brightness",
+          "pre_visible_chunks": [
+            "c01"
+          ],
+          "offscreen_chunks": [
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible_chunks": [
+            "c07",
+            "c08"
+          ],
+          "leave_chunk": "c02",
+          "return_chunk": "c07",
+          "reference_chunk": "c01",
+          "expected_evolution": [
+            "flame silhouette changes over time",
+            "brightness/flicker changes over time",
+            "same torch/world identity on return"
+          ],
+          "failure_modes": [
+            "target never leaves view",
+            "target never returns",
+            "frozen copy",
+            "world reset",
+            "identity swap"
+          ]
+        }
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "viewpoint_trajectory_verifier",
+      "return_consistency_verifier",
+      "offscreen_evolution_verifier"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "reason": "The case is not an intentional semantic or object-state edit; the target is natural offscreen evolution of an existing torch flame during camera navigation."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "There is no explicit physical intervention or force whose causal response must be evaluated; torch flicker is an ongoing process."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "No case-specific physical-law validation is required beyond general plausibility of camera motion and flame behavior."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "Although world persistence matters, this is a short eight-chunk offscreen-return sequence, not a long-horizon rollout targeting progressive degradation resistance."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 7,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_offscreen_0002_torch_gateway\",\n    \"taxonomy\": {\n      \"primary_axis\": \"world_persistence\",\n      \"probe_family\": \"offscreen_evolution\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_offscreen_0002_torch_gateway\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_offscreen_0002_torch_gateway.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"torch_gateway\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"stone gateway\",\n        \"obelisk\",\n        \"path fork\",\n        \"fallen column\",\n        \"torch flame silhouettes and brightness\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"offscreen_evolution_spec\": {\n        \"target_process\": \"torch flame silhouettes and brightness\",\n        \"expected_evolution\": [\n          \"The torch flame silhouettes and brightness continues changing during the offscreen interval.\",\n          \"When it returns, the torch flame silhouettes and brightness is not an exact frozen copy, but remains the same process in the same world.\"\n        ],\n        \"failure_modes\": [\n          \"target never leaves view\",\n          \"target never returns\",\n          \"frozen copy\",\n          \"world reset\",\n          \"identity swap\"\n        ]\n      },\n      \"visibility_plan\": {\n        \"pre_visible\": [\n          \"c01\"\n        ],\n        \"offscreen\": [\n          \"c03\",\n          \"c04\",\n          \"c05\"\n        ],\n        \"return_visible\": [\n          \"c07\",\n          \"c08\"\n        ]\n      },\n      \"offscreen_window\": {\n        \"leave_chunk\": \"c02\",\n        \"return_chunk\": \"c07\"\n      },\n      \"return_window\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\"\n      },\n      \"protected_anchors\": [\n        \"stone gateway\",\n        \"obelisk\",\n        \"path fork\",\n        \"fallen column\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"offscreen_evolution_sequence\",\n        \"action_id\": \"offscreen_0002\",\n        \"text\": \"Use a look-away-and-return sequence. The torch flame silhouettes and brightness should continue evolving while offscreen.\",\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"action\": {\n              \"text\": \"Turn away from the torch flame silhouettes and brightness while it is still visible.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"action\": {\n              \"text\": \"Continue turning so the torch flame silhouettes and brightness leaves the camera view.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"action\": {\n              \"text\": \"Move forward while looking away; the torch flame silhouettes and brightness remains offscreen and should continue evolving.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"action\": {\n              \"text\": \"Pause briefly with the torch flame silhouettes and brightness still offscreen.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"action\": {\n              \"text\": \"Move back toward the original area while not facing the torch flame silhouettes and brightness.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"action\": {\n              \"text\": \"Turn back toward the same torch flame silhouettes and brightness.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"action\": {\n              \"text\": \"Return the torch flame silhouettes and brightness to view; it should have evolved rather than frozen or reset.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"action\": {\n              \"text\": \"Settle into a final view compatible with the original world.\"\n            }\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "a26c020a4ae643fbb940ea665fddc785796d31f18f01cb15bd3b6ce39e9bcbf9",
+            "bytes": 433490
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "Assess overall technical and aesthetic quality of the generated realistic torch-gateway frames, including artifacts, blur, watermarks, lighting, and whether the scene remains judgeable.",
+          "parameters": {
+            "scene": "realistic first-person torch gateway",
+            "check_artifacts": true,
+            "check_judgeability": true
+          }
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "The rollout requires a look-away, movement, pause, and return sequence; generated motion should be present, smooth, and temporally coherent across chunks c01-c08.",
+          "parameters": {
+            "chunks": [
+              "c01",
+              "c02",
+              "c03",
+              "c04",
+              "c05",
+              "c06",
+              "c07",
+              "c08"
+            ],
+            "focus": "camera turn/move/pause/return and torch flame temporal motion"
+          }
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "The same world should persist across the sequence, with consistent stone gateway, obelisk, path fork, fallen column, terrain, lighting style, and torch identity when visible again.",
+          "parameters": {
+            "stable_anchors": [
+              "stone gateway",
+              "obelisk",
+              "path fork",
+              "fallen column",
+              "torch flame silhouettes and brightness"
+            ],
+            "protected_anchors": [
+              "stone gateway",
+              "obelisk",
+              "path fork",
+              "fallen column"
+            ]
+          }
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "Camera navigation, perspective changes, torch flame flicker, brightness variation, and scene lighting should remain physically and causally plausible.",
+          "parameters": {
+            "focus": [
+              "first-person camera movement",
+              "fire flicker and illumination",
+              "spatial perspective consistency"
+            ]
+          }
+        },
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "role": "core",
+          "reason": "The action explicitly requires an active first-person trajectory: turn away from the torch, keep it offscreen while moving and pausing, then turn back to the same area.",
+          "parameters": {
+            "required_sequence": [
+              {
+                "chunk": "c01",
+                "expectation": "torch flame still visible while beginning to turn away"
+              },
+              {
+                "chunk": "c02",
+                "expectation": "torch flame leaves camera view"
+              },
+              {
+                "chunks": [
+                  "c03",
+                  "c04",
+                  "c05"
+                ],
+                "expectation": "torch remains offscreen during forward movement, pause, and movement back"
+              },
+              {
+                "chunk": "c06",
+                "expectation": "camera turns back toward original torch area"
+              },
+              {
+                "chunks": [
+                  "c07",
+                  "c08"
+                ],
+                "expectation": "torch returns to view and final view is compatible with original world"
+              }
+            ],
+            "offscreen_window": {
+              "leave_chunk": "c02",
+              "offscreen_chunks": [
+                "c03",
+                "c04",
+                "c05"
+              ],
+              "return_chunk": "c07"
+            }
+          }
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "role": "core",
+          "reason": "After a non-static look-away-and-return loop, the returned view must match the original world layout and protected anchors rather than reset, swap identity, or drift spatially.",
+          "parameters": {
+            "reference_chunk": "c01",
+            "return_chunks": [
+              "c07",
+              "c08"
+            ],
+            "protected_anchors": [
+              "stone gateway",
+              "obelisk",
+              "path fork",
+              "fallen column"
+            ],
+            "failure_modes": [
+              "world reset",
+              "identity swap",
+              "anchor relocation",
+              "incompatible final view"
+            ]
+          }
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "role": "core",
+          "reason": "The central requirement is that the torch flame silhouettes and brightness continue evolving while offscreen and reappear as the same ongoing process, not a frozen copy.",
+          "parameters": {
+            "target_process": "torch flame silhouettes and brightness",
+            "pre_visible_chunks": [
+              "c01"
+            ],
+            "offscreen_chunks": [
+              "c03",
+              "c04",
+              "c05"
+            ],
+            "return_visible_chunks": [
+              "c07",
+              "c08"
+            ],
+            "leave_chunk": "c02",
+            "return_chunk": "c07",
+            "reference_chunk": "c01",
+            "expected_evolution": [
+              "flame silhouette changes over time",
+              "brightness/flicker changes over time",
+              "same torch/world identity on return"
+            ],
+            "failure_modes": [
+              "target never leaves view",
+              "target never returns",
+              "frozen copy",
+              "world reset",
+              "identity swap"
+            ]
+          }
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "reason": "The case is not an intentional semantic or object-state edit; the target is natural offscreen evolution of an existing torch flame during camera navigation."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "There is no explicit physical intervention or force whose causal response must be evaluated; torch flicker is an ongoing process."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "No case-specific physical-law validation is required beyond general plausibility of camera motion and flame behavior."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "Although world persistence matters, this is a short eight-chunk offscreen-return sequence, not a long-horizon rollout targeting progressive degradation resistance."
+        }
+      ]
+    },
+    "raw_output_text": "{\"selected_skills\":[{\"skill_id\":\"render_quality_inspector\",\"role\":\"observation\",\"reason\":\"Assess overall technical and aesthetic quality of the generated realistic torch-gateway frames, including artifacts, blur, watermarks, lighting, and whether the scene remains judgeable.\",\"parameters\":{\"scene\":\"realistic first-person torch gateway\",\"check_artifacts\":true,\"check_judgeability\":true}},{\"skill_id\":\"motion_quality_inspector\",\"role\":\"observation\",\"reason\":\"The rollout requires a look-away, movement, pause, and return sequence; generated motion should be present, smooth, and temporally coherent across chunks c01-c08.\",\"parameters\":{\"chunks\":[\"c01\",\"c02\",\"c03\",\"c04\",\"c05\",\"c06\",\"c07\",\"c08\"],\"focus\":\"camera turn/move/pause/return and torch flame temporal motion\"}},{\"skill_id\":\"appearance_consistency_inspector\",\"role\":\"observation\",\"reason\":\"The same world should persist across the sequence, with consistent stone gateway, obelisk, path fork, fallen column, terrain, lighting style, and torch identity when visible again.\",\"parameters\":{\"stable_anchors\":[\"stone gateway\",\"obelisk\",\"path fork\",\"fallen column\",\"torch flame silhouettes and brightness\"],\"protected_anchors\":[\"stone gateway\",\"obelisk\",\"path fork\",\"fallen column\"]}},{\"skill_id\":\"physical_plausibility_inspector\",\"role\":\"observation\",\"reason\":\"Camera navigation, perspective changes, torch flame flicker, brightness variation, and scene lighting should remain physically and causally plausible.\",\"parameters\":{\"focus\":[\"first-person camera movement\",\"fire flicker and illumination\",\"spatial perspective consistency\"]}},{\"skill_id\":\"viewpoint_trajectory_verifier\",\"role\":\"core\",\"reason\":\"The action explicitly requires an active first-person trajectory: turn away from the torch, keep it offscreen while moving and pausing, then turn back to the same area.\",\"parameters\":{\"required_sequence\":[{\"chunk\":\"c01\",\"expectation\":\"torch flame still visible while beginning to turn away\"},{\"chunk\":\"c02\",\"expectation\":\"torch flame leaves camera view\"},{\"chunks\":[\"c03\",\"c04\",\"c05\"],\"expectation\":\"torch remains offscreen during forward movement, pause, and movement back\"},{\"chunk\":\"c06\",\"expectation\":\"camera turns back toward original torch area\"},{\"chunks\":[\"c07\",\"c08\"],\"expectation\":\"torch returns to view and final view is compatible with original world\"}],\"offscreen_window\":{\"leave_chunk\":\"c02\",\"offscreen_chunks\":[\"c03\",\"c04\",\"c05\"],\"return_chunk\":\"c07\"}}},{\"skill_id\":\"return_consistency_verifier\",\"role\":\"core\",\"reason\":\"After a non-static look-away-and-return loop, the returned view must match the original world layout and protected anchors rather than reset, swap identity, or drift spatially.\",\"parameters\":{\"reference_chunk\":\"c01\",\"return_chunks\":[\"c07\",\"c08\"],\"protected_anchors\":[\"stone gateway\",\"obelisk\",\"path fork\",\"fallen column\"],\"failure_modes\":[\"world reset\",\"identity swap\",\"anchor relocation\",\"incompatible final view\"]}},{\"skill_id\":\"offscreen_evolution_verifier\",\"role\":\"core\",\"reason\":\"The central requirement is that the torch flame silhouettes and brightness continue evolving while offscreen and reappear as the same ongoing process, not a frozen copy.\",\"parameters\":{\"target_process\":\"torch flame silhouettes and brightness\",\"pre_visible_chunks\":[\"c01\"],\"offscreen_chunks\":[\"c03\",\"c04\",\"c05\"],\"return_visible_chunks\":[\"c07\",\"c08\"],\"leave_chunk\":\"c02\",\"return_chunk\":\"c07\",\"reference_chunk\":\"c01\",\"expected_evolution\":[\"flame silhouette changes over time\",\"brightness/flicker changes over time\",\"same torch/world identity on return\"],\"failure_modes\":[\"target never leaves view\",\"target never returns\",\"frozen copy\",\"world reset\",\"identity swap\"]}}],\"skipped_skills\":[{\"skill_id\":\"intentional_change_verifier_vlm\",\"reason\":\"The case is not an intentional semantic or object-state edit; the target is natural offscreen evolution of an existing torch flame during camera navigation.\"},{\"skill_id\":\"physical_response_verifier_vlm\",\"reason\":\"There is no explicit physical intervention or force whose causal response must be evaluated; torch flicker is an ongoing process.\"},{\"skill_id\":\"physical_law_validator\",\"reason\":\"No case-specific physical-law validation is required beyond general plausibility of camera motion and flame behavior.\"},{\"skill_id\":\"drift_degradation_analyzer\",\"reason\":\"Although world persistence matters, this is a short eight-chunk offscreen-return sequence, not a long-horizon rollout targeting progressive degradation resistance.\"}]}",
+    "raw_response": {
+      "id": "chatcmpl-EU7CjQDYEsIifyRq0YSpmQXXhAcpl",
+      "object": "chat.completion",
+      "created": 1790846241,
+      "model": "gpt-5.5-2026-04-23",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\"selected_skills\":[{\"skill_id\":\"render_quality_inspector\",\"role\":\"observation\",\"reason\":\"Assess overall technical and aesthetic quality of the generated realistic torch-gateway frames, including artifacts, blur, watermarks, lighting, and whether the scene remains judgeable.\",\"parameters\":{\"scene\":\"realistic first-person torch gateway\",\"check_artifacts\":true,\"check_judgeability\":true}},{\"skill_id\":\"motion_quality_inspector\",\"role\":\"observation\",\"reason\":\"The rollout requires a look-away, movement, pause, and return sequence; generated motion should be present, smooth, and temporally coherent across chunks c01-c08.\",\"parameters\":{\"chunks\":[\"c01\",\"c02\",\"c03\",\"c04\",\"c05\",\"c06\",\"c07\",\"c08\"],\"focus\":\"camera turn/move/pause/return and torch flame temporal motion\"}},{\"skill_id\":\"appearance_consistency_inspector\",\"role\":\"observation\",\"reason\":\"The same world should persist across the sequence, with consistent stone gateway, obelisk, path fork, fallen column, terrain, lighting style, and torch identity when visible again.\",\"parameters\":{\"stable_anchors\":[\"stone gateway\",\"obelisk\",\"path fork\",\"fallen column\",\"torch flame silhouettes and brightness\"],\"protected_anchors\":[\"stone gateway\",\"obelisk\",\"path fork\",\"fallen column\"]}},{\"skill_id\":\"physical_plausibility_inspector\",\"role\":\"observation\",\"reason\":\"Camera navigation, perspective changes, torch flame flicker, brightness variation, and scene lighting should remain physically and causally plausible.\",\"parameters\":{\"focus\":[\"first-person camera movement\",\"fire flicker and illumination\",\"spatial perspective consistency\"]}},{\"skill_id\":\"viewpoint_trajectory_verifier\",\"role\":\"core\",\"reason\":\"The action explicitly requires an active first-person trajectory: turn away from the torch, keep it offscreen while moving and pausing, then turn back to the same area.\",\"parameters\":{\"required_sequence\":[{\"chunk\":\"c01\",\"expectation\":\"torch flame still visible while beginning to turn away\"},{\"chunk\":\"c02\",\"expectation\":\"torch flame leaves camera view\"},{\"chunks\":[\"c03\",\"c04\",\"c05\"],\"expectation\":\"torch remains offscreen during forward movement, pause, and movement back\"},{\"chunk\":\"c06\",\"expectation\":\"camera turns back toward original torch area\"},{\"chunks\":[\"c07\",\"c08\"],\"expectation\":\"torch returns to view and final view is compatible with original world\"}],\"offscreen_window\":{\"leave_chunk\":\"c02\",\"offscreen_chunks\":[\"c03\",\"c04\",\"c05\"],\"return_chunk\":\"c07\"}}},{\"skill_id\":\"return_consistency_verifier\",\"role\":\"core\",\"reason\":\"After a non-static look-away-and-return loop, the returned view must match the original world layout and protected anchors rather than reset, swap identity, or drift spatially.\",\"parameters\":{\"reference_chunk\":\"c01\",\"return_chunks\":[\"c07\",\"c08\"],\"protected_anchors\":[\"stone gateway\",\"obelisk\",\"path fork\",\"fallen column\"],\"failure_modes\":[\"world reset\",\"identity swap\",\"anchor relocation\",\"incompatible final view\"]}},{\"skill_id\":\"offscreen_evolution_verifier\",\"role\":\"core\",\"reason\":\"The central requirement is that the torch flame silhouettes and brightness continue evolving while offscreen and reappear as the same ongoing process, not a frozen copy.\",\"parameters\":{\"target_process\":\"torch flame silhouettes and brightness\",\"pre_visible_chunks\":[\"c01\"],\"offscreen_chunks\":[\"c03\",\"c04\",\"c05\"],\"return_visible_chunks\":[\"c07\",\"c08\"],\"leave_chunk\":\"c02\",\"return_chunk\":\"c07\",\"reference_chunk\":\"c01\",\"expected_evolution\":[\"flame silhouette changes over time\",\"brightness/flicker changes over time\",\"same torch/world identity on return\"],\"failure_modes\":[\"target never leaves view\",\"target never returns\",\"frozen copy\",\"world reset\",\"identity swap\"]}}],\"skipped_skills\":[{\"skill_id\":\"intentional_change_verifier_vlm\",\"reason\":\"The case is not an intentional semantic or object-state edit; the target is natural offscreen evolution of an existing torch flame during camera navigation.\"},{\"skill_id\":\"physical_response_verifier_vlm\",\"reason\":\"There is no explicit physical intervention or force whose causal response must be evaluated; torch flicker is an ongoing process.\"},{\"skill_id\":\"physical_law_validator\",\"reason\":\"No case-specific physical-law validation is required beyond general plausibility of camera motion and flame behavior.\"},{\"skill_id\":\"drift_degradation_analyzer\",\"reason\":\"Although world persistence matters, this is a short eight-chunk offscreen-return sequence, not a long-horizon rollout targeting progressive degradation resistance.\"}]}",
+            "refusal": null,
+            "annotations": []
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2994,
+        "completion_tokens": 1226,
+        "total_tokens": 4220,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 273,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "service_tier": "default",
+      "system_fingerprint": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-EU7CjQDYEsIifyRq0YSpmQXXhAcpl",
+      "model": "gpt-5.5-2026-04-23",
+      "created": 1790846241,
+      "usage": {
+        "prompt_tokens": 2994,
+        "completion_tokens": 1226,
+        "total_tokens": 4220,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 273,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "request_url": "https://api.openai.com/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:17:20.910106+00:00",
+      "response_received_at": "2026-10-01T09:17:33.834040+00:00",
+      "elapsed_seconds": 12.923947,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "https://api.openai.com/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 12.923829
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "reasoning_effort": "medium",
+        "temperature": "API default (temperature=0 unsupported)",
+        "max_completion_tokens": 16384
+      },
+      "request_sha256": "975820a0e07faa8edb93a52a4e8e391923e2caa597652b9313c5c80c4d14e37c"
+    }
+  }
+}

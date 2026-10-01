@@ -1,0 +1,260 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:44:26.320274+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "eae11f01a7c1c74a17194ce3ce3c04baf46f9266a5ed76136fbddcf7d5e36a28",
+    "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+    "taxonomy": {
+      "primary_axis": "transition_correctness",
+      "probe_family": "exploratory_transition"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "General visual quality check needed for generated frames; validation questions ask for freedom from severe artifacts, watermarks, ambiguity.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "Navigation affordances require judgeable camera motion; motion presence and temporal smoothness must be assessed.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "Stable anchors crosswalk, traffic lights, corner shop, bus shelter must remain visually consistent through the short rollout.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "First-person navigation motion should be physically and causally plausible in the urban crosswalk scene.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "role": "core",
+        "reason": "Probe family is exploratory_transition with navigation_control actions W then left; active camera viewpoint movement along a path must be verified.",
+        "parameters": {}
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "viewpoint_trajectory_verifier"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "reason": "Case is exploratory navigation, not an explicitly specified intentional semantic or object-state transition."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "Primary target is viewpoint navigation, not causal response to a physical intervention or force."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "Diagnostic for physical_transition cases; this case is exploratory_transition with no case-specific physical law check required."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "Only two navigation chunks; not a long-horizon rollout where progressive degradation is an explicit target."
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "reason": "No non-static loop or return view requirement in the action sequence."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "No offscreen process evolution is specified; task is active viewpoint exploration."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 5,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_exploratory_0001_urban_crosswalk\",\n    \"taxonomy\": {\n      \"primary_axis\": \"transition_correctness\",\n      \"probe_family\": \"exploratory_transition\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_exploratory_0001_urban_crosswalk\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_exploratory_0001_urban_crosswalk.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"urban_crosswalk\",\n        \"domain\": \"urban\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"crosswalk\",\n        \"traffic lights\",\n        \"corner shop\",\n        \"bus shelter\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"navigation_affordances\": [\n        \"visible path\",\n        \"stable near-mid-far anchors\",\n        \"camera motion judgeable\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"navigation_control\",\n        \"action_id\": \"explore_0001\",\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"left\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "12f13b2625ef717edf648f79fef266be9f0713733985a5408fdbf5b20c7f6f66",
+            "bytes": 381777
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "role": "core",
+          "reason": "Probe family is exploratory_transition with navigation_control actions W then left; active camera viewpoint movement along a path must be verified.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "General visual quality check needed for generated frames; validation questions ask for freedom from severe artifacts, watermarks, ambiguity.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "Navigation affordances require judgeable camera motion; motion presence and temporal smoothness must be assessed.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "Stable anchors crosswalk, traffic lights, corner shop, bus shelter must remain visually consistent through the short rollout.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "First-person navigation motion should be physically and causally plausible in the urban crosswalk scene.",
+          "parameters": {}
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "reason": "Case is exploratory navigation, not an explicitly specified intentional semantic or object-state transition."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "Primary target is viewpoint navigation, not causal response to a physical intervention or force."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "Diagnostic for physical_transition cases; this case is exploratory_transition with no case-specific physical law check required."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "Only two navigation chunks; not a long-horizon rollout where progressive degradation is an explicit target."
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "reason": "No non-static loop or return view requirement in the action sequence."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "No offscreen process evolution is specified; task is active viewpoint exploration."
+        }
+      ]
+    },
+    "raw_output_text": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"Probe family is exploratory_transition with navigation_control actions W then left; active camera viewpoint movement along a path must be verified.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"General visual quality check needed for generated frames; validation questions ask for freedom from severe artifacts, watermarks, ambiguity.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Navigation affordances require judgeable camera motion; motion presence and temporal smoothness must be assessed.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Stable anchors crosswalk, traffic lights, corner shop, bus shelter must remain visually consistent through the short rollout.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"First-person navigation motion should be physically and causally plausible in the urban crosswalk scene.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"Case is exploratory navigation, not an explicitly specified intentional semantic or object-state transition.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"Primary target is viewpoint navigation, not causal response to a physical intervention or force.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"Diagnostic for physical_transition cases; this case is exploratory_transition with no case-specific physical law check required.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Only two navigation chunks; not a long-horizon rollout where progressive degradation is an explicit target.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"No non-static loop or return view requirement in the action sequence.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process evolution is specified; task is active viewpoint exploration.\"\n    }\n  ]\n}",
+    "raw_response": {
+      "id": "chatcmpl-91ea38ed7df6e5ef",
+      "object": "chat.completion",
+      "created": 1790847803,
+      "model": "meta-models/Muse-Glimmer-30B",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"Probe family is exploratory_transition with navigation_control actions W then left; active camera viewpoint movement along a path must be verified.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"General visual quality check needed for generated frames; validation questions ask for freedom from severe artifacts, watermarks, ambiguity.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Navigation affordances require judgeable camera motion; motion presence and temporal smoothness must be assessed.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Stable anchors crosswalk, traffic lights, corner shop, bus shelter must remain visually consistent through the short rollout.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"First-person navigation motion should be physically and causally plausible in the urban crosswalk scene.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"Case is exploratory navigation, not an explicitly specified intentional semantic or object-state transition.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"Primary target is viewpoint navigation, not causal response to a physical intervention or force.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"Diagnostic for physical_transition cases; this case is exploratory_transition with no case-specific physical law check required.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Only two navigation chunks; not a long-horizon rollout where progressive degradation is an explicit target.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"No non-static loop or return view requirement in the action sequence.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process evolution is specified; task is active viewpoint exploration.\"\n    }\n  ]\n}",
+            "refusal": null,
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "reasoning": "{\n  \"case\": ...\n}\n\nWe need select skills. Primary axis transition_correctness, probe_family exploratory_transition. Interaction navigation_control with chunks W then left. So active camera viewpoint movement along path. So viewpoint_trajectory_verifier core_for exploratory_transition. So select that as core.\n\nAlso need observation skills: render_quality_inspector, motion_quality_inspector, appearance_consistency_inspector, physical_plausibility_inspector. Probably all applicable? General visual quality, motion quality, consistency, physical plausibility. The case mentions navigation affordances visible path, stable near-mid-far anchors, camera motion judgeable. So motion quality inspector relevant. Appearance consistency inspector relevant for stable anchors crosswalk, traffic lights, corner shop, bus shelter. Physical plausibility inspector for navigation motion.\n\nIntentional_change_verifier_vlm core_for intentional_transition not applicable. Physical_response_verifier_vlm core_for physical_transition not applicable. Physical_law_validator diagnostic_for physical_transition not applicable. Drift_degradation_analyzer core_for drift_resistance not applicable (only 2 chunks). Return_consistency_verifier core_for return_revisit_consistency not applicable. Offscreen_evolution_verifier core_for offscreen_evolution not applicable.\n\nSo selected skills: viewpoint_trajectory_verifier role core. render_quality_inspector role observation. motion_quality_inspector role observation. appearance_consistency_inspector role observation. physical_plausibility_inspector role observation.\n\nPossibly also skip others.\n\nReturn JSON with selected_skills list with skill_id, role, reason, parameters {}.\n\nSkipped skills list with reason.\n\nLet's produce."
+          },
+          "logprobs": null,
+          "finish_reason": "stop",
+          "stop_reason": 200008,
+          "token_ids": null,
+          "routed_experts": null
+        }
+      ],
+      "service_tier": null,
+      "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+      "usage": {
+        "prompt_tokens": 2612,
+        "total_tokens": 3462,
+        "completion_tokens": 850,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "prompt_logprobs": null,
+      "prompt_token_ids": null,
+      "prompt_text": null,
+      "kv_transfer_params": null,
+      "ec_transfer_params": null,
+      "metrics": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-91ea38ed7df6e5ef",
+      "model": "meta-models/Muse-Glimmer-30B",
+      "created": 1790847803,
+      "usage": {
+        "prompt_tokens": 2612,
+        "total_tokens": 3462,
+        "completion_tokens": 850,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:43:23.766065+00:00",
+      "response_received_at": "2026-10-01T09:44:26.315538+00:00",
+      "elapsed_seconds": 62.549482,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "http://127.0.0.1:8001/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 62.54941
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "temperature": 0,
+        "max_tokens": 16384,
+        "reasoning_strength": "medium",
+        "structured_output": "JSON requested in prompt; native Muse channel protocol"
+      },
+      "request_sha256": "eae11f01a7c1c74a17194ce3ce3c04baf46f9266a5ed76136fbddcf7d5e36a28"
+    }
+  }
+}

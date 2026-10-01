@@ -1,0 +1,37 @@
+{
+  "model": "gpt-5.5",
+  "completed": 6,
+  "expected": 6,
+  "results": [
+    {
+      "example": "intentional_transition",
+      "independent_score": 1.0,
+      "fixed_score": 1.0
+    },
+    {
+      "example": "offscreen_evolution",
+      "independent_score": 0.08,
+      "fixed_score": 0.1
+    },
+    {
+      "example": "physical_transition",
+      "independent_score": 0.808281,
+      "fixed_score": 0.808281
+    },
+    {
+      "example": "frozen",
+      "independent_score": 0.25,
+      "fixed_score": 0.25
+    },
+    {
+      "example": "reversed",
+      "independent_score": 0.585,
+      "fixed_score": 0.54
+    },
+    {
+      "example": "generated_book",
+      "independent_score": 0.8675,
+      "fixed_score": 0.9125
+    }
+  ]
+}

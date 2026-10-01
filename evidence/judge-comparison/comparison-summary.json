@@ -1,0 +1,74 @@
+{
+  "models": {
+    "muse": "Muse-Glimmer-30B",
+    "gpt": "GPT-5.5",
+    "baseline": "Qwen3-VL-8B (historical baseline)"
+  },
+  "reports": {
+    "gpt": {
+      "leaderboard": [
+        {
+          "family_scores": {
+            "exploratory_transition": 0.866355,
+            "intentional_transition": 0.854251,
+            "physical_transition": 0.837263,
+            "drift_resistance": 0.805007,
+            "return_revisit_consistency": 0.716988,
+            "offscreen_evolution": 0.617533
+          },
+          "family_core_scores": {
+            "exploratory_transition": 0.926951,
+            "intentional_transition": 1.0,
+            "physical_transition": 0.808281,
+            "drift_resistance": 0.798794,
+            "return_revisit_consistency": 0.630599,
+            "offscreen_evolution": 0.483962
+          },
+          "family_observation_scores": {
+            "exploratory_transition": 0.805759,
+            "intentional_transition": 0.708502,
+            "physical_transition": 0.866245,
+            "drift_resistance": 0.811221,
+            "return_revisit_consistency": 0.803377,
+            "offscreen_evolution": 0.751104
+          },
+          "overall_score": 0.782899
+        }
+      ]
+    }
+  },
+  "settings": {
+    "muse": {
+      "model": "meta-models/Muse-Glimmer-30B",
+      "settings": {
+        "temperature": 0,
+        "max_tokens": 16384,
+        "reasoning_strength": "medium",
+        "structured_output": "JSON requested in prompt; native Muse channel protocol"
+      },
+      "muse_revision": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+      "protocol": "Independent Analyze–Verify plus fixed expected-specification Verify; identical video and frame sampling; released prompts and formulas; six semantic examples, not a population study."
+    },
+    "gpt": {
+      "model": "gpt-5.5",
+      "settings": {
+        "reasoning_effort": "medium",
+        "temperature": "API default (temperature=0 unsupported)",
+        "max_completion_tokens": 16384
+      },
+      "muse_revision": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+      "protocol": "Independent Analyze–Verify plus fixed expected-specification Verify; identical video and frame sampling; released prompts and formulas; six semantic examples, not a population study."
+    }
+  },
+  "complete": false,
+  "independent_summary": {
+    "paired_examples": 0,
+    "mean_absolute_score_difference": null,
+    "different_scores": 0
+  },
+  "fixed_specification_summary": {
+    "paired_examples": 0,
+    "mean_absolute_score_difference": null,
+    "different_scores": 0
+  }
+}
