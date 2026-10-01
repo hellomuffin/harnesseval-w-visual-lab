@@ -1,0 +1,37 @@
+{
+  "model": "meta-models/Muse-Glimmer-30B",
+  "completed": 6,
+  "expected": 6,
+  "results": [
+    {
+      "example": "intentional_transition",
+      "independent_score": 0.9375,
+      "fixed_score": 0.8925
+    },
+    {
+      "example": "offscreen_evolution",
+      "independent_score": 0.0,
+      "fixed_score": 0.063437
+    },
+    {
+      "example": "physical_transition",
+      "independent_score": 0.34541,
+      "fixed_score": 0.441914
+    },
+    {
+      "example": "frozen",
+      "independent_score": 0.25,
+      "fixed_score": 0.25
+    },
+    {
+      "example": "reversed",
+      "independent_score": 0.51,
+      "fixed_score": 0.585
+    },
+    {
+      "example": "generated_book",
+      "independent_score": 0.955,
+      "fixed_score": 1.0
+    }
+  ]
+}

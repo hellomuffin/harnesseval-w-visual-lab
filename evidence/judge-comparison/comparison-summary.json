@@ -5,6 +5,37 @@
     "baseline": "Qwen3-VL-8B (historical baseline)"
   },
   "reports": {
+    "muse": {
+      "leaderboard": [
+        {
+          "family_scores": {
+            "exploratory_transition": 0.866355,
+            "intentional_transition": 0.823001,
+            "physical_transition": 0.605827,
+            "drift_resistance": 0.805007,
+            "return_revisit_consistency": 0.716988,
+            "offscreen_evolution": 0.6042
+          },
+          "family_core_scores": {
+            "exploratory_transition": 0.926951,
+            "intentional_transition": 0.9375,
+            "physical_transition": 0.34541,
+            "drift_resistance": 0.798794,
+            "return_revisit_consistency": 0.630599,
+            "offscreen_evolution": 0.457295
+          },
+          "family_observation_scores": {
+            "exploratory_transition": 0.805759,
+            "intentional_transition": 0.708502,
+            "physical_transition": 0.866245,
+            "drift_resistance": 0.811221,
+            "return_revisit_consistency": 0.803377,
+            "offscreen_evolution": 0.751104
+          },
+          "overall_score": 0.736896
+        }
+      ]
+    },
     "gpt": {
       "leaderboard": [
         {
@@ -60,15 +91,15 @@
       "protocol": "Independent Analyze–Verify plus fixed expected-specification Verify; identical video and frame sampling; released prompts and formulas; six semantic examples, not a population study."
     }
   },
-  "complete": false,
+  "complete": true,
   "independent_summary": {
-    "paired_examples": 0,
-    "mean_absolute_score_difference": null,
-    "different_scores": 0
+    "paired_examples": 6,
+    "mean_absolute_score_difference": 0.12797849999999997,
+    "different_scores": 5
   },
   "fixed_specification_summary": {
-    "paired_examples": 0,
-    "mean_absolute_score_difference": null,
-    "different_scores": 0
+    "paired_examples": 6,
+    "mean_absolute_score_difference": 0.107155,
+    "different_scores": 5
   }
 }

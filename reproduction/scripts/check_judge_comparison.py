@@ -15,7 +15,7 @@ for row in J['rows']:
  for judge in ['muse','gpt']:
   for mode in ['independent','fixed_specification']:
    x=row['judges'][judge][mode];judgment=x['verify']['judgment'] if mode=='independent' else x['output']['parsed'];q=mod.normalize_q_scores(judgment)
-   assert len(q)==8 and all(isinstance(v,(int,float)) and 0<=v<=1 for v in q.values()),(row['id'],judge,mode,q)
+   assert len(q)==8 and all(isinstance(v,(int,float)) and v in {0,.25,.5,.75,1} for v in q.values()),(row['id'],judge,mode,q)
    score=mod.aggregate_q_scores(q)['final_score'];assert score==x['result']['score'];counts+=1
    responses=[x['analyze']['raw_response'],x['verify']['raw_response']] if mode=='independent' else [x['output']['raw_response']]
    assert all(r['choices'][0]['finish_reason']=='stop' for r in responses),(row['id'],judge,'truncated output')

@@ -1,0 +1,261 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:45:36.621665+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "0753ee374a327b8fac73033a10194dec452e0da440eaa28a8e4bfa53736f2108",
+    "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+    "taxonomy": {
+      "primary_axis": "transition_correctness",
+      "probe_family": "intentional_transition"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "General visual quality check for artifacts, watermarks and ambiguity per validation questions.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "Tipping the mug and creating a spill involves motion that must be present and temporally smooth.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "Protected anchors sofa, coffee table, rug, floor lamp must remain unchanged and the mug must stay identifiable as the same entity.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "Mug tipping and local spill need physically and causally plausible rendering.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "role": "core",
+        "reason": "Primary axis is transition_correctness with probe_family intentional_transition requiring verification that the ceramic mug is tipped onto its side with a small spill while protected anchors remain intact.",
+        "parameters": {}
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "intentional_change_verifier_vlm"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "reason": "Case requires fixed camera and no active viewpoint navigation; fixed-camera constraint does not make this skill applicable."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "Primary target is an explicitly specified intentional semantic/object-state edit, not a causal physical intervention response."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "Diagnostic for physical_transition cases; this case is intentional_transition."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "No long-horizon rollout with many action turns specified."
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "reason": "No non-static loop return view requirement."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "No offscreen process evolution is required."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 5,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_intentional_0001_living_room_table_ceramic_mug\",\n    \"taxonomy\": {\n      \"primary_axis\": \"transition_correctness\",\n      \"probe_family\": \"intentional_transition\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_intentional_0001_living_room_table_ceramic_mug\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"living_room_table\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"third_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"sofa\",\n        \"coffee table\",\n        \"rug\",\n        \"floor lamp\",\n        \"ceramic mug\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"target_entity\": \"ceramic mug\",\n      \"expected_outcome\": [\n        \"tip the white ceramic mug onto its side and create a small local spill\",\n        \"The ceramic mug remains identifiable as the same entity.\",\n        \"Protected anchors remain unchanged.\"\n      ],\n      \"protected_anchors\": [\n        \"sofa\",\n        \"coffee table\",\n        \"rug\",\n        \"floor lamp\"\n      ],\n      \"negative_constraints\": [\n        \"Do not replace the whole scene.\",\n        \"Do not add unrelated extra events.\",\n        \"Do not change camera viewpoint.\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"text_based_state_change\",\n        \"action_id\": \"intentional_0001\",\n        \"text\": \"tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.\"\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "83e591995e7fd4e71e40137395dfc46daf250038f91c044794d969421b966382",
+            "bytes": 293142
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "role": "core",
+          "reason": "Primary axis is transition_correctness with probe_family intentional_transition requiring verification that the ceramic mug is tipped onto its side with a small spill while protected anchors remain intact.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "question": "Are the generated frames aesthetically and technically clean?",
+          "reason": "General visual quality check for artifacts, watermarks and ambiguity per validation questions.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "Tipping the mug and creating a spill involves motion that must be present and temporally smooth.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "Protected anchors sofa, coffee table, rug, floor lamp must remain unchanged and the mug must stay identifiable as the same entity.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "Mug tipping and local spill need physically and causally plausible rendering.",
+          "parameters": {}
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "reason": "Case requires fixed camera and no active viewpoint navigation; fixed-camera constraint does not make this skill applicable."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "Primary target is an explicitly specified intentional semantic/object-state edit, not a causal physical intervention response."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "Diagnostic for physical_transition cases; this case is intentional_transition."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "No long-horizon rollout with many action turns specified."
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "reason": "No non-static loop return view requirement."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "No offscreen process evolution is required."
+        }
+      ]
+    },
+    "raw_output_text": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"role\": \"core\",\n      \"reason\": \"Primary axis is transition_correctness with probe_family intentional_transition requiring verification that the ceramic mug is tipped onto its side with a small spill while protected anchors remain intact.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\",\n      \"reason\": \"General visual quality check for artifacts, watermarks and ambiguity per validation questions.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Tipping the mug and creating a spill involves motion that must be present and temporally smooth.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Protected anchors sofa, coffee table, rug, floor lamp must remain unchanged and the mug must stay identifiable as the same entity.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Mug tipping and local spill need physically and causally plausible rendering.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"reason\": \"Case requires fixed camera and no active viewpoint navigation; fixed-camera constraint does not make this skill applicable.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"Primary target is an explicitly specified intentional semantic/object-state edit, not a causal physical intervention response.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"Diagnostic for physical_transition cases; this case is intentional_transition.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"No long-horizon rollout with many action turns specified.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"No non-static loop return view requirement.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process evolution is required.\"\n    }\n  ]\n}",
+    "raw_response": {
+      "id": "chatcmpl-b800639f9069fc46",
+      "object": "chat.completion",
+      "created": 1790847866,
+      "model": "meta-models/Muse-Glimmer-30B",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"role\": \"core\",\n      \"reason\": \"Primary axis is transition_correctness with probe_family intentional_transition requiring verification that the ceramic mug is tipped onto its side with a small spill while protected anchors remain intact.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\",\n      \"reason\": \"General visual quality check for artifacts, watermarks and ambiguity per validation questions.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Tipping the mug and creating a spill involves motion that must be present and temporally smooth.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Protected anchors sofa, coffee table, rug, floor lamp must remain unchanged and the mug must stay identifiable as the same entity.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Mug tipping and local spill need physically and causally plausible rendering.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"reason\": \"Case requires fixed camera and no active viewpoint navigation; fixed-camera constraint does not make this skill applicable.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"Primary target is an explicitly specified intentional semantic/object-state edit, not a causal physical intervention response.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"Diagnostic for physical_transition cases; this case is intentional_transition.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"No long-horizon rollout with many action turns specified.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"No non-static loop return view requirement.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process evolution is required.\"\n    }\n  ]\n}",
+            "refusal": null,
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "reasoning": "{\n  \"case\": ...\n}\n\nWe need select skills. Primary axis transition_correctness, probe_family intentional_transition. So core skill is intentional_change_verifier_vlm. Also observation skills: render_quality_inspector, motion_quality_inspector, appearance_consistency_inspector, physical_plausibility_inspector. Possibly viewpoint_trajectory_verifier? Case requires keep camera fixed. The skill question: Does case explicitly require active camera... Fixed-camera constraints do not make applicable. So skip.\n\nphysical_response_verifier_vlm core for physical_transition, not applicable.\n\nphysical_law_validator diagnostic for physical_transition, skip.\n\ndrift_degradation_analyzer core for drift_resistance, skip.\n\nreturn_consistency_verifier core for return_revisit_consistency, skip.\n\noffscreen_evolution_verifier core for offscreen_evolution, skip.\n\nWe need select skills with role. Intentional_change_verifier_vlm role core.\n\nObservation skills likely all applicable? Motion quality inspector: Is generated motion present and temporally smooth? The action is tip mug and spill. That's motion. So yes.\n\nAppearance consistency inspector: Does visual appearance remain consistent through rollout? Yes, protected anchors unchanged.\n\nPhysical plausibility inspector: Is rendered motion physically and causally plausible? Tipping mug and spill plausibility.\n\nRender quality inspector: Are frames aesthetically and technically clean? General.\n\nSo selected skills: intentional_change_verifier_vlm core, render_quality_inspector observation, motion_quality_inspector observation, appearance_consistency_inspector observation, physical_plausibility_inspector observation.\n\nSkipped skills: viewpoint_trajectory_verifier, physical_response_verifier_vlm, physical_law_validator, drift_degradation_analyzer, return_consistency_verifier, offscreen_evolution_verifier.\n\nProvide JSON.\n\nNeed parameters empty.\n\nReturn one JSON object.\n\n"
+          },
+          "logprobs": null,
+          "finish_reason": "stop",
+          "stop_reason": 200008,
+          "token_ids": null,
+          "routed_experts": null
+        }
+      ],
+      "service_tier": null,
+      "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+      "usage": {
+        "prompt_tokens": 2654,
+        "total_tokens": 3543,
+        "completion_tokens": 889,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "prompt_logprobs": null,
+      "prompt_token_ids": null,
+      "prompt_text": null,
+      "kv_transfer_params": null,
+      "ec_transfer_params": null,
+      "metrics": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-b800639f9069fc46",
+      "model": "meta-models/Muse-Glimmer-30B",
+      "created": 1790847866,
+      "usage": {
+        "prompt_tokens": 2654,
+        "total_tokens": 3543,
+        "completion_tokens": 889,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:44:26.324883+00:00",
+      "response_received_at": "2026-10-01T09:45:36.617639+00:00",
+      "elapsed_seconds": 70.292764,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "http://127.0.0.1:8001/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 70.292701
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "temperature": 0,
+        "max_tokens": 16384,
+        "reasoning_strength": "medium",
+        "structured_output": "JSON requested in prompt; native Muse channel protocol"
+      },
+      "request_sha256": "0753ee374a327b8fac73033a10194dec452e0da440eaa28a8e4bfa53736f2108"
+    }
+  }
+}

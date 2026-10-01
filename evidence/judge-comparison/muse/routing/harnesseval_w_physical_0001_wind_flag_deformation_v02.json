@@ -1,0 +1,265 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:48:32.959362+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "27ef64b607f8a177686494fb988ab2fd9adb88dc1c8abf6b989faf028ef6608c",
+    "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+    "taxonomy": {
+      "primary_axis": "transition_correctness",
+      "probe_family": "physical_transition"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "Generated frames must be aesthetically and technically clean for the coastal weather station flag scene.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "Flag aeroelastic deformation under 5.0 m/s wind requires present and temporally smooth motion.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "Visual appearance of flag, pole, blower and background must remain consistent through the rollout.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "Rendered flag motion must be physically and causally plausible for wind-driven fabric.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "role": "core",
+        "reason": "Primary target is causal response and temporal dynamics to explicit physical intervention of calibrated fan airflow at 5.0 m/s.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "role": "diagnostic",
+        "reason": "Physical transition of aeroelastic fabric deformation requires case-specific physical-law check for wind speed vs deformation relation.",
+        "parameters": {}
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "physical_response_verifier_vlm",
+      "physical_law_validator"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "reason": "Case uses fixed camera; no active viewpoint or navigation movement required."
+      },
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "reason": "Target is physical causal response, not an explicitly specified intentional semantic or object-state edit."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "Rollout is short physical response, not a long-horizon multi-turn drift resistance target."
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "reason": "No non-static loop return view consistency requirement."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "No offscreen process evolution is evaluated; flag and blower remain onscreen."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 6,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"schema_version\": \"harnesseval_image_first_multiphysics\",\n    \"case_id\": \"harnesseval_w_physical_0001_wind_flag_deformation_v02\",\n    \"suite\": \"image_first_multiphysics_12\",\n    \"taxonomy\": {\n      \"primary_axis\": \"transition_correctness\",\n      \"probe_family\": \"physical_transition\",\n      \"phenomenon\": \"aeroelastic_fabric_deformation\",\n      \"complexity\": \"L2\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_physical_0001_wind_flag_deformation_v02\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_physical_0001_wind_flag_deformation_v02.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"wind_flag_deformation\",\n        \"realization\": \"grounded_blower_flag_test\",\n        \"domain\": \"coastal_weather_station\",\n        \"generator\": \"seedream_image_first_then_simulator_v1\",\n        \"image_backend\": \"doubao_seedream_4_0\",\n        \"physics_backend\": \"image_calibrated_reduced_order_flag_v1\",\n        \"render_backend\": \"blender_eevee_next\",\n        \"construction_order\": \"real_image_then_image_calibrated_simulator\"\n      }\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"apply_physical_control\",\n        \"text\": \"Continue the calibrated fan airflow at 5.0 m/s.\",\n        \"parameters\": {\n          \"wind_speed_m_per_s\": 5.0\n        }\n      }\n    },\n    \"counterfactual\": {\n      \"group_id\": \"wdm_imagefirst_multi_g01_wind_flag_deformation\",\n      \"variant_index\": 2,\n      \"variant_label\": \"medium\",\n      \"varied_parameter\": \"wind_speed_m_per_s\",\n      \"parameter_unit\": \"meter_per_second\",\n      \"parameter_value\": 5.0,\n      \"expected_group_relation\": \"flag_deformation_increases_as_wind_speed_increases\",\n      \"relation_eligible\": true,\n      \"controlled_constants\": {\n        \"air_density_kg_m3\": 1.225,\n        \"known_flag_height_m\": 1.25,\n        \"effective_sheet_stiffness_n_m\": 180.0,\n        \"response_time_seconds\": 0.65\n      }\n    },\n    \"physics\": {\n      \"model\": \"image_calibrated_reduced_order_flag_v1\",\n      \"control_parameter_source\": \"experiment_protocol_not_inferred_from_single_image\",\n      \"expected_transition\": \"Higher dynamic pressure produces larger flexible-sheet deformation.\",\n      \"deterministic\": true,\n      \"single_view_policy\": {\n        \"measured\": \"visible object positions, silhouettes, contacts, and scale anchors\",\n        \"not_claimed_measured\": \"unobserved depth, instantaneous velocity, and future control response\"\n      }\n    },\n    \"generation\": {\n      \"photo_sha256\": \"9f2b6758021e831c390a95419e56d0da8db76bb22452580c83950f9b266d613a\",\n      \"image_quality_gate\": {\n        \"passed\": true,\n        \"errors\": []\n      },\n      \"correspondence_passed\": true,\n      \"blender_version\": \"4.2.22 LTS\"\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "afd3caaa3e8a3335b5e722656d5d5ec76cc8419ee643cf7600d9068273576af9",
+            "bytes": 119826
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "Generated frames must be aesthetically and technically clean for the coastal weather station flag scene.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "Flag aeroelastic deformation under 5.0 m/s wind requires present and temporally smooth motion.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "Visual appearance of flag, pole, blower and background must remain consistent through the rollout.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "Rendered flag motion must be physically and causally plausible for wind-driven fabric.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "role": "core",
+          "reason": "Primary target is causal response and temporal dynamics to explicit physical intervention of calibrated fan airflow at 5.0 m/s.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "role": "diagnostic",
+          "reason": "Physical transition of aeroelastic fabric deformation requires case-specific physical-law check for wind speed vs deformation relation.",
+          "parameters": {}
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "reason": "Case uses fixed camera; no active viewpoint or navigation movement required."
+        },
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "reason": "Target is physical causal response, not an explicitly specified intentional semantic or object-state edit."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "Rollout is short physical response, not a long-horizon multi-turn drift resistance target."
+        },
+        {
+          "skill_id": "return_consistency_verifier",
+          "reason": "No non-static loop return view consistency requirement."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "No offscreen process evolution is evaluated; flag and blower remain onscreen."
+        }
+      ]
+    },
+    "raw_output_text": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Generated frames must be aesthetically and technically clean for the coastal weather station flag scene.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Flag aeroelastic deformation under 5.0 m/s wind requires present and temporally smooth motion.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Visual appearance of flag, pole, blower and background must remain consistent through the rollout.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Rendered flag motion must be physically and causally plausible for wind-driven fabric.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"role\": \"core\",\n      \"reason\": \"Primary target is causal response and temporal dynamics to explicit physical intervention of calibrated fan airflow at 5.0 m/s.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"role\": \"diagnostic\",\n      \"reason\": \"Physical transition of aeroelastic fabric deformation requires case-specific physical-law check for wind speed vs deformation relation.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"reason\": \"Case uses fixed camera; no active viewpoint or navigation movement required.\"\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"Target is physical causal response, not an explicitly specified intentional semantic or object-state edit.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Rollout is short physical response, not a long-horizon multi-turn drift resistance target.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"No non-static loop return view consistency requirement.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process evolution is evaluated; flag and blower remain onscreen.\"\n    }\n  ]\n}",
+    "raw_response": {
+      "id": "chatcmpl-9dd26de22b333c0f",
+      "object": "chat.completion",
+      "created": 1790848050,
+      "model": "meta-models/Muse-Glimmer-30B",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Generated frames must be aesthetically and technically clean for the coastal weather station flag scene.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Flag aeroelastic deformation under 5.0 m/s wind requires present and temporally smooth motion.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Visual appearance of flag, pole, blower and background must remain consistent through the rollout.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Rendered flag motion must be physically and causally plausible for wind-driven fabric.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"role\": \"core\",\n      \"reason\": \"Primary target is causal response and temporal dynamics to explicit physical intervention of calibrated fan airflow at 5.0 m/s.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"role\": \"diagnostic\",\n      \"reason\": \"Physical transition of aeroelastic fabric deformation requires case-specific physical-law check for wind speed vs deformation relation.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"reason\": \"Case uses fixed camera; no active viewpoint or navigation movement required.\"\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"Target is physical causal response, not an explicitly specified intentional semantic or object-state edit.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Rollout is short physical response, not a long-horizon multi-turn drift resistance target.\"\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"reason\": \"No non-static loop return view consistency requirement.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"No offscreen process evolution is evaluated; flag and blower remain onscreen.\"\n    }\n  ]\n}",
+            "refusal": null,
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "reasoning": "{\n  \"case\": ...\n}\n\nWe need select applicable skills. Case is physical_transition, aeroelastic fabric deformation, wind flag. Interaction apply physical control continue calibrated fan airflow at 5.0 m/s. Counterfactual group relation flag deformation increases as wind speed increases.\n\nPrimary target is causal response to physical intervention. So physical_response_verifier_vlm is core_for physical_transition. So select it as core.\n\nAlso need observation skills: render_quality_inspector, motion_quality_inspector, appearance_consistency_inspector, physical_plausibility_inspector. Probably all applicable.\n\nDiagnostic: physical_law_validator diagnostic_for physical_transition. Does evaluating causal physical response require case-specific physical-law check? Probably yes, wind speed vs deformation. So include.\n\nViewpoint_trajectory_verifier core_for exploratory_transition -> not applicable. Intentional_change_verifier_vlm core_for intentional_transition -> not applicable. Drift_degradation_analyzer core_for drift_resistance -> not applicable. Return_consistency_verifier core_for return_revisit_consistency -> not. Offscreen_evolution_verifier core_for offscreen_evolution -> not.\n\nSo selected skills: render_quality_inspector observation, motion_quality_inspector observation, appearance_consistency_inspector observation, physical_plausibility_inspector observation, physical_response_verifier_vlm core, physical_law_validator diagnostic.\n\nPossibly also need viewpoint? Fixed camera. So skip.\n\nReturn JSON.\n\nParameters empty.\n\nProvide selected_skills list with role and reason.\n\nLet's craft reasons short case-grounded.\n\n"
+          },
+          "logprobs": null,
+          "finish_reason": "stop",
+          "stop_reason": 200008,
+          "token_ids": null,
+          "routed_experts": null
+        }
+      ],
+      "service_tier": null,
+      "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+      "usage": {
+        "prompt_tokens": 1773,
+        "total_tokens": 2602,
+        "completion_tokens": 829,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "prompt_logprobs": null,
+      "prompt_token_ids": null,
+      "prompt_text": null,
+      "kv_transfer_params": null,
+      "ec_transfer_params": null,
+      "metrics": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-9dd26de22b333c0f",
+      "model": "meta-models/Muse-Glimmer-30B",
+      "created": 1790848050,
+      "usage": {
+        "prompt_tokens": 1773,
+        "total_tokens": 2602,
+        "completion_tokens": 829,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:47:29.988349+00:00",
+      "response_received_at": "2026-10-01T09:48:32.957182+00:00",
+      "elapsed_seconds": 62.968841,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "http://127.0.0.1:8001/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 62.968778
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "temperature": 0,
+        "max_tokens": 16384,
+        "reasoning_strength": "medium",
+        "structured_output": "JSON requested in prompt; native Muse channel protocol"
+      },
+      "request_sha256": "27ef64b607f8a177686494fb988ab2fd9adb88dc1c8abf6b989faf028ef6608c"
+    }
+  }
+}

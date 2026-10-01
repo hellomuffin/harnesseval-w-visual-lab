@@ -1,0 +1,926 @@
+{
+  "status": "complete",
+  "example": "generated_book",
+  "case_id": "local_constructed_red_book",
+  "model": "meta-models/Muse-Glimmer-30B",
+  "video_sha256": "e2041a985204066e2dd6f7e5fdc89996add8158183c865767a74be476a7cb917",
+  "independent": {
+    "result": {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok",
+      "score": 0.955,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 0.75,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 0.85,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 0.955,
+        "final_score": 0.955,
+        "expected_spec_alignment": 0.402387
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.402387,
+          "target_alignment": 0.304348,
+          "change_alignment": 0.608696,
+          "anchor_alignment": 0.294118
+        },
+        "analyze_agent_cache": "[workspace]/.private/judge-cache/muse/generated_book/skills/intentional_change/analyze_agent/local_constructed_red_book.json",
+        "analyze_agent_evidence_digest": "bac5e40e351840a2ba98c9e2cc842988e833fd0eb24de6023406847fc6475b86",
+        "verify_agent_cache": "[workspace]/.private/judge-cache/muse/generated_book/skills/intentional_change/verify_agent/artifacts/harness_video/local_constructed_red_book.json",
+        "verify_agent_evidence_digest": "af46966745f7a82154fbe31f968d402a900937f06936de3bc711d231a755a462"
+      },
+      "notes": []
+    },
+    "analyze": {
+      "schema_version": "harnesseval.intentional_change.analyze_agent",
+      "skill_id": "intentional_change_verifier_vlm",
+      "definition_version": "harnesseval.intentional_change_vlm",
+      "prompt_version": "harnesseval.intentional_change.prompt",
+      "agent": "analyze_agent",
+      "case_id": "local_constructed_red_book",
+      "input_digest": "4a7d1bc9685216c1175d4f51d580c432d255b3aa63bb3ec5fb2f513ea320115b",
+      "expected_spec": {
+        "target": "red hardcover book on kitchen counter",
+        "initial_state": "book is closed and lying flat on the wooden counter with the red front cover facing up, spine oriented to the right, pages not visible, resting between a blue ceramic mug on the left and a potted basil plant on the right",
+        "intended_change": "a hand enters from the right side of the frame and gently lifts the front cover upward, opening the book in place to reveal the interior first page(s); the book remains at the same location and orientation on the counter",
+        "change_type": "object_state",
+        "completion_criteria": "book is open with the front cover raised from the closed position and interior pages visible, cover angle >0° from flat, book base position and orientation on the counter unchanged, opening is consistent with a gentle lift from the right side",
+        "protected_anchors": [
+          "kitchen counter surface, wood grain and overall layout",
+          "blue ceramic mug position on left side of counter",
+          "potted basil plant in white pot on right side of counter",
+          "white subway tile backsplash and wall",
+          "white drawer with black metal handle below counter",
+          "lighting, shadows and photorealistic style",
+          "camera viewpoint and framing"
+        ],
+        "negative_constraints": [
+          "no translation or rotation of the book as a whole",
+          "no movement, deformation or appearance change of mug, plant, counter, tiles or drawer",
+          "no change to background lighting or scene composition",
+          "no additional objects besides a transient hand performing the lift",
+          "no page tearing, unrealistic bending or color change of the book"
+        ],
+        "failure_modes": [
+          "book remains closed or cover not lifted",
+          "cover lifts but interior pages not visible",
+          "book slides, rotates or changes position on counter",
+          "hand appears from wrong side, multiple hands, or no hand present",
+          "book opens backward or cover lifts unrealistically",
+          "scene elements such as mug, plant or background change"
+        ]
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a careful benchmark case-specification assistant. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Infer the expected intentional-change specification for this world-model case.\nUse only the initial observation and the model-facing action. Do not score any generated video.\nThis is a target state-transition specification, not a generic video-edit or motion-quality task.\nIdentify the world entity/relation being intentionally changed, the pre-change state, the requested state delta, and the anchors that should remain stable.\nReturn JSON only with keys: target, initial_state, intended_change, change_type, completion_criteria, protected_anchors, negative_constraints, failure_modes.\nchange_type must be one of: attribute, pose, relation, object_state, agent_event, appearance, other.\n\n{\n  \"action_text\": \"A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.\",\n  \"chunks\": [],\n  \"source_tags\": {\n    \"scene\": \"kitchen_counter\",\n    \"style\": \"photorealistic\"\n  }\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "bbb2725e6cc7663bd55e529162d8ce0e87075fb8b4359bef2352b65ad68622ef",
+                "bytes": 24362
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\n  \"target\": \"red hardcover book on kitchen counter\",\n  \"initial_state\": \"book is closed and lying flat on the wooden counter with the red front cover facing up, spine oriented to the right, pages not visible, resting between a blue ceramic mug on the left and a potted basil plant on the right\",\n  \"intended_change\": \"a hand enters from the right side of the frame and gently lifts the front cover upward, opening the book in place to reveal the interior first page(s); the book remains at the same location and orientation on the counter\",\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": \"book is open with the front cover raised from the closed position and interior pages visible, cover angle >0° from flat, book base position and orientation on the counter unchanged, opening is consistent with a gentle lift from the right side\",\n  \"protected_anchors\": [\n    \"kitchen counter surface, wood grain and overall layout\",\n    \"blue ceramic mug position on left side of counter\",\n    \"potted basil plant in white pot on right side of counter\",\n    \"white subway tile backsplash and wall\",\n    \"white drawer with black metal handle below counter\",\n    \"lighting, shadows and photorealistic style\",\n    \"camera viewpoint and framing\"\n  ],\n  \"negative_constraints\": [\n    \"no translation or rotation of the book as a whole\",\n    \"no movement, deformation or appearance change of mug, plant, counter, tiles or drawer\",\n    \"no change to background lighting or scene composition\",\n    \"no additional objects besides a transient hand performing the lift\",\n    \"no page tearing, unrealistic bending or color change of the book\"\n  ],\n  \"failure_modes\": [\n    \"book remains closed or cover not lifted\",\n    \"cover lifts but interior pages not visible\",\n    \"book slides, rotates or changes position on counter\",\n    \"hand appears from wrong side, multiple hands, or no hand present\",\n    \"book opens backward or cover lifts unrealistically\",\n    \"scene elements such as mug, plant or background change\"\n  ]\n}",
+      "raw_response": {
+        "id": "chatcmpl-b6222b4921cf4f36",
+        "object": "chat.completion",
+        "created": 1790848017,
+        "model": "meta-models/Muse-Glimmer-30B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"target\": \"red hardcover book on kitchen counter\",\n  \"initial_state\": \"book is closed and lying flat on the wooden counter with the red front cover facing up, spine oriented to the right, pages not visible, resting between a blue ceramic mug on the left and a potted basil plant on the right\",\n  \"intended_change\": \"a hand enters from the right side of the frame and gently lifts the front cover upward, opening the book in place to reveal the interior first page(s); the book remains at the same location and orientation on the counter\",\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": \"book is open with the front cover raised from the closed position and interior pages visible, cover angle >0° from flat, book base position and orientation on the counter unchanged, opening is consistent with a gentle lift from the right side\",\n  \"protected_anchors\": [\n    \"kitchen counter surface, wood grain and overall layout\",\n    \"blue ceramic mug position on left side of counter\",\n    \"potted basil plant in white pot on right side of counter\",\n    \"white subway tile backsplash and wall\",\n    \"white drawer with black metal handle below counter\",\n    \"lighting, shadows and photorealistic style\",\n    \"camera viewpoint and framing\"\n  ],\n  \"negative_constraints\": [\n    \"no translation or rotation of the book as a whole\",\n    \"no movement, deformation or appearance change of mug, plant, counter, tiles or drawer\",\n    \"no change to background lighting or scene composition\",\n    \"no additional objects besides a transient hand performing the lift\",\n    \"no page tearing, unrealistic bending or color change of the book\"\n  ],\n  \"failure_modes\": [\n    \"book remains closed or cover not lifted\",\n    \"cover lifts but interior pages not visible\",\n    \"book slides, rotates or changes position on counter\",\n    \"hand appears from wrong side, multiple hands, or no hand present\",\n    \"book opens backward or cover lifts unrealistically\",\n    \"scene elements such as mug, plant or background change\"\n  ]\n}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": "Infer the expected intentional-change specification for this world-model case.\nUse only initial observation and model-facing action. Do not score any generated video.\nThis is target state-transition specification, not generic video-edit or motion-quality task.\nIdentify world entity/relation being intentionally changed, pre-change state, requested state delta, and anchors that should remain stable.\nReturn JSON only with keys: target, initial_state, intended_change, change_type, completion_criteria, protected_anchors, negative_constraints, failure_modes.\nchange_type must be one of: attribute, pose, relation, object_state, agent_event, appearance, other.\n\nAction: A hand reaches from right side of frame and gently lifts front cover of red book, opening it to reveal first page.\n\nInitial observation: kitchen counter with red book closed on wooden counter, blue mug left, plant right.\n\nTarget entity: red book (front cover). initial_state: closed, lying flat on counter, spine? Book is red, closed, front cover down? Actually book lying with spine to right? Looks like book lying with front cover up? Wait red book on counter, red cover facing up? The book is red, appears top is red cover, white pages at back? Actually book is lying with spine to right? Let's see: red cover is top, white pages visible at right edge? The book is oriented with spine to right? Hmm. Front cover is the red side facing up. Lifting front cover means opening it. So initial_state: book closed, cover flat on counter, pages not visible.\n\nIntended_change: cover lifted upward, book opened to reveal first page interior. Hand enters from right.\n\nchange_type: object_state? Or pose? Opening book is object_state change (closed to open). Could be pose. Probably object_state.\n\ncompletion_criteria: book is open with front cover raised, interior pages visible, hand may be present or not? Action says hand reaches and lifts... Probably final state shows book open, cover lifted, first page visible. Hand may be still holding or just after? Intentional change is book open.\n\nprotected_anchors: kitchen counter, blue mug position, plant position, lighting, background tiles, wooden counter texture, drawer handle, overall scene layout unchanged except book and hand.\n\nnegative_constraints: no other objects moved, no book translation, no change to mug/plant, no change to lighting, no page tearing, no extra hands, no book disappearing.\n\nfailure_modes: book remains closed, cover not lifted, book moves/slides, pages not visible, hand appears from wrong side, book opens to wrong side, etc.\n\nReturn JSON.\n\nLet's craft.\n\ntarget: \"red hardcover book on kitchen counter\"\ninitial_state: \"book is closed, lying flat on counter with red cover facing up, spine oriented to the right, pages not visible\"\nintended_change: \"front cover is lifted upward/opened by a hand entering from right side, revealing interior first page(s); book remains in place\"\nchange_type: \"object_state\"\ncompletion_criteria: \"book is open with cover raised, interior page visible, cover angle >0 degrees from closed, book position unchanged\"\nprotected_anchors: [\"kitchen counter surface and wood grain\", \"blue ceramic mug on left\", \"potted basil plant on right\", \"white subway tile backsplash\", \"white drawer with black handle below\", \"lighting and shadows\", \"camera viewpoint\"]\nnegative_constraints: [\"no movement of mug, plant, counter, or background\", \"no translation/rotation of book as a whole\", \"no change to book color/texture\", \"no additional objects introduced except hand\", \"no page damage or unrealistic deformation\"]\nfailure_modes: [\"book stays closed\", \"cover lifts but pages not visible\", \"book slides or rotates\", \"hand enters from wrong side or no hand\", \"book opens backward\", \"scene elements change\"]\n\nReturn JSON only."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 200008,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+        "usage": {
+          "prompt_tokens": 463,
+          "total_tokens": 1690,
+          "completion_tokens": 1227,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-b6222b4921cf4f36",
+        "model": "meta-models/Muse-Glimmer-30B",
+        "created": 1790848017,
+        "usage": {
+          "prompt_tokens": 463,
+          "total_tokens": 1690,
+          "completion_tokens": 1227,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:46:57.119801+00:00",
+        "response_received_at": "2026-10-01T09:48:28.427713+00:00",
+        "elapsed_seconds": 91.307905,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "http://127.0.0.1:8001/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 91.307842
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "meta-models/Muse-Glimmer-30B",
+          "config_digest": "5f17fcd96b31e7d791868ac465935825523aa0f6d6bc35d3bbbb500375fc05cf"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "temperature": 0,
+            "max_tokens": 16384,
+            "reasoning_strength": "medium",
+            "structured_output": "JSON requested in prompt; native Muse channel protocol"
+          },
+          "request_sha256": "16782a5acd0e4583a08db90eb0f5a696d7b6e62268794996b237cd5a35c86563"
+        }
+      },
+      "evidence_digest": "bac5e40e351840a2ba98c9e2cc842988e833fd0eb24de6023406847fc6475b86"
+    },
+    "verify": {
+      "schema_version": "harnesseval.intentional_change.verify_agent",
+      "skill_id": "intentional_change_verifier_vlm",
+      "definition_version": "harnesseval.intentional_change_vlm",
+      "prompt_version": "harnesseval.intentional_change.prompt",
+      "agent": "verify_agent",
+      "case_id": "local_constructed_red_book",
+      "input_digest": "bc6e6f75d10e79a9ed6e1624985cef33e12b85e4217064ebc885fbab56bd7755",
+      "judgment": {
+        "q_scores": {
+          "Q1_target_visible": 1,
+          "Q2_transition_visible": 1,
+          "Q3_intended_change": 0.75,
+          "Q4_target_specificity": 1,
+          "Q5_final_state": 1,
+          "Q6_anchor_preservation": 1,
+          "Q7_no_extra_event": 1,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_target_visible": "The red hardcover book is clearly visible on the wooden countertop in the initial observation and first video frame, between the blue mug and basil plant, with spine to the left and cover up.",
+          "Q2_transition_visible": "A clear temporal transition is visible: a hand enters from the right, contacts the book, and the book changes from closed to open across the sampled frames.",
+          "Q3_intended_change": "A hand enters from the right side and lifts the front cover, opening the book to reveal interior pages. The lift is present and the book ends open, though the motion is somewhat abrupt with motion blur rather than a fully gentle lift.",
+          "Q4_target_specificity": "The state change is applied to the correct red book on the kitchen counter; the mug, plant and background are not altered as targets.",
+          "Q5_final_state": "The final frames show the book open on the counter with the front cover raised and interior first pages visible, matching the expected open state with the book base remaining in place.",
+          "Q6_anchor_preservation": "The red book stays on the same wooden countertop location, the blue mug and basil plant remain in their original positions, and the white tiled wall background is unchanged throughout.",
+          "Q7_no_extra_event": "No reset, hard cut, world replacement or unrelated edits are observed; the only added element is the transient hand performing the lift, with no new objects introduced.",
+          "Q8_judgeable": "The video is photorealistic, continuous and well framed, allowing clear observation of the hand entry, cover lift and final open state."
+        },
+        "warnings": [],
+        "summary": "The rollout successfully shows the red book being opened by a hand entering from the right, with the book ending in an open state and protected anchors preserved. The transition is visible and target-specific, with only a minor deviation in the gentleness/smoothness of the lift."
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a strict VLM evaluator for intentional world-state changes. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate this generated rollout against the canonical intentional-transition case spec.\nUse the canonical spec as authoritative. The expected spec is provided only as a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nDo not reward generic visual motion, style change, or edit magnitude unless it realizes the requested target state change.\nDo not penalize natural secondary changes unless they violate the protected anchors, negative constraints, continuity, or target specificity.\n\nQuestions:\nQ1_target_visible: target is clearly visible and localizable in the initial/evidence frames.\nQ2_transition_visible: a visible transition occurs, not just a static image.\nQ3_intended_change: the requested intended change actually occurs.\nQ4_target_specificity: the change happens to the correct target, not a wrong or ambiguous object.\nQ5_final_state: the final visible state matches the action and expected outcome.\nQ6_anchor_preservation: protected anchors and unrelated objects remain in the same world state.\nQ7_no_extra_event: the rollout avoids extra events, reset, hard cut, world replacement, or unrelated edits.\nQ8_judgeable: the video is clear, continuous, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_target_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_target_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case spec:\n{\n  \"action_type\": \"text_based_state_change\",\n  \"action_id\": \"book_open\",\n  \"action_text\": \"A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.\",\n  \"chunks\": [],\n  \"expected_outcome\": [\n    \"The book's front cover is lifted, revealing the inner pages.\",\n    \"The book is now in an open state, with the first page visible.\"\n  ],\n  \"protected_anchors\": [\n    \"The red book remains on the same wooden countertop.\",\n    \"The blue mug and basil plant remain in their original positions.\",\n    \"The white tiled wall background remains unchanged.\"\n  ],\n  \"negative_constraints\": [\n    \"The book does not move from its position on the countertop.\",\n    \"No new objects are introduced into the scene.\",\n    \"The book does not become damaged or torn during the transition.\"\n  ],\n  \"source_tags\": {\n    \"scene\": \"kitchen_counter\",\n    \"style\": \"photorealistic\"\n  },\n  \"initial_observation_type\": \"image\"\n}\n\nExpected spec inferred before seeing the video, for audit only:\n{\n  \"target\": \"red hardcover book on kitchen counter\",\n  \"initial_state\": \"book is closed and lying flat on the wooden counter with the red front cover facing up, spine oriented to the right, pages not visible, resting between a blue ceramic mug on the left and a potted basil plant on the right\",\n  \"intended_change\": \"a hand enters from the right side of the frame and gently lifts the front cover upward, opening the book in place to reveal the interior first page(s); the book remains at the same location and orientation on the counter\",\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": \"book is open with the front cover raised from the closed position and interior pages visible, cover angle >0° from flat, book base position and orientation on the counter unchanged, opening is consistent with a gentle lift from the right side\",\n  \"protected_anchors\": [\n    \"kitchen counter surface, wood grain and overall layout\",\n    \"blue ceramic mug position on left side of counter\",\n    \"potted basil plant in white pot on right side of counter\",\n    \"white subway tile backsplash and wall\",\n    \"white drawer with black metal handle below counter\",\n    \"lighting, shadows and photorealistic style\",\n    \"camera viewpoint and framing\"\n  ],\n  \"negative_constraints\": [\n    \"no translation or rotation of the book as a whole\",\n    \"no movement, deformation or appearance change of mug, plant, counter, tiles or drawer\",\n    \"no change to background lighting or scene composition\",\n    \"no additional objects besides a transient hand performing the lift\",\n    \"no page tearing, unrealistic bending or color change of the book\"\n  ],\n  \"failure_modes\": [\n    \"book remains closed or cover not lifted\",\n    \"cover lifts but interior pages not visible\",\n    \"book slides, rotates or changes position on counter\",\n    \"hand appears from wrong side, multiple hands, or no hand present\",\n    \"book opens backward or cover lifts unrealistically\",\n    \"scene elements such as mug, plant or background change\"\n  ]\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "bbb2725e6cc7663bd55e529162d8ce0e87075fb8b4359bef2352b65ad68622ef",
+                "bytes": 24362
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 00:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "1c51302ded7ff6907f6ba8a293d01f7fa6a06f770c781b585c90df3ee9a4f881",
+                "bytes": 23190
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 01:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "db40dfeb73faa123f3619b2781f000cfe669c21c5fcb2222aa21491092611d95",
+                "bytes": 22933
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 02:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "bf79421ab83a7148a194d059fb3dc9f874af6e2f144f518ffcc7068fb1e9f5ad",
+                "bytes": 23892
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 03:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "a40a32cab65c0bd5bd42e7340fd8782557543220fb49c640f1c49768b9ba23cf",
+                "bytes": 23923
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 04:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "6be974a8203085447c63b1e3f9056bec7b5e63cacf3fe141329e01dd1841ee17",
+                "bytes": 23698
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 05:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "7a9208f1050d87cb836a273fb3ea04b1de4d1d98bf39a5fe4424801aecda1e3e",
+                "bytes": 23158
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 06:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "40dde5a6c3282660b3062b257aa309af4b4f6fda9069f158bac91086a86220e5",
+                "bytes": 22631
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 07:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "8e9b2b5cbf959508d5940947bbc40dd73c4e1cc85f7d9808e5c7901cead0312e",
+                "bytes": 24870
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 08:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "54c0e89d877e79c85c80fcfb968f0c6c95fd376094c05311c0daa72fcb319687",
+                "bytes": 25514
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 09:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "e84b92763e78b68c63455b5d68c2645d5966f3a9d9fa3c618769afb362613983",
+                "bytes": 25442
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 10:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "584d5b84a061224b7b559fc90c054589d8d830ef7dbc5af419cdcd0947b171e2",
+                "bytes": 25464
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 11:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "bd32d3108d1d80548c9838f3f45527963b4325fbdbfefa6ed6cffce0a4e0c4f6",
+                "bytes": 25516
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":0.75,\"Q4_target_specificity\":1,\"Q5_final_state\":1,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":1,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The red hardcover book is clearly visible on the wooden countertop in the initial observation and first video frame, between the blue mug and basil plant, with spine to the left and cover up.\",\"Q2_transition_visible\":\"A clear temporal transition is visible: a hand enters from the right, contacts the book, and the book changes from closed to open across the sampled frames.\",\"Q3_intended_change\":\"A hand enters from the right side and lifts the front cover, opening the book to reveal interior pages. The lift is present and the book ends open, though the motion is somewhat abrupt with motion blur rather than a fully gentle lift.\",\"Q4_target_specificity\":\"The state change is applied to the correct red book on the kitchen counter; the mug, plant and background are not altered as targets.\",\"Q5_final_state\":\"The final frames show the book open on the counter with the front cover raised and interior first pages visible, matching the expected open state with the book base remaining in place.\",\"Q6_anchor_preservation\":\"The red book stays on the same wooden countertop location, the blue mug and basil plant remain in their original positions, and the white tiled wall background is unchanged throughout.\",\"Q7_no_extra_event\":\"No reset, hard cut, world replacement or unrelated edits are observed; the only added element is the transient hand performing the lift, with no new objects introduced.\",\"Q8_judgeable\":\"The video is photorealistic, continuous and well framed, allowing clear observation of the hand entry, cover lift and final open state.\"},\"warnings\":[],\"summary\":\"The rollout successfully shows the red book being opened by a hand entering from the right, with the book ending in an open state and protected anchors preserved. The transition is visible and target-specific, with only a minor deviation in the gentleness/smoothness of the lift.\"}",
+      "raw_response": {
+        "id": "chatcmpl-870b51c32e16b90b",
+        "object": "chat.completion",
+        "created": 1790848108,
+        "model": "meta-models/Muse-Glimmer-30B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":0.75,\"Q4_target_specificity\":1,\"Q5_final_state\":1,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":1,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The red hardcover book is clearly visible on the wooden countertop in the initial observation and first video frame, between the blue mug and basil plant, with spine to the left and cover up.\",\"Q2_transition_visible\":\"A clear temporal transition is visible: a hand enters from the right, contacts the book, and the book changes from closed to open across the sampled frames.\",\"Q3_intended_change\":\"A hand enters from the right side and lifts the front cover, opening the book to reveal interior pages. The lift is present and the book ends open, though the motion is somewhat abrupt with motion blur rather than a fully gentle lift.\",\"Q4_target_specificity\":\"The state change is applied to the correct red book on the kitchen counter; the mug, plant and background are not altered as targets.\",\"Q5_final_state\":\"The final frames show the book open on the counter with the front cover raised and interior first pages visible, matching the expected open state with the book base remaining in place.\",\"Q6_anchor_preservation\":\"The red book stays on the same wooden countertop location, the blue mug and basil plant remain in their original positions, and the white tiled wall background is unchanged throughout.\",\"Q7_no_extra_event\":\"No reset, hard cut, world replacement or unrelated edits are observed; the only added element is the transient hand performing the lift, with no new objects introduced.\",\"Q8_judgeable\":\"The video is photorealistic, continuous and well framed, allowing clear observation of the hand entry, cover lift and final open state.\"},\"warnings\":[],\"summary\":\"The rollout successfully shows the red book being opened by a hand entering from the right, with the book ending in an open state and protected anchors preserved. The transition is visible and target-specific, with only a minor deviation in the gentleness/smoothness of the lift.\"}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": "Evaluate this generated rollout against canonical intentional-transition case spec.\n\nWe need scores Q1..Q8.\n\nQ1_target_visible: target is clearly visible and localizable in initial/evidence frames. Initial observation image shows red book clearly. So 1.\n\nQ2_transition_visible: a visible transition occurs, not just static. Yes hand enters, lifts. So 1.\n\nQ3_intended_change: requested intended change actually occurs. Action: hand reaches from right side and gently lifts front cover opening to reveal first page. In video, hand enters from right, presses, then lifts cover? Sample 05 shows hand lifting cover up, book appears to be lifted? Sample 06 shows book open with pages visible, hand holding cover. The book seems to be opened, but does it lift front cover gently? It seems hand lifts cover from top? Actually front cover is the top of book? Book orientation spine to left? Wait book is lying with spine left, front cover up. Lifting front cover would be lifting the top edge (right side of book). Hand enters from right, lifts front cover upward. In sample 05, hand is lifting the front cover up, book base remains? The book appears to be lifted off counter? Sample 05 shows book white pages visible, red cover being lifted, but book seems to be moving? Sample 06 shows book open with pages visible, hand holding right page. The book base seems still on counter? Might be okay. The intended change is open to reveal first page. It does open. Might be a bit abrupt but seems okay. Score maybe 0.75? Let's see negative constraints: book does not move from its position. In sample 05-06, the book appears to be lifted slightly? The white block remains. Might be okay. The hand reaches from right side, yes. Gently lifts front cover. Might be okay. I'd give 0.75 or 1. Probably 0.75 because motion is a bit fast and hand seems to grab cover and flip? Sample 05 shows motion blur. But final state is open.\n\nQ4_target_specificity: change happens to correct target, not wrong. Yes red book. 1.\n\nQ5_final_state: final visible state matches action and expected outcome. Book is open with first page visible. In sample 07-11, book is open, pages visible, hand holding right page. The front cover is lifted? Actually cover is now on left side? The book is open with spine left, cover on left? Wait orientation: book opened like a book, spine left, pages to right. The front cover is now on left side? Might be okay. The expected outcome: front cover lifted revealing inner pages, book now open with first page visible. Yes. Score 1? Maybe 0.75 because hand still holding page, but final state is open. Could be 1.\n\nQ6_anchor_preservation: protected anchors remain same world state. Red book remains on same wooden countertop. In samples, book appears to stay in place, mug and plant unchanged, wall unchanged. Might be okay. However sample 05 shows book maybe lifted? Might be slight movement. Probably 0.75? Let's assume anchors preserved. Might be 1.\n\nQ7_no_extra_event: rollout avoids extra events, reset, hard cut, world replacement, or unrelated edits. The hand appears, lifts, seems continuous. No extra objects. Might be okay. Score 1.\n\nQ8_judgeable: video clear continuous sufficiently observable. Yes. 1.\n\nOverall maybe Q3 0.75 due to not gentle? The spec says gently lifts front cover. The motion looks a bit fast with blur. Could be 0.75.\n\nQ5 maybe 0.75 because hand still holding page at end, but final state matches. Might be 1.\n\nLet's give:\nQ1 1\nQ2 1\nQ3 0.75\nQ4 1\nQ5 0.75? Hmm final state matches but book is open wider than just first page? It shows interior page with pattern. Might be okay.\n\nI'll give Q5 1.\n\nQ6 1\nQ7 1\nQ8 1\n\nReturn JSON.\n\n"
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 200008,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+        "usage": {
+          "prompt_tokens": 3937,
+          "total_tokens": 5266,
+          "completion_tokens": 1329,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-870b51c32e16b90b",
+        "model": "meta-models/Muse-Glimmer-30B",
+        "created": 1790848108,
+        "usage": {
+          "prompt_tokens": 3937,
+          "total_tokens": 5266,
+          "completion_tokens": 1329,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:48:28.613060+00:00",
+        "response_received_at": "2026-10-01T09:50:11.148972+00:00",
+        "elapsed_seconds": 102.535904,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "http://127.0.0.1:8001/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 102.53584
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "meta-models/Muse-Glimmer-30B",
+          "config_digest": "5f17fcd96b31e7d791868ac465935825523aa0f6d6bc35d3bbbb500375fc05cf"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "temperature": 0,
+            "max_tokens": 16384,
+            "reasoning_strength": "medium",
+            "structured_output": "JSON requested in prompt; native Muse channel protocol"
+          },
+          "request_sha256": "10bc5b67a727b7150ab22b4730b45110a6a11df9e63ff9b54832735784a24438"
+        }
+      },
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "source_frame_count": 97,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          8,
+          17,
+          26,
+          34,
+          43,
+          52,
+          61,
+          69,
+          78,
+          87,
+          96
+        ]
+      },
+      "evidence_digest": "af46966745f7a82154fbe31f968d402a900937f06936de3bc711d231a755a462"
+    }
+  },
+  "fixed_specification": {
+    "result": {
+      "skill_id": "intentional_change_verifier_vlm",
+      "status": "ok_case_audit_warning",
+      "score": 1.0,
+      "metrics": {
+        "Q1_target_visible": 1.0,
+        "Q2_transition_visible": 1.0,
+        "Q3_intended_change": 1.0,
+        "Q4_target_specificity": 1.0,
+        "Q5_final_state": 1.0,
+        "Q6_anchor_preservation": 1.0,
+        "Q7_no_extra_event": 1.0,
+        "Q8_judgeable": 1.0,
+        "target_visibility": 1.0,
+        "change_execution": 1.0,
+        "target_specificity": 1.0,
+        "final_state": 1.0,
+        "preservation": 1.0,
+        "validity_gate": 1.0,
+        "core_score": 1.0,
+        "final_score": 1.0,
+        "expected_spec_alignment": 0.185848
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.intentional_change_vlm",
+        "prompt_version": "harnesseval.intentional_change.prompt",
+        "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+        "case_audit": {
+          "status": "warning",
+          "warning": true,
+          "expected_spec_alignment": 0.185848,
+          "target_alignment": 0.043478,
+          "change_alignment": 0.043478,
+          "anchor_alignment": 0.470588
+        }
+      },
+      "notes": []
+    },
+    "expected_spec": {
+      "target": "red book",
+      "initial_state": "closed",
+      "intended_change": "open",
+      "change_type": "object_state",
+      "completion_criteria": "book cover is fully lifted and pages are visible",
+      "protected_anchors": [
+        "blue mug",
+        "potted basil plant",
+        "wooden countertop",
+        "white tiled wall"
+      ],
+      "negative_constraints": [
+        "book should not be moved from its position",
+        "book should not be rotated",
+        "book should not be damaged"
+      ],
+      "failure_modes": [
+        "book remains closed",
+        "book is partially opened",
+        "book is moved or rotated",
+        "book cover is torn or damaged"
+      ]
+    },
+    "conversation": [
+      {
+        "role": "system",
+        "content": [
+          {
+            "type": "text",
+            "text": "You are a strict VLM evaluator for intentional world-state changes. Return valid JSON only."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluate this generated rollout against the canonical intentional-transition case spec.\nUse the canonical spec as authoritative. The expected spec is provided only as a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nDo not reward generic visual motion, style change, or edit magnitude unless it realizes the requested target state change.\nDo not penalize natural secondary changes unless they violate the protected anchors, negative constraints, continuity, or target specificity.\n\nQuestions:\nQ1_target_visible: target is clearly visible and localizable in the initial/evidence frames.\nQ2_transition_visible: a visible transition occurs, not just a static image.\nQ3_intended_change: the requested intended change actually occurs.\nQ4_target_specificity: the change happens to the correct target, not a wrong or ambiguous object.\nQ5_final_state: the final visible state matches the action and expected outcome.\nQ6_anchor_preservation: protected anchors and unrelated objects remain in the same world state.\nQ7_no_extra_event: the rollout avoids extra events, reset, hard cut, world replacement, or unrelated edits.\nQ8_judgeable: the video is clear, continuous, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_target_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_target_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case spec:\n{\n  \"action_type\": \"text_based_state_change\",\n  \"action_id\": \"book_open\",\n  \"action_text\": \"A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.\",\n  \"chunks\": [],\n  \"expected_outcome\": [\n    \"The book's front cover is lifted, revealing the inner pages.\",\n    \"The book is now in an open state, with the first page visible.\"\n  ],\n  \"protected_anchors\": [\n    \"The red book remains on the same wooden countertop.\",\n    \"The blue mug and basil plant remain in their original positions.\",\n    \"The white tiled wall background remains unchanged.\"\n  ],\n  \"negative_constraints\": [\n    \"The book does not move from its position on the countertop.\",\n    \"No new objects are introduced into the scene.\",\n    \"The book does not become damaged or torn during the transition.\"\n  ],\n  \"source_tags\": {\n    \"scene\": \"kitchen_counter\",\n    \"style\": \"photorealistic\"\n  },\n  \"initial_observation_type\": \"image\"\n}\n\nExpected spec inferred before seeing the video, for audit only:\n{\n  \"target\": \"red book\",\n  \"initial_state\": \"closed\",\n  \"intended_change\": \"open\",\n  \"change_type\": \"object_state\",\n  \"completion_criteria\": \"book cover is fully lifted and pages are visible\",\n  \"protected_anchors\": [\n    \"blue mug\",\n    \"potted basil plant\",\n    \"wooden countertop\",\n    \"white tiled wall\"\n  ],\n  \"negative_constraints\": [\n    \"book should not be moved from its position\",\n    \"book should not be rotated\",\n    \"book should not be damaged\"\n  ],\n  \"failure_modes\": [\n    \"book remains closed\",\n    \"book is partially opened\",\n    \"book is moved or rotated\",\n    \"book cover is torn or damaged\"\n  ]\n}"
+          },
+          {
+            "type": "text",
+            "text": "Initial observation image:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "bbb2725e6cc7663bd55e529162d8ce0e87075fb8b4359bef2352b65ad68622ef",
+              "bytes": 24362
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 00:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "1c51302ded7ff6907f6ba8a293d01f7fa6a06f770c781b585c90df3ee9a4f881",
+              "bytes": 23190
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 01:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "db40dfeb73faa123f3619b2781f000cfe669c21c5fcb2222aa21491092611d95",
+              "bytes": 22933
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 02:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "bf79421ab83a7148a194d059fb3dc9f874af6e2f144f518ffcc7068fb1e9f5ad",
+              "bytes": 23892
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 03:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "a40a32cab65c0bd5bd42e7340fd8782557543220fb49c640f1c49768b9ba23cf",
+              "bytes": 23923
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 04:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "6be974a8203085447c63b1e3f9056bec7b5e63cacf3fe141329e01dd1841ee17",
+              "bytes": 23698
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 05:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "7a9208f1050d87cb836a273fb3ea04b1de4d1d98bf39a5fe4424801aecda1e3e",
+              "bytes": 23158
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 06:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "40dde5a6c3282660b3062b257aa309af4b4f6fda9069f158bac91086a86220e5",
+              "bytes": 22631
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 07:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "8e9b2b5cbf959508d5940947bbc40dd73c4e1cc85f7d9808e5c7901cead0312e",
+              "bytes": 24870
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 08:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "54c0e89d877e79c85c80fcfb968f0c6c95fd376094c05311c0daa72fcb319687",
+              "bytes": 25514
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 09:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "e84b92763e78b68c63455b5d68c2645d5966f3a9d9fa3c618769afb362613983",
+              "bytes": 25442
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 10:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "584d5b84a061224b7b559fc90c054589d8d830ef7dbc5af419cdcd0947b171e2",
+              "bytes": 25464
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 11:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "bd32d3108d1d80548c9838f3f45527963b4325fbdbfefa6ed6cffce0a4e0c4f6",
+              "bytes": 25516
+            }
+          }
+        ]
+      }
+    ],
+    "request_digest": "a9c239f7b3f7a1e1b20c5559ba4aa1f1c642baa8c90f56d85c7afc8247c4d9e5",
+    "output": {
+      "schema_version": "harnesseval.intentional_change.backend_output",
+      "parsed": {
+        "q_scores": {
+          "Q1_target_visible": 1,
+          "Q2_transition_visible": 1,
+          "Q3_intended_change": 1,
+          "Q4_target_specificity": 1,
+          "Q5_final_state": 1,
+          "Q6_anchor_preservation": 1,
+          "Q7_no_extra_event": 1,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_target_visible": "The red book is clearly visible on the wooden countertop in the initial observation and first generated frame, easily localizable next to the blue mug and basil plant.",
+          "Q2_transition_visible": "A clear temporal transition is visible: a hand enters from the right, contacts the book, and the book opens over successive frames rather than remaining static.",
+          "Q3_intended_change": "A hand reaches from the right side and lifts the front cover of the red book, opening it to reveal inner pages; the open state is achieved by the end of the rollout.",
+          "Q4_target_specificity": "The state change is applied specifically to the red book; the mug, plant and background are unaffected as targets.",
+          "Q5_final_state": "The final frames show the book in an open state with the front cover lifted and inner pages visible, matching the expected open-book outcome with the book remaining on the countertop.",
+          "Q6_anchor_preservation": "The red book stays on the same wooden countertop, the blue mug and basil plant remain in their original positions, and the white tiled wall background is unchanged throughout.",
+          "Q7_no_extra_event": "No reset, hard cut, world replacement or unrelated edits are observed; the scene evolves continuously with only the intended hand interaction and book opening.",
+          "Q8_judgeable": "The video is photorealistic, continuous and well framed, allowing clear observation of the hand motion, book opening and anchor objects."
+        },
+        "warnings": [],
+        "summary": "The rollout successfully realizes the intended book-opening transition. The red book is clearly visible initially, a hand enters from the right and lifts the front cover to open the book, revealing pages, while the mug, plant, countertop and wall anchors are preserved and no extra events occur. The final state matches the canonical expected outcome."
+      },
+      "raw_output_text": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":1,\"Q4_target_specificity\":1,\"Q5_final_state\":1,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":1,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The red book is clearly visible on the wooden countertop in the initial observation and first generated frame, easily localizable next to the blue mug and basil plant.\",\"Q2_transition_visible\":\"A clear temporal transition is visible: a hand enters from the right, contacts the book, and the book opens over successive frames rather than remaining static.\",\"Q3_intended_change\":\"A hand reaches from the right side and lifts the front cover of the red book, opening it to reveal inner pages; the open state is achieved by the end of the rollout.\",\"Q4_target_specificity\":\"The state change is applied specifically to the red book; the mug, plant and background are unaffected as targets.\",\"Q5_final_state\":\"The final frames show the book in an open state with the front cover lifted and inner pages visible, matching the expected open-book outcome with the book remaining on the countertop.\",\"Q6_anchor_preservation\":\"The red book stays on the same wooden countertop, the blue mug and basil plant remain in their original positions, and the white tiled wall background is unchanged throughout.\",\"Q7_no_extra_event\":\"No reset, hard cut, world replacement or unrelated edits are observed; the scene evolves continuously with only the intended hand interaction and book opening.\",\"Q8_judgeable\":\"The video is photorealistic, continuous and well framed, allowing clear observation of the hand motion, book opening and anchor objects.\"},\"warnings\":[],\"summary\":\"The rollout successfully realizes the intended book-opening transition. The red book is clearly visible initially, a hand enters from the right and lifts the front cover to open the book, revealing pages, while the mug, plant, countertop and wall anchors are preserved and no extra events occur. The final state matches the canonical expected outcome.\"}",
+      "raw_response": {
+        "id": "chatcmpl-96449294191db6ee",
+        "object": "chat.completion",
+        "created": 1790848211,
+        "model": "meta-models/Muse-Glimmer-30B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_target_visible\":1,\"Q2_transition_visible\":1,\"Q3_intended_change\":1,\"Q4_target_specificity\":1,\"Q5_final_state\":1,\"Q6_anchor_preservation\":1,\"Q7_no_extra_event\":1,\"Q8_judgeable\":1},\"reasons\":{\"Q1_target_visible\":\"The red book is clearly visible on the wooden countertop in the initial observation and first generated frame, easily localizable next to the blue mug and basil plant.\",\"Q2_transition_visible\":\"A clear temporal transition is visible: a hand enters from the right, contacts the book, and the book opens over successive frames rather than remaining static.\",\"Q3_intended_change\":\"A hand reaches from the right side and lifts the front cover of the red book, opening it to reveal inner pages; the open state is achieved by the end of the rollout.\",\"Q4_target_specificity\":\"The state change is applied specifically to the red book; the mug, plant and background are unaffected as targets.\",\"Q5_final_state\":\"The final frames show the book in an open state with the front cover lifted and inner pages visible, matching the expected open-book outcome with the book remaining on the countertop.\",\"Q6_anchor_preservation\":\"The red book stays on the same wooden countertop, the blue mug and basil plant remain in their original positions, and the white tiled wall background is unchanged throughout.\",\"Q7_no_extra_event\":\"No reset, hard cut, world replacement or unrelated edits are observed; the scene evolves continuously with only the intended hand interaction and book opening.\",\"Q8_judgeable\":\"The video is photorealistic, continuous and well framed, allowing clear observation of the hand motion, book opening and anchor objects.\"},\"warnings\":[],\"summary\":\"The rollout successfully realizes the intended book-opening transition. The red book is clearly visible initially, a hand enters from the right and lifts the front cover to open the book, revealing pages, while the mug, plant, countertop and wall anchors are preserved and no extra events occur. The final state matches the canonical expected outcome.\"}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": "Evaluate this generated rollout against canonical intentional-transition case spec.\n\nCanonical spec: action_text \"A hand reaches from the right side of the frame and gently lifts the front cover of the red book, opening it to reveal the first page.\" Expected outcome: front cover lifted revealing inner pages, book now open with first page visible. Protected anchors: red book remains on same wooden countertop, blue mug and basil plant remain original positions, white tiled wall unchanged. Negative constraints: book does not move from position, no new objects, book does not become damaged/torn.\n\nWe have frames 00 to 11. Frame 00 same as initial. Frame 01 hand enters from right. Frame 02-04 hand on book. Frame 05 hand lifts cover? Actually frame 05 shows hand lifting front cover? It shows red cover being lifted, book white pages visible. Frame 06 shows book open with pages, hand holding. Frame 07-11 book open, hand holding right page.\n\nCheck intended change: hand reaches from right and gently lifts front cover opening to reveal first page. In video, hand appears to lift front cover? Actually front cover is the red cover on top? The book is lying flat with spine left, front cover is top? Wait book orientation: spine on left, front cover is top? The book is lying with spine left, cover facing up. Lifting front cover would be lifting the top edge? In frames 05-06, hand lifts the front cover from the right side? The hand is on right side, lifting the cover up, revealing pages. The book appears to be opened like a book opened to the right, with left page white (inside cover) and right page with pattern. The book seems to be moved? The book's position seems roughly same, but the book is now open, spine still left. The hand is holding the right side. The book does not appear to move significantly from countertop. The mug and plant remain. Wall unchanged.\n\nQ1_target_visible: target clearly visible and localizable in initial/evidence frames. Yes red book visible. Score 1.\n\nQ2_transition_visible: visible transition occurs, not just static. Yes hand enters and book opens. Score 1.\n\nQ3_intended_change: requested intended change actually occurs. Hand reaches from right and lifts front cover opening to reveal first page. The hand does reach from right, lifts cover, book opens. However action says gently lifts front cover of red book, opening it to reveal first page. In video, the book is opened wide, pages visible, first page visible? It shows a page with pattern. Might be okay. The hand lifts cover, but the motion seems a bit abrupt? Frame 05 shows motion blur. But overall change occurs. Might be 0.75? The spec says gently lifts front cover. The motion looks a bit fast but still lifts. Could be 1.\n\nQ4_target_specificity: change happens to correct target, not wrong object. Yes red book. Score 1.\n\nQ5_final_state: final visible state matches action and expected outcome. Expected: book's front cover lifted revealing inner pages, book now open with first page visible. Final frames show book open, pages visible, cover lifted. The book is open with both pages visible. The first page visible? Possibly yes. The hand is still holding the right page. The book remains on countertop. Might be okay. Score 1? Maybe 0.75 because hand still holding? The expected outcome maybe book open without hand? But action includes hand reaching. Final state may still have hand. Might be acceptable. Could be 1.\n\nQ6_anchor_preservation: protected anchors remain same world state. Red book remains on same wooden countertop? The book appears to stay in place, though opening may shift slightly. Mug and plant remain. Wall unchanged. Score 1.\n\nQ7_no_extra_event: avoid extra events, reset, hard cut, world replacement, unrelated edits. The video seems continuous. No extra objects. Might be okay. Score 1.\n\nQ8_judgeable: video clear, continuous, sufficiently observable. Yes. Score 1.\n\nPotential nuance: negative constraint: book does not move from its position on countertop. In frames, the book seems to stay, but opening may cause slight shift? Looks stable. Also book does not become damaged. Looks fine.\n\nMaybe Q3 is 0.75 because hand lifts cover but also seems to lift the whole book? Frame 05 shows hand lifting cover, book base stays. Might be okay.\n\nI think scores all 1 except maybe Q5 final state matches? The action says gently lifts front cover, opening it to reveal first page. The final state shows book open wide with hand still holding page. Might be okay.\n\nReturn JSON.\n\n"
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 200008,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+        "usage": {
+          "prompt_tokens": 3667,
+          "total_tokens": 5089,
+          "completion_tokens": 1422,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-96449294191db6ee",
+        "model": "meta-models/Muse-Glimmer-30B",
+        "created": 1790848211,
+        "usage": {
+          "prompt_tokens": 3667,
+          "total_tokens": 5089,
+          "completion_tokens": 1422,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:50:11.362194+00:00",
+        "response_received_at": "2026-10-01T09:51:59.835655+00:00",
+        "elapsed_seconds": 108.473436,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "http://127.0.0.1:8001/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 108.47338
+          }
+        ]
+      },
+      "provenance": {
+        "settings": {
+          "temperature": 0,
+          "max_tokens": 16384,
+          "reasoning_strength": "medium",
+          "structured_output": "JSON requested in prompt; native Muse channel protocol"
+        },
+        "request_sha256": "a9c239f7b3f7a1e1b20c5559ba4aa1f1c642baa8c90f56d85c7afc8247c4d9e5"
+      }
+    },
+    "sampling": {
+      "method": "uniform_full_video",
+      "max_frames": 12,
+      "source_frame_count": 97,
+      "source_fps": 24.0,
+      "sample_indices": [
+        0,
+        8,
+        17,
+        26,
+        34,
+        43,
+        52,
+        61,
+        69,
+        78,
+        87,
+        96
+      ]
+    }
+  },
+  "elapsed_seconds": 302.77292799949646
+}

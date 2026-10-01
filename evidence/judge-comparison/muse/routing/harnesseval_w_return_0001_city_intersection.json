@@ -1,0 +1,260 @@
+{
+  "status": "complete",
+  "plan": {
+    "schema_version": "harnesseval.skill_plan",
+    "planner_version": "harnesseval.planner.v1",
+    "created_at": "2026-10-01T09:50:13.493243+00:00",
+    "routing_mode": "llm_case",
+    "input_digest": "6e4495b8cf1a27e390058b007cab2afd989c6d8ddded5f51ed5f237cb6587f36",
+    "case_id": "harnesseval_w_return_0001_city_intersection",
+    "taxonomy": {
+      "primary_axis": "world_persistence",
+      "probe_family": "return_revisit_consistency"
+    },
+    "planner": {},
+    "selected_skills": [
+      {
+        "skill_id": "render_quality_inspector",
+        "role": "observation",
+        "reason": "General visual quality check for artifacts, watermarks and aesthetic cleanliness across generated frames.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "motion_quality_inspector",
+        "role": "observation",
+        "reason": "Navigation sequence requires temporally smooth camera motion through 8 chunks.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "appearance_consistency_inspector",
+        "role": "observation",
+        "reason": "World persistence requires stable anchors station arch, traffic gantry, zebra crossing, bus shelter to stay visually consistent through rollout.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "physical_plausibility_inspector",
+        "role": "observation",
+        "reason": "First-person navigation should be physically and causally plausible with no impossible jumps.",
+        "parameters": {}
+      },
+      {
+        "skill_id": "return_consistency_verifier",
+        "role": "core",
+        "reason": "Probe family is return_revisit_consistency with closed-loop navigation from c01 to c08; need to verify returned view remains consistent after non-static loop.",
+        "parameters": {}
+      }
+    ],
+    "selected_skill_ids": [
+      "render_quality_inspector",
+      "motion_quality_inspector",
+      "appearance_consistency_inspector",
+      "physical_plausibility_inspector",
+      "return_consistency_verifier"
+    ],
+    "skipped_skills": [
+      {
+        "skill_id": "viewpoint_trajectory_verifier",
+        "reason": "Case primary target is return revisit consistency not exploratory transition; trajectory is covered by return consistency check."
+      },
+      {
+        "skill_id": "intentional_change_verifier_vlm",
+        "reason": "No explicitly specified intentional semantic or object-state transition; action is closed-loop navigation."
+      },
+      {
+        "skill_id": "physical_response_verifier_vlm",
+        "reason": "Primary target is world persistence on return, not causal response to a physical intervention."
+      },
+      {
+        "skill_id": "physical_law_validator",
+        "reason": "No physical transition requiring case-specific physical law check."
+      },
+      {
+        "skill_id": "drift_degradation_analyzer",
+        "reason": "Rollout is short 8 chunks; not a long-horizon drift resistance target."
+      },
+      {
+        "skill_id": "offscreen_evolution_verifier",
+        "reason": "Probe is return revisit consistency, not offscreen process evolution."
+      }
+    ],
+    "validation": {
+      "status": "ok",
+      "registered_skill_count": 11,
+      "selected_skill_count": 5,
+      "selection_source": "planner",
+      "selection_modified": false
+    }
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_return_0001_city_intersection\",\n    \"taxonomy\": {\n      \"primary_axis\": \"world_persistence\",\n      \"probe_family\": \"return_revisit_consistency\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_return_0001_city_intersection\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_return_0001_city_intersection.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"city_intersection\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"station arch\",\n        \"traffic gantry\",\n        \"zebra crossing\",\n        \"bus shelter\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"return_window\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\"\n      },\n      \"closed_loop_pairs\": [\n        {\n          \"reference_chunk\": \"c01\",\n          \"return_chunk\": \"c08\"\n        }\n      ],\n      \"protected_anchors\": [\n        \"station arch\",\n        \"traffic gantry\",\n        \"zebra crossing\",\n        \"bus shelter\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"closed_loop_navigation\",\n        \"action_id\": \"return_0001\",\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"text\": \"Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.\",\n        \"closed_loop\": {\n          \"intended\": true,\n          \"closure_type\": \"inverse_balanced_navigation_tokens\"\n        },\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"S\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"S\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"left\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"right\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"A\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"D\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "type": "image_reference",
+            "mime": "image/png",
+            "sha256": "8297becf993b43947767bb733ee48b4761e9371fc1bfb96b6f14bf715dee8683",
+            "bytes": 507297
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "schema_version": "harnesseval.intentional_change.backend_output",
+    "parsed": {
+      "selected_skills": [
+        {
+          "skill_id": "return_consistency_verifier",
+          "role": "core",
+          "reason": "Probe family is return_revisit_consistency with closed-loop navigation from c01 to c08; need to verify returned view remains consistent after non-static loop.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "render_quality_inspector",
+          "role": "observation",
+          "reason": "General visual quality check for artifacts, watermarks and aesthetic cleanliness across generated frames.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "motion_quality_inspector",
+          "role": "observation",
+          "reason": "Navigation sequence requires temporally smooth camera motion through 8 chunks.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "appearance_consistency_inspector",
+          "role": "observation",
+          "reason": "World persistence requires stable anchors station arch, traffic gantry, zebra crossing, bus shelter to stay visually consistent through rollout.",
+          "parameters": {}
+        },
+        {
+          "skill_id": "physical_plausibility_inspector",
+          "role": "observation",
+          "reason": "First-person navigation should be physically and causally plausible with no impossible jumps.",
+          "parameters": {}
+        }
+      ],
+      "skipped_skills": [
+        {
+          "skill_id": "viewpoint_trajectory_verifier",
+          "reason": "Case primary target is return revisit consistency not exploratory transition; trajectory is covered by return consistency check."
+        },
+        {
+          "skill_id": "intentional_change_verifier_vlm",
+          "reason": "No explicitly specified intentional semantic or object-state transition; action is closed-loop navigation."
+        },
+        {
+          "skill_id": "physical_response_verifier_vlm",
+          "reason": "Primary target is world persistence on return, not causal response to a physical intervention."
+        },
+        {
+          "skill_id": "physical_law_validator",
+          "reason": "No physical transition requiring case-specific physical law check."
+        },
+        {
+          "skill_id": "drift_degradation_analyzer",
+          "reason": "Rollout is short 8 chunks; not a long-horizon drift resistance target."
+        },
+        {
+          "skill_id": "offscreen_evolution_verifier",
+          "reason": "Probe is return revisit consistency, not offscreen process evolution."
+        }
+      ]
+    },
+    "raw_output_text": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"Probe family is return_revisit_consistency with closed-loop navigation from c01 to c08; need to verify returned view remains consistent after non-static loop.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"General visual quality check for artifacts, watermarks and aesthetic cleanliness across generated frames.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Navigation sequence requires temporally smooth camera motion through 8 chunks.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"World persistence requires stable anchors station arch, traffic gantry, zebra crossing, bus shelter to stay visually consistent through rollout.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"First-person navigation should be physically and causally plausible with no impossible jumps.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"reason\": \"Case primary target is return revisit consistency not exploratory transition; trajectory is covered by return consistency check.\"\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"No explicitly specified intentional semantic or object-state transition; action is closed-loop navigation.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"Primary target is world persistence on return, not causal response to a physical intervention.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"No physical transition requiring case-specific physical law check.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Rollout is short 8 chunks; not a long-horizon drift resistance target.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"Probe is return revisit consistency, not offscreen process evolution.\"\n    }\n  ]\n}",
+    "raw_response": {
+      "id": "chatcmpl-b611f69aa7f0575a",
+      "object": "chat.completion",
+      "created": 1790848113,
+      "model": "meta-models/Muse-Glimmer-30B",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"selected_skills\": [\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"role\": \"core\",\n      \"reason\": \"Probe family is return_revisit_consistency with closed-loop navigation from c01 to c08; need to verify returned view remains consistent after non-static loop.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"General visual quality check for artifacts, watermarks and aesthetic cleanliness across generated frames.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"Navigation sequence requires temporally smooth camera motion through 8 chunks.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"World persistence requires stable anchors station arch, traffic gantry, zebra crossing, bus shelter to stay visually consistent through rollout.\",\n      \"parameters\": {}\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"role\": \"observation\",\n      \"reason\": \"First-person navigation should be physically and causally plausible with no impossible jumps.\",\n      \"parameters\": {}\n    }\n  ],\n  \"skipped_skills\": [\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"reason\": \"Case primary target is return revisit consistency not exploratory transition; trajectory is covered by return consistency check.\"\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"reason\": \"No explicitly specified intentional semantic or object-state transition; action is closed-loop navigation.\"\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"reason\": \"Primary target is world persistence on return, not causal response to a physical intervention.\"\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"reason\": \"No physical transition requiring case-specific physical law check.\"\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"reason\": \"Rollout is short 8 chunks; not a long-horizon drift resistance target.\"\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"reason\": \"Probe is return revisit consistency, not offscreen process evolution.\"\n    }\n  ]\n}",
+            "refusal": null,
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "reasoning": "{\n  \"case\": ...\n}\n\nWe need select skills. Case taxonomy primary_axis world_persistence, probe_family return_revisit_consistency. Interaction closed_loop_navigation, move away then return to compatible view without resetting scene. Return window reference chunk c01 return chunk c08. Protected anchors: station arch, traffic gantry, zebra crossing, bus shelter.\n\nSkills catalog:\n\nrender_quality_inspector observation\nmotion_quality_inspector observation\nappearance_consistency_inspector observation\nphysical_plausibility_inspector observation\nviewpoint_trajectory_verifier core for exploratory_transition\nintentional_change_verifier_vlm core for intentional_transition\nphysical_response_verifier_vlm core for physical_transition\nphysical_law_validator diagnostic for physical_transition\ndrift_degradation_analyzer core for drift_resistance\nreturn_consistency_verifier core for return_revisit_consistency\noffscreen_evolution_verifier core for offscreen_evolution\n\nWe need select applicable skills.\n\nCore skill: return_consistency_verifier is core_for return_revisit_consistency. So select it as core.\n\nAlso need observation skills: render_quality_inspector, motion_quality_inspector, appearance_consistency_inspector, physical_plausibility_inspector likely relevant for general quality.\n\nViewpoint_trajectory_verifier? Question: Does case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Yes, closed_loop_navigation with chunks W,W,S,S,left,right,A,D. So active camera movement. Core_for exploratory_transition, but case is return_revisit_consistency. The skill description says fixed-camera constraints... does not make applicable. It asks does case explicitly require active camera... Yes. But core_for is exploratory_transition. The catalog says core_for indicates primary use, not allowlist; select outside them only when case gives concrete reason. Does case give concrete reason to verify viewpoint trajectory? The action is navigation, so viewpoint trajectory verifier might be relevant to ensure movement follows actions. However primary probe is return consistency. Might still need viewpoint trajectory? The skill is for exploratory_transition. Might be not needed. Could be skipped.\n\nIntentional_change_verifier_vlm: primary target is intentional semantic transition? No, it's navigation return. So skip.\n\nPhysical_response_verifier_vlm: no.\n\nPhysical_law_validator diagnostic for physical_transition: skip.\n\nDrift_degradation_analyzer core for drift_resistance: case has 8 chunks, short rollout. Not long-horizon. Skip.\n\nOffscreen_evolution_verifier: no.\n\nSo selected skills: return_consistency_verifier core, render_quality_inspector observation, motion_quality_inspector observation, appearance_consistency_inspector observation, physical_plausibility_inspector observation.\n\nPossibly viewpoint_trajectory_verifier as observation? The skill default_role core. Could be used to ensure navigation actions executed. The case requires move away then return. Might need to verify trajectory. The skill question: Does case explicitly require active camera... Yes. So maybe select it as core? But core_for is exploratory_transition. Hmm.\n\nThe instruction: Catalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\n\nViewpoint_trajectory_verifier core_for exploratory_transition. Case is return_revisit_consistency, not exploratory_transition. Does case give concrete reason to verify viewpoint trajectory? The action is navigation, so trajectory verification might be needed to ensure return is correct. But return_consistency_verifier already checks returned view consistency. Might be redundant.\n\nI think keep viewpoint_trajectory_verifier skipped because primary probe is return consistency, not trajectory.\n\nAlso appearance_consistency_inspector is observation, good.\n\nReturn consistency verifier parameters? None.\n\nProvide JSON.\n\nSkipped skills: viewpoint_trajectory_verifier, intentional_change_verifier_vlm, physical_response_verifier_vlm, physical_law_validator, drift_degradation_analyzer, offscreen_evolution_verifier.\n\nReturn JSON.\n\n"
+          },
+          "logprobs": null,
+          "finish_reason": "stop",
+          "stop_reason": 200008,
+          "token_ids": null,
+          "routed_experts": null
+        }
+      ],
+      "service_tier": null,
+      "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+      "usage": {
+        "prompt_tokens": 2945,
+        "total_tokens": 4251,
+        "completion_tokens": 1306,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "prompt_logprobs": null,
+      "prompt_token_ids": null,
+      "prompt_text": null,
+      "kv_transfer_params": null,
+      "ec_transfer_params": null,
+      "metrics": null
+    },
+    "response_metadata": {
+      "id": "chatcmpl-b611f69aa7f0575a",
+      "model": "meta-models/Muse-Glimmer-30B",
+      "created": 1790848113,
+      "usage": {
+        "prompt_tokens": 2945,
+        "total_tokens": 4251,
+        "completion_tokens": 1306,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+      "request_started_at": "2026-10-01T09:48:32.965144+00:00",
+      "response_received_at": "2026-10-01T09:50:13.484682+00:00",
+      "elapsed_seconds": 100.519552,
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "http://127.0.0.1:8001/v1/chat/completions",
+          "status_code": 200,
+          "error": null,
+          "elapsed_seconds": 100.519478
+        }
+      ]
+    },
+    "provenance": {
+      "settings": {
+        "temperature": 0,
+        "max_tokens": 16384,
+        "reasoning_strength": "medium",
+        "structured_output": "JSON requested in prompt; native Muse channel protocol"
+      },
+      "request_sha256": "6e4495b8cf1a27e390058b007cab2afd989c6d8ddded5f51ed5f237cb6587f36"
+    }
+  }
+}

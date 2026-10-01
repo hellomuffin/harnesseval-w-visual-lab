@@ -1,0 +1,951 @@
+{
+  "status": "complete",
+  "example": "offscreen_evolution",
+  "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+  "model": "meta-models/Muse-Glimmer-30B",
+  "video_sha256": "e36facea499a0d8ef5a8f7d78a5e695a634d8b4af67b71956665ce1d661bdd44",
+  "independent": {
+    "result": {
+      "skill_id": "offscreen_evolution_verifier",
+      "status": "ok",
+      "score": 0.0,
+      "metrics": {
+        "Q1_pre_visible": 1.0,
+        "Q2_offscreen_absent": 0.5,
+        "Q3_return_visible": 0.0,
+        "Q4_anchor_preservation": 0.0,
+        "Q5_no_reset": 0.0,
+        "Q6_state_change_visible": 0.0,
+        "Q7_evolution_plausible": 0.0,
+        "Q8_judgeable": 1.0,
+        "visibility_score": 0.5,
+        "validity_gate": 0.5,
+        "anchor_score": 0.0,
+        "evolution_score": 0.0,
+        "core_score": 0.0,
+        "final_score": 0.0,
+        "expected_spec_alignment": 0.577441
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.offscreen_evolution",
+        "prompt_version": "harnesseval.offscreen_evolution.prompt",
+        "cache_contract_version": "harnesseval.offscreen_evolution.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.577441,
+          "target_alignment": 0.277778,
+          "anchor_alignment": 0.454545,
+          "visibility_alignment": 1.0
+        },
+        "analyze_agent_cache": "[workspace]/.private/judge-cache/muse/offscreen_evolution/skills/offscreen_evolution/analyze_agent/harnesseval_w_offscreen_0002_torch_gateway.json",
+        "analyze_agent_evidence_digest": "7eed97a69cf1c636857481998721855ae0b081f9a4c0b36045c52b35480ca983",
+        "verify_agent_cache": "[workspace]/.private/judge-cache/muse/offscreen_evolution/skills/offscreen_evolution/verify_agent/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+        "verify_agent_evidence_digest": "f09d94781da66ff58a4bcd6d90fbfa31981939819f88eeb9bd438b0c82b23212"
+      },
+      "notes": [
+        "analyze_agent alignment is a case-audit warning only; scoring uses the canonical offscreen-evolution specification and generated video"
+      ]
+    },
+    "analyze": {
+      "schema_version": "harnesseval.offscreen_evolution.analyze_agent",
+      "skill_id": "offscreen_evolution_verifier",
+      "definition_version": "harnesseval.offscreen_evolution",
+      "prompt_version": "harnesseval.offscreen_evolution.prompt",
+      "agent": "analyze_agent",
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "input_digest": "0f5fd3e56ab112c56350b37735debc8272c44ef42a2fb10e60a6c4b20b1e8000",
+      "expected_spec": {
+        "target_process": "The torch flame in the foreground right and the dynamic illumination / brightness it provides, including the flickering flame shape, intensity and color variation and the torch-cast silhouettes / lighting on the background figures and surroundings that evolve with the flame.",
+        "stable_anchors": [
+          "Stone archway ruin on the left",
+          "Obelisk/monolith on the central path",
+          "Fallen column in the foreground left",
+          "Dirt path branching through grass",
+          "Grassy terrain and distant landscape",
+          "Clear sky and sun position"
+        ],
+        "visibility_timeline": {
+          "pre_visible": [
+            "c01"
+          ],
+          "offscreen": [
+            "c02",
+            "c03",
+            "c04",
+            "c05"
+          ],
+          "return_visible": [
+            "c06",
+            "c07",
+            "c08"
+          ]
+        },
+        "expected_evolution": "While the torch flame silhouettes and brightness are offscreen from c02 to c05 the flame must continue to evolve temporally with natural flicker, brightness and shape variation and the associated lighting on silhouettes must progress continuously. No freeze, reset or teleport to the initial observation state is allowed. Upon return in c06-c08 the torch flame and its illumination should be present at a spatially consistent location relative to stable anchors and show a plausible continuation of the flicker/brightness trajectory from before it left view, i.e., evolved rather than identical to the first visible frame.",
+        "failure_modes": [
+          "Flame frozen or static during offscreen and return_visible periods",
+          "Brightness and flicker reset to the initial observation state on return",
+          "Torch or silhouettes disappear permanently or reappear abruptly with no temporal continuity",
+          "Flame shape/intensity repeats exactly as in pre_visible frames indicating looping",
+          "Torch position or scale jumps relative to stable anchors on return",
+          "Silhouettes change identity, number or position inconsistently with the initial scene"
+        ]
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a careful benchmark case-specification assistant. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Infer the expected offscreen-evolution specification for this world-model case.\nUse only the initial observation and model-facing action. Do not score a generated video.\nIdentify the target process, stable anchors, when the target should be visible or offscreen, and how it should continue evolving.\nReturn JSON only with keys: target_process, stable_anchors, visibility_timeline, expected_evolution, failure_modes.\nvisibility_timeline must be a JSON object whose keys are pre_visible, offscreen, and return_visible.\nEach visibility_timeline value must be an array containing only chunk ids, for example: {\"pre_visible\":[\"c01\"],\"offscreen\":[\"c03\",\"c04\"],\"return_visible\":[\"c06\",\"c07\"]}.\nDo not put prose descriptions or boolean values in visibility_timeline.\n\n{\n  \"top_level_action_text\": \"Use a look-away-and-return sequence. The torch flame silhouettes and brightness should continue evolving while offscreen.\",\n  \"chunks\": [\n    {\n      \"chunk_id\": \"c01\",\n      \"text\": \"Turn away from the torch flame silhouettes and brightness while it is still visible.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c02\",\n      \"text\": \"Continue turning so the torch flame silhouettes and brightness leaves the camera view.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c03\",\n      \"text\": \"Move forward while looking away; the torch flame silhouettes and brightness remains offscreen and should continue evolving.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c04\",\n      \"text\": \"Pause briefly with the torch flame silhouettes and brightness still offscreen.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c05\",\n      \"text\": \"Move back toward the original area while not facing the torch flame silhouettes and brightness.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c06\",\n      \"text\": \"Turn back toward the same torch flame silhouettes and brightness.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c07\",\n      \"text\": \"Return the torch flame silhouettes and brightness to view; it should have evolved rather than frozen or reset.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c08\",\n      \"text\": \"Settle into a final view compatible with the original world.\",\n      \"controls\": []\n    }\n  ]\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "7b9f8b7b3f3d96e9cb8c8e737e5c5c534281a79d573f6e3c2fbe1a78e9e55351",
+                "bytes": 24146
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\n  \"target_process\": \"The torch flame in the foreground right and the dynamic illumination / brightness it provides, including the flickering flame shape, intensity and color variation and the torch-cast silhouettes / lighting on the background figures and surroundings that evolve with the flame.\",\n  \"stable_anchors\": [\n    \"Stone archway ruin on the left\",\n    \"Obelisk/monolith on the central path\",\n    \"Fallen column in the foreground left\",\n    \"Dirt path branching through grass\",\n    \"Grassy terrain and distant landscape\",\n    \"Clear sky and sun position\"\n  ],\n  \"visibility_timeline\": {\n    \"pre_visible\": [\"c01\"],\n    \"offscreen\": [\"c02\",\"c03\",\"c04\",\"c05\"],\n    \"return_visible\": [\"c06\",\"c07\",\"c08\"]\n  },\n  \"expected_evolution\": \"While the torch flame silhouettes and brightness are offscreen from c02 to c05 the flame must continue to evolve temporally with natural flicker, brightness and shape variation and the associated lighting on silhouettes must progress continuously. No freeze, reset or teleport to the initial observation state is allowed. Upon return in c06-c08 the torch flame and its illumination should be present at a spatially consistent location relative to stable anchors and show a plausible continuation of the flicker/brightness trajectory from before it left view, i.e., evolved rather than identical to the first visible frame.\",\n  \"failure_modes\": [\n    \"Flame frozen or static during offscreen and return_visible periods\",\n    \"Brightness and flicker reset to the initial observation state on return\",\n    \"Torch or silhouettes disappear permanently or reappear abruptly with no temporal continuity\",\n    \"Flame shape/intensity repeats exactly as in pre_visible frames indicating looping\",\n    \"Torch position or scale jumps relative to stable anchors on return\",\n    \"Silhouettes change identity, number or position inconsistently with the initial scene\"\n  ]\n}",
+      "raw_response": {
+        "id": "chatcmpl-a4eac9693d8281ee",
+        "object": "chat.completion",
+        "created": 1790847691,
+        "model": "meta-models/Muse-Glimmer-30B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"target_process\": \"The torch flame in the foreground right and the dynamic illumination / brightness it provides, including the flickering flame shape, intensity and color variation and the torch-cast silhouettes / lighting on the background figures and surroundings that evolve with the flame.\",\n  \"stable_anchors\": [\n    \"Stone archway ruin on the left\",\n    \"Obelisk/monolith on the central path\",\n    \"Fallen column in the foreground left\",\n    \"Dirt path branching through grass\",\n    \"Grassy terrain and distant landscape\",\n    \"Clear sky and sun position\"\n  ],\n  \"visibility_timeline\": {\n    \"pre_visible\": [\"c01\"],\n    \"offscreen\": [\"c02\",\"c03\",\"c04\",\"c05\"],\n    \"return_visible\": [\"c06\",\"c07\",\"c08\"]\n  },\n  \"expected_evolution\": \"While the torch flame silhouettes and brightness are offscreen from c02 to c05 the flame must continue to evolve temporally with natural flicker, brightness and shape variation and the associated lighting on silhouettes must progress continuously. No freeze, reset or teleport to the initial observation state is allowed. Upon return in c06-c08 the torch flame and its illumination should be present at a spatially consistent location relative to stable anchors and show a plausible continuation of the flicker/brightness trajectory from before it left view, i.e., evolved rather than identical to the first visible frame.\",\n  \"failure_modes\": [\n    \"Flame frozen or static during offscreen and return_visible periods\",\n    \"Brightness and flicker reset to the initial observation state on return\",\n    \"Torch or silhouettes disappear permanently or reappear abruptly with no temporal continuity\",\n    \"Flame shape/intensity repeats exactly as in pre_visible frames indicating looping\",\n    \"Torch position or scale jumps relative to stable anchors on return\",\n    \"Silhouettes change identity, number or position inconsistently with the initial scene\"\n  ]\n}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": "Infer the expected offscreen-evolution specification for this world-model case.\nUse only initial observation and model-facing action. Do not score a generated video.\nIdentify target process, stable anchors, when target should be visible or offscreen, and how it should continue evolving.\nReturn JSON only with keys: target_process, stable_anchors, visibility_timeline, expected_evolution, failure_modes.\nvisibility_timeline must be JSON object whose keys are pre_visible, offscreen, and return_visible.\nEach visibility_timeline value must be array containing only chunk ids, for example...\n\nWe need infer.\n\nTarget process: torch flame silhouettes and brightness? The description: torch flame silhouettes and brightness should continue evolving while offscreen. In image, torch in foreground right, flame, and silhouettes of people behind? Actually silhouettes of people? The torch flame silhouettes and brightness. Probably the torch flame itself and the silhouettes it casts? Or torch flame silhouettes? Might be the torch flame and the silhouettes of figures behind it? The initial observation shows torch in foreground right with flame, and silhouettes of people in background right. Also a torch? Hmm.\n\nTarget process: flame flicker, brightness variation, and silhouette shapes? Probably the torch flame's flicker and illumination.\n\nStable anchors: stone archway, obelisk, fallen column, path, grass, sky, sun.\n\nVisibility timeline: pre_visible: c01? Turn away from torch flame silhouettes and brightness while it is still visible. So c01 pre_visible. c02 continue turning so leaves view. So c02 maybe still pre_visible? Or offscreen starts? \"leaves the camera view\" so c02 is transition. Might be offscreen starts c03. Let's interpret: pre_visible chunks where target is visible: c01. Possibly c02 still visible? \"Continue turning so ... leaves the camera view.\" Could be still partially visible. Might be pre_visible includes c01, c02? Hmm.\n\nOffscreen: c03, c04, c05? c05 move back toward original area while not facing... So still offscreen. c06 turn back toward same... So maybe becomes visible at c06? c07 return to view. So return_visible: c06, c07, c08? c08 settle into final view compatible. Probably return_visible includes c06, c07, c08? The description says return the torch... to view; it should have evolved rather than frozen or reset. That's c07. c08 settle.\n\nLet's define:\npre_visible: [\"c01\",\"c02\"]? The instruction: Turn away while it is still visible. Continue turning so it leaves view. So c02 is the leaving, maybe still visible at start of chunk. Might be considered pre_visible.\n\noffscreen: [\"c03\",\"c04\",\"c05\"] maybe c06 is turning back, so maybe still offscreen until visible. Could be offscreen includes c03,c04,c05,c06? But c06 says turn back toward same... So maybe becomes visible during c06.\n\nreturn_visible: [\"c06\",\"c07\",\"c08\"]\n\nAlternative interpretation: pre_visible = c01 only. offscreen = c02,c03,c04,c05,c06? Hmm.\n\nThe spec says visibility_timeline must be array of chunk ids. Let's pick reasonable.\n\npre_visible: c01\noffscreen: c02,c03,c04,c05\nreturn_visible: c06,c07,c08\n\nBut c02 says leaves camera view, so maybe offscreen starts c02. Could be pre_visible c01 only.\n\nLet's choose pre_visible [\"c01\"], offscreen [\"c02\",\"c03\",\"c04\",\"c05\"], return_visible [\"c06\",\"c07\",\"c08\"].\n\nTarget process: continuous flame flicker, brightness variation, and dynamic silhouettes cast by torch light on background figures/architecture, evolving naturally over time, not frozen/reset.\n\nStable anchors: stone archway ruin, obelisk/monolith, fallen column in foreground, dirt path, grassy terrain, sky/sun, distant landscape.\n\nExpected evolution: flame continues flickering with natural variation in shape, intensity, color temperature; brightness of scene influenced by torch persists; silhouettes of figures remain consistent in position but their edge lighting changes with flame; no teleport, no reset to initial frame; temporal continuity preserved.\n\nFailure modes: flame frozen/static, brightness reset to initial, silhouettes disappear/reappear abruptly, torch reappears at different position, flicker pattern repeats exactly, etc.\n\nReturn JSON.\n\n"
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 200008,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+        "usage": {
+          "prompt_tokens": 742,
+          "total_tokens": 2093,
+          "completion_tokens": 1351,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-a4eac9693d8281ee",
+        "model": "meta-models/Muse-Glimmer-30B",
+        "created": 1790847691,
+        "usage": {
+          "prompt_tokens": 742,
+          "total_tokens": 2093,
+          "completion_tokens": 1351,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:41:31.622824+00:00",
+        "response_received_at": "2026-10-01T09:43:13.572887+00:00",
+        "elapsed_seconds": 101.950053,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "http://127.0.0.1:8001/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 101.949986
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "meta-models/Muse-Glimmer-30B",
+          "config_digest": "5f17fcd96b31e7d791868ac465935825523aa0f6d6bc35d3bbbb500375fc05cf"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "temperature": 0,
+            "max_tokens": 16384,
+            "reasoning_strength": "medium",
+            "structured_output": "JSON requested in prompt; native Muse channel protocol"
+          },
+          "request_sha256": "ca097d145fd59dd62156da45e903787949dd892f4483473e8441ef3b207dea4a"
+        }
+      },
+      "evidence_digest": "7eed97a69cf1c636857481998721855ae0b081f9a4c0b36045c52b35480ca983"
+    },
+    "verify": {
+      "schema_version": "harnesseval.offscreen_evolution.verify_agent",
+      "skill_id": "offscreen_evolution_verifier",
+      "definition_version": "harnesseval.offscreen_evolution",
+      "prompt_version": "harnesseval.offscreen_evolution.prompt",
+      "agent": "verify_agent",
+      "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+      "input_digest": "2217194084810795ddccdfd1c0ca9ba1cb33071a520a2651dc90fa08ddf9a24a",
+      "judgment": {
+        "q_scores": {
+          "Q1_pre_visible": 1,
+          "Q2_offscreen_absent": 0.5,
+          "Q3_return_visible": 0,
+          "Q4_anchor_preservation": 0,
+          "Q5_no_reset": 0,
+          "Q6_state_change_visible": 0,
+          "Q7_evolution_plausible": 0,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_pre_visible": "The initial c01 frames show the foreground torch with flame and the background silhouettes clearly in view, matching the pre-visible requirement.",
+          "Q2_offscreen_absent": "The original foreground torch is out of view in c03 and c05, but c04 shows new flame sources on the hill, so the target process is not cleanly absent across the whole intended offscreen window.",
+          "Q3_return_visible": "In the return window c07-c08 the original torch flame silhouettes and brightness do not reappear; instead unrelated large flames, running figures and an explosion are shown.",
+          "Q4_anchor_preservation": "Stone gateway and obelisk are present briefly but by c08 the scene changes to different ruins and an explosion, losing the stable anchors and world identity.",
+          "Q5_no_reset": "The video contains a hard scene change / replacement world with explosion and smoke, not a continuous look-away-and-return.",
+          "Q6_state_change_visible": "No same target process returns, so no comparable pre vs post state can be assessed.",
+          "Q7_evolution_plausible": "The change is a dramatic explosion and identity swap, not a plausible continuous evolution of the torch flame silhouettes and brightness.",
+          "Q8_judgeable": "Frames are clear and motion is observable, allowing judgment of visibility and world changes."
+        },
+        "warnings": [],
+        "summary": "The rollout shows the torch flame silhouettes and brightness clearly pre-visible, then the original torch leaves view, but the intended offscreen interval is contaminated by new flames and the target never returns as the same process. Stable anchors are lost and the world resets to an explosion/replacement scene in the return window, so offscreen evolution is not demonstrated."
+      },
+      "conversation": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are a strict VLM evaluator for offscreen world-state evolution. Return valid JSON only."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate this generated rollout against the canonical offscreen-evolution case specification.\nUse the canonical specification as authoritative. The expected specification is only a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nUse 0 for absent or contradicted, 0.25 for weak evidence, 0.5 for partial or ambiguous evidence, 0.75 for mostly satisfied, and 1 for clearly and fully satisfied.\nJudge visibility using the supplied approximate chunk labels. Do not infer successful offscreen evolution merely from generic motion or visual change.\n\nQuestions:\nQ1_pre_visible: the target process is clearly visible before the look-away phase.\nQ2_offscreen_absent: the target process is out of view during intended offscreen chunks.\nQ3_return_visible: the same target process returns afterward.\nQ4_anchor_preservation: stable anchors preserve the identity of the world after return.\nQ5_no_reset: the video avoids a hard cut, scene reset, or replacement world.\nQ6_state_change_visible: the returned target state visibly differs from its pre-offscreen state.\nQ7_evolution_plausible: the change matches continuous expected evolution rather than random deformation.\nQ8_judgeable: the video is clear, non-static, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_pre_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_pre_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case specification:\n{\n  \"target_process\": \"torch flame silhouettes and brightness\",\n  \"evolvable_elements\": [],\n  \"stable_anchors\": [\n    \"stone gateway\",\n    \"obelisk\",\n    \"path fork\",\n    \"fallen column\",\n    \"torch flame silhouettes and brightness\"\n  ],\n  \"visibility_plan\": {\n    \"pre_visible\": [\n      \"c01\"\n    ],\n    \"offscreen\": [\n      \"c03\",\n      \"c04\",\n      \"c05\"\n    ],\n    \"return_visible\": [\n      \"c07\",\n      \"c08\"\n    ]\n  },\n  \"expected_evolution\": [\n    \"The torch flame silhouettes and brightness continues changing during the offscreen interval.\",\n    \"When it returns, the torch flame silhouettes and brightness is not an exact frozen copy, but remains the same process in the same world.\"\n  ],\n  \"failure_modes\": [\n    \"target never leaves view\",\n    \"target never returns\",\n    \"frozen copy\",\n    \"world reset\",\n    \"identity swap\"\n  ],\n  \"top_level_action_text\": \"Use a look-away-and-return sequence. The torch flame silhouettes and brightness should continue evolving while offscreen.\",\n  \"chunks\": [\n    {\n      \"chunk_id\": \"c01\",\n      \"text\": \"Turn away from the torch flame silhouettes and brightness while it is still visible.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c02\",\n      \"text\": \"Continue turning so the torch flame silhouettes and brightness leaves the camera view.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c03\",\n      \"text\": \"Move forward while looking away; the torch flame silhouettes and brightness remains offscreen and should continue evolving.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c04\",\n      \"text\": \"Pause briefly with the torch flame silhouettes and brightness still offscreen.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c05\",\n      \"text\": \"Move back toward the original area while not facing the torch flame silhouettes and brightness.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c06\",\n      \"text\": \"Turn back toward the same torch flame silhouettes and brightness.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c07\",\n      \"text\": \"Return the torch flame silhouettes and brightness to view; it should have evolved rather than frozen or reset.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c08\",\n      \"text\": \"Settle into a final view compatible with the original world.\",\n      \"controls\": []\n    }\n  ],\n  \"return_window\": {\n    \"reference_chunk\": \"c01\",\n    \"return_chunk\": \"c08\"\n  },\n  \"offscreen_window\": {\n    \"leave_chunk\": \"c02\",\n    \"return_chunk\": \"c07\"\n  }\n}\n\nExpected specification inferred before seeing the video, for audit only:\n{\n  \"target_process\": \"The torch flame in the foreground right and the dynamic illumination / brightness it provides, including the flickering flame shape, intensity and color variation and the torch-cast silhouettes / lighting on the background figures and surroundings that evolve with the flame.\",\n  \"stable_anchors\": [\n    \"Stone archway ruin on the left\",\n    \"Obelisk/monolith on the central path\",\n    \"Fallen column in the foreground left\",\n    \"Dirt path branching through grass\",\n    \"Grassy terrain and distant landscape\",\n    \"Clear sky and sun position\"\n  ],\n  \"visibility_timeline\": {\n    \"pre_visible\": [\n      \"c01\"\n    ],\n    \"offscreen\": [\n      \"c02\",\n      \"c03\",\n      \"c04\",\n      \"c05\"\n    ],\n    \"return_visible\": [\n      \"c06\",\n      \"c07\",\n      \"c08\"\n    ]\n  },\n  \"expected_evolution\": \"While the torch flame silhouettes and brightness are offscreen from c02 to c05 the flame must continue to evolve temporally with natural flicker, brightness and shape variation and the associated lighting on silhouettes must progress continuously. No freeze, reset or teleport to the initial observation state is allowed. Upon return in c06-c08 the torch flame and its illumination should be present at a spatially consistent location relative to stable anchors and show a plausible continuation of the flicker/brightness trajectory from before it left view, i.e., evolved rather than identical to the first visible frame.\",\n  \"failure_modes\": [\n    \"Flame frozen or static during offscreen and return_visible periods\",\n    \"Brightness and flicker reset to the initial observation state on return\",\n    \"Torch or silhouettes disappear permanently or reappear abruptly with no temporal continuity\",\n    \"Flame shape/intensity repeats exactly as in pre_visible frames indicating looping\",\n    \"Torch position or scale jumps relative to stable anchors on return\",\n    \"Silhouettes change identity, number or position inconsistently with the initial scene\"\n  ]\n}"
+            },
+            {
+              "type": "text",
+              "text": "Initial observation image:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "7b9f8b7b3f3d96e9cb8c8e737e5c5c534281a79d573f6e3c2fbe1a78e9e55351",
+                "bytes": 24146
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 00, source frame 0, approximate chunk c01:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "d7f9729f563c1a36bc3565c789a62b60d6b4f10dff37fe5cc7fe3b1dae5ae789",
+                "bytes": 24581
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 01, source frame 69, approximate chunk c01:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "251ab6f1207119e5cec1262318ede20782ca79a899b02b8d89127b994b3c84c9",
+                "bytes": 19088
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 02, source frame 139, approximate chunk c02:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "66a3a7462eaf23e67a9d56b20a57163566a8338720dc51d7cff770ac1107d263",
+                "bytes": 22756
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 03, source frame 209, approximate chunk c03:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "0fe5bfba6871f9b9e3e5030ad103ff615eb805fc79dbed87025fba0d00212592",
+                "bytes": 22337
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 04, source frame 279, approximate chunk c03:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "d4ca1e3c0d5a21e0654aea73acd356fc33ab40fb076cc68f483615af361cff4a",
+                "bytes": 20771
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 05, source frame 349, approximate chunk c04:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "377142d0196001a84df1e41f8fdbc08566011ed7368b26418dbe10f5eeb1c45d",
+                "bytes": 16664
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 06, source frame 418, approximate chunk c05:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "d74958f26edc6526867d4573d1b54436863ae2a5e98015a3a8d70f331c2de9c0",
+                "bytes": 20249
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 07, source frame 488, approximate chunk c06:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "1d49ea573af22a83a514a0612fdbaaaea078ad4eddaa88d0dc11628a7083d1ab",
+                "bytes": 22608
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 08, source frame 558, approximate chunk c06:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "35a8ddd53df0f7b8c9ed5cfd8523149145188f6bd069336f4330e642beb2e5f5",
+                "bytes": 19773
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 09, source frame 628, approximate chunk c07:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "baf803d16161102541bba51b6acae479aee44ef44c490cc566b1e04f991ec231",
+                "bytes": 22710
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 10, source frame 698, approximate chunk c08:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "0e7b7a54a99c17bff9841ba818391111f08c2bd72ca73c59ac0af8cd0004cb04",
+                "bytes": 15337
+              }
+            },
+            {
+              "type": "text",
+              "text": "Generated video sample 11, source frame 768, approximate chunk c08:"
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "type": "image_reference",
+                "mime": "image/jpeg",
+                "sha256": "9239872b2670ec83b27a03764598b2b3dc8bc90f46a569954888ebd155dede45",
+                "bytes": 23779
+              }
+            }
+          ]
+        }
+      ],
+      "raw_output_text": "{\"q_scores\":{\"Q1_pre_visible\":1,\"Q2_offscreen_absent\":0.5,\"Q3_return_visible\":0,\"Q4_anchor_preservation\":0,\"Q5_no_reset\":0,\"Q6_state_change_visible\":0,\"Q7_evolution_plausible\":0,\"Q8_judgeable\":1},\"reasons\":{\"Q1_pre_visible\":\"The initial c01 frames show the foreground torch with flame and the background silhouettes clearly in view, matching the pre-visible requirement.\",\"Q2_offscreen_absent\":\"The original foreground torch is out of view in c03 and c05, but c04 shows new flame sources on the hill, so the target process is not cleanly absent across the whole intended offscreen window.\",\"Q3_return_visible\":\"In the return window c07-c08 the original torch flame silhouettes and brightness do not reappear; instead unrelated large flames, running figures and an explosion are shown.\",\"Q4_anchor_preservation\":\"Stone gateway and obelisk are present briefly but by c08 the scene changes to different ruins and an explosion, losing the stable anchors and world identity.\",\"Q5_no_reset\":\"The video contains a hard scene change / replacement world with explosion and smoke, not a continuous look-away-and-return.\",\"Q6_state_change_visible\":\"No same target process returns, so no comparable pre vs post state can be assessed.\",\"Q7_evolution_plausible\":\"The change is a dramatic explosion and identity swap, not a plausible continuous evolution of the torch flame silhouettes and brightness.\",\"Q8_judgeable\":\"Frames are clear and motion is observable, allowing judgment of visibility and world changes.\"},\"warnings\":[],\"summary\":\"The rollout shows the torch flame silhouettes and brightness clearly pre-visible, then the original torch leaves view, but the intended offscreen interval is contaminated by new flames and the target never returns as the same process. Stable anchors are lost and the world resets to an explosion/replacement scene in the return window, so offscreen evolution is not demonstrated.\"}",
+      "raw_response": {
+        "id": "chatcmpl-b6000debccf21a48",
+        "object": "chat.completion",
+        "created": 1790847793,
+        "model": "meta-models/Muse-Glimmer-30B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_pre_visible\":1,\"Q2_offscreen_absent\":0.5,\"Q3_return_visible\":0,\"Q4_anchor_preservation\":0,\"Q5_no_reset\":0,\"Q6_state_change_visible\":0,\"Q7_evolution_plausible\":0,\"Q8_judgeable\":1},\"reasons\":{\"Q1_pre_visible\":\"The initial c01 frames show the foreground torch with flame and the background silhouettes clearly in view, matching the pre-visible requirement.\",\"Q2_offscreen_absent\":\"The original foreground torch is out of view in c03 and c05, but c04 shows new flame sources on the hill, so the target process is not cleanly absent across the whole intended offscreen window.\",\"Q3_return_visible\":\"In the return window c07-c08 the original torch flame silhouettes and brightness do not reappear; instead unrelated large flames, running figures and an explosion are shown.\",\"Q4_anchor_preservation\":\"Stone gateway and obelisk are present briefly but by c08 the scene changes to different ruins and an explosion, losing the stable anchors and world identity.\",\"Q5_no_reset\":\"The video contains a hard scene change / replacement world with explosion and smoke, not a continuous look-away-and-return.\",\"Q6_state_change_visible\":\"No same target process returns, so no comparable pre vs post state can be assessed.\",\"Q7_evolution_plausible\":\"The change is a dramatic explosion and identity swap, not a plausible continuous evolution of the torch flame silhouettes and brightness.\",\"Q8_judgeable\":\"Frames are clear and motion is observable, allowing judgment of visibility and world changes.\"},\"warnings\":[],\"summary\":\"The rollout shows the torch flame silhouettes and brightness clearly pre-visible, then the original torch leaves view, but the intended offscreen interval is contaminated by new flames and the target never returns as the same process. Stable anchors are lost and the world resets to an explosion/replacement scene in the return window, so offscreen evolution is not demonstrated.\"}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": "Evaluate this generated rollout against canonical offscreen-evolution case specification.\n\nWe need scores Q1_pre_visible, Q2_offscreen_absent, Q3_return_visible, Q4_anchor_preservation, Q5_no_reset, Q6_state_change_visible, Q7_evolution_plausible, Q8_judgeable.\n\nCanonical spec: target_process = \"torch flame silhouettes and brightness\". evolvable_elements [] stable anchors: stone gateway, obelisk, path fork, fallen column, torch flame silhouettes and brightness.\n\nvisibility_plan: pre_visible c01, offscreen c03 c04 c05, return_visible c07 c08.\n\nExpected evolution: torch flame silhouettes and brightness continues changing during offscreen interval. When returns, not exact frozen copy, but remains same process in same world.\n\nWe have frames:\n\nc01 sample 00 frame0: torch visible right foreground, flame, silhouettes in background. Good.\n\nsample01 frame69 approx chunk c01: camera turned left, torch flame on left edge, column in foreground. Torch still visible? Flame visible left. So still visible? Chunk c01 is pre visible. Might be okay.\n\nc02 sample02 frame139 approx chunk c02: view shows gateway, obelisk, silhouettes, no torch visible. So torch left view. Good.\n\nc03 sample03 frame209 approx chunk c03: gateway, obelisk, silhouettes. No torch. Good.\n\nsample04 frame279 approx chunk c03: gateway, obelisk, no torch, silhouettes far. Good.\n\nc04 sample05 frame349 approx chunk c04: rocks, torches on hill? Shows multiple flames on hill. That's not the original torch? The target process is torch flame silhouettes and brightness. The original torch is foreground right. Now we see multiple torches on hill. Might be different. Offscreen should be absent. But we see flames. Hmm.\n\nc05 sample06 frame418 approx chunk c05: gateway, obelisk, silhouettes far. No torch.\n\nc06 sample07 frame488 approx chunk c06: gateway, obelisk, silhouettes, and flames on left with smoke, people running with torches? The original torch is not visible? Actually flames appear on left hill with people. That's not the original torch.\n\nc06 sample08 frame558: flames large, people running through gateway with torches. The original torch foreground is gone.\n\nc07 sample09 frame628: flames huge, people running.\n\nc08 sample10 frame698: scene changed to different ruins, smoke. No gateway? Looks different.\n\nsample11 frame768: huge explosion, people silhouettes.\n\nSo target process never returns as same torch. It seems world changed dramatically, explosion, different scene. So Q1_pre_visible: target clearly visible before look-away. Yes. Score 1.\n\nQ2_offscreen_absent: target process is out of view during intended offscreen chunks c03 c04 c05. In c03 frames, torch not visible. Good. c04 frame shows multiple torches on hill, but original torch not visible. Might be considered target process still present? The target is torch flame silhouettes and brightness. Could be ambiguous. But offscreen absent requires target out of view. The flames on hill are different torches. Might be considered target process still present? The spec says target process is torch flame silhouettes and brightness. Could be any torch? Probably the specific torch. The frames show flames but not the original torch. Might be okay. However c04 shows flames. Might be considered target still visible (different flames). Hmm.\n\nBetter score maybe 0.5 partial.\n\nQ3_return_visible: same target process returns afterward. Return visible chunks c07 c08. The torch from start never returns. Instead we see different flames/explosion. So 0.\n\nQ4_anchor_preservation: stable anchors preserve identity after return. Anchors: stone gateway, obelisk, path fork, fallen column, torch flame... In c07/c08, gateway appears but later scene changes to different ruins and explosion. Anchors not preserved. Score 0.\n\nQ5_no_reset: video avoids hard cut, scene reset, or replacement world. There is clearly a scene reset / explosion / replacement. So 0.\n\nQ6_state_change_visible: returned target state visibly differs from pre-offscreen state. Since target never returns, maybe 0.\n\nQ7_evolution_plausible: change matches continuous expected evolution rather than random deformation. No. 0.\n\nQ8_judgeable: video is clear, non-static, sufficiently observable. Yes, it's observable. Score 1? Maybe 0.75? It's clear. I'll give 1.\n\nNeed reasons.\n\nReturn JSON.\n\nLet's produce scores:\nQ1_pre_visible 1\nQ2_offscreen_absent 0.5? Could be 0.75? The target is absent in c03 c05, but c04 shows flames. Might be 0.5 partial. Let's give 0.5.\n\nQ3_return_visible 0\nQ4_anchor_preservation 0\nQ5_no_reset 0\nQ6_state_change_visible 0\nQ7_evolution_plausible 0\nQ8_judgeable 1\n\nWarnings empty.\n\nSummary: target never returns, world resets to explosion, anchors lost.\n\nReturn JSON only."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 200008,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+        "usage": {
+          "prompt_tokens": 4351,
+          "total_tokens": 5888,
+          "completion_tokens": 1537,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-b6000debccf21a48",
+        "model": "meta-models/Muse-Glimmer-30B",
+        "created": 1790847793,
+        "usage": {
+          "prompt_tokens": 4351,
+          "total_tokens": 5888,
+          "completion_tokens": 1537,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:43:13.881464+00:00",
+        "response_received_at": "2026-10-01T09:45:10.235299+00:00",
+        "elapsed_seconds": 116.353826,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "http://127.0.0.1:8001/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 116.353753
+          }
+        ]
+      },
+      "provenance": {
+        "backend": {
+          "backend_id": "openai_compatible.intentional_change_vlm",
+          "backend_version": "meta-models/Muse-Glimmer-30B",
+          "config_digest": "5f17fcd96b31e7d791868ac465935825523aa0f6d6bc35d3bbbb500375fc05cf"
+        },
+        "execution_mode": "api",
+        "backend_output": {
+          "settings": {
+            "temperature": 0,
+            "max_tokens": 16384,
+            "reasoning_strength": "medium",
+            "structured_output": "JSON requested in prompt; native Muse channel protocol"
+          },
+          "request_sha256": "e16501e9c2d3cf7c83ca0494a8bd4be3fe20947819f42fb692b6edc07945b9e8"
+        }
+      },
+      "sampling": {
+        "method": "uniform_full_video",
+        "max_frames": 12,
+        "chunk_assignment": "normalized_temporal_midpoint",
+        "source_frame_count": 769,
+        "source_fps": 24.0,
+        "sample_indices": [
+          0,
+          69,
+          139,
+          209,
+          279,
+          349,
+          418,
+          488,
+          558,
+          628,
+          698,
+          768
+        ],
+        "frame_chunk_labels": [
+          "c01",
+          "c01",
+          "c02",
+          "c03",
+          "c03",
+          "c04",
+          "c05",
+          "c06",
+          "c06",
+          "c07",
+          "c08",
+          "c08"
+        ]
+      },
+      "evidence_digest": "f09d94781da66ff58a4bcd6d90fbfa31981939819f88eeb9bd438b0c82b23212"
+    }
+  },
+  "fixed_specification": {
+    "result": {
+      "skill_id": "offscreen_evolution_verifier",
+      "status": "ok",
+      "score": 0.063437,
+      "metrics": {
+        "Q1_pre_visible": 1.0,
+        "Q2_offscreen_absent": 0.5,
+        "Q3_return_visible": 0.25,
+        "Q4_anchor_preservation": 0.25,
+        "Q5_no_reset": 0.0,
+        "Q6_state_change_visible": 0.5,
+        "Q7_evolution_plausible": 0.0,
+        "Q8_judgeable": 1.0,
+        "visibility_score": 0.583333,
+        "validity_gate": 0.5,
+        "anchor_score": 0.25,
+        "evolution_score": 0.2,
+        "core_score": 0.2175,
+        "final_score": 0.063437,
+        "expected_spec_alignment": 0.442761
+      },
+      "diagnostics": {
+        "definition_version": "harnesseval.offscreen_evolution",
+        "prompt_version": "harnesseval.offscreen_evolution.prompt",
+        "cache_contract_version": "harnesseval.offscreen_evolution.cache_contract",
+        "case_audit": {
+          "status": "ok",
+          "warning": false,
+          "expected_spec_alignment": 0.442761,
+          "target_alignment": 0.333333,
+          "anchor_alignment": 0.272727,
+          "visibility_alignment": 0.722222
+        }
+      },
+      "notes": [
+        "analyze_agent alignment is a case-audit warning only; scoring uses the canonical offscreen-evolution specification and generated video"
+      ]
+    },
+    "expected_spec": {
+      "target_process": "torch flame silhouettes and brightness evolution",
+      "stable_anchors": [
+        "stone archway",
+        "obelisk",
+        "silhouetted figures",
+        "torch holder"
+      ],
+      "visibility_timeline": {
+        "pre_visible": [
+          "c01"
+        ],
+        "offscreen": [
+          "c03",
+          "c04"
+        ],
+        "return_visible": [
+          "c06",
+          "c07"
+        ]
+      },
+      "expected_evolution": "The torch flame silhouettes and brightness should continue evolving (changing shape, intensity, or flicker) while offscreen, without resetting or freezing.",
+      "failure_modes": [
+        "torch flame appears frozen or unchanged while offscreen",
+        "torch flame reappears without visible evolution",
+        "torch flame returns before the look-away sequence completes"
+      ]
+    },
+    "conversation": [
+      {
+        "role": "system",
+        "content": [
+          {
+            "type": "text",
+            "text": "You are a strict VLM evaluator for offscreen world-state evolution. Return valid JSON only."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Evaluate this generated rollout against the canonical offscreen-evolution case specification.\nUse the canonical specification as authoritative. The expected specification is only a case-audit reference.\nEach question score must be exactly one of: 0, 0.25, 0.5, 0.75, 1.\nUse 0 for absent or contradicted, 0.25 for weak evidence, 0.5 for partial or ambiguous evidence, 0.75 for mostly satisfied, and 1 for clearly and fully satisfied.\nJudge visibility using the supplied approximate chunk labels. Do not infer successful offscreen evolution merely from generic motion or visual change.\n\nQuestions:\nQ1_pre_visible: the target process is clearly visible before the look-away phase.\nQ2_offscreen_absent: the target process is out of view during intended offscreen chunks.\nQ3_return_visible: the same target process returns afterward.\nQ4_anchor_preservation: stable anchors preserve the identity of the world after return.\nQ5_no_reset: the video avoids a hard cut, scene reset, or replacement world.\nQ6_state_change_visible: the returned target state visibly differs from its pre-offscreen state.\nQ7_evolution_plausible: the change matches continuous expected evolution rather than random deformation.\nQ8_judgeable: the video is clear, non-static, and sufficiently observable to judge.\n\nReturn JSON only:\n{\"q_scores\":{\"Q1_pre_visible\":0|0.25|0.5|0.75|1,...},\"reasons\":{\"Q1_pre_visible\":\"...\"},\"warnings\":[],\"summary\":\"...\"}\n\nCanonical case specification:\n{\n  \"target_process\": \"torch flame silhouettes and brightness\",\n  \"evolvable_elements\": [],\n  \"stable_anchors\": [\n    \"stone gateway\",\n    \"obelisk\",\n    \"path fork\",\n    \"fallen column\",\n    \"torch flame silhouettes and brightness\"\n  ],\n  \"visibility_plan\": {\n    \"pre_visible\": [\n      \"c01\"\n    ],\n    \"offscreen\": [\n      \"c03\",\n      \"c04\",\n      \"c05\"\n    ],\n    \"return_visible\": [\n      \"c07\",\n      \"c08\"\n    ]\n  },\n  \"expected_evolution\": [\n    \"The torch flame silhouettes and brightness continues changing during the offscreen interval.\",\n    \"When it returns, the torch flame silhouettes and brightness is not an exact frozen copy, but remains the same process in the same world.\"\n  ],\n  \"failure_modes\": [\n    \"target never leaves view\",\n    \"target never returns\",\n    \"frozen copy\",\n    \"world reset\",\n    \"identity swap\"\n  ],\n  \"top_level_action_text\": \"Use a look-away-and-return sequence. The torch flame silhouettes and brightness should continue evolving while offscreen.\",\n  \"chunks\": [\n    {\n      \"chunk_id\": \"c01\",\n      \"text\": \"Turn away from the torch flame silhouettes and brightness while it is still visible.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c02\",\n      \"text\": \"Continue turning so the torch flame silhouettes and brightness leaves the camera view.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c03\",\n      \"text\": \"Move forward while looking away; the torch flame silhouettes and brightness remains offscreen and should continue evolving.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c04\",\n      \"text\": \"Pause briefly with the torch flame silhouettes and brightness still offscreen.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c05\",\n      \"text\": \"Move back toward the original area while not facing the torch flame silhouettes and brightness.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c06\",\n      \"text\": \"Turn back toward the same torch flame silhouettes and brightness.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c07\",\n      \"text\": \"Return the torch flame silhouettes and brightness to view; it should have evolved rather than frozen or reset.\",\n      \"controls\": []\n    },\n    {\n      \"chunk_id\": \"c08\",\n      \"text\": \"Settle into a final view compatible with the original world.\",\n      \"controls\": []\n    }\n  ],\n  \"return_window\": {\n    \"reference_chunk\": \"c01\",\n    \"return_chunk\": \"c08\"\n  },\n  \"offscreen_window\": {\n    \"leave_chunk\": \"c02\",\n    \"return_chunk\": \"c07\"\n  }\n}\n\nExpected specification inferred before seeing the video, for audit only:\n{\n  \"target_process\": \"torch flame silhouettes and brightness evolution\",\n  \"stable_anchors\": [\n    \"stone archway\",\n    \"obelisk\",\n    \"silhouetted figures\",\n    \"torch holder\"\n  ],\n  \"visibility_timeline\": {\n    \"pre_visible\": [\n      \"c01\"\n    ],\n    \"offscreen\": [\n      \"c03\",\n      \"c04\"\n    ],\n    \"return_visible\": [\n      \"c06\",\n      \"c07\"\n    ]\n  },\n  \"expected_evolution\": \"The torch flame silhouettes and brightness should continue evolving (changing shape, intensity, or flicker) while offscreen, without resetting or freezing.\",\n  \"failure_modes\": [\n    \"torch flame appears frozen or unchanged while offscreen\",\n    \"torch flame reappears without visible evolution\",\n    \"torch flame returns before the look-away sequence completes\"\n  ]\n}"
+          },
+          {
+            "type": "text",
+            "text": "Initial observation image:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "7b9f8b7b3f3d96e9cb8c8e737e5c5c534281a79d573f6e3c2fbe1a78e9e55351",
+              "bytes": 24146
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 00, source frame 0, approximate chunk c01:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "d7f9729f563c1a36bc3565c789a62b60d6b4f10dff37fe5cc7fe3b1dae5ae789",
+              "bytes": 24581
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 01, source frame 69, approximate chunk c01:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "251ab6f1207119e5cec1262318ede20782ca79a899b02b8d89127b994b3c84c9",
+              "bytes": 19088
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 02, source frame 139, approximate chunk c02:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "66a3a7462eaf23e67a9d56b20a57163566a8338720dc51d7cff770ac1107d263",
+              "bytes": 22756
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 03, source frame 209, approximate chunk c03:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "0fe5bfba6871f9b9e3e5030ad103ff615eb805fc79dbed87025fba0d00212592",
+              "bytes": 22337
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 04, source frame 279, approximate chunk c03:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "d4ca1e3c0d5a21e0654aea73acd356fc33ab40fb076cc68f483615af361cff4a",
+              "bytes": 20771
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 05, source frame 349, approximate chunk c04:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "377142d0196001a84df1e41f8fdbc08566011ed7368b26418dbe10f5eeb1c45d",
+              "bytes": 16664
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 06, source frame 418, approximate chunk c05:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "d74958f26edc6526867d4573d1b54436863ae2a5e98015a3a8d70f331c2de9c0",
+              "bytes": 20249
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 07, source frame 488, approximate chunk c06:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "1d49ea573af22a83a514a0612fdbaaaea078ad4eddaa88d0dc11628a7083d1ab",
+              "bytes": 22608
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 08, source frame 558, approximate chunk c06:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "35a8ddd53df0f7b8c9ed5cfd8523149145188f6bd069336f4330e642beb2e5f5",
+              "bytes": 19773
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 09, source frame 628, approximate chunk c07:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "baf803d16161102541bba51b6acae479aee44ef44c490cc566b1e04f991ec231",
+              "bytes": 22710
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 10, source frame 698, approximate chunk c08:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "0e7b7a54a99c17bff9841ba818391111f08c2bd72ca73c59ac0af8cd0004cb04",
+              "bytes": 15337
+            }
+          },
+          {
+            "type": "text",
+            "text": "Generated video sample 11, source frame 768, approximate chunk c08:"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "type": "image_reference",
+              "mime": "image/jpeg",
+              "sha256": "9239872b2670ec83b27a03764598b2b3dc8bc90f46a569954888ebd155dede45",
+              "bytes": 23779
+            }
+          }
+        ]
+      }
+    ],
+    "request_digest": "4140cb00365f2a0b4ad719f05a92215b6b202e0118fe2903efcaede547f6672e",
+    "output": {
+      "schema_version": "harnesseval.offscreen_evolution.backend_output",
+      "parsed": {
+        "q_scores": {
+          "Q1_pre_visible": 1,
+          "Q2_offscreen_absent": 0.5,
+          "Q3_return_visible": 0.25,
+          "Q4_anchor_preservation": 0.25,
+          "Q5_no_reset": 0,
+          "Q6_state_change_visible": 0.5,
+          "Q7_evolution_plausible": 0,
+          "Q8_judgeable": 1
+        },
+        "reasons": {
+          "Q1_pre_visible": "The initial frames c01 show the foreground torch flame clearly visible on the right with the stone gateway, obelisk and fallen column in view, satisfying pre-visibility.",
+          "Q2_offscreen_absent": "Target torch is absent in c03 samples 03-04 and c05 sample 06, but c04 sample 05 shows distant torch flames on the hill, so the target process is not consistently out of view during the intended offscreen window.",
+          "Q3_return_visible": "Return window c07-c08 shows large fire/explosion silhouettes with figures rather than the original foreground torch; the same torch process does not clearly reappear, only a different fire element is visible.",
+          "Q4_anchor_preservation": "Stone gateway and obelisk are recognizable in early offscreen frames but later c08 frames show a different stone structure, smoke and an explosion, indicating loss of stable world identity and anchor continuity.",
+          "Q5_no_reset": "The video transitions to a dramatically different scene with explosion, smoke and altered architecture, consistent with a hard cut/scene reset and replacement world rather than continuous look-away-and-return.",
+          "Q6_state_change_visible": "When fire reappears it is massively larger and explosive compared with the initial small torch flame, so a visible change is present, but it is not a continuation of the same torch process.",
+          "Q7_evolution_plausible": "The returned fire is an explosion with running silhouettes, which is not a plausible continuous evolution of a stationary torch flame silhouettes and brightness; it is random deformation/reset.",
+          "Q8_judgeable": "Frames are clear and motion is observable across chunks, allowing assessment of visibility and anchor changes."
+        },
+        "warnings": [],
+        "summary": "The rollout shows the torch flame clearly pre-visible and the camera does look away, but the target process is not reliably kept offscreen and the return shows a different, explosive fire rather than the original torch continuing to evolve. Stable anchors are lost late in the sequence and the world appears reset, so offscreen evolution is not demonstrated."
+      },
+      "raw_output_text": "{\"q_scores\":{\"Q1_pre_visible\":1,\"Q2_offscreen_absent\":0.5,\"Q3_return_visible\":0.25,\"Q4_anchor_preservation\":0.25,\"Q5_no_reset\":0,\"Q6_state_change_visible\":0.5,\"Q7_evolution_plausible\":0,\"Q8_judgeable\":1},\"reasons\":{\"Q1_pre_visible\":\"The initial frames c01 show the foreground torch flame clearly visible on the right with the stone gateway, obelisk and fallen column in view, satisfying pre-visibility.\",\"Q2_offscreen_absent\":\"Target torch is absent in c03 samples 03-04 and c05 sample 06, but c04 sample 05 shows distant torch flames on the hill, so the target process is not consistently out of view during the intended offscreen window.\",\"Q3_return_visible\":\"Return window c07-c08 shows large fire/explosion silhouettes with figures rather than the original foreground torch; the same torch process does not clearly reappear, only a different fire element is visible.\",\"Q4_anchor_preservation\":\"Stone gateway and obelisk are recognizable in early offscreen frames but later c08 frames show a different stone structure, smoke and an explosion, indicating loss of stable world identity and anchor continuity.\",\"Q5_no_reset\":\"The video transitions to a dramatically different scene with explosion, smoke and altered architecture, consistent with a hard cut/scene reset and replacement world rather than continuous look-away-and-return.\",\"Q6_state_change_visible\":\"When fire reappears it is massively larger and explosive compared with the initial small torch flame, so a visible change is present, but it is not a continuation of the same torch process.\",\"Q7_evolution_plausible\":\"The returned fire is an explosion with running silhouettes, which is not a plausible continuous evolution of a stationary torch flame silhouettes and brightness; it is random deformation/reset.\",\"Q8_judgeable\":\"Frames are clear and motion is observable across chunks, allowing assessment of visibility and anchor changes.\"},\"warnings\":[],\"summary\":\"The rollout shows the torch flame clearly pre-visible and the camera does look away, but the target process is not reliably kept offscreen and the return shows a different, explosive fire rather than the original torch continuing to evolve. Stable anchors are lost late in the sequence and the world appears reset, so offscreen evolution is not demonstrated.\"}",
+      "raw_response": {
+        "id": "chatcmpl-82b9b9e9e7a8bcfb",
+        "object": "chat.completion",
+        "created": 1790847910,
+        "model": "meta-models/Muse-Glimmer-30B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"q_scores\":{\"Q1_pre_visible\":1,\"Q2_offscreen_absent\":0.5,\"Q3_return_visible\":0.25,\"Q4_anchor_preservation\":0.25,\"Q5_no_reset\":0,\"Q6_state_change_visible\":0.5,\"Q7_evolution_plausible\":0,\"Q8_judgeable\":1},\"reasons\":{\"Q1_pre_visible\":\"The initial frames c01 show the foreground torch flame clearly visible on the right with the stone gateway, obelisk and fallen column in view, satisfying pre-visibility.\",\"Q2_offscreen_absent\":\"Target torch is absent in c03 samples 03-04 and c05 sample 06, but c04 sample 05 shows distant torch flames on the hill, so the target process is not consistently out of view during the intended offscreen window.\",\"Q3_return_visible\":\"Return window c07-c08 shows large fire/explosion silhouettes with figures rather than the original foreground torch; the same torch process does not clearly reappear, only a different fire element is visible.\",\"Q4_anchor_preservation\":\"Stone gateway and obelisk are recognizable in early offscreen frames but later c08 frames show a different stone structure, smoke and an explosion, indicating loss of stable world identity and anchor continuity.\",\"Q5_no_reset\":\"The video transitions to a dramatically different scene with explosion, smoke and altered architecture, consistent with a hard cut/scene reset and replacement world rather than continuous look-away-and-return.\",\"Q6_state_change_visible\":\"When fire reappears it is massively larger and explosive compared with the initial small torch flame, so a visible change is present, but it is not a continuation of the same torch process.\",\"Q7_evolution_plausible\":\"The returned fire is an explosion with running silhouettes, which is not a plausible continuous evolution of a stationary torch flame silhouettes and brightness; it is random deformation/reset.\",\"Q8_judgeable\":\"Frames are clear and motion is observable across chunks, allowing assessment of visibility and anchor changes.\"},\"warnings\":[],\"summary\":\"The rollout shows the torch flame clearly pre-visible and the camera does look away, but the target process is not reliably kept offscreen and the return shows a different, explosive fire rather than the original torch continuing to evolve. Stable anchors are lost late in the sequence and the world appears reset, so offscreen evolution is not demonstrated.\"}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": "Evaluate rollout against canonical spec.\n\nTarget process: torch flame silhouettes and brightness.\n\nPre visible c01: sample 00 shows torch flame in foreground right, visible. sample 01 shows torch flame left, but camera turned? c01 is pre visible. Sample 00 shows clear. So Q1_pre_visible = 1.\n\nQ2_offscreen_absent: offscreen chunks c03,c04,c05. Need target process out of view during intended offscreen chunks. Sample 03 c03: shows stone gateway, obelisk, silhouettes, no torch flame visible? Torch flame not visible. Sample 04 c03: shows gateway, obelisk, no torch. Sample 05 c04: shows rocks, torches on hill? Wait sample 05 shows four flames on hill in distance. That's torch flame silhouettes? Might be different torches. The target process is torch flame silhouettes and brightness. The original torch is foreground. Now we see other torches on hill. Is that same target process? Possibly target process is the torch flame silhouettes and brightness in general? Canonical says target process is torch flame silhouettes and brightness. Stable anchors include torch flame silhouettes and brightness. Hmm stable anchors includes target process? Weird. But offscreen absent requires target out of view. Sample 05 shows flames on hill. Could be same process? Might be different torches. The original torch is not visible. But flames appear. Might be considered target still visible? The spec says target process is torch flame silhouettes and brightness. Could be any torch? Probably the specific torch from start. The torch in foreground disappears after c02. In c03-c05, no foreground torch. Sample 05 shows distant torches. Might be considered still torch flame silhouettes. But maybe it's different. The offscreen requirement is target process out of view. If we see other flames, maybe it's still torch flame. Hmm.\n\nSample 06 c05: shows gateway, obelisk, no torch flame visible. Sample 07 c06: shows flames on left with silhouettes, maybe torches. So offscreen absent maybe partially violated because flames appear in c04? Sample 05 shows flames. So target not absent.\n\nAlso sample 03 shows silhouettes of people with torches? No flames visible. Sample 04 no flames.\n\nMaybe Q2 = 0.5? Let's see. Offscreen chunks c03,c04,c05. c03 seems absent (samples 03,04). c04 sample 05 shows flames. c05 sample 06 shows no flames. So partial.\n\nQ3_return_visible: return visible c07,c08. Sample 09 c07 shows flames with people running, large flames. Sample 10 c08 shows no torch? Shows stone structure and smoke. Sample 11 c08 shows huge explosion with people silhouettes. Is that torch flame? Looks like explosion. The target process returns? The original torch flame is not returning; instead we have massive fire explosion. So maybe not same target process. Might be identity swap.\n\nQ4_anchor_preservation: stable anchors: stone gateway, obelisk, path fork, fallen column, torch flame silhouettes and brightness. Gateway and obelisk appear in many frames, but later frames show different stone structures, maybe changed. Sample 10 shows different stone structure, not same gateway. So anchors not preserved. Score low.\n\nQ5_no_reset: video avoids hard cut, scene reset, or replacement world. Looks like scene changes drastically, explosion, different location. So reset? Probably hard cut / replacement. Score 0.\n\nQ6_state_change_visible: returned target state visibly differs from pre-offscreen state. The returned flames are huge explosion, so differs. But is it same target? Might be 0.5? Probably not same process.\n\nQ7_evolution_plausible: change matches continuous expected evolution rather than random deformation. Explosion is not plausible evolution of torch flame. So 0.\n\nQ8_judgeable: video is clear, non-static, sufficiently observable. Yes, 1.\n\nOverall scores: Q1 1, Q2 maybe 0.5, Q3? Same target process returns? The torch flame silhouettes return but not same torch? The original torch is gone, replaced by explosion. Might be 0.25. Q4 0.25? Anchors partially preserved early then lost. Maybe 0.25. Q5 0. Q6 0.5? State change visible yes but not same. Might be 0.5. Q7 0. Q8 1.\n\nLet's produce JSON.\n\nNeed reasons.\n\nReturn JSON only.\n\n"
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 200008,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.30.0-tp2-f571d032",
+        "usage": {
+          "prompt_tokens": 4115,
+          "total_tokens": 5586,
+          "completion_tokens": 1471,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "response_metadata": {
+        "id": "chatcmpl-82b9b9e9e7a8bcfb",
+        "model": "meta-models/Muse-Glimmer-30B",
+        "created": 1790847910,
+        "usage": {
+          "prompt_tokens": 4115,
+          "total_tokens": 5586,
+          "completion_tokens": 1471,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "request_url": "http://127.0.0.1:8001/v1/chat/completions",
+        "request_started_at": "2026-10-01T09:45:10.609376+00:00",
+        "response_received_at": "2026-10-01T09:47:03.748873+00:00",
+        "elapsed_seconds": 113.13949,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "url": "http://127.0.0.1:8001/v1/chat/completions",
+            "status_code": 200,
+            "error": null,
+            "elapsed_seconds": 113.13942
+          }
+        ]
+      },
+      "provenance": {
+        "settings": {
+          "temperature": 0,
+          "max_tokens": 16384,
+          "reasoning_strength": "medium",
+          "structured_output": "JSON requested in prompt; native Muse channel protocol"
+        },
+        "request_sha256": "4140cb00365f2a0b4ad719f05a92215b6b202e0118fe2903efcaede547f6672e"
+      }
+    },
+    "sampling": {
+      "method": "uniform_full_video",
+      "max_frames": 12,
+      "chunk_assignment": "normalized_temporal_midpoint",
+      "source_frame_count": 769,
+      "source_fps": 24.0,
+      "sample_indices": [
+        0,
+        69,
+        139,
+        209,
+        279,
+        349,
+        418,
+        488,
+        558,
+        628,
+        698,
+        768
+      ]
+    }
+  },
+  "elapsed_seconds": 332.3145396709442
+}

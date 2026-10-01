@@ -1,0 +1,14 @@
+{
+  "vllm": "0.30.0+cu129",
+  "torch": "2.13.0+cu129",
+  "driver": "570.124.06",
+  "cuda_toolkit": "12.8.93",
+  "sampling_backend": "native PyTorch (VLLM_USE_FLASHINFER_SAMPLER=0)",
+  "reasoning_parser": "muse_glimmer",
+  "precision": "BF16",
+  "tensor_parallel_size": 2,
+  "max_model_len": 24576,
+  "max_num_seqs": 4,
+  "transport": "JSON requested in prompt; native Muse channel protocol retained. JSON grammar constraint disabled because it interferes with channel framing.",
+  "environment_consistency": "passed uv pip check after correcting cuda-python metadata umbrella from 13.4.1 to 12.9.7. That distribution contains no executable files; actual cuda-bindings 12.9.9 was unchanged. Original inference environment is preserved in muse-environment-at-inference.txt."
+}

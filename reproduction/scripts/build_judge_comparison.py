@@ -11,6 +11,11 @@ D=read(R/'site/data/demo.json');rows=[]
 labels={'intentional_transition':'Intentional transition: mug','physical_transition':'Physical response: wind and flag','offscreen_evolution':'Offscreen evolution: torch','frozen':'Temporal control: frozen mug','reversed':'Temporal control: reversed mug','generated_book':'Generated rollout: red book'}
 for key,title in labels.items():
  row={'id':key,'title':title,'judges':{}}
+ if key=='generated_book':row.update(video=D['generation']['video'],action=D['construction']['action'])
+ else:
+  family='intentional_transition' if key in ['frozen','reversed'] else key
+  source_case=next(c for c in D['cases'] if c['taxonomy']['probe_family']==family)
+  row.update(video='evidence/controls/'+key+'.mp4' if key in ['frozen','reversed'] else source_case['video'],action=source_case['interaction']['action'])
  for judge in ['muse','gpt']:
   p=A/judge/(key+'.json')
   if p.exists() and read(p).get('status')=='complete':

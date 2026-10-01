@@ -22,7 +22,7 @@ cryptography==50.0.2
 cuda-bindings==12.9.9
 cuda-core==1.2.1
 cuda-pathfinder==1.8.2
-cuda-python==12.9.7
+cuda-python==13.4.1
 cuda-tile==1.6.0
 cuda-toolkit==12.9.1
 depyf==0.20.0

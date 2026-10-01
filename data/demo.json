@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T09:15:06.236169+00:00",
+  "generated_at": "2026-10-01T09:52:20.217565+00:00",
   "commit": "ed4ccc6486b8271723ee8baea60d89b32d0a7518",
   "cases": [
     {
@@ -2873,6 +2873,91 @@
         }
       },
       "judge_plans": {
+        "muse": {
+          "schema_version": "harnesseval.skill_plan",
+          "planner_version": "harnesseval.planner.v1",
+          "created_at": "2026-10-01T09:44:26.320274+00:00",
+          "routing_mode": "llm_case",
+          "input_digest": "eae11f01a7c1c74a17194ce3ce3c04baf46f9266a5ed76136fbddcf7d5e36a28",
+          "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
+          "taxonomy": {
+            "primary_axis": "transition_correctness",
+            "probe_family": "exploratory_transition"
+          },
+          "planner": {},
+          "selected_skills": [
+            {
+              "skill_id": "render_quality_inspector",
+              "role": "observation",
+              "reason": "General visual quality check needed for generated frames; validation questions ask for freedom from severe artifacts, watermarks, ambiguity.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "role": "observation",
+              "reason": "Navigation affordances require judgeable camera motion; motion presence and temporal smoothness must be assessed.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "role": "observation",
+              "reason": "Stable anchors crosswalk, traffic lights, corner shop, bus shelter must remain visually consistent through the short rollout.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "role": "observation",
+              "reason": "First-person navigation motion should be physically and causally plausible in the urban crosswalk scene.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "role": "core",
+              "reason": "Probe family is exploratory_transition with navigation_control actions W then left; active camera viewpoint movement along a path must be verified.",
+              "parameters": {}
+            }
+          ],
+          "selected_skill_ids": [
+            "render_quality_inspector",
+            "motion_quality_inspector",
+            "appearance_consistency_inspector",
+            "physical_plausibility_inspector",
+            "viewpoint_trajectory_verifier"
+          ],
+          "skipped_skills": [
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "reason": "Case is exploratory navigation, not an explicitly specified intentional semantic or object-state transition."
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "reason": "Primary target is viewpoint navigation, not causal response to a physical intervention or force."
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "reason": "Diagnostic for physical_transition cases; this case is exploratory_transition with no case-specific physical law check required."
+            },
+            {
+              "skill_id": "drift_degradation_analyzer",
+              "reason": "Only two navigation chunks; not a long-horizon rollout where progressive degradation is an explicit target."
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "reason": "No non-static loop or return view requirement in the action sequence."
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "reason": "No offscreen process evolution is specified; task is active viewpoint exploration."
+            }
+          ],
+          "validation": {
+            "status": "ok",
+            "registered_skill_count": 11,
+            "selected_skill_count": 5,
+            "selection_source": "planner",
+            "selection_modified": false
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.skill_plan",
           "planner_version": "harnesseval.planner.v1",
@@ -3020,95 +3105,10 @@
             "selection_source": "planner",
             "selection_modified": false
           }
-        },
-        "muse": {
-          "schema_version": "harnesseval.skill_plan",
-          "planner_version": "harnesseval.planner.v1",
-          "created_at": "2026-10-01T09:44:26.320274+00:00",
-          "routing_mode": "llm_case",
-          "input_digest": "eae11f01a7c1c74a17194ce3ce3c04baf46f9266a5ed76136fbddcf7d5e36a28",
-          "case_id": "harnesseval_w_exploratory_0001_urban_crosswalk",
-          "taxonomy": {
-            "primary_axis": "transition_correctness",
-            "probe_family": "exploratory_transition"
-          },
-          "planner": {},
-          "selected_skills": [
-            {
-              "skill_id": "render_quality_inspector",
-              "role": "observation",
-              "reason": "General visual quality check needed for generated frames; validation questions ask for freedom from severe artifacts, watermarks, ambiguity.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "motion_quality_inspector",
-              "role": "observation",
-              "reason": "Navigation affordances require judgeable camera motion; motion presence and temporal smoothness must be assessed.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "appearance_consistency_inspector",
-              "role": "observation",
-              "reason": "Stable anchors crosswalk, traffic lights, corner shop, bus shelter must remain visually consistent through the short rollout.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "physical_plausibility_inspector",
-              "role": "observation",
-              "reason": "First-person navigation motion should be physically and causally plausible in the urban crosswalk scene.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "viewpoint_trajectory_verifier",
-              "role": "core",
-              "reason": "Probe family is exploratory_transition with navigation_control actions W then left; active camera viewpoint movement along a path must be verified.",
-              "parameters": {}
-            }
-          ],
-          "selected_skill_ids": [
-            "render_quality_inspector",
-            "motion_quality_inspector",
-            "appearance_consistency_inspector",
-            "physical_plausibility_inspector",
-            "viewpoint_trajectory_verifier"
-          ],
-          "skipped_skills": [
-            {
-              "skill_id": "intentional_change_verifier_vlm",
-              "reason": "Case is exploratory navigation, not an explicitly specified intentional semantic or object-state transition."
-            },
-            {
-              "skill_id": "physical_response_verifier_vlm",
-              "reason": "Primary target is viewpoint navigation, not causal response to a physical intervention or force."
-            },
-            {
-              "skill_id": "physical_law_validator",
-              "reason": "Diagnostic for physical_transition cases; this case is exploratory_transition with no case-specific physical law check required."
-            },
-            {
-              "skill_id": "drift_degradation_analyzer",
-              "reason": "Only two navigation chunks; not a long-horizon rollout where progressive degradation is an explicit target."
-            },
-            {
-              "skill_id": "return_consistency_verifier",
-              "reason": "No non-static loop or return view requirement in the action sequence."
-            },
-            {
-              "skill_id": "offscreen_evolution_verifier",
-              "reason": "No offscreen process evolution is specified; task is active viewpoint exploration."
-            }
-          ],
-          "validation": {
-            "status": "ok",
-            "registered_skill_count": 11,
-            "selected_skill_count": 5,
-            "selection_source": "planner",
-            "selection_modified": false
-          }
         }
       },
       "judge_routing_prompts": {
-        "gpt": [
+        "muse": [
           {
             "role": "system",
             "content": [
@@ -3137,7 +3137,7 @@
             ]
           }
         ],
-        "muse": [
+        "gpt": [
           {
             "role": "system",
             "content": [
@@ -3785,6 +3785,166 @@
             "input_digest": "d7fde1d68f53dc1b6999c62cfee1fe4adca0daf4f3a52ff90e1ee1417310bf1d"
           }
         },
+        "muse": {
+          "schema_version": "harnesseval.metric_bundle",
+          "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+          "model_id": "seedance-2.0-standard",
+          "probe_family": "intentional_transition",
+          "video": {
+            "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/intentional_transition/seedance-2.0-standard/harnesseval_w_intentional_0001_living_room_table_ceramic_mug/output.mp4",
+            "size_bytes": 439558,
+            "mtime_ns": 1790802127077440522
+          },
+          "skill_results": [
+            {
+              "skill_id": "render_quality_inspector",
+              "status": "ok",
+              "score": 0.721097,
+              "metrics": {
+                "aesthetic": 0.558087,
+                "imaging": 0.675299,
+                "hpsv3": 0.653062,
+                "flickering": 0.997939
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.render_quality",
+                "cache_contract_version": "harnesseval.render_quality.cache_contract",
+                "aggregation": "equal_mean_required_components",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "status": "ok",
+              "score": 0.498649,
+              "metrics": {
+                "dynamic": 0.0,
+                "smoothness": 0.997298
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.motion_quality",
+                "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+                "aggregation": "equal_mean_required_components",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "status": "ok",
+              "score": 0.979323,
+              "metrics": {
+                "background": 0.979323
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.appearance_consistency",
+                "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+                "aggregation": "single_required_component",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "status": "ok",
+              "score": 0.63494,
+              "metrics": {
+                "visual_plausibility": 0.63494
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.physical_plausibility.pavrm",
+                "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+                "aggregation": "pavrm_raw_score_divided_by_5",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "status": "ok",
+              "score": 0.9375,
+              "metrics": {
+                "Q1_target_visible": 1.0,
+                "Q2_transition_visible": 1.0,
+                "Q3_intended_change": 1.0,
+                "Q4_target_specificity": 1.0,
+                "Q5_final_state": 1.0,
+                "Q6_anchor_preservation": 0.75,
+                "Q7_no_extra_event": 0.75,
+                "Q8_judgeable": 1.0,
+                "target_visibility": 1.0,
+                "change_execution": 1.0,
+                "target_specificity": 1.0,
+                "final_state": 1.0,
+                "preservation": 0.75,
+                "validity_gate": 1.0,
+                "core_score": 0.9375,
+                "final_score": 0.9375,
+                "expected_spec_alignment": 0.444444
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.intentional_change_vlm",
+                "prompt_version": "harnesseval.intentional_change.prompt",
+                "cache_contract_version": "harnesseval.intentional_change.cache_contract",
+                "case_audit": {
+                  "status": "ok",
+                  "warning": false,
+                  "expected_spec_alignment": 0.444444,
+                  "target_alignment": 0.142857,
+                  "change_alignment": 0.190476,
+                  "anchor_alignment": 1.0
+                },
+                "analyze_agent_cache": "[workspace]/.private/judge-cache/muse/intentional_transition/skills/intentional_change/analyze_agent/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+                "analyze_agent_evidence_digest": "431501d486038a1192c95ed5154602cb7662b1ba42229994b72513cf73faac83",
+                "verify_agent_cache": "[workspace]/.private/judge-cache/muse/intentional_transition/skills/intentional_change/verify_agent/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+                "verify_agent_evidence_digest": "08cc2c71ef3b5741b2bc4cd5362bfb5871cf7eca8307aec2c297489e5a0d7c97"
+              },
+              "notes": []
+            }
+          ],
+          "skill_runs": {
+            "appearance_consistency_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:06:22.167675+00:00"
+            },
+            "intentional_change_verifier_vlm": {
+              "evidence": "evidence/judge-comparison/muse/intentional_transition.json",
+              "judge": "meta-models/Muse-Glimmer-30B",
+              "execution": "new semantic inference"
+            },
+            "motion_quality_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:14:01.285706+00:00"
+            },
+            "physical_plausibility_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+              "cache_hit": true,
+              "updated_at": "2026-09-30T21:37:05.133535+00:00"
+            },
+            "render_quality_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:30:00.879441+00:00"
+            }
+          },
+          "provenance": {
+            "type": "derived matched-judge bundle",
+            "numerical_source": "original fresh numerical cache, unchanged",
+            "semantic_judge": "meta-models/Muse-Glimmer-30B",
+            "scoring_plan": "fixed released plan"
+          },
+          "plan": {
+            "path": "[workspace]/upstream/benchmark/plans/intentional_transition/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.skill_plan.json",
+            "input_digest": "d7fde1d68f53dc1b6999c62cfee1fe4adca0daf4f3a52ff90e1ee1417310bf1d"
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.metric_bundle",
           "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
@@ -4120,6 +4280,85 @@
             ]
           }
         },
+        "muse": {
+          "expected_spec": {
+            "target": "white ceramic mug on the wooden coffee table and the liquid it contains",
+            "initial_state": "mug is upright on the coffee table surface, handle facing left, body vertical, no spill or liquid on table, coffee table, sofa, floor lamp, curtains, rug and room layout as observed",
+            "intended_change": "mug tips/rolls onto its side resting on the tabletop and a small localized liquid spill forms on the table surface adjacent to the tipped mug",
+            "change_type": "pose",
+            "completion_criteria": [
+              "mug orientation changes from upright to lying on its side in contact with the tabletop",
+              "a small, localized puddle/spill of liquid is visible on the table near the mug",
+              "mug remains on the same coffee table and is still identifiable as the white ceramic mug"
+            ],
+            "protected_anchors": [
+              "camera viewpoint, framing and perspective remain fixed",
+              "coffee table position, shape and appearance",
+              "sofa, floor lamp, curtains, rug, walls and overall living room layout",
+              "lighting and shadows of the static scene",
+              "all unrelated objects and background elements unchanged"
+            ],
+            "negative_constraints": [
+              "no camera motion, zoom or reframing",
+              "no movement or alteration of furniture, decor or background elements",
+              "no change to mug color, material or identity",
+              "no large-scale spill, splashing, or liquid leaving the table area",
+              "no disappearance, duplication or teleportation of the mug"
+            ],
+            "failure_modes": [
+              "mug stays upright or only slightly tilts without resting on side",
+              "no spill or spill is absent, unrealistic, or covers large area",
+              "mug floats, sinks through table, or changes position on table",
+              "camera moves or scene lighting changes",
+              "other scene anchors shift, deform or change appearance"
+            ]
+          },
+          "judgment": {
+            "q_scores": {
+              "Q1_target_visible": 1,
+              "Q2_transition_visible": 1,
+              "Q3_intended_change": 1,
+              "Q4_target_specificity": 1,
+              "Q5_final_state": 1,
+              "Q6_anchor_preservation": 0.75,
+              "Q7_no_extra_event": 0.75,
+              "Q8_judgeable": 1
+            },
+            "reasons": {
+              "Q1_target_visible": "The white ceramic mug is clearly visible and localizable on the wooden coffee table in the initial observation and first video frames, handle left, upright.",
+              "Q2_transition_visible": "A visible temporal transition is present: the mug progressively tilts from upright to lying on its side across samples 03-06 and a spill appears from sample 07 onward, not a static image.",
+              "Q3_intended_change": "The requested change occurs: the mug tips/rolls onto its side resting on the tabletop and a small localized liquid spill forms adjacent to the tipped mug.",
+              "Q4_target_specificity": "The pose change and spill are applied to the correct white ceramic mug on the coffee table; no other object is altered as the target.",
+              "Q5_final_state": "Final frames show the mug lying on its side on the same table, identifiable as the same entity, with a small localized puddle on the table surface matching the expected outcome.",
+              "Q6_anchor_preservation": "Camera framing is fixed and coffee table, rug and floor lamp remain stable, but the right sofa’s arm/cushion shape shows a noticeable deformation artifact in later frames, a deviation from protected anchors.",
+              "Q7_no_extra_event": "The rollout shows the intended tip and spill without hard cuts or scene replacement, though the sofa deformation in later frames constitutes an unrelated visual artifact/extra edit.",
+              "Q8_judgeable": "The video is clear, continuous and well framed, allowing unambiguous observation of mug pose, spill formation and scene anchors throughout."
+            },
+            "warnings": [],
+            "summary": "The rollout successfully realizes the intended mug tip onto its side with a small local spill and keeps camera and most anchors stable. Target visibility, transition visibility, intended change, target specificity, final state and judgeability are satisfied. Anchor preservation and no-extra-event scores are reduced due to a visible sofa shape artifact appearing in the later frames."
+          },
+          "sampling": {
+            "method": "uniform_full_video",
+            "max_frames": 12,
+            "source_frame_count": 97,
+            "source_fps": 24.0,
+            "sample_indices": [
+              0,
+              8,
+              17,
+              26,
+              34,
+              43,
+              52,
+              61,
+              69,
+              78,
+              87,
+              96
+            ]
+          },
+          "judge": "meta-models/Muse-Glimmer-30B"
+        },
         "gpt": {
           "expected_spec": {
             "target": "white ceramic mug on the wooden coffee table, including the small amount of liquid associated with it",
@@ -4219,6 +4458,91 @@
         "fresh": {}
       },
       "judge_plans": {
+        "muse": {
+          "schema_version": "harnesseval.skill_plan",
+          "planner_version": "harnesseval.planner.v1",
+          "created_at": "2026-10-01T09:45:36.621665+00:00",
+          "routing_mode": "llm_case",
+          "input_digest": "0753ee374a327b8fac73033a10194dec452e0da440eaa28a8e4bfa53736f2108",
+          "case_id": "harnesseval_w_intentional_0001_living_room_table_ceramic_mug",
+          "taxonomy": {
+            "primary_axis": "transition_correctness",
+            "probe_family": "intentional_transition"
+          },
+          "planner": {},
+          "selected_skills": [
+            {
+              "skill_id": "render_quality_inspector",
+              "role": "observation",
+              "reason": "General visual quality check for artifacts, watermarks and ambiguity per validation questions.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "role": "observation",
+              "reason": "Tipping the mug and creating a spill involves motion that must be present and temporally smooth.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "role": "observation",
+              "reason": "Protected anchors sofa, coffee table, rug, floor lamp must remain unchanged and the mug must stay identifiable as the same entity.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "role": "observation",
+              "reason": "Mug tipping and local spill need physically and causally plausible rendering.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "role": "core",
+              "reason": "Primary axis is transition_correctness with probe_family intentional_transition requiring verification that the ceramic mug is tipped onto its side with a small spill while protected anchors remain intact.",
+              "parameters": {}
+            }
+          ],
+          "selected_skill_ids": [
+            "render_quality_inspector",
+            "motion_quality_inspector",
+            "appearance_consistency_inspector",
+            "physical_plausibility_inspector",
+            "intentional_change_verifier_vlm"
+          ],
+          "skipped_skills": [
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "reason": "Case requires fixed camera and no active viewpoint navigation; fixed-camera constraint does not make this skill applicable."
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "reason": "Primary target is an explicitly specified intentional semantic/object-state edit, not a causal physical intervention response."
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "reason": "Diagnostic for physical_transition cases; this case is intentional_transition."
+            },
+            {
+              "skill_id": "drift_degradation_analyzer",
+              "reason": "No long-horizon rollout with many action turns specified."
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "reason": "No non-static loop return view requirement."
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "reason": "No offscreen process evolution is required."
+            }
+          ],
+          "validation": {
+            "status": "ok",
+            "registered_skill_count": 11,
+            "selected_skill_count": 5,
+            "selection_source": "planner",
+            "selection_modified": false
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.skill_plan",
           "planner_version": "harnesseval.planner.v1",
@@ -4360,6 +4684,35 @@
         }
       },
       "judge_routing_prompts": {
+        "muse": [
+          {
+            "role": "system",
+            "content": [
+              {
+                "type": "text",
+                "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_intentional_0001_living_room_table_ceramic_mug\",\n    \"taxonomy\": {\n      \"primary_axis\": \"transition_correctness\",\n      \"probe_family\": \"intentional_transition\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_intentional_0001_living_room_table_ceramic_mug\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_intentional_0001_living_room_table_ceramic_mug.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"living_room_table\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"third_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"sofa\",\n        \"coffee table\",\n        \"rug\",\n        \"floor lamp\",\n        \"ceramic mug\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"target_entity\": \"ceramic mug\",\n      \"expected_outcome\": [\n        \"tip the white ceramic mug onto its side and create a small local spill\",\n        \"The ceramic mug remains identifiable as the same entity.\",\n        \"Protected anchors remain unchanged.\"\n      ],\n      \"protected_anchors\": [\n        \"sofa\",\n        \"coffee table\",\n        \"rug\",\n        \"floor lamp\"\n      ],\n      \"negative_constraints\": [\n        \"Do not replace the whole scene.\",\n        \"Do not add unrelated extra events.\",\n        \"Do not change camera viewpoint.\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"text_based_state_change\",\n        \"action_id\": \"intentional_0001\",\n        \"text\": \"tip the white ceramic mug onto its side and create a small local spill. Keep the camera fixed and keep all unrelated scene anchors unchanged.\"\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+              },
+              {
+                "type": "image_url",
+                "image_url": {
+                  "type": "image_reference",
+                  "mime": "image/png",
+                  "sha256": "83e591995e7fd4e71e40137395dfc46daf250038f91c044794d969421b966382",
+                  "bytes": 293142
+                }
+              }
+            ]
+          }
+        ],
         "gpt": [
           {
             "role": "system",
@@ -5106,6 +5459,206 @@
             "input_digest": "dd192bb153653c4eeaae7e967e454f61c809db6d50b4d87c6ac690c812b8fd2f"
           }
         },
+        "muse": {
+          "schema_version": "harnesseval.metric_bundle",
+          "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+          "model_id": "seedance-2.0-standard",
+          "probe_family": "physical_transition",
+          "video": {
+            "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/transition_correctness/physical_transition/seedance-2.0-standard/harnesseval_w_physical_0001_wind_flag_deformation_v02/output.mp4",
+            "size_bytes": 694141,
+            "mtime_ns": 1790802127085868734
+          },
+          "skill_results": [
+            {
+              "skill_id": "render_quality_inspector",
+              "status": "ok",
+              "score": 0.759629,
+              "metrics": {
+                "aesthetic": 0.631097,
+                "imaging": 0.704137,
+                "hpsv3": 0.719569,
+                "flickering": 0.983713
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.render_quality",
+                "cache_contract_version": "harnesseval.render_quality.cache_contract",
+                "aggregation": "equal_mean_required_components",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "status": "ok",
+              "score": 0.994807,
+              "metrics": {
+                "dynamic": 1.0,
+                "smoothness": 0.989614
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.motion_quality",
+                "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+                "aggregation": "equal_mean_required_components",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "status": "ok",
+              "score": 0.987443,
+              "metrics": {
+                "background": 0.987443
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.appearance_consistency",
+                "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+                "aggregation": "single_required_component",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "status": "ok",
+              "score": 0.7231,
+              "metrics": {
+                "visual_plausibility": 0.7231
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.physical_plausibility.pavrm",
+                "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+                "aggregation": "pavrm_raw_score_divided_by_5",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "status": "ok",
+              "score": 0.34541,
+              "metrics": {
+                "Q1_setup_visible": 1.0,
+                "Q2_intervention_visible": 0.25,
+                "Q3_response_presence": 0.75,
+                "Q4_condition_following": 0.75,
+                "Q5_causal_order": 1.0,
+                "Q6_anchor_preservation": 0.5,
+                "Q7_no_physical_artifacts": 0.25,
+                "Q8_judgeable": 0.75,
+                "intervention_grounding": 0.625,
+                "response_execution": 0.8,
+                "causal_order": 1.0,
+                "preservation": 0.3875,
+                "validity_gate": 0.75,
+                "core_score": 0.736875,
+                "final_score": 0.34541,
+                "expected_spec_alignment": 0.5
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.physical_response_vlm",
+                "prompt_version": "harnesseval.physical_response.prompt",
+                "cache_contract_version": "harnesseval.physical_response.cache_contract",
+                "case_audit": {
+                  "status": "ok",
+                  "warning": false,
+                  "expected_spec_alignment": 0.5,
+                  "target_alignment": 1.0,
+                  "response_alignment": 0.0,
+                  "anchor_alignment": null
+                },
+                "analyze_agent_cache": "[workspace]/.private/judge-cache/muse/physical_transition/skills/physical_response/analyze_agent/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+                "analyze_agent_evidence_digest": "6e8242f453f9558970c73a38ad20119a010d811462d27f43103f9cef94820e63",
+                "verify_agent_cache": "[workspace]/.private/judge-cache/muse/physical_transition/skills/physical_response/verify_agent/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+                "verify_agent_evidence_digest": "e24f311c8d57cc947b0df32c915383dc7cb92ef776226f433b5c059373209e8e"
+              },
+              "notes": [
+                "analyze_agent expected_spec_alignment is a case-audit warning only; the score uses the canonical physical spec and generated video"
+              ]
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "status": "not_applicable",
+              "score": null,
+              "metrics": {
+                "PhysicalLawScore": null,
+                "law_score": null,
+                "law_count": 0,
+                "scored_law_count": 0,
+                "mean_scored_law_score": null
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.physical_law",
+                "engine_spec": {
+                  "source": "scene_mapping",
+                  "scene": "wind_flag_deformation",
+                  "engine_model_id": null,
+                  "sample_id": "",
+                  "gt": {},
+                  "law_checks": []
+                },
+                "laws": [],
+                "reliability_assumptions": [
+                  "fixed camera",
+                  "one dominant moving subject",
+                  "static background",
+                  "sufficient subject texture",
+                  "moderate inter-frame displacement"
+                ]
+              },
+              "notes": [
+                "This diagnostic uses only final.md optical-flow laws; unavailable laws are not forced to zero."
+              ]
+            }
+          ],
+          "skill_runs": {
+            "physical_law_validator": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_law/results/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:05:58.102987+00:00"
+            },
+            "appearance_consistency_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:06:23.452308+00:00"
+            },
+            "physical_response_verifier_vlm": {
+              "evidence": "evidence/judge-comparison/muse/physical_transition.json",
+              "judge": "meta-models/Muse-Glimmer-30B",
+              "execution": "new semantic inference"
+            },
+            "motion_quality_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:14:14.066523+00:00"
+            },
+            "physical_plausibility_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+              "cache_hit": true,
+              "updated_at": "2026-09-30T21:37:09.188702+00:00"
+            },
+            "render_quality_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:30:09.514696+00:00"
+            }
+          },
+          "provenance": {
+            "type": "derived matched-judge bundle",
+            "numerical_source": "original fresh numerical cache, unchanged",
+            "semantic_judge": "meta-models/Muse-Glimmer-30B",
+            "scoring_plan": "fixed released plan"
+          },
+          "plan": {
+            "path": "[workspace]/upstream/benchmark/plans/physical_transition/harnesseval_w_physical_0001_wind_flag_deformation_v02.skill_plan.json",
+            "input_digest": "dd192bb153653c4eeaae7e967e454f61c809db6d50b4d87c6ac690c812b8fd2f"
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.metric_bundle",
           "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
@@ -5468,6 +6021,86 @@
             ]
           }
         },
+        "muse": {
+          "expected_spec": {
+            "target_system": "red wind flag aerodynamic deformation and the grounded blower-flag test rig on a coastal platform",
+            "intervention": "Continue the calibrated fan airflow at 5.0 m/s from the blue blower unit toward the flag pole",
+            "controlled_variables": [
+              "airflow speed 5.0 m/s",
+              "airflow direction left-to-right from blower to flag",
+              "blower unit pose and on-state",
+              "flag pole and yellow base pose",
+              "camera viewpoint and scene lighting"
+            ],
+            "expected_response": "The flag remains in a steady downwind billowed/streamer configuration with continuous small-scale flutter consistent with ~5 m/s flow from left to right. The blower housing stays in place and appears operational. The concrete platform, sea horizon, sky and overall scene geometry remain static with only flag fabric motion and natural wind-induced micro-motion visible.",
+            "causal_checks": [
+              "Flag fabric stays extended downwind to the right of the pole and does not collapse to limp",
+              "Flag exhibits persistent flutter/wave motion rather than static or frozen pose",
+              "Pole and yellow base remain stationary with no translation or rotation",
+              "Blue blower unit remains at same position and orientation with no disappearance",
+              "Background sea, sky and platform edges remain unchanged across frames"
+            ],
+            "protected_anchors": [
+              "Blue blower unit position, orientation and support legs",
+              "Black flag pole and yellow base on concrete platform",
+              "Concrete platform geometry and edge",
+              "Sea horizon, water texture and sky",
+              "Overall scene lighting, shadows and camera viewpoint"
+            ],
+            "failure_modes": [
+              "Flag snaps to fully limp, inverts, or disappears",
+              "Flag reverses to upwind side or is removed",
+              "Blower unit moves, rotates, turns off or changes appearance",
+              "Pole or base shifts, tilts or is displaced",
+              "Background scene changes unnaturally, e.g., sea level, platform geometry, lighting jumps"
+            ]
+          },
+          "judgment": {
+            "q_scores": {
+              "Q1_setup_visible": 1,
+              "Q2_intervention_visible": 0.25,
+              "Q3_response_presence": 0.75,
+              "Q4_condition_following": 0.75,
+              "Q5_causal_order": 1,
+              "Q6_anchor_preservation": 0.5,
+              "Q7_no_physical_artifacts": 0.25,
+              "Q8_judgeable": 0.75
+            },
+            "reasons": {
+              "Q1_setup_visible": "The blue blower rig, black pole with yellow base, red flag and coastal platform with sea horizon are clearly visible throughout the samples and match the initial observation framing.",
+              "Q2_intervention_visible": "The blower unit is present and in place, but no visible airflow cue, stream, or operational indication is rendered; the calibrated 5.0 m/s fan condition is not visibly instantiated.",
+              "Q3_response_presence": "The flag transitions from the initial upright pose to a downwind billowed/streamer pose and shows small changes in fabric folds across frames, indicating real fabric motion/state change.",
+              "Q4_condition_following": "Once billowed, the flag remains extended downwind to the right of the pole with a streamer configuration consistent with left-to-right flow, and the pole/base/blower stay stationary as required.",
+              "Q5_causal_order": "The flag is upright in sample 00 and moves to the downwind billowed state in sample 01 onward, so effect follows the implied continued airflow with no effect before cause.",
+              "Q6_anchor_preservation": "Blower, pole, yellow base, platform geometry and camera viewpoint remain fixed, but the sea water texture changes: a white wake appears in the generated samples that was absent in the initial observation, violating protected sea horizon/water texture and lighting anchors.",
+              "Q7_no_physical_artifacts": "A hard-appearing transition of the flag from upright to fully billowed between sample 00 and 01 and the introduction of a new sea wake/background detail indicate replacement-world artifacts and background change, with limited continuous flutter.",
+              "Q8_judgeable": "The video is clear and the viewpoint is stable enough to assess flag pose and anchor positions, although background changes and limited motion reduce full confidence."
+            },
+            "warnings": [],
+            "summary": "Setup and anchors for the rig are visible and the flag does move to a downwind billowed configuration in the correct causal order, consistent with continued airflow. The intervention itself is not visibly instantiated, background sea/water texture is altered with a new wake and lighting shift relative to the initial observation, and the flag motion shows a near-teleport onset with only modest continuous flutter, leading to anchor and artifact penalties."
+          },
+          "sampling": {
+            "method": "uniform_full_video",
+            "max_frames": 12,
+            "source_frame_count": 97,
+            "source_fps": 24.0,
+            "sample_indices": [
+              0,
+              8,
+              17,
+              26,
+              34,
+              43,
+              52,
+              61,
+              69,
+              78,
+              87,
+              96
+            ]
+          },
+          "judge": "meta-models/Muse-Glimmer-30B"
+        },
         "gpt": {
           "expected_spec": {
             "target_system": "Red fabric flag mounted on a vertical black pole at a coastal weather-station platform, with a blue calibrated blower positioned to the left directing airflow toward the flag.",
@@ -5564,6 +6197,94 @@
         "fresh": {}
       },
       "judge_plans": {
+        "muse": {
+          "schema_version": "harnesseval.skill_plan",
+          "planner_version": "harnesseval.planner.v1",
+          "created_at": "2026-10-01T09:48:32.959362+00:00",
+          "routing_mode": "llm_case",
+          "input_digest": "27ef64b607f8a177686494fb988ab2fd9adb88dc1c8abf6b989faf028ef6608c",
+          "case_id": "harnesseval_w_physical_0001_wind_flag_deformation_v02",
+          "taxonomy": {
+            "primary_axis": "transition_correctness",
+            "probe_family": "physical_transition"
+          },
+          "planner": {},
+          "selected_skills": [
+            {
+              "skill_id": "render_quality_inspector",
+              "role": "observation",
+              "reason": "Generated frames must be aesthetically and technically clean for the coastal weather station flag scene.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "role": "observation",
+              "reason": "Flag aeroelastic deformation under 5.0 m/s wind requires present and temporally smooth motion.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "role": "observation",
+              "reason": "Visual appearance of flag, pole, blower and background must remain consistent through the rollout.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "role": "observation",
+              "reason": "Rendered flag motion must be physically and causally plausible for wind-driven fabric.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "role": "core",
+              "reason": "Primary target is causal response and temporal dynamics to explicit physical intervention of calibrated fan airflow at 5.0 m/s.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "role": "diagnostic",
+              "reason": "Physical transition of aeroelastic fabric deformation requires case-specific physical-law check for wind speed vs deformation relation.",
+              "parameters": {}
+            }
+          ],
+          "selected_skill_ids": [
+            "render_quality_inspector",
+            "motion_quality_inspector",
+            "appearance_consistency_inspector",
+            "physical_plausibility_inspector",
+            "physical_response_verifier_vlm",
+            "physical_law_validator"
+          ],
+          "skipped_skills": [
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "reason": "Case uses fixed camera; no active viewpoint or navigation movement required."
+            },
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "reason": "Target is physical causal response, not an explicitly specified intentional semantic or object-state edit."
+            },
+            {
+              "skill_id": "drift_degradation_analyzer",
+              "reason": "Rollout is short physical response, not a long-horizon multi-turn drift resistance target."
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "reason": "No non-static loop return view consistency requirement."
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "reason": "No offscreen process evolution is evaluated; flag and blower remain onscreen."
+            }
+          ],
+          "validation": {
+            "status": "ok",
+            "registered_skill_count": 11,
+            "selected_skill_count": 6,
+            "selection_source": "planner",
+            "selection_modified": false
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.skill_plan",
           "planner_version": "harnesseval.planner.v1",
@@ -5713,6 +6434,35 @@
         }
       },
       "judge_routing_prompts": {
+        "muse": [
+          {
+            "role": "system",
+            "content": [
+              {
+                "type": "text",
+                "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "{\n  \"case\": {\n    \"schema_version\": \"harnesseval_image_first_multiphysics\",\n    \"case_id\": \"harnesseval_w_physical_0001_wind_flag_deformation_v02\",\n    \"suite\": \"image_first_multiphysics_12\",\n    \"taxonomy\": {\n      \"primary_axis\": \"transition_correctness\",\n      \"probe_family\": \"physical_transition\",\n      \"phenomenon\": \"aeroelastic_fabric_deformation\",\n      \"complexity\": \"L2\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_physical_0001_wind_flag_deformation_v02\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_physical_0001_wind_flag_deformation_v02.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"wind_flag_deformation\",\n        \"realization\": \"grounded_blower_flag_test\",\n        \"domain\": \"coastal_weather_station\",\n        \"generator\": \"seedream_image_first_then_simulator_v1\",\n        \"image_backend\": \"doubao_seedream_4_0\",\n        \"physics_backend\": \"image_calibrated_reduced_order_flag_v1\",\n        \"render_backend\": \"blender_eevee_next\",\n        \"construction_order\": \"real_image_then_image_calibrated_simulator\"\n      }\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"apply_physical_control\",\n        \"text\": \"Continue the calibrated fan airflow at 5.0 m/s.\",\n        \"parameters\": {\n          \"wind_speed_m_per_s\": 5.0\n        }\n      }\n    },\n    \"counterfactual\": {\n      \"group_id\": \"wdm_imagefirst_multi_g01_wind_flag_deformation\",\n      \"variant_index\": 2,\n      \"variant_label\": \"medium\",\n      \"varied_parameter\": \"wind_speed_m_per_s\",\n      \"parameter_unit\": \"meter_per_second\",\n      \"parameter_value\": 5.0,\n      \"expected_group_relation\": \"flag_deformation_increases_as_wind_speed_increases\",\n      \"relation_eligible\": true,\n      \"controlled_constants\": {\n        \"air_density_kg_m3\": 1.225,\n        \"known_flag_height_m\": 1.25,\n        \"effective_sheet_stiffness_n_m\": 180.0,\n        \"response_time_seconds\": 0.65\n      }\n    },\n    \"physics\": {\n      \"model\": \"image_calibrated_reduced_order_flag_v1\",\n      \"control_parameter_source\": \"experiment_protocol_not_inferred_from_single_image\",\n      \"expected_transition\": \"Higher dynamic pressure produces larger flexible-sheet deformation.\",\n      \"deterministic\": true,\n      \"single_view_policy\": {\n        \"measured\": \"visible object positions, silhouettes, contacts, and scale anchors\",\n        \"not_claimed_measured\": \"unobserved depth, instantaneous velocity, and future control response\"\n      }\n    },\n    \"generation\": {\n      \"photo_sha256\": \"9f2b6758021e831c390a95419e56d0da8db76bb22452580c83950f9b266d613a\",\n      \"image_quality_gate\": {\n        \"passed\": true,\n        \"errors\": []\n      },\n      \"correspondence_passed\": true,\n      \"blender_version\": \"4.2.22 LTS\"\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+              },
+              {
+                "type": "image_url",
+                "image_url": {
+                  "type": "image_reference",
+                  "mime": "image/png",
+                  "sha256": "afd3caaa3e8a3335b5e722656d5d5ec76cc8419ee643cf7600d9068273576af9",
+                  "bytes": 119826
+                }
+              }
+            ]
+          }
+        ],
         "gpt": [
           {
             "role": "system",
@@ -9965,6 +10715,94 @@
         }
       },
       "judge_plans": {
+        "muse": {
+          "schema_version": "harnesseval.skill_plan",
+          "planner_version": "harnesseval.planner.v1",
+          "created_at": "2026-10-01T09:43:23.748460+00:00",
+          "routing_mode": "llm_case",
+          "input_digest": "41145092666214bfde9bb1dc865f0ab3ebd1ad4ec1a5035d9c81cbf4f744b8f0",
+          "case_id": "harnesseval_w_drift_0001_old_town_lane",
+          "taxonomy": {
+            "primary_axis": "world_persistence",
+            "probe_family": "drift_resistance"
+          },
+          "planner": {},
+          "selected_skills": [
+            {
+              "skill_id": "render_quality_inspector",
+              "role": "observation",
+              "reason": "Validation requires case free of severe artifacts, watermarks or ambiguity; general aesthetic and technical cleanliness of generated frames is needed.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "role": "observation",
+              "reason": "Long navigation demands present and temporally smooth motion across chunks to judgeability of the requested action.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "role": "observation",
+              "reason": "Stable anchors clock tower, cobblestone lane, bakery awning, lamp posts must remain part of one coherent world state through the rollout.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "role": "observation",
+              "reason": "First-person navigation through old town lane requires physically and causally plausible camera motion and scene dynamics.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "role": "core",
+              "reason": "Interaction is a long continuous navigation sequence with explicit W/A/D/left/right chunks; active camera/viewpoint movement along the prescribed path must be followed without cuts or reset.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "drift_degradation_analyzer",
+              "role": "core",
+              "reason": "Probe family is drift_resistance with 8-chunk long navigation rollout; resistance to progressive visual/geometric/semantic degradation of stable anchors is the explicit target.",
+              "parameters": {}
+            }
+          ],
+          "selected_skill_ids": [
+            "render_quality_inspector",
+            "motion_quality_inspector",
+            "appearance_consistency_inspector",
+            "physical_plausibility_inspector",
+            "viewpoint_trajectory_verifier",
+            "drift_degradation_analyzer"
+          ],
+          "skipped_skills": [
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "reason": "Case targets world persistence/drift resistance, not an explicitly specified intentional semantic or object-state transition."
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "reason": "No explicit physical intervention or force is being applied; navigation viewpoint change is the driver, not a causal physical response."
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "reason": "Diagnostic for physical_transition cases; this case is drift resistance with navigation, not a case-specific physical-law causal check."
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "reason": "No non-static loop return to a prior view is required; evaluation is forward long-horizon drift, not revisit consistency."
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "reason": "No offscreen process evolution is specified; focus is on anchor persistence during continuous navigation."
+            }
+          ],
+          "validation": {
+            "status": "ok",
+            "registered_skill_count": 11,
+            "selected_skill_count": 6,
+            "selection_source": "planner",
+            "selection_modified": false
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.skill_plan",
           "planner_version": "harnesseval.planner.v1",
@@ -10144,98 +10982,10 @@
             "selection_source": "planner",
             "selection_modified": false
           }
-        },
-        "muse": {
-          "schema_version": "harnesseval.skill_plan",
-          "planner_version": "harnesseval.planner.v1",
-          "created_at": "2026-10-01T09:43:23.748460+00:00",
-          "routing_mode": "llm_case",
-          "input_digest": "41145092666214bfde9bb1dc865f0ab3ebd1ad4ec1a5035d9c81cbf4f744b8f0",
-          "case_id": "harnesseval_w_drift_0001_old_town_lane",
-          "taxonomy": {
-            "primary_axis": "world_persistence",
-            "probe_family": "drift_resistance"
-          },
-          "planner": {},
-          "selected_skills": [
-            {
-              "skill_id": "render_quality_inspector",
-              "role": "observation",
-              "reason": "Validation requires case free of severe artifacts, watermarks or ambiguity; general aesthetic and technical cleanliness of generated frames is needed.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "motion_quality_inspector",
-              "role": "observation",
-              "reason": "Long navigation demands present and temporally smooth motion across chunks to judgeability of the requested action.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "appearance_consistency_inspector",
-              "role": "observation",
-              "reason": "Stable anchors clock tower, cobblestone lane, bakery awning, lamp posts must remain part of one coherent world state through the rollout.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "physical_plausibility_inspector",
-              "role": "observation",
-              "reason": "First-person navigation through old town lane requires physically and causally plausible camera motion and scene dynamics.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "viewpoint_trajectory_verifier",
-              "role": "core",
-              "reason": "Interaction is a long continuous navigation sequence with explicit W/A/D/left/right chunks; active camera/viewpoint movement along the prescribed path must be followed without cuts or reset.",
-              "parameters": {}
-            },
-            {
-              "skill_id": "drift_degradation_analyzer",
-              "role": "core",
-              "reason": "Probe family is drift_resistance with 8-chunk long navigation rollout; resistance to progressive visual/geometric/semantic degradation of stable anchors is the explicit target.",
-              "parameters": {}
-            }
-          ],
-          "selected_skill_ids": [
-            "render_quality_inspector",
-            "motion_quality_inspector",
-            "appearance_consistency_inspector",
-            "physical_plausibility_inspector",
-            "viewpoint_trajectory_verifier",
-            "drift_degradation_analyzer"
-          ],
-          "skipped_skills": [
-            {
-              "skill_id": "intentional_change_verifier_vlm",
-              "reason": "Case targets world persistence/drift resistance, not an explicitly specified intentional semantic or object-state transition."
-            },
-            {
-              "skill_id": "physical_response_verifier_vlm",
-              "reason": "No explicit physical intervention or force is being applied; navigation viewpoint change is the driver, not a causal physical response."
-            },
-            {
-              "skill_id": "physical_law_validator",
-              "reason": "Diagnostic for physical_transition cases; this case is drift resistance with navigation, not a case-specific physical-law causal check."
-            },
-            {
-              "skill_id": "return_consistency_verifier",
-              "reason": "No non-static loop return to a prior view is required; evaluation is forward long-horizon drift, not revisit consistency."
-            },
-            {
-              "skill_id": "offscreen_evolution_verifier",
-              "reason": "No offscreen process evolution is specified; focus is on anchor persistence during continuous navigation."
-            }
-          ],
-          "validation": {
-            "status": "ok",
-            "registered_skill_count": 11,
-            "selected_skill_count": 6,
-            "selection_source": "planner",
-            "selection_modified": false
-          }
         }
       },
       "judge_routing_prompts": {
-        "gpt": [
+        "muse": [
           {
             "role": "system",
             "content": [
@@ -10264,7 +11014,7 @@
             ]
           }
         ],
-        "muse": [
+        "gpt": [
           {
             "role": "system",
             "content": [
@@ -14147,6 +14897,91 @@
         }
       },
       "judge_plans": {
+        "muse": {
+          "schema_version": "harnesseval.skill_plan",
+          "planner_version": "harnesseval.planner.v1",
+          "created_at": "2026-10-01T09:50:13.493243+00:00",
+          "routing_mode": "llm_case",
+          "input_digest": "6e4495b8cf1a27e390058b007cab2afd989c6d8ddded5f51ed5f237cb6587f36",
+          "case_id": "harnesseval_w_return_0001_city_intersection",
+          "taxonomy": {
+            "primary_axis": "world_persistence",
+            "probe_family": "return_revisit_consistency"
+          },
+          "planner": {},
+          "selected_skills": [
+            {
+              "skill_id": "render_quality_inspector",
+              "role": "observation",
+              "reason": "General visual quality check for artifacts, watermarks and aesthetic cleanliness across generated frames.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "role": "observation",
+              "reason": "Navigation sequence requires temporally smooth camera motion through 8 chunks.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "role": "observation",
+              "reason": "World persistence requires stable anchors station arch, traffic gantry, zebra crossing, bus shelter to stay visually consistent through rollout.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "role": "observation",
+              "reason": "First-person navigation should be physically and causally plausible with no impossible jumps.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "role": "core",
+              "reason": "Probe family is return_revisit_consistency with closed-loop navigation from c01 to c08; need to verify returned view remains consistent after non-static loop.",
+              "parameters": {}
+            }
+          ],
+          "selected_skill_ids": [
+            "render_quality_inspector",
+            "motion_quality_inspector",
+            "appearance_consistency_inspector",
+            "physical_plausibility_inspector",
+            "return_consistency_verifier"
+          ],
+          "skipped_skills": [
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "reason": "Case primary target is return revisit consistency not exploratory transition; trajectory is covered by return consistency check."
+            },
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "reason": "No explicitly specified intentional semantic or object-state transition; action is closed-loop navigation."
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "reason": "Primary target is world persistence on return, not causal response to a physical intervention."
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "reason": "No physical transition requiring case-specific physical law check."
+            },
+            {
+              "skill_id": "drift_degradation_analyzer",
+              "reason": "Rollout is short 8 chunks; not a long-horizon drift resistance target."
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "reason": "Probe is return revisit consistency, not offscreen process evolution."
+            }
+          ],
+          "validation": {
+            "status": "ok",
+            "registered_skill_count": 11,
+            "selected_skill_count": 5,
+            "selection_source": "planner",
+            "selection_modified": false
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.skill_plan",
           "planner_version": "harnesseval.planner.v1",
@@ -14344,6 +15179,35 @@
         }
       },
       "judge_routing_prompts": {
+        "muse": [
+          {
+            "role": "system",
+            "content": [
+              {
+                "type": "text",
+                "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_return_0001_city_intersection\",\n    \"taxonomy\": {\n      \"primary_axis\": \"world_persistence\",\n      \"probe_family\": \"return_revisit_consistency\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_return_0001_city_intersection\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_return_0001_city_intersection.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"city_intersection\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"station arch\",\n        \"traffic gantry\",\n        \"zebra crossing\",\n        \"bus shelter\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"return_window\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\"\n      },\n      \"closed_loop_pairs\": [\n        {\n          \"reference_chunk\": \"c01\",\n          \"return_chunk\": \"c08\"\n        }\n      ],\n      \"protected_anchors\": [\n        \"station arch\",\n        \"traffic gantry\",\n        \"zebra crossing\",\n        \"bus shelter\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"closed_loop_navigation\",\n        \"action_id\": \"return_0001\",\n        \"control_scheme\": \"harnesseval_navigation_v1\",\n        \"text\": \"Move away from the initial viewpoint and then return to a compatible view of the same world without resetting the scene.\",\n        \"closed_loop\": {\n          \"intended\": true,\n          \"closure_type\": \"inverse_balanced_navigation_tokens\"\n        },\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"W\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"S\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"S\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"left\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"right\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"A\"\n              }\n            ]\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"actions\": [\n              {\n                \"type\": \"navigation\",\n                \"action\": \"D\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+              },
+              {
+                "type": "image_url",
+                "image_url": {
+                  "type": "image_reference",
+                  "mime": "image/png",
+                  "sha256": "8297becf993b43947767bb733ee48b4761e9371fc1bfb96b6f14bf715dee8683",
+                  "bytes": 507297
+                }
+              }
+            ]
+          }
+        ],
         "gpt": [
           {
             "role": "system",
@@ -15336,6 +16200,242 @@
             "input_digest": "4b0c1e7bee5c7106c5c538f03135c528322db9ba027e0a1e8289d5679d1ac680"
           }
         },
+        "muse": {
+          "schema_version": "harnesseval.metric_bundle",
+          "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+          "model_id": "seedance-2.0-standard",
+          "probe_family": "offscreen_evolution",
+          "video": {
+            "path": "[workspace]/upstream/runs/example/results_example/generation/outputs/world_persistence/offscreen_evolution/seedance-2.0-standard/harnesseval_w_offscreen_0002_torch_gateway/output.mp4",
+            "size_bytes": 4400447,
+            "mtime_ns": 1790802127201079853
+          },
+          "skill_results": [
+            {
+              "skill_id": "render_quality_inspector",
+              "status": "ok",
+              "score": 0.652537,
+              "metrics": {
+                "aesthetic": 0.5922,
+                "imaging": 0.504512,
+                "hpsv3": 0.58866,
+                "flickering": 0.924778
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.render_quality",
+                "cache_contract_version": "harnesseval.render_quality.cache_contract",
+                "aggregation": "equal_mean_required_components",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "status": "ok",
+              "score": 0.981382,
+              "metrics": {
+                "dynamic": 1.0,
+                "smoothness": 0.962763
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.motion_quality",
+                "cache_contract_version": "harnesseval.motion_quality.cache_contract",
+                "aggregation": "equal_mean_required_components",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "status": "ok",
+              "score": 0.866756,
+              "metrics": {
+                "background": 0.866756
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.appearance_consistency",
+                "cache_contract_version": "harnesseval.appearance_consistency.cache_contract",
+                "aggregation": "single_required_component",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "status": "ok",
+              "score": 0.50374,
+              "metrics": {
+                "visual_plausibility": 0.50374
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.physical_plausibility.pavrm",
+                "cache_contract_version": "harnesseval.physical_plausibility.cache_contract",
+                "aggregation": "pavrm_raw_score_divided_by_5",
+                "missing_components": [],
+                "invalid_components": []
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "status": "ok",
+              "score": 0.939473,
+              "metrics": {
+                "NavScore": 0.939473,
+                "Accuracy": 0.878945,
+                "Consistency": 1.0,
+                "nATE_t": 0.084493,
+                "nATE_r": 0.157616,
+                "cnATE_t": 0.0,
+                "cnATE_r": 0.0,
+                "consistency_pairs": 0,
+                "ATE_t": 0.066399,
+                "ATE_r": 7.79814,
+                "total_path_length": 0.78585,
+                "total_rotation_deg": 49.475491
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.viewpoint_trajectory.navscore",
+                "cache_contract_version": "harnesseval.viewpoint_trajectory.cache_contract",
+                "aggregation": "harnesseval_navigation_trajectory_navscore"
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "status": "ok",
+              "score": 0.432413,
+              "metrics": {
+                "closed_loop_pair_consistency": 0.432413,
+                "best_pair_similarity": 0.435975,
+                "mean_pair_similarity": 0.428852,
+                "mean_closed_loop_score": 0.432413,
+                "worst_pair_similarity": 0.432413,
+                "non_static_gate": 1.0,
+                "motion_presence": 1.0,
+                "mean_frame_diff": 0.222011,
+                "peak_frame_diff": 0.30289,
+                "active_frame_pair_ratio": 1.0,
+                "pair_weights": {
+                  "best_similarity": 0.5,
+                  "mean_similarity": 0.5
+                },
+                "multi_pair_weights": {
+                  "mean_pair_score": 0.7,
+                  "worst_pair_score": 0.3
+                }
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.return_consistency",
+                "cache_contract_version": "harnesseval.return_consistency.cache_contract",
+                "pair_details": [
+                  {
+                    "reference_chunk": "c01",
+                    "return_chunk": "c08",
+                    "best_similarity": 0.435975,
+                    "mean_similarity": 0.428852,
+                    "pair_score": 0.432413,
+                    "comparison_count": 2
+                  }
+                ],
+                "formal_gate_accepted": true
+              },
+              "notes": []
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "status": "ok",
+              "score": 0.0,
+              "metrics": {
+                "Q1_pre_visible": 1.0,
+                "Q2_offscreen_absent": 0.5,
+                "Q3_return_visible": 0.0,
+                "Q4_anchor_preservation": 0.0,
+                "Q5_no_reset": 0.0,
+                "Q6_state_change_visible": 0.0,
+                "Q7_evolution_plausible": 0.0,
+                "Q8_judgeable": 1.0,
+                "visibility_score": 0.5,
+                "validity_gate": 0.5,
+                "anchor_score": 0.0,
+                "evolution_score": 0.0,
+                "core_score": 0.0,
+                "final_score": 0.0,
+                "expected_spec_alignment": 0.577441
+              },
+              "diagnostics": {
+                "definition_version": "harnesseval.offscreen_evolution",
+                "prompt_version": "harnesseval.offscreen_evolution.prompt",
+                "cache_contract_version": "harnesseval.offscreen_evolution.cache_contract",
+                "case_audit": {
+                  "status": "ok",
+                  "warning": false,
+                  "expected_spec_alignment": 0.577441,
+                  "target_alignment": 0.277778,
+                  "anchor_alignment": 0.454545,
+                  "visibility_alignment": 1.0
+                },
+                "analyze_agent_cache": "[workspace]/.private/judge-cache/muse/offscreen_evolution/skills/offscreen_evolution/analyze_agent/harnesseval_w_offscreen_0002_torch_gateway.json",
+                "analyze_agent_evidence_digest": "7eed97a69cf1c636857481998721855ae0b081f9a4c0b36045c52b35480ca983",
+                "verify_agent_cache": "[workspace]/.private/judge-cache/muse/offscreen_evolution/skills/offscreen_evolution/verify_agent/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+                "verify_agent_evidence_digest": "f09d94781da66ff58a4bcd6d90fbfa31981939819f88eeb9bd438b0c82b23212"
+              },
+              "notes": [
+                "analyze_agent alignment is a case-audit warning only; scoring uses the canonical offscreen-evolution specification and generated video"
+              ]
+            }
+          ],
+          "skill_runs": {
+            "appearance_consistency_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/appearance_consistency/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:06:23.295856+00:00"
+            },
+            "return_consistency_verifier": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/return_consistency/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:08:01.215766+00:00"
+            },
+            "offscreen_evolution_verifier": {
+              "evidence": "evidence/judge-comparison/muse/offscreen_evolution.json",
+              "judge": "meta-models/Muse-Glimmer-30B",
+              "execution": "new semantic inference"
+            },
+            "motion_quality_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/motion_quality/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:14:12.765301+00:00"
+            },
+            "render_quality_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/render_quality/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:30:06.068170+00:00"
+            },
+            "physical_plausibility_inspector": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/physical_plausibility/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T21:37:09.151883+00:00"
+            },
+            "viewpoint_trajectory_verifier": {
+              "cache_path": "[workspace]/artifacts/fresh/cache/skills/viewpoint_trajectory/seedance-2.0-standard/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.json",
+              "cache_hit": false,
+              "updated_at": "2026-09-30T22:03:09.138541+00:00"
+            }
+          },
+          "provenance": {
+            "type": "derived matched-judge bundle",
+            "numerical_source": "original fresh numerical cache, unchanged",
+            "semantic_judge": "meta-models/Muse-Glimmer-30B",
+            "scoring_plan": "fixed released plan"
+          },
+          "plan": {
+            "path": "[workspace]/upstream/benchmark/plans/offscreen_evolution/harnesseval_w_offscreen_0002_torch_gateway.skill_plan.json",
+            "input_digest": "4b0c1e7bee5c7106c5c538f03135c528322db9ba027e0a1e8289d5679d1ac680"
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.metric_bundle",
           "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
@@ -15768,6 +16868,104 @@
               "c08"
             ]
           }
+        },
+        "muse": {
+          "expected_spec": {
+            "target_process": "The torch flame in the foreground right and the dynamic illumination / brightness it provides, including the flickering flame shape, intensity and color variation and the torch-cast silhouettes / lighting on the background figures and surroundings that evolve with the flame.",
+            "stable_anchors": [
+              "Stone archway ruin on the left",
+              "Obelisk/monolith on the central path",
+              "Fallen column in the foreground left",
+              "Dirt path branching through grass",
+              "Grassy terrain and distant landscape",
+              "Clear sky and sun position"
+            ],
+            "visibility_timeline": {
+              "pre_visible": [
+                "c01"
+              ],
+              "offscreen": [
+                "c02",
+                "c03",
+                "c04",
+                "c05"
+              ],
+              "return_visible": [
+                "c06",
+                "c07",
+                "c08"
+              ]
+            },
+            "expected_evolution": "While the torch flame silhouettes and brightness are offscreen from c02 to c05 the flame must continue to evolve temporally with natural flicker, brightness and shape variation and the associated lighting on silhouettes must progress continuously. No freeze, reset or teleport to the initial observation state is allowed. Upon return in c06-c08 the torch flame and its illumination should be present at a spatially consistent location relative to stable anchors and show a plausible continuation of the flicker/brightness trajectory from before it left view, i.e., evolved rather than identical to the first visible frame.",
+            "failure_modes": [
+              "Flame frozen or static during offscreen and return_visible periods",
+              "Brightness and flicker reset to the initial observation state on return",
+              "Torch or silhouettes disappear permanently or reappear abruptly with no temporal continuity",
+              "Flame shape/intensity repeats exactly as in pre_visible frames indicating looping",
+              "Torch position or scale jumps relative to stable anchors on return",
+              "Silhouettes change identity, number or position inconsistently with the initial scene"
+            ]
+          },
+          "judgment": {
+            "q_scores": {
+              "Q1_pre_visible": 1,
+              "Q2_offscreen_absent": 0.5,
+              "Q3_return_visible": 0,
+              "Q4_anchor_preservation": 0,
+              "Q5_no_reset": 0,
+              "Q6_state_change_visible": 0,
+              "Q7_evolution_plausible": 0,
+              "Q8_judgeable": 1
+            },
+            "reasons": {
+              "Q1_pre_visible": "The initial c01 frames show the foreground torch with flame and the background silhouettes clearly in view, matching the pre-visible requirement.",
+              "Q2_offscreen_absent": "The original foreground torch is out of view in c03 and c05, but c04 shows new flame sources on the hill, so the target process is not cleanly absent across the whole intended offscreen window.",
+              "Q3_return_visible": "In the return window c07-c08 the original torch flame silhouettes and brightness do not reappear; instead unrelated large flames, running figures and an explosion are shown.",
+              "Q4_anchor_preservation": "Stone gateway and obelisk are present briefly but by c08 the scene changes to different ruins and an explosion, losing the stable anchors and world identity.",
+              "Q5_no_reset": "The video contains a hard scene change / replacement world with explosion and smoke, not a continuous look-away-and-return.",
+              "Q6_state_change_visible": "No same target process returns, so no comparable pre vs post state can be assessed.",
+              "Q7_evolution_plausible": "The change is a dramatic explosion and identity swap, not a plausible continuous evolution of the torch flame silhouettes and brightness.",
+              "Q8_judgeable": "Frames are clear and motion is observable, allowing judgment of visibility and world changes."
+            },
+            "warnings": [],
+            "summary": "The rollout shows the torch flame silhouettes and brightness clearly pre-visible, then the original torch leaves view, but the intended offscreen interval is contaminated by new flames and the target never returns as the same process. Stable anchors are lost and the world resets to an explosion/replacement scene in the return window, so offscreen evolution is not demonstrated."
+          },
+          "sampling": {
+            "method": "uniform_full_video",
+            "max_frames": 12,
+            "chunk_assignment": "normalized_temporal_midpoint",
+            "source_frame_count": 769,
+            "source_fps": 24.0,
+            "sample_indices": [
+              0,
+              69,
+              139,
+              209,
+              279,
+              349,
+              418,
+              488,
+              558,
+              628,
+              698,
+              768
+            ],
+            "frame_chunk_labels": [
+              "c01",
+              "c01",
+              "c02",
+              "c03",
+              "c03",
+              "c04",
+              "c05",
+              "c06",
+              "c06",
+              "c07",
+              "c08",
+              "c08"
+            ]
+          },
+          "judge": "meta-models/Muse-Glimmer-30B"
         },
         "gpt": {
           "expected_spec": {
@@ -18503,6 +19701,91 @@
         }
       },
       "judge_plans": {
+        "muse": {
+          "schema_version": "harnesseval.skill_plan",
+          "planner_version": "harnesseval.planner.v1",
+          "created_at": "2026-10-01T09:47:29.982107+00:00",
+          "routing_mode": "llm_case",
+          "input_digest": "975820a0e07faa8edb93a52a4e8e391923e2caa597652b9313c5c80c4d14e37c",
+          "case_id": "harnesseval_w_offscreen_0002_torch_gateway",
+          "taxonomy": {
+            "primary_axis": "world_persistence",
+            "probe_family": "offscreen_evolution"
+          },
+          "planner": {},
+          "selected_skills": [
+            {
+              "skill_id": "render_quality_inspector",
+              "role": "observation",
+              "reason": "Validation questions require checking for severe artifacts, watermarks and ambiguity and overall aesthetic/technical cleanliness of generated frames.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "motion_quality_inspector",
+              "role": "observation",
+              "reason": "Action sequence involves turning away, moving forward/back and returning view; temporal smoothness of camera and scene motion must be judgeable.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "appearance_consistency_inspector",
+              "role": "observation",
+              "reason": "Protected anchors stone gateway, obelisk, path fork, fallen column must stay spatially distinct and consistent; stable anchors are listed for persistence.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "physical_plausibility_inspector",
+              "role": "observation",
+              "reason": "First-person navigation and torch flame behavior need causally plausible motion and lighting changes across chunks.",
+              "parameters": {}
+            },
+            {
+              "skill_id": "offscreen_evolution_verifier",
+              "role": "core",
+              "reason": "Probe family is offscreen_evolution and the target process is torch flame silhouettes and brightness which must continue evolving while offscreen and return non-frozen; visibility plan defines leave at c02 and return at c07.",
+              "parameters": {}
+            }
+          ],
+          "selected_skill_ids": [
+            "render_quality_inspector",
+            "motion_quality_inspector",
+            "appearance_consistency_inspector",
+            "physical_plausibility_inspector",
+            "offscreen_evolution_verifier"
+          ],
+          "skipped_skills": [
+            {
+              "skill_id": "viewpoint_trajectory_verifier",
+              "reason": "Core for exploratory_transition; case primary requirement is offscreen evolution of torch flames, not verification of an exploratory path."
+            },
+            {
+              "skill_id": "intentional_change_verifier_vlm",
+              "reason": "Case targets offscreen process evolution, not an explicit intentional semantic/object-state transition with protected anchors intact."
+            },
+            {
+              "skill_id": "physical_response_verifier_vlm",
+              "reason": "No explicit physical intervention or force is the primary target; evolution is of flame silhouettes/brightness while offscreen."
+            },
+            {
+              "skill_id": "physical_law_validator",
+              "reason": "Diagnostic for physical_transition; case is offscreen_evolution, not a causal physical response requiring case-specific law checks."
+            },
+            {
+              "skill_id": "drift_degradation_analyzer",
+              "reason": "Rollout is a short 8-chunk look-away-and-return sequence, not an explicit long-horizon drift resistance target."
+            },
+            {
+              "skill_id": "return_consistency_verifier",
+              "reason": "Core for return_revisit_consistency; offscreen_evolution_verifier covers the required return evolution and non-frozen world persistence for this probe."
+            }
+          ],
+          "validation": {
+            "status": "ok",
+            "registered_skill_count": 11,
+            "selected_skill_count": 5,
+            "selection_source": "planner",
+            "selection_modified": false
+          }
+        },
         "gpt": {
           "schema_version": "harnesseval.skill_plan",
           "planner_version": "harnesseval.planner.v1",
@@ -18718,6 +20001,35 @@
         }
       },
       "judge_routing_prompts": {
+        "muse": [
+          {
+            "role": "system",
+            "content": [
+              {
+                "type": "text",
+                "text": "You are an evaluation skill planner.\nGiven the complete case definition, initial world observation, and skill catalog, design a comprehensive evaluation plan for the generated result.\nConsider general visual quality, motion quality, consistency, physical plausibility, and the case-specific world behavior and constraints.\nCatalog core_for and diagnostic_for fields indicate primary use, not an allowlist; select outside them only when the case gives a concrete reason.\nChoose the applicable skills and ground each reason in the case requirements.\nReturn one JSON object and no surrounding prose."
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "{\n  \"case\": {\n    \"case_id\": \"harnesseval_w_offscreen_0002_torch_gateway\",\n    \"taxonomy\": {\n      \"primary_axis\": \"world_persistence\",\n      \"probe_family\": \"offscreen_evolution\"\n    },\n    \"world\": {\n      \"world_id\": \"wdw_harnesseval_w_offscreen_0002_torch_gateway\",\n      \"initial_observation\": {\n        \"type\": \"image\",\n        \"path\": \"benchmark/initial_observations/harnesseval_w_offscreen_0002_torch_gateway.png\"\n      },\n      \"source_tags\": {\n        \"scene\": \"torch_gateway\",\n        \"domain\": \"realistic\",\n        \"style\": \"procedural_prompt_spec\",\n        \"perspective\": \"first_person\",\n        \"generator\": \"seedream_initial_materializer_v0\",\n        \"render_backend\": \"doubao_seedream_4_0\"\n      }\n    },\n    \"non_model_facing\": {\n      \"stable_anchors\": [\n        \"stone gateway\",\n        \"obelisk\",\n        \"path fork\",\n        \"fallen column\",\n        \"torch flame silhouettes and brightness\"\n      ],\n      \"case_quality_status\": \"pending_initial_observation_materialization\",\n      \"validation_questions\": [\n        \"Is the target or navigation affordance clearly visible?\",\n        \"Are stable anchors visible and spatially distinct?\",\n        \"Is the requested action judgeable from generated frames?\",\n        \"Is the case free of severe artifacts, watermarks, or ambiguity?\"\n      ],\n      \"offscreen_evolution_spec\": {\n        \"target_process\": \"torch flame silhouettes and brightness\",\n        \"expected_evolution\": [\n          \"The torch flame silhouettes and brightness continues changing during the offscreen interval.\",\n          \"When it returns, the torch flame silhouettes and brightness is not an exact frozen copy, but remains the same process in the same world.\"\n        ],\n        \"failure_modes\": [\n          \"target never leaves view\",\n          \"target never returns\",\n          \"frozen copy\",\n          \"world reset\",\n          \"identity swap\"\n        ]\n      },\n      \"visibility_plan\": {\n        \"pre_visible\": [\n          \"c01\"\n        ],\n        \"offscreen\": [\n          \"c03\",\n          \"c04\",\n          \"c05\"\n        ],\n        \"return_visible\": [\n          \"c07\",\n          \"c08\"\n        ]\n      },\n      \"offscreen_window\": {\n        \"leave_chunk\": \"c02\",\n        \"return_chunk\": \"c07\"\n      },\n      \"return_window\": {\n        \"reference_chunk\": \"c01\",\n        \"return_chunk\": \"c08\"\n      },\n      \"protected_anchors\": [\n        \"stone gateway\",\n        \"obelisk\",\n        \"path fork\",\n        \"fallen column\"\n      ],\n      \"pool_source\": \"template_generated\"\n    },\n    \"interaction\": {\n      \"action\": {\n        \"type\": \"offscreen_evolution_sequence\",\n        \"action_id\": \"offscreen_0002\",\n        \"text\": \"Use a look-away-and-return sequence. The torch flame silhouettes and brightness should continue evolving while offscreen.\",\n        \"chunks\": [\n          {\n            \"chunk_id\": \"c01\",\n            \"action\": {\n              \"text\": \"Turn away from the torch flame silhouettes and brightness while it is still visible.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c02\",\n            \"action\": {\n              \"text\": \"Continue turning so the torch flame silhouettes and brightness leaves the camera view.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c03\",\n            \"action\": {\n              \"text\": \"Move forward while looking away; the torch flame silhouettes and brightness remains offscreen and should continue evolving.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c04\",\n            \"action\": {\n              \"text\": \"Pause briefly with the torch flame silhouettes and brightness still offscreen.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c05\",\n            \"action\": {\n              \"text\": \"Move back toward the original area while not facing the torch flame silhouettes and brightness.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c06\",\n            \"action\": {\n              \"text\": \"Turn back toward the same torch flame silhouettes and brightness.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c07\",\n            \"action\": {\n              \"text\": \"Return the torch flame silhouettes and brightness to view; it should have evolved rather than frozen or reset.\"\n            }\n          },\n          {\n            \"chunk_id\": \"c08\",\n            \"action\": {\n              \"text\": \"Settle into a final view compatible with the original world.\"\n            }\n          }\n        ]\n      }\n    }\n  },\n  \"skill_catalog\": [\n    {\n      \"skill_id\": \"render_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Are the generated frames aesthetically and technically clean?\"\n    },\n    {\n      \"skill_id\": \"motion_quality_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the generated motion present and temporally smooth?\"\n    },\n    {\n      \"skill_id\": \"appearance_consistency_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Does visual appearance remain consistent through the rollout?\"\n    },\n    {\n      \"skill_id\": \"physical_plausibility_inspector\",\n      \"default_role\": \"observation\",\n      \"question\": \"Is the rendered motion physically and causally plausible?\"\n    },\n    {\n      \"skill_id\": \"viewpoint_trajectory_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does the case explicitly require active camera, viewpoint, or navigation movement along a path or action sequence? Fixed-camera constraints, stable framing, visibility requirements, and incidental camera motion do not make this skill applicable.\",\n      \"core_for\": [\n        \"exploratory_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"intentional_change_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target an explicitly specified intentional semantic or object-state transition while protected anchors remain intact? A causal response to a physical intervention, a navigation or viewpoint change, long-horizon drift, or offscreen evolution does not count as an intentional change.\",\n      \"core_for\": [\n        \"intentional_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_response_verifier_vlm\",\n      \"default_role\": \"core\",\n      \"question\": \"Is the case's primary target the causal response and temporal dynamics produced by an explicit physical intervention or force? A directly specified intentional semantic or object-state edit does not count as a physical response.\",\n      \"core_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"physical_law_validator\",\n      \"default_role\": \"diagnostic\",\n      \"question\": \"Does evaluating the causal physical response require a case-specific physical-law check? General visual plausibility and intentional semantic or object-state edits do not make this skill applicable.\",\n      \"diagnostic_for\": [\n        \"physical_transition\"\n      ]\n    },\n    {\n      \"skill_id\": \"drift_degradation_analyzer\",\n      \"default_role\": \"core\",\n      \"question\": \"Is resistance to progressive visual, geometric, and semantic degradation an explicit target of a long-horizon rollout with many action turns or chunks? An ordinary short multi-step rollout does not make this skill applicable.\",\n      \"core_for\": [\n        \"drift_resistance\"\n      ]\n    },\n    {\n      \"skill_id\": \"return_consistency_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does a returned view remain consistent after a non-static loop?\",\n      \"core_for\": [\n        \"return_revisit_consistency\"\n      ]\n    },\n    {\n      \"skill_id\": \"offscreen_evolution_verifier\",\n      \"default_role\": \"core\",\n      \"question\": \"Does an offscreen process continue evolving in the same world?\",\n      \"core_for\": [\n        \"offscreen_evolution\"\n      ]\n    }\n  ],\n  \"output_schema\": {\n    \"selected_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"role\": \"one of observation, core, diagnostic\",\n        \"reason\": \"short case-grounded reason\",\n        \"parameters\": {}\n      }\n    ],\n    \"skipped_skills\": [\n      {\n        \"skill_id\": \"skill id from the catalog\",\n        \"reason\": \"short reason\"\n      }\n    ]\n  }\n}"
+              },
+              {
+                "type": "image_url",
+                "image_url": {
+                  "type": "image_reference",
+                  "mime": "image/png",
+                  "sha256": "a26c020a4ae643fbb940ea665fddc785796d31f18f01cb15bd3b6ce39e9bcbf9",
+                  "bytes": 433490
+                }
+              }
+            ]
+          }
+        ],
         "gpt": [
           {
             "role": "system",
@@ -26116,6 +27428,37 @@
     ]
   },
   "judge_reports": {
+    "muse": {
+      "leaderboard": [
+        {
+          "family_scores": {
+            "exploratory_transition": 0.866355,
+            "intentional_transition": 0.823001,
+            "physical_transition": 0.605827,
+            "drift_resistance": 0.805007,
+            "return_revisit_consistency": 0.716988,
+            "offscreen_evolution": 0.6042
+          },
+          "family_core_scores": {
+            "exploratory_transition": 0.926951,
+            "intentional_transition": 0.9375,
+            "physical_transition": 0.34541,
+            "drift_resistance": 0.798794,
+            "return_revisit_consistency": 0.630599,
+            "offscreen_evolution": 0.457295
+          },
+          "family_observation_scores": {
+            "exploratory_transition": 0.805759,
+            "intentional_transition": 0.708502,
+            "physical_transition": 0.866245,
+            "drift_resistance": 0.811221,
+            "return_revisit_consistency": 0.803377,
+            "offscreen_evolution": 0.751104
+          },
+          "overall_score": 0.736896
+        }
+      ]
+    },
     "gpt": {
       "leaderboard": [
         {

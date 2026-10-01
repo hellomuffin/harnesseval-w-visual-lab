@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "paired_examples": 6,
+  "official_semantic_formula_recomputations": 24,
+  "matched_fixed_specification_request_hashes": 6,
+  "validated_routing_plans": 12,
+  "workbench_case_judge_stage_combinations": 96,
+  "question_level_table_conditions": 12,
+  "numerical_backend_evidence": "unchanged",
+  "browser_errors": [],
+  "mobile_overflow": false
+}
