@@ -1,8 +1,8 @@
 from pathlib import Path
-import json,random,re
+import json,random,re,sys
 from playwright.sync_api import sync_playwright
 from harnesseval.skills.skill_intentional_change_vlm import aggregate_q_scores,normalize_q_scores
-R=Path(__file__).resolve().parents[1];url='http://127.0.0.1:8082/'
+R=Path(__file__).resolve().parents[1];url=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8082/'
 rng=random.Random(17);vectors=[[rng.choice([0,.25,.5,.75,1]) for _ in range(8)] for _ in range(5000)]+[[0]*8,[1]*8]
 expected=[aggregate_q_scores(normalize_q_scores({'q_scores':{'Q'+str(i+1):v for i,v in enumerate(q)}}))['final_score'] for q in vectors]
 with sync_playwright() as p:

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "formula_vectors": 5002,
+  "max_absolute_error": 0.0,
+  "browser_errors": [],
+  "api_requests": [],
+  "failed_asset_requests": [],
+  "case_tabs": 6,
+  "skills": 11,
+  "recorded_validation": "accepted and rejected executions verified",
+  "generated_video_seeking": "passed",
+  "mobile_overflow": false
+}

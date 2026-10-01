@@ -1,6 +1,6 @@
 # HarnessEval-W — an explorable reproduction lab
 
-Open **http://localhost:8080** while `server.py` is running. On a remote machine, forward port 8080 to your browser’s localhost; the server listens on all interfaces. This is an independent visual introduction to [HarnessEval-W](https://mirros-lab.github.io/HarnessEval-W/), with real local execution artifacts and explicit paper/code differences.
+Open **https://hellomuffin.github.io/harnesseval-w-visual-lab/**. The hosted edition includes the videos and recorded evaluation evidence, plus independently checked browser grading. Source and evidence: https://github.com/hellomuffin/harnesseval-w-visual-lab. It needs no local server. GPU validation is presented as recorded executions on the hosted page.
 
 The page includes six playable case studies, selected/skipped skill routing, Analyze and Verify traces, all 11 skills, an interactive Python-backed score calculator, a 100-case gallery, a reconstructed case-authoring experiment, frozen/reversed video controls, physical-law controls, and a claim-by-claim audit. You can edit the new book case's action and ask the local vision judge to validate it.
 

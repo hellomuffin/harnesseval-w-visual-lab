@@ -10,7 +10,7 @@ for name in ['media','data']:shutil.copytree(R/'site'/name,P/name,dirs_exist_ok=
 for src in (R/'artifacts').rglob('*'):
  rel=src.relative_to(R/'artifacts')
  if src.is_file() and 'logs' not in rel.parts and src.suffix in ['.json','.mp4','.png','.jpg','.npz','.patch','.py','.txt'] and src.name not in ['desktop.png','mobile.png','hero.png','generated-case.png']:
-  if '-raw.mp4' not in src.name:copy(src,P/'evidence'/rel)
+  if '-raw.mp4' not in src.name and not src.name.endswith(('desktop.png','mobile.png')):copy(src,P/'evidence'/rel)
 for src in (R/'public-set/data').rglob('*'):
  if src.is_file() and src.suffix in ['.json','.png','.jpg','.jpeg']:copy(src,P/'public/data'/src.relative_to(R/'public-set/data'))
 D=json.loads((P/'data/demo.json').read_text())
@@ -27,7 +27,7 @@ a=s.index("$('#case-form').onsubmit=");b=s.index('\n',a)
 s=s[:a]+s[b:]
 s=s.replace('href="upstream/src/', 'href="https://github.com/MirroS-Lab/HarnessEval-W/blob/${D.commit}/src/')
 s+='''
-const hostedConstruction=renderConstruction;renderConstruction=function(){hostedConstruction();const c=D.construction;const options=[{name:'Accepted · open the book',action:c.action,validation:c.validation},{name:'Rejected · reveal a recipe',action:c.previous_attempt.plan.action_text,validation:c.previous_attempt.validation}];$('#case-form').innerHTML='<div><span class="tiny-label">RECORDED LOCAL GPU VALIDATION</span><h3>Inspect what the validator accepted and rejected.</h3><p>These are saved model executions. This hosted site does not run a GPU or send your input to a model.</p></div><label for="recorded-case">Choose an executed proposal</label><select id="recorded-case">'+options.map((x,i)=>'<option value="'+i+'">'+esc(x.name)+'</option>').join('')+'</select><div id="validation-output" role="status"></div>';const show=()=>{const x=options[Number($('#recorded-case').value)];$('#validation-output').innerHTML='<p><b>Proposed action:</b> '+esc(x.action)+'</p>'+tag(x.validation.valid?'Accepted':'Rejected',x.validation.valid?'teal':'amber')+'<p>'+esc(x.validation.reason)+'</p><div class="chips">'+Object.entries(x.validation.checks||{}).map(([k,v])=>'<span>'+esc(nice(k))+': '+(v?'yes':'no')+'</span>').join('')+'</div><a href="evidence/construction/result.json" target="_blank">Inspect original execution evidence ↗</a>'};$('#recorded-case').onchange=show;show()};
+const hostedConstruction=renderConstruction;renderConstruction=function(){hostedConstruction();const c=D.construction;const options=[{name:'Accepted · open the book',action:c.action,validation:c.validation},{name:'Rejected · reveal a recipe',action:c.previous_attempt.plan.action_text,validation:c.previous_attempt.validation}];$('#case-form').innerHTML='<div><span class="tiny-label">Recorded validation experiment</span><h3>Case-Validation Outcomes</h3><p>Recorded VLM judgments for accepted and rejected case proposals. Results are from GPU execution; the hosted interface does not initiate new inference.</p></div><label for="recorded-case">Choose an executed proposal</label><select id="recorded-case">'+options.map((x,i)=>'<option value="'+i+'">'+esc(x.name)+'</option>').join('')+'</select><div id="validation-output" role="status"></div>';const show=()=>{const x=options[Number($('#recorded-case').value)];$('#validation-output').innerHTML='<p><b>Proposed action:</b> '+esc(x.action)+'</p>'+tag(x.validation.valid?'Accepted':'Rejected',x.validation.valid?'teal':'amber')+'<p>'+esc(x.validation.reason)+'</p><div class="chips">'+Object.entries(x.validation.checks||{}).map(([k,v])=>'<span>'+esc(nice(k))+': '+(v?'yes':'no')+'</span>').join('')+'</div><a href="evidence/construction/result.json" target="_blank">Inspect original execution evidence ↗</a>'};$('#recorded-case').onchange=show;show()};
 '''
 p.write_text(s)
 p=P/'index.html';s=p.read_text().replace('INTERACTIVE · RELEASED FORMULA','INTERACTIVE · VERIFIED BROWSER FORMULA').replace('The server runs the paper repository’s aggregation code.','The browser runs a port of the released formula, checked against the Python implementation.').replace('INTERACTIVE REPRODUCTION LAB','HOSTED REPRODUCTION LAB')
@@ -40,9 +40,9 @@ shutil.copytree(R/'scripts',P/'reproduction/scripts',dirs_exist_ok=True,ignore=s
 # Public copies redact machine-specific workspace prefixes only; numerical results stay unchanged.
 for p in P.rglob('*'):
  if '.git' in p.parts or not p.is_file() or p.suffix not in ['.json','.patch','.md','.txt','.py']:continue
- t=p.read_text();t=t.replace(str(R),'[workspace]').replace('/weka/oe-training-default/jasonr/chenhao_prior/home','[home]');p.write_text(t)
+ t=p.read_text();t=t.replace(str(R),'[workspace]').replace('[home]','[home]');p.write_text(t)
 (P/'.nojekyll').write_text('')
-(P/'README.md').write_text('''# HarnessEval-W visual reproduction lab
+(P/'README.md').write_text('''# HarnessEval-W: Academic Project Page and Reproduction Study
 
 **Open https://hellomuffin.github.io/harnesseval-w-visual-lab/**
 

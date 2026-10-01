@@ -1,4 +1,4 @@
-# HarnessEval-W visual reproduction lab
+# HarnessEval-W: Academic Project Page and Reproduction Study
 
 **Open https://hellomuffin.github.io/harnesseval-w-visual-lab/**
 
