@@ -1,0 +1,189 @@
+{
+  "video": "../upstream/runs/example/results_example/generation/outputs/transition_correctness/physical_transition/seedance-2.0-standard/harnesseval_w_physical_0001_wind_flag_deformation_v02/output.mp4",
+  "judges": {
+    "muse": {
+      "independent": {
+        "judgment": {
+          "q_scores": {
+            "Q1_setup_visible": 1,
+            "Q2_intervention_visible": 0.25,
+            "Q3_response_presence": 0.75,
+            "Q4_condition_following": 0.75,
+            "Q5_causal_order": 1,
+            "Q6_anchor_preservation": 0.5,
+            "Q7_no_physical_artifacts": 0.25,
+            "Q8_judgeable": 0.75
+          },
+          "reasons": {
+            "Q1_setup_visible": "The blue blower rig, black pole with yellow base, red flag and coastal platform with sea horizon are clearly visible throughout the samples and match the initial observation framing.",
+            "Q2_intervention_visible": "The blower unit is present and in place, but no visible airflow cue, stream, or operational indication is rendered; the calibrated 5.0 m/s fan condition is not visibly instantiated.",
+            "Q3_response_presence": "The flag transitions from the initial upright pose to a downwind billowed/streamer pose and shows small changes in fabric folds across frames, indicating real fabric motion/state change.",
+            "Q4_condition_following": "Once billowed, the flag remains extended downwind to the right of the pole with a streamer configuration consistent with left-to-right flow, and the pole/base/blower stay stationary as required.",
+            "Q5_causal_order": "The flag is upright in sample 00 and moves to the downwind billowed state in sample 01 onward, so effect follows the implied continued airflow with no effect before cause.",
+            "Q6_anchor_preservation": "Blower, pole, yellow base, platform geometry and camera viewpoint remain fixed, but the sea water texture changes: a white wake appears in the generated samples that was absent in the initial observation, violating protected sea horizon/water texture and lighting anchors.",
+            "Q7_no_physical_artifacts": "A hard-appearing transition of the flag from upright to fully billowed between sample 00 and 01 and the introduction of a new sea wake/background detail indicate replacement-world artifacts and background change, with limited continuous flutter.",
+            "Q8_judgeable": "The video is clear and the viewpoint is stable enough to assess flag pose and anchor positions, although background changes and limited motion reduce full confidence."
+          },
+          "warnings": [],
+          "summary": "Setup and anchors for the rig are visible and the flag does move to a downwind billowed configuration in the correct causal order, consistent with continued airflow. The intervention itself is not visibly instantiated, background sea/water texture is altered with a new wake and lighting shift relative to the initial observation, and the flag motion shows a near-teleport onset with only modest continuous flutter, leading to anchor and artifact penalties."
+        },
+        "score": 0.34541,
+        "metrics": {
+          "Q1_setup_visible": 1.0,
+          "Q2_intervention_visible": 0.25,
+          "Q3_response_presence": 0.75,
+          "Q4_condition_following": 0.75,
+          "Q5_causal_order": 1.0,
+          "Q6_anchor_preservation": 0.5,
+          "Q7_no_physical_artifacts": 0.25,
+          "Q8_judgeable": 0.75,
+          "intervention_grounding": 0.625,
+          "response_execution": 0.8,
+          "causal_order": 1.0,
+          "preservation": 0.3875,
+          "validity_gate": 0.75,
+          "core_score": 0.736875,
+          "final_score": 0.34541,
+          "expected_spec_alignment": 0.5
+        }
+      },
+      "fixed_specification": {
+        "judgment": {
+          "q_scores": {
+            "Q1_setup_visible": 1,
+            "Q2_intervention_visible": 0.5,
+            "Q3_response_presence": 0.75,
+            "Q4_condition_following": 0.5,
+            "Q5_causal_order": 1,
+            "Q6_anchor_preservation": 1,
+            "Q7_no_physical_artifacts": 0.5,
+            "Q8_judgeable": 0.75
+          },
+          "reasons": {
+            "Q1_setup_visible": "The red flag on the black pole with yellow base and the blue blower apparatus on the coastal platform are clearly visible in all frames, with the sea background consistent.",
+            "Q2_intervention_visible": "The blue blower/fan unit is present and positioned to face the flag, but calibrated 5.0 m/s airflow is not visibly instantiated, e.g., no airflow visualization or indication of active blowing; intervention is implied rather than shown.",
+            "Q3_response_presence": "The flag changes state from near-upright in sample 00 to a billowed outward pose from sample 01 onward, indicating a physical response. Continuous fluttering motion is not clearly observable in the still samples.",
+            "Q4_condition_following": "A deformation is produced, consistent with wind loading, but the expected steady, regular flutter/waving at constant 5.0 m/s is not demonstrated; the flag settles into a largely static billowed shape with limited temporal variation.",
+            "Q5_causal_order": "No effect precedes cause in the visible sequence; the flag deformation appears after the setup is established and remains thereafter, with no obvious reverse ordering.",
+            "Q6_anchor_preservation": "The pole, yellow base, blue blower stand, platform and camera viewpoint remain fixed. The flag stays attached and does not tear, detach or entangle.",
+            "Q7_no_physical_artifacts": "The scene is stable with no teleporting of apparatus or pass-through, but the flag pose changes in a stepwise manner across samples with little smooth inter-frame motion, suggesting hard cuts or limited simulation continuity rather than fluid physical motion.",
+            "Q8_judgeable": "Frames are clear and the setup is observable, allowing assessment of flag pose and anchors, but the lack of smooth continuous motion limits confident judgement of dynamic flutter and causal timing."
+          },
+          "warnings": [],
+          "summary": "Setup and anchors are clearly preserved and the flag does deform under the implied fan, showing a state change consistent with wind loading. However the calibrated 5.0 m/s airflow is not visibly instantiated, the response is a largely static billow rather than the expected steady regular flutter, and motion continuity is weak, indicating limited physical realism and artifacting."
+        },
+        "score": 0.441914,
+        "metrics": {
+          "Q1_setup_visible": 1.0,
+          "Q2_intervention_visible": 0.5,
+          "Q3_response_presence": 0.75,
+          "Q4_condition_following": 0.5,
+          "Q5_causal_order": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_physical_artifacts": 0.5,
+          "Q8_judgeable": 0.75,
+          "intervention_grounding": 0.75,
+          "response_execution": 0.7125,
+          "causal_order": 1.0,
+          "preservation": 0.775,
+          "validity_gate": 0.75,
+          "core_score": 0.785625,
+          "final_score": 0.441914,
+          "expected_spec_alignment": 0.666667
+        }
+      }
+    },
+    "gpt": {
+      "independent": {
+        "judgment": {
+          "q_scores": {
+            "Q1_setup_visible": 1,
+            "Q2_intervention_visible": 0.75,
+            "Q3_response_presence": 1,
+            "Q4_condition_following": 0.75,
+            "Q5_causal_order": 1,
+            "Q6_anchor_preservation": 1,
+            "Q7_no_physical_artifacts": 0.75,
+            "Q8_judgeable": 1
+          },
+          "reasons": {
+            "Q1_setup_visible": "The blue blower, red flag on a black pole, yellow base, platform, and ocean background are clearly visible throughout.",
+            "Q2_intervention_visible": "The blower is visibly positioned to the left and aimed toward the flag, and the flag is extended as if under airflow; however, the airflow itself and exact 5.0 m/s calibration are not directly visible.",
+            "Q3_response_presence": "The flag shows clear physical state changes with changing folds, ripples, and free-edge motion across the rollout.",
+            "Q4_condition_following": "The flag remains blown away from the blower/pole with moderate flutter and deformation, broadly matching steady 5.0 m/s airflow. The motion is somewhat generic and the traveling wave pattern is not strongly demonstrated, so not full credit.",
+            "Q5_causal_order": "The case is a continued airflow condition, and the flag response is present during the maintained intervention with no visible effect occurring before the setup/condition.",
+            "Q6_anchor_preservation": "The pole, yellow base, blower, platform, camera framing, and overall layout remain fixed while only the fabric changes shape.",
+            "Q7_no_physical_artifacts": "No major teleporting, hard cuts, pass-through, or extra forces are apparent. Minor generative inconsistencies in the flag shape/deformation prevent perfect confidence.",
+            "Q8_judgeable": "The scene is clear, continuous enough from the samples, and the flag and apparatus remain sufficiently observable to judge the physical response."
+          },
+          "warnings": [],
+          "summary": "The rollout largely satisfies the canonical transition: a fixed blower continues to drive a red flag outward with moderate flutter while rigid anchors remain stationary. Main limitations are that the airflow speed is not directly measurable and the cloth dynamics are somewhat generic rather than clearly showing calibrated traveling ripples."
+        },
+        "score": 0.808281,
+        "metrics": {
+          "Q1_setup_visible": 1.0,
+          "Q2_intervention_visible": 0.75,
+          "Q3_response_presence": 1.0,
+          "Q4_condition_following": 0.75,
+          "Q5_causal_order": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_physical_artifacts": 0.75,
+          "Q8_judgeable": 1.0,
+          "intervention_grounding": 0.875,
+          "response_execution": 0.9125,
+          "causal_order": 1.0,
+          "preservation": 0.8875,
+          "validity_gate": 1.0,
+          "core_score": 0.92375,
+          "final_score": 0.808281,
+          "expected_spec_alignment": 0.833333
+        }
+      },
+      "fixed_specification": {
+        "judgment": {
+          "q_scores": {
+            "Q1_setup_visible": 1,
+            "Q2_intervention_visible": 0.75,
+            "Q3_response_presence": 1,
+            "Q4_condition_following": 0.75,
+            "Q5_causal_order": 1,
+            "Q6_anchor_preservation": 1,
+            "Q7_no_physical_artifacts": 0.75,
+            "Q8_judgeable": 1
+          },
+          "reasons": {
+            "Q1_setup_visible": "The blue blower/fan apparatus, red flag, pole, and yellow base are clearly visible in the coastal test setup.",
+            "Q2_intervention_visible": "The blower is visibly aimed toward the flag and the flag is extended as if under airflow, but the exact calibrated value of 5.0 m/s is not directly observable.",
+            "Q3_response_presence": "The flag fabric changes shape across frames with visible waving and deformation.",
+            "Q4_condition_following": "The flag remains generally extended downwind and shows steady flutter consistent with continued moderate airflow, though the precise 5.0 m/s condition cannot be verified visually.",
+            "Q5_causal_order": "The blower/airflow condition is present from the start and the flag response occurs under that continuing condition, with no response appearing before the visible cause.",
+            "Q6_anchor_preservation": "The blower, pole, yellow base, camera viewpoint, and flag attachment remain fixed; the flag does not detach or tear.",
+            "Q7_no_physical_artifacts": "No major teleporting, pass-through, hard cuts, or replacement of the world are evident, though the flag deformation has some mildly synthetic morphing quality.",
+            "Q8_judgeable": "The scene is continuous, unobstructed, and sufficiently clear to judge the setup, intervention, and flag response."
+          },
+          "warnings": [],
+          "summary": "The rollout shows a clear blower-and-flag setup with the flag steadily fluttering while remaining attached, consistent with continued airflow. The main limitation is that the specific calibrated 5.0 m/s speed is not directly visible."
+        },
+        "score": 0.808281,
+        "metrics": {
+          "Q1_setup_visible": 1.0,
+          "Q2_intervention_visible": 0.75,
+          "Q3_response_presence": 1.0,
+          "Q4_condition_following": 0.75,
+          "Q5_causal_order": 1.0,
+          "Q6_anchor_preservation": 1.0,
+          "Q7_no_physical_artifacts": 0.75,
+          "Q8_judgeable": 1.0,
+          "intervention_grounding": 0.875,
+          "response_execution": 0.9125,
+          "causal_order": 1.0,
+          "preservation": 0.8875,
+          "validity_gate": 1.0,
+          "core_score": 0.92375,
+          "final_score": 0.808281,
+          "expected_spec_alignment": 0.666667
+        }
+      }
+    }
+  }
+}

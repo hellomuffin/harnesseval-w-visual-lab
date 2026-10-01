@@ -5,7 +5,7 @@ R=Path(__file__).resolve().parents[1];P=R/'publish';P.mkdir(exist_ok=True)
 def copy(src,dst):
  dst.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,dst)
 for name in ['index.html','style.css','app.js']:copy(R/'site'/name,P/name)
-for name in ['media','data']:shutil.copytree(R/'site'/name,P/name,dirs_exist_ok=True)
+for name in ['media','data','physical-transition']:shutil.copytree(R/'site'/name,P/name,dirs_exist_ok=True)
 # Curated evidence only: no runtime environments, model weights, credentials or server logs.
 for src in (R/'artifacts').rglob('*'):
  rel=src.relative_to(R/'artifacts')
